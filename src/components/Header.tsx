@@ -14,9 +14,9 @@ const Header = () => {
             <Link to="/merge" className="text-muted-foreground hover:text-foreground transition-colors">
               Merge PDF
             </Link>
-            <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
-              Features
-            </a>
+            <Link to="/split" className="text-muted-foreground hover:text-foreground transition-colors">
+              Split PDF
+            </Link>
             <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">
               Contact
             </a>

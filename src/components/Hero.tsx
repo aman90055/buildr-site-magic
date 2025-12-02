@@ -40,13 +40,16 @@ const Hero = () => {
                 <p className="text-sm text-muted-foreground">Combine multiple PDFs into one</p>
               </Link>
 
-              <div className="p-6 bg-card border border-border rounded-2xl opacity-60 cursor-not-allowed">
-                <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center mb-4">
-                  <Split className="w-6 h-6 text-muted-foreground" />
+              <Link 
+                to="/split"
+                className="group p-6 bg-card border border-border rounded-2xl hover:border-accent hover:shadow-lg transition-all duration-300"
+              >
+                <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
+                  <Split className="w-6 h-6 text-accent group-hover:text-accent-foreground" />
                 </div>
                 <h3 className="font-semibold text-foreground mb-2">Split PDF</h3>
-                <p className="text-sm text-muted-foreground">Coming soon</p>
-              </div>
+                <p className="text-sm text-muted-foreground">Extract specific pages</p>
+              </Link>
 
               <div className="p-6 bg-card border border-border rounded-2xl opacity-60 cursor-not-allowed">
                 <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center mb-4">
