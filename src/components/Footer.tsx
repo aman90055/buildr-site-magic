@@ -16,7 +16,7 @@ const Footer = () => {
             <h4 className="font-semibold text-foreground mb-4">Tools</h4>
             <ul className="space-y-2">
               <li><Link to="/merge" className="text-muted-foreground hover:text-foreground transition-colors">Merge PDF</Link></li>
-              <li><span className="text-muted-foreground/50">Split PDF (Soon)</span></li>
+              <li><Link to="/split" className="text-muted-foreground hover:text-foreground transition-colors">Split PDF</Link></li>
               <li><span className="text-muted-foreground/50">Compress PDF (Soon)</span></li>
             </ul>
           </div>
