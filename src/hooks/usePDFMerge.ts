@@ -54,24 +54,28 @@ export const usePDFMerge = () => {
       const url = URL.createObjectURL(blob);
       setDownloadUrl(url);
 
-      // Also upload to storage for record keeping
-      const fileName = `merged_${Date.now()}.pdf`;
-      const filePath = `merged/${fileName}`;
+      // Only log to database if user is authenticated
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (user) {
+        const fileName = `merged_${Date.now()}.pdf`;
+        const filePath = `${user.id}/merged/${fileName}`;
 
-      await supabase.storage
-        .from("pdfs")
-        .upload(filePath, blob, {
-          contentType: "application/pdf",
-          upsert: false,
+        await supabase.storage
+          .from("pdfs")
+          .upload(filePath, blob, {
+            contentType: "application/pdf",
+            upsert: false,
+          });
+
+        await supabase.from("pdf_jobs").insert({
+          user_id: user.id,
+          job_type: "merge",
+          status: "completed",
+          input_files: files.map((f) => f.name),
+          output_file: filePath,
         });
-
-      // Create a job record
-      await supabase.from("pdf_jobs").insert({
-        job_type: "merge",
-        status: "completed",
-        input_files: files.map((f) => f.name),
-        output_file: filePath,
-      });
+      }
 
       setProgress(100);
 
@@ -87,13 +91,17 @@ export const usePDFMerge = () => {
         variant: "destructive",
       });
 
-      // Log the failed job
-      await supabase.from("pdf_jobs").insert({
-        job_type: "merge",
-        status: "failed",
-        input_files: files.map((f) => f.name),
-        error_message: error instanceof Error ? error.message : "Unknown error",
-      });
+      // Log failed job only if authenticated
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        await supabase.from("pdf_jobs").insert({
+          user_id: user.id,
+          job_type: "merge",
+          status: "failed",
+          input_files: files.map((f) => f.name),
+          error_message: error instanceof Error ? error.message : "Unknown error",
+        });
+      }
     } finally {
       setIsProcessing(false);
     }
