@@ -17,7 +17,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/merge" className="text-muted-foreground hover:text-foreground transition-colors">Merge PDF</Link></li>
               <li><Link to="/split" className="text-muted-foreground hover:text-foreground transition-colors">Split PDF</Link></li>
-              <li><span className="text-muted-foreground/50">Compress PDF (Soon)</span></li>
+              <li><Link to="/compress" className="text-muted-foreground hover:text-foreground transition-colors">Compress PDF</Link></li>
             </ul>
           </div>
           

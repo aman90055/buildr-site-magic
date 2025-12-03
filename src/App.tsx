@@ -7,6 +7,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import PDFMerge from "./pages/PDFMerge";
 import PDFSplit from "./pages/PDFSplit";
+import PDFCompress from "./pages/PDFCompress";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/merge" element={<PDFMerge />} />
             <Route path="/split" element={<PDFSplit />} />
+            <Route path="/compress" element={<PDFCompress />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

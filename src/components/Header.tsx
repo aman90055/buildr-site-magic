@@ -17,9 +17,9 @@ const Header = () => {
             <Link to="/split" className="text-muted-foreground hover:text-foreground transition-colors">
               Split PDF
             </Link>
-            <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">
-              Contact
-            </a>
+            <Link to="/compress" className="text-muted-foreground hover:text-foreground transition-colors">
+              Compress PDF
+            </Link>
           </nav>
           
           <div className="flex items-center gap-4">
