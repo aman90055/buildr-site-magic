@@ -10,15 +10,18 @@ const Header = () => {
             PDF Tools
           </Link>
           
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-6">
             <Link to="/merge" className="text-muted-foreground hover:text-foreground transition-colors">
-              Merge PDF
+              Merge
             </Link>
             <Link to="/split" className="text-muted-foreground hover:text-foreground transition-colors">
-              Split PDF
+              Split
             </Link>
             <Link to="/compress" className="text-muted-foreground hover:text-foreground transition-colors">
-              Compress PDF
+              Compress
+            </Link>
+            <Link to="/convert" className="text-muted-foreground hover:text-foreground transition-colors">
+              Convert
             </Link>
           </nav>
           
