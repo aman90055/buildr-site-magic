@@ -18,6 +18,7 @@ const Footer = () => {
               <li><Link to="/merge" className="text-muted-foreground hover:text-foreground transition-colors">Merge PDF</Link></li>
               <li><Link to="/split" className="text-muted-foreground hover:text-foreground transition-colors">Split PDF</Link></li>
               <li><Link to="/compress" className="text-muted-foreground hover:text-foreground transition-colors">Compress PDF</Link></li>
+              <li><Link to="/convert" className="text-muted-foreground hover:text-foreground transition-colors">Convert PDF</Link></li>
             </ul>
           </div>
           
