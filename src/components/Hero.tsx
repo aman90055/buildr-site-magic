@@ -8,19 +8,35 @@ const Hero = () => {
       <div className="container mx-auto px-6 py-32">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-in">
+            <p className="text-accent font-semibold text-lg mb-4 tracking-wide">Welcome to Your PDF Hub</p>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
-              All-in-One PDF & Document Tools
+              ✨ All-in-One PDF & Document Tools
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-4 leading-relaxed">
-              Simple, Fast, Free. Convert, Merge, Split, Compress, and Edit your files online with ease.
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
+              Convert, merge, split, compress, and edit your files online with ease.
             </p>
-            <p className="text-lg text-muted-foreground/80 mb-8">
-              Your documents, your control – anytime, anywhere.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            
+            <div className="grid sm:grid-cols-3 gap-4 mb-8 text-left">
+              <div className="p-4 bg-card/50 rounded-xl border border-border">
+                <span className="text-2xl mb-2 block">🚀</span>
+                <h3 className="font-semibold text-foreground mb-1">Fast, Simple, Free</h3>
+                <p className="text-sm text-muted-foreground">No downloads, no hassle – just upload and get the job done in seconds.</p>
+              </div>
+              <div className="p-4 bg-card/50 rounded-xl border border-border">
+                <span className="text-2xl mb-2 block">🔒</span>
+                <h3 className="font-semibold text-foreground mb-1">Secure & Reliable</h3>
+                <p className="text-sm text-muted-foreground">Your files are processed safely, and privacy is always protected.</p>
+              </div>
+              <div className="p-4 bg-card/50 rounded-xl border border-border">
+                <span className="text-2xl mb-2 block">🌍</span>
+                <h3 className="font-semibold text-foreground mb-1">Access Anywhere</h3>
+                <p className="text-sm text-muted-foreground">Work on your documents anytime, anywhere – desktop, tablet, or mobile.</p>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button size="lg" className="text-lg group" asChild>
                 <Link to="/merge">
-                  Merge PDFs
+                  Get Started Now
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
