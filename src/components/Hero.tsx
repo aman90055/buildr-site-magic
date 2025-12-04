@@ -9,10 +9,13 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-in">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
-              PDF Tools Made Simple
+              All-in-One PDF & Document Tools
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
-              Merge, split, compress, and convert PDF files with ease. Fast, secure, and free to use.
+            <p className="text-xl md:text-2xl text-muted-foreground mb-4 leading-relaxed">
+              Simple, Fast, Free. Convert, Merge, Split, Compress, and Edit your files online with ease.
+            </p>
+            <p className="text-lg text-muted-foreground/80 mb-8">
+              Your documents, your control – anytime, anywhere.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" className="text-lg group" asChild>
