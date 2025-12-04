@@ -9,91 +9,108 @@ All colors MUST be HSL.
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 18%;
+    --foreground: 220 20% 15%;
 
-    --card: 0 0% 96%;
-    --card-foreground: 0 0% 18%;
+    --card: 220 20% 98%;
+    --card-foreground: 220 20% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 18%;
+    --popover-foreground: 220 20% 15%;
 
+    /* Bold Red for CTAs */
     --primary: 355 82% 56%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 18%;
+    --secondary: 220 15% 95%;
+    --secondary-foreground: 220 20% 15%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 33%;
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 10% 45%;
 
+    /* Blue accent */
     --accent: 211 100% 50%;
     --accent-foreground: 0 0% 100%;
+
+    /* Additional color palette */
+    --color-blue: 211 100% 50%;
+    --color-green: 152 69% 45%;
+    --color-purple: 270 70% 55%;
+    --color-orange: 25 95% 55%;
+    --color-pink: 330 80% 60%;
+    --color-cyan: 185 85% 45%;
 
     --destructive: 355 82% 56%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 355 82% 56%;
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 211 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
     
     /* Custom design tokens */
-    --hero-gradient-start: 0 0% 100%;
-    --hero-gradient-end: 0 0% 96%;
+    --hero-gradient-start: 220 20% 98%;
+    --hero-gradient-end: 0 0% 100%;
     
-    --transition-smooth: all 0.3s ease;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 18%;
+    --sidebar-foreground: 220 20% 15%;
     --sidebar-primary: 355 82% 56%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 96%;
-    --sidebar-accent-foreground: 0 0% 18%;
-    --sidebar-border: 0 0% 90%;
-    --sidebar-ring: 355 82% 56%;
+    --sidebar-accent: 220 15% 95%;
+    --sidebar-accent-foreground: 220 20% 15%;
+    --sidebar-border: 220 15% 90%;
+    --sidebar-ring: 211 100% 50%;
   }
 
   .dark {
-    --background: 0 0% 10%;
+    --background: 220 20% 8%;
     --foreground: 0 0% 98%;
 
-    --card: 0 0% 15%;
+    --card: 220 20% 12%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 15%;
+    --popover: 220 20% 12%;
     --popover-foreground: 0 0% 98%;
 
     --primary: 355 82% 56%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 20%;
+    --secondary: 220 15% 18%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 60%;
 
-    --accent: 211 100% 50%;
+    --accent: 211 100% 55%;
     --accent-foreground: 0 0% 100%;
+
+    --color-blue: 211 100% 55%;
+    --color-green: 152 69% 50%;
+    --color-purple: 270 70% 60%;
+    --color-orange: 25 95% 60%;
+    --color-pink: 330 80% 65%;
+    --color-cyan: 185 85% 50%;
 
     --destructive: 355 70% 45%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 25%;
-    --input: 0 0% 25%;
-    --ring: 355 82% 56%;
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 211 100% 55%;
     
-    --hero-gradient-start: 0 0% 12%;
-    --hero-gradient-end: 0 0% 10%;
+    --hero-gradient-start: 220 20% 10%;
+    --hero-gradient-end: 220 20% 8%;
 
-    --sidebar-background: 0 0% 10%;
+    --sidebar-background: 220 20% 8%;
     --sidebar-foreground: 0 0% 98%;
     --sidebar-primary: 355 82% 56%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent: 220 15% 15%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 355 82% 56%;
+    --sidebar-border: 220 15% 18%;
+    --sidebar-ring: 211 100% 55%;
   }
 }
 
@@ -103,6 +120,17 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  }
+  
+  .bg-gradient-hero {
+    background: linear-gradient(135deg, hsl(var(--hero-gradient-start)) 0%, hsl(var(--hero-gradient-end)) 100%);
   }
 }

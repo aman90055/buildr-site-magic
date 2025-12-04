@@ -1,97 +1,90 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, FileText, Merge, Split, Minimize2 } from "lucide-react";
+import { ArrowRight, FileText, Merge, Split, Minimize2, Sparkles, Shield, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
+
+const tools = [
+  { to: "/merge", icon: Merge, label: "Merge PDF", desc: "Combine multiple PDFs", color: "bg-brand-blue" },
+  { to: "/split", icon: Split, label: "Split PDF", desc: "Extract specific pages", color: "bg-brand-green" },
+  { to: "/compress", icon: Minimize2, label: "Compress PDF", desc: "Reduce file size", color: "bg-brand-purple" },
+  { to: "/convert", icon: FileText, label: "Convert PDF", desc: "To images or text", color: "bg-brand-orange" },
+];
+
+const features = [
+  { icon: Sparkles, title: "Fast & Simple", desc: "No downloads, just upload and get the job done in seconds.", color: "text-brand-blue" },
+  { icon: Shield, title: "Secure & Reliable", desc: "Your files are processed safely with privacy protected.", color: "text-brand-green" },
+  { icon: Globe, title: "Access Anywhere", desc: "Work on documents anytime – desktop, tablet, or mobile.", color: "text-brand-purple" },
+];
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[hsl(var(--hero-gradient-start))] to-[hsl(var(--hero-gradient-end))]">
-      <div className="container mx-auto px-6 py-32">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="animate-fade-in">
-            <p className="text-accent font-semibold text-lg mb-4 tracking-wide">Welcome to Your PDF Hub</p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
-              ✨ All-in-One PDF & Document Tools
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
-              Convert, merge, split, compress, and edit your files online with ease.
-            </p>
-            
-            <div className="grid sm:grid-cols-3 gap-4 mb-8 text-left">
-              <div className="p-4 bg-card/50 rounded-xl border border-border">
-                <span className="text-2xl mb-2 block">🚀</span>
-                <h3 className="font-semibold text-foreground mb-1">Fast, Simple, Free</h3>
-                <p className="text-sm text-muted-foreground">No downloads, no hassle – just upload and get the job done in seconds.</p>
-              </div>
-              <div className="p-4 bg-card/50 rounded-xl border border-border">
-                <span className="text-2xl mb-2 block">🔒</span>
-                <h3 className="font-semibold text-foreground mb-1">Secure & Reliable</h3>
-                <p className="text-sm text-muted-foreground">Your files are processed safely, and privacy is always protected.</p>
-              </div>
-              <div className="p-4 bg-card/50 rounded-xl border border-border">
-                <span className="text-2xl mb-2 block">🌍</span>
-                <h3 className="font-semibold text-foreground mb-1">Access Anywhere</h3>
-                <p className="text-sm text-muted-foreground">Work on your documents anytime, anywhere – desktop, tablet, or mobile.</p>
-              </div>
+    <section className="relative overflow-hidden bg-gradient-hero">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="container relative mx-auto px-6 py-20 lg:py-28">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Content */}
+          <div className="space-y-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium animate-fade-in">
+              <Sparkles className="w-4 h-4" />
+              Welcome to Your PDF Hub
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="text-lg group" asChild>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight animate-fade-in" style={{ animationDelay: "0.1s" }}>
+              All-in-One PDF &{" "}
+              <span className="text-gradient">Document Tools</span>
+            </h1>
+            
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl animate-fade-in" style={{ animationDelay: "0.2s" }}>
+              Convert, merge, split, compress, and edit your files online with ease. 
+              Simple, fast, and completely free.
+            </p>
+
+            {/* Feature badges */}
+            <div className="flex flex-wrap gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+              {features.map((feature, i) => (
+                <div key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <feature.icon className={`w-4 h-4 ${feature.color}`} />
+                  <span>{feature.title}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+              <Button size="lg" className="text-base shadow-cta group" asChild>
                 <Link to="/merge">
                   Get Started Now
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="text-lg">
-                View All Tools
+              <Button size="lg" variant="outline" className="text-base" asChild>
+                <a href="#tools">View All Tools</a>
               </Button>
             </div>
           </div>
-          
-          <div className="relative animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <div className="grid grid-cols-2 gap-4">
-              <Link 
-                to="/merge"
-                className="group p-6 bg-card border border-border rounded-2xl hover:border-accent hover:shadow-lg transition-all duration-300"
-              >
-                <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
-                  <Merge className="w-6 h-6 text-accent group-hover:text-accent-foreground" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">Merge PDF</h3>
-                <p className="text-sm text-muted-foreground">Combine multiple PDFs into one</p>
-              </Link>
 
-              <Link 
-                to="/split"
-                className="group p-6 bg-card border border-border rounded-2xl hover:border-accent hover:shadow-lg transition-all duration-300"
+          {/* Right - Tool Cards */}
+          <div className="grid grid-cols-2 gap-4 animate-slide-in-right">
+            {tools.map((tool, i) => (
+              <Link
+                key={tool.to}
+                to={tool.to}
+                className="group p-6 bg-card border border-border rounded-2xl hover:shadow-card-hover hover:border-transparent transition-all duration-300 animate-fade-in"
+                style={{ animationDelay: `${0.4 + i * 0.1}s` }}
               >
-                <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
-                  <Split className="w-6 h-6 text-accent group-hover:text-accent-foreground" />
+                <div className={`w-12 h-12 ${tool.color} rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110`}>
+                  <tool.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">Split PDF</h3>
-                <p className="text-sm text-muted-foreground">Extract specific pages</p>
+                <h3 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+                  {tool.label}
+                </h3>
+                <p className="text-sm text-muted-foreground">{tool.desc}</p>
               </Link>
-
-              <Link 
-                to="/compress"
-                className="group p-6 bg-card border border-border rounded-2xl hover:border-accent hover:shadow-lg transition-all duration-300"
-              >
-                <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
-                  <Minimize2 className="w-6 h-6 text-accent group-hover:text-accent-foreground" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">Compress PDF</h3>
-                <p className="text-sm text-muted-foreground">Reduce file size</p>
-              </Link>
-
-              <Link 
-                to="/convert"
-                className="group p-6 bg-card border border-border rounded-2xl hover:border-accent hover:shadow-lg transition-all duration-300"
-              >
-                <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
-                  <FileText className="w-6 h-6 text-accent group-hover:text-accent-foreground" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">Convert PDF</h3>
-                <p className="text-sm text-muted-foreground">To images or text</p>
-              </Link>
-            </div>
+            ))}
           </div>
         </div>
       </div>
