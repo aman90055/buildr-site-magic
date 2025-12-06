@@ -1,5 +1,8 @@
 import { useCallback, useState } from "react";
 import { FileUp } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+
+const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
 
 interface PDFDropzoneProps {
   onFilesAdded: (files: File[]) => void;
@@ -8,6 +11,31 @@ interface PDFDropzoneProps {
 
 const PDFDropzone = ({ onFilesAdded, disabled }: PDFDropzoneProps) => {
   const [isDragging, setIsDragging] = useState(false);
+
+  const validateFiles = (files: File[]) => {
+    const validFiles: File[] = [];
+    const oversizedFiles: File[] = [];
+
+    files.forEach((file) => {
+      if (file.type === "application/pdf") {
+        if (file.size <= MAX_FILE_SIZE) {
+          validFiles.push(file);
+        } else {
+          oversizedFiles.push(file);
+        }
+      }
+    });
+
+    if (oversizedFiles.length > 0) {
+      toast({
+        title: "File too large",
+        description: `${oversizedFiles.length} file(s) exceed the 50MB limit and were not added.`,
+        variant: "destructive",
+      });
+    }
+
+    return validFiles;
+  };
 
   const handleDrag = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -36,11 +64,10 @@ const PDFDropzone = ({ onFilesAdded, disabled }: PDFDropzoneProps) => {
 
       if (disabled) return;
 
-      const files = Array.from(e.dataTransfer.files).filter(
-        (file) => file.type === "application/pdf"
-      );
-      if (files.length > 0) {
-        onFilesAdded(files);
+      const files = Array.from(e.dataTransfer.files);
+      const validFiles = validateFiles(files);
+      if (validFiles.length > 0) {
+        onFilesAdded(validFiles);
       }
     },
     [onFilesAdded, disabled]
@@ -48,11 +75,10 @@ const PDFDropzone = ({ onFilesAdded, disabled }: PDFDropzoneProps) => {
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) return;
-    const files = Array.from(e.target.files || []).filter(
-      (file) => file.type === "application/pdf"
-    );
-    if (files.length > 0) {
-      onFilesAdded(files);
+    const files = Array.from(e.target.files || []);
+    const validFiles = validateFiles(files);
+    if (validFiles.length > 0) {
+      onFilesAdded(validFiles);
     }
     e.target.value = "";
   };

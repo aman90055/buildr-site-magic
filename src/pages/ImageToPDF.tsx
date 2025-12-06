@@ -19,11 +19,29 @@ const ImageToPDF = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
 
+  const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
+
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const imageFiles = acceptedFiles.filter((file) =>
       file.type.startsWith("image/")
     );
-    const newImages: ImageFile[] = imageFiles.map((file) => ({
+    
+    const validFiles: File[] = [];
+    const oversizedFiles: File[] = [];
+    
+    imageFiles.forEach((file) => {
+      if (file.size <= MAX_FILE_SIZE) {
+        validFiles.push(file);
+      } else {
+        oversizedFiles.push(file);
+      }
+    });
+
+    if (oversizedFiles.length > 0) {
+      toast.error(`${oversizedFiles.length} file(s) exceed the 50MB limit and were not added.`);
+    }
+
+    const newImages: ImageFile[] = validFiles.map((file) => ({
       id: crypto.randomUUID(),
       file,
       preview: URL.createObjectURL(file),
@@ -34,6 +52,7 @@ const ImageToPDF = () => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: { "image/*": [".jpg", ".jpeg", ".png", ".gif", ".webp"] },
+    maxSize: MAX_FILE_SIZE,
   });
 
   const removeImage = (id: string) => {

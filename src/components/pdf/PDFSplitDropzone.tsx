@@ -3,6 +3,8 @@ import { FileUp } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import { toast } from "@/hooks/use-toast";
 
+const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
+
 interface PDFSplitDropzoneProps {
   onFileAdded: (file: File, pageCount: number) => void;
   disabled?: boolean;
@@ -17,6 +19,15 @@ const PDFSplitDropzone = ({ onFileAdded, disabled }: PDFSplitDropzoneProps) => {
       toast({
         title: "Invalid file",
         description: "Please upload a PDF file.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      toast({
+        title: "File too large",
+        description: "File exceeds the 50MB limit. Please choose a smaller file.",
         variant: "destructive",
       });
       return;
