@@ -15,9 +15,15 @@ const PDFToImage = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [images, setImages] = useState<string[]>([]);
 
+  const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
+
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const pdf = acceptedFiles.find((f) => f.type === "application/pdf");
     if (pdf) {
+      if (pdf.size > MAX_FILE_SIZE) {
+        toast.error("File exceeds the 50MB limit. Please choose a smaller file.");
+        return;
+      }
       setPdfFile(pdf);
       setImages([]);
     }
@@ -27,6 +33,7 @@ const PDFToImage = () => {
     onDrop,
     accept: { "application/pdf": [".pdf"] },
     maxFiles: 1,
+    maxSize: MAX_FILE_SIZE,
   });
 
   const convertToImages = async () => {
