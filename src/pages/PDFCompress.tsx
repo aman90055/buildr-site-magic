@@ -7,11 +7,11 @@ import CompressionOptions from "@/components/pdf/CompressionOptions";
 import CompressActions from "@/components/pdf/CompressActions";
 import { usePDFCompress } from "@/hooks/usePDFCompress";
 
-export type CompressionLevel = "low" | "medium" | "high";
+export type CompressionLevel = number; // 1-100
 
 const PDFCompress = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [compressionLevel, setCompressionLevel] = useState<CompressionLevel>("medium");
+  const [compressionLevel, setCompressionLevel] = useState<CompressionLevel>(50);
   
   const { compressFile, isProcessing, progress, downloadUrl, originalSize, compressedSize, reset } = usePDFCompress();
 
