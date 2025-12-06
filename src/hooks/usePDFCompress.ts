@@ -112,24 +112,10 @@ export const usePDFCompress = () => {
   };
 
   const getCompressionOptions = (level: CompressionLevel) => {
-    switch (level) {
-      case "low":
-        return {
-          useObjectStreams: false,
-        };
-      case "medium":
-        return {
-          useObjectStreams: true,
-        };
-      case "high":
-        return {
-          useObjectStreams: true,
-        };
-      default:
-        return {
-          useObjectStreams: true,
-        };
-    }
+    // Level 1-100: higher = more compression
+    return {
+      useObjectStreams: level > 30,
+    };
   };
 
   const reset = () => {

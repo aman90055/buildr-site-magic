@@ -1,3 +1,4 @@
+import { Slider } from "@/components/ui/slider";
 import type { CompressionLevel } from "@/pages/PDFCompress";
 
 interface CompressionOptionsProps {
@@ -7,70 +8,38 @@ interface CompressionOptionsProps {
 }
 
 const CompressionOptions = ({ compressionLevel, onLevelChange, disabled }: CompressionOptionsProps) => {
-  const options: { level: CompressionLevel; label: string; description: string }[] = [
-    {
-      level: "low",
-      label: "Low Compression",
-      description: "Best quality, minimal size reduction",
-    },
-    {
-      level: "medium",
-      label: "Medium Compression",
-      description: "Balanced quality and size",
-    },
-    {
-      level: "high",
-      label: "High Compression",
-      description: "Maximum size reduction",
-    },
-  ];
+  const getLabel = (level: number) => {
+    if (level <= 33) return "Low compression - Best quality";
+    if (level <= 66) return "Medium compression - Balanced";
+    return "High compression - Smallest size";
+  };
 
   return (
     <div className="bg-card border border-border rounded-xl p-6">
-      <h3 className="font-semibold text-foreground mb-4">Compression Level</h3>
-      
-      <div className="grid gap-3">
-        {options.map((option) => (
-          <label
-            key={option.level}
-            className={`
-              flex items-center gap-4 p-4 rounded-lg border cursor-pointer transition-all
-              ${compressionLevel === option.level
-                ? "border-primary bg-primary/5"
-                : "border-border hover:border-primary/50"
-              }
-              ${disabled ? "opacity-50 cursor-not-allowed" : ""}
-            `}
-          >
-            <input
-              type="radio"
-              name="compression"
-              value={option.level}
-              checked={compressionLevel === option.level}
-              onChange={() => onLevelChange(option.level)}
-              disabled={disabled}
-              className="sr-only"
-            />
-            
-            <div className={`
-              w-5 h-5 rounded-full border-2 flex items-center justify-center
-              ${compressionLevel === option.level
-                ? "border-primary"
-                : "border-muted-foreground"
-              }
-            `}>
-              {compressionLevel === option.level && (
-                <div className="w-2.5 h-2.5 rounded-full bg-primary" />
-              )}
-            </div>
-            
-            <div className="flex-1">
-              <p className="font-medium text-foreground">{option.label}</p>
-              <p className="text-sm text-muted-foreground">{option.description}</p>
-            </div>
-          </label>
-        ))}
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="font-semibold text-foreground">Compression Level</h3>
+        <span className="text-sm font-medium text-primary">{compressionLevel}%</span>
       </div>
+      
+      <Slider
+        value={[compressionLevel]}
+        onValueChange={(value) => onLevelChange(value[0])}
+        min={1}
+        max={100}
+        step={1}
+        disabled={disabled}
+        className="mb-3"
+      />
+      
+      <div className="flex justify-between text-xs text-muted-foreground mb-2">
+        <span>1</span>
+        <span>50</span>
+        <span>100</span>
+      </div>
+      
+      <p className="text-sm text-muted-foreground text-center">
+        {getLabel(compressionLevel)}
+      </p>
     </div>
   );
 };
