@@ -10,9 +10,18 @@ import {
 } from "@/components/ui/navigation-menu";
 import { 
   Image, FileText, Presentation, Table, Code,
-  FileImage, FileType, FileSpreadsheet, FileBadge
+  FileImage, FileType, FileSpreadsheet, FileBadge,
+  LogIn, LogOut, User, Loader2
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/useAuth";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useToast } from "@/hooks/use-toast";
 
 const convertToPdfTools = [
   { title: "JPG to PDF", href: "/image-to-pdf", icon: Image, description: "Convert images to PDF" },
@@ -31,6 +40,25 @@ const convertFromPdfTools = [
 ];
 
 const Header = () => {
+  const { user, loading, signOut } = useAuth();
+  const { toast } = useToast();
+
+  const handleSignOut = async () => {
+    const { error } = await signOut();
+    if (error) {
+      toast({
+        title: "Error signing out",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Signed out",
+        description: "You have been successfully signed out.",
+      });
+    }
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-6 py-4">
@@ -121,10 +149,39 @@ const Header = () => {
             </NavigationMenuList>
           </NavigationMenu>
           
-          <div className="flex items-center gap-4">
-            <Button asChild>
-              <Link to="/merge">Get Started</Link>
-            </Button>
+          <div className="flex items-center gap-3">
+            {loading ? (
+              <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+            ) : user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm" className="gap-2">
+                    <User className="h-4 w-4" />
+                    <span className="hidden sm:inline max-w-[120px] truncate">
+                      {user.email}
+                    </span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={handleSignOut} className="gap-2 cursor-pointer">
+                    <LogOut className="h-4 w-4" />
+                    Sign out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <>
+                <Button variant="ghost" size="sm" asChild className="gap-2">
+                  <Link to="/auth">
+                    <LogIn className="h-4 w-4" />
+                    <span className="hidden sm:inline">Sign In</span>
+                  </Link>
+                </Button>
+                <Button size="sm" asChild>
+                  <Link to="/merge">Get Started</Link>
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </div>
