@@ -1,1 +1,13 @@
 project_id = "nqqnwepqyogrixjdbxev"
+
+[functions.ai-chat]
+verify_jwt = false
+
+[functions.ai-analyze]
+verify_jwt = false
+
+[functions.ai-ocr]
+verify_jwt = false
+
+[functions.ai-generate-image]
+verify_jwt = false
