@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
+import Auth from "./pages/Auth";
 import PDFMerge from "./pages/PDFMerge";
 import PDFSplit from "./pages/PDFSplit";
 import PDFCompress from "./pages/PDFCompress";
@@ -54,6 +55,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/auth" element={<Auth />} />
             {/* Core Tools */}
             <Route path="/merge" element={<PDFMerge />} />
             <Route path="/split" element={<PDFSplit />} />
