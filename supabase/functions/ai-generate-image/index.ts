@@ -1,9 +1,21 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { z } from "https://esm.sh/zod@3.23.8";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
+
+// Input validation schema
+const requestSchema = z.object({
+  prompt: z.string()
+    .min(3, "Prompt too short (min 3 characters)")
+    .max(1000, "Prompt too long (max 1,000 characters)")
+    .refine(
+      (prompt) => !/[<>{}]/g.test(prompt),
+      "Invalid characters in prompt"
+    ),
+});
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -11,14 +23,28 @@ serve(async (req) => {
   }
 
   try {
-    const { prompt } = await req.json();
+    const body = await req.json();
+    
+    // Validate input
+    const validation = requestSchema.safeParse(body);
+    if (!validation.success) {
+      return new Response(JSON.stringify({ 
+        error: "Validation failed", 
+        details: validation.error.errors.map(e => e.message) 
+      }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const { prompt } = validation.data;
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    console.log("Generating image with prompt:", prompt);
+    console.log("Generating image with prompt:", prompt.substring(0, 100));
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",

@@ -1,9 +1,23 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { z } from "https://esm.sh/zod@3.23.8";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
+
+// Input validation schemas
+const messageSchema = z.object({
+  role: z.enum(["user", "assistant", "system"]),
+  content: z.string().min(1, "Message cannot be empty").max(10000, "Message too long (max 10,000 characters)"),
+});
+
+const requestSchema = z.object({
+  messages: z.array(messageSchema)
+    .min(1, "At least one message required")
+    .max(50, "Too many messages (max 50)"),
+  type: z.enum(["chat", "analyze", "ocr"]).optional().default("chat"),
+});
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -11,7 +25,21 @@ serve(async (req) => {
   }
 
   try {
-    const { messages, type } = await req.json();
+    const body = await req.json();
+    
+    // Validate input
+    const validation = requestSchema.safeParse(body);
+    if (!validation.success) {
+      return new Response(JSON.stringify({ 
+        error: "Validation failed", 
+        details: validation.error.errors.map(e => e.message) 
+      }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const { messages, type } = validation.data;
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     
     if (!LOVABLE_API_KEY) {
