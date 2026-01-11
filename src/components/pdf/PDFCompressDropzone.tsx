@@ -1,8 +1,5 @@
 import { useState, useCallback, useRef } from "react";
 import { Minimize2 } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
-
-const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
 
 interface PDFCompressDropzoneProps {
   onFileAdded: (file: File) => void;
@@ -12,18 +9,6 @@ interface PDFCompressDropzoneProps {
 const PDFCompressDropzone = ({ onFileAdded, disabled }: PDFCompressDropzoneProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const validateFile = (file: File): boolean => {
-    if (file.size > MAX_FILE_SIZE) {
-      toast({
-        title: "File too large",
-        description: "File exceeds the 50MB limit. Please choose a smaller file.",
-        variant: "destructive",
-      });
-      return false;
-    }
-    return true;
-  };
 
   const handleDragEnter = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -54,14 +39,14 @@ const PDFCompressDropzone = ({ onFileAdded, disabled }: PDFCompressDropzoneProps
     const files = Array.from(e.dataTransfer.files);
     const pdfFile = files.find((file) => file.type === "application/pdf");
 
-    if (pdfFile && validateFile(pdfFile)) {
+    if (pdfFile) {
       onFileAdded(pdfFile);
     }
   }, [disabled, onFileAdded]);
 
   const handleFileSelect = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files && files[0] && files[0].type === "application/pdf" && validateFile(files[0])) {
+    if (files && files[0] && files[0].type === "application/pdf") {
       onFileAdded(files[0]);
     }
     if (fileInputRef.current) {
@@ -115,7 +100,7 @@ const PDFCompressDropzone = ({ onFileAdded, disabled }: PDFCompressDropzoneProps
             {isDragging ? "Drop your PDF here" : "Drag & drop a PDF file"}
           </p>
           <p className="text-sm text-muted-foreground">
-            or click to browse • Max 50MB
+            or click to browse
           </p>
         </div>
       </div>

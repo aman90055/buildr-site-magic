@@ -10,9 +10,6 @@ import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
 import { Hash, Download, RotateCcw } from "lucide-react";
 import { usePDFPageNumbers, PageNumberPosition } from "@/hooks/usePDFPageNumbers";
-import { toast } from "@/hooks/use-toast";
-
-const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
 const AddPageNumbers = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -25,10 +22,6 @@ const AddPageNumbers = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
-      if (selectedFile.size > MAX_FILE_SIZE) {
-        toast({ title: "Error", description: "File exceeds 50MB limit.", variant: "destructive" });
-        return;
-      }
       setFile(selectedFile);
     }
   };
