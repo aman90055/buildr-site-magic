@@ -1,9 +1,18 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { z } from "https://esm.sh/zod@3.23.8";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
+
+// Input validation schema
+const requestSchema = z.object({
+  text: z.string()
+    .min(1, "Text cannot be empty")
+    .max(100000, "Text too long (max 100,000 characters)"),
+  action: z.enum(["summarize", "extract-info", "qa", "analyze"]).optional().default("analyze"),
+});
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -11,7 +20,21 @@ serve(async (req) => {
   }
 
   try {
-    const { text, action } = await req.json();
+    const body = await req.json();
+    
+    // Validate input
+    const validation = requestSchema.safeParse(body);
+    if (!validation.success) {
+      return new Response(JSON.stringify({ 
+        error: "Validation failed", 
+        details: validation.error.errors.map(e => e.message) 
+      }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const { text, action } = validation.data;
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     
     if (!LOVABLE_API_KEY) {
