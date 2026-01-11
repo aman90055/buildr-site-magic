@@ -7,11 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
-import { RotateCw, Upload, Download, RotateCcw } from "lucide-react";
+import { RotateCw, Download, RotateCcw } from "lucide-react";
 import { usePDFRotate, RotationDegrees } from "@/hooks/usePDFRotate";
-import { toast } from "@/hooks/use-toast";
-
-const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
 const RotatePDF = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -22,10 +19,6 @@ const RotatePDF = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
-      if (selectedFile.size > MAX_FILE_SIZE) {
-        toast({ title: "Error", description: "File exceeds 50MB limit.", variant: "destructive" });
-        return;
-      }
       setFile(selectedFile);
     }
   };

@@ -1,8 +1,5 @@
 import { useCallback, useState } from "react";
 import { FileUp } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
-
-const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
 
 interface PDFDropzoneProps {
   onFilesAdded: (files: File[]) => void;
@@ -13,28 +10,7 @@ const PDFDropzone = ({ onFilesAdded, disabled }: PDFDropzoneProps) => {
   const [isDragging, setIsDragging] = useState(false);
 
   const validateFiles = (files: File[]) => {
-    const validFiles: File[] = [];
-    const oversizedFiles: File[] = [];
-
-    files.forEach((file) => {
-      if (file.type === "application/pdf") {
-        if (file.size <= MAX_FILE_SIZE) {
-          validFiles.push(file);
-        } else {
-          oversizedFiles.push(file);
-        }
-      }
-    });
-
-    if (oversizedFiles.length > 0) {
-      toast({
-        title: "File too large",
-        description: `${oversizedFiles.length} file(s) exceed the 50MB limit and were not added.`,
-        variant: "destructive",
-      });
-    }
-
-    return validFiles;
+    return files.filter((file) => file.type === "application/pdf");
   };
 
   const handleDrag = useCallback((e: React.DragEvent) => {
@@ -126,7 +102,6 @@ const PDFDropzone = ({ onFilesAdded, disabled }: PDFDropzoneProps) => {
 
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <span className="px-2 py-1 bg-secondary rounded">PDF</span>
-          <span>Max 50MB per file</span>
         </div>
       </div>
     </div>
