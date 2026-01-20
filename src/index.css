@@ -2,115 +2,122 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* 2026 AI-Powered PDF Tools - Modern Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 20% 15%;
+    --background: 220 25% 98%;
+    --foreground: 220 30% 10%;
 
-    --card: 220 20% 98%;
-    --card-foreground: 220 20% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 15%;
+    --popover-foreground: 220 30% 10%;
 
-    /* Bold Red for CTAs */
-    --primary: 355 82% 56%;
+    /* Vibrant AI Accent - Electric Blue */
+    --primary: 235 85% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 15% 95%;
-    --secondary-foreground: 220 20% 15%;
+    --secondary: 220 20% 96%;
+    --secondary-foreground: 220 30% 10%;
 
-    --muted: 220 15% 95%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 220 20% 96%;
+    --muted-foreground: 220 15% 45%;
 
-    /* Blue accent */
-    --accent: 211 100% 50%;
-    --accent-foreground: 0 0% 100%;
+    /* AI Glow - Cyan */
+    --accent: 180 85% 50%;
+    --accent-foreground: 220 30% 10%;
 
-    /* Additional color palette */
-    --color-blue: 211 100% 50%;
-    --color-green: 152 69% 45%;
-    --color-purple: 270 70% 55%;
-    --color-orange: 25 95% 55%;
-    --color-pink: 330 80% 60%;
-    --color-cyan: 185 85% 45%;
+    /* Multi-color palette - 2026 Edition */
+    --color-blue: 235 85% 60%;
+    --color-green: 158 75% 48%;
+    --color-purple: 280 85% 60%;
+    --color-orange: 28 95% 55%;
+    --color-pink: 338 85% 60%;
+    --color-cyan: 180 85% 50%;
+    --color-ai: 260 85% 65%;
 
-    --destructive: 355 82% 56%;
+    --destructive: 0 75% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 211 100% 50%;
+    --border: 220 20% 90%;
+    --input: 220 20% 90%;
+    --ring: 235 85% 60%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
     
-    /* Custom design tokens */
-    --hero-gradient-start: 220 20% 98%;
-    --hero-gradient-end: 0 0% 100%;
+    /* 2026 Design Tokens */
+    --hero-gradient-start: 235 85% 60%;
+    --hero-gradient-mid: 280 85% 60%;
+    --hero-gradient-end: 180 85% 50%;
     
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --glow-primary: 235 85% 60%;
+    --glow-accent: 180 85% 50%;
+    --glow-ai: 260 85% 65%;
+    
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 220 20% 15%;
-    --sidebar-primary: 355 82% 56%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 30% 10%;
+    --sidebar-primary: 235 85% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 15% 95%;
-    --sidebar-accent-foreground: 220 20% 15%;
-    --sidebar-border: 220 15% 90%;
-    --sidebar-ring: 211 100% 50%;
+    --sidebar-accent: 220 20% 96%;
+    --sidebar-accent-foreground: 220 30% 10%;
+    --sidebar-border: 220 20% 90%;
+    --sidebar-ring: 235 85% 60%;
   }
 
   .dark {
-    --background: 220 20% 8%;
+    --background: 225 30% 6%;
     --foreground: 0 0% 98%;
 
-    --card: 220 20% 12%;
+    --card: 225 30% 10%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 220 20% 12%;
+    --popover: 225 30% 10%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 355 82% 56%;
+    --primary: 235 90% 65%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 15% 18%;
+    --secondary: 225 25% 14%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 15% 18%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 225 25% 14%;
+    --muted-foreground: 220 15% 60%;
 
-    --accent: 211 100% 55%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 180 90% 55%;
+    --accent-foreground: 225 30% 6%;
 
-    --color-blue: 211 100% 55%;
-    --color-green: 152 69% 50%;
-    --color-purple: 270 70% 60%;
-    --color-orange: 25 95% 60%;
-    --color-pink: 330 80% 65%;
-    --color-cyan: 185 85% 50%;
+    --color-blue: 235 90% 65%;
+    --color-green: 158 80% 52%;
+    --color-purple: 280 90% 65%;
+    --color-orange: 28 95% 60%;
+    --color-pink: 338 90% 65%;
+    --color-cyan: 180 90% 55%;
+    --color-ai: 260 90% 70%;
 
-    --destructive: 355 70% 45%;
+    --destructive: 0 80% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 20%;
-    --input: 220 15% 20%;
-    --ring: 211 100% 55%;
+    --border: 225 25% 18%;
+    --input: 225 25% 18%;
+    --ring: 235 90% 65%;
     
-    --hero-gradient-start: 220 20% 10%;
-    --hero-gradient-end: 220 20% 8%;
+    --hero-gradient-start: 235 90% 65%;
+    --hero-gradient-mid: 280 90% 65%;
+    --hero-gradient-end: 180 90% 55%;
 
-    --sidebar-background: 220 20% 8%;
+    --sidebar-background: 225 30% 6%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 355 82% 56%;
+    --sidebar-primary: 235 90% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 15% 15%;
+    --sidebar-accent: 225 25% 14%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 220 15% 18%;
-    --sidebar-ring: 211 100% 55%;
+    --sidebar-border: 225 25% 18%;
+    --sidebar-ring: 235 90% 65%;
   }
 }
 
@@ -125,12 +132,94 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
+  /* 2026 Gradient Utilities */
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
   }
   
+  .text-gradient-ai {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--color-ai)), hsl(var(--accent)), hsl(var(--primary)));
+  }
+  
   .bg-gradient-hero {
-    background: linear-gradient(135deg, hsl(var(--hero-gradient-start)) 0%, hsl(var(--hero-gradient-end)) 100%);
+    background: linear-gradient(135deg, 
+      hsl(var(--hero-gradient-start) / 0.08) 0%, 
+      hsl(var(--hero-gradient-mid) / 0.05) 50%, 
+      hsl(var(--hero-gradient-end) / 0.08) 100%);
+  }
+  
+  .bg-gradient-ai {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary)) 0%, 
+      hsl(var(--color-ai)) 50%, 
+      hsl(var(--accent)) 100%);
+  }
+  
+  .bg-gradient-ai-subtle {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.1) 0%, 
+      hsl(var(--color-ai) / 0.08) 50%, 
+      hsl(var(--accent) / 0.1) 100%);
+  }
+
+  /* AI Glow Effects */
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(var(--glow-primary) / 0.3),
+                0 0 40px hsl(var(--glow-primary) / 0.2),
+                0 0 60px hsl(var(--glow-primary) / 0.1);
+  }
+  
+  .glow-accent {
+    box-shadow: 0 0 20px hsl(var(--glow-accent) / 0.3),
+                0 0 40px hsl(var(--glow-accent) / 0.2);
+  }
+  
+  .glow-ai {
+    box-shadow: 0 0 25px hsl(var(--glow-ai) / 0.4),
+                0 0 50px hsl(var(--glow-ai) / 0.2),
+                0 0 75px hsl(var(--glow-ai) / 0.1);
+  }
+  
+  /* Glass Morphism */
+  .glass {
+    @apply bg-background/70 backdrop-blur-xl border border-border/50;
+  }
+  
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-lg border border-border/30;
+  }
+  
+  /* AI Badge Shimmer */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--primary) / 0.1) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  
+  /* Pulse Glow for AI elements */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsl(var(--color-ai) / 0.3);
+    }
+    50% { 
+      box-shadow: 0 0 35px hsl(var(--color-ai) / 0.5),
+                  0 0 50px hsl(var(--color-ai) / 0.3);
+    }
   }
 }

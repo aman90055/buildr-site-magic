@@ -11,7 +11,7 @@ import {
 import { 
   Image, FileText, Presentation, Table, Code,
   FileImage, FileType, FileSpreadsheet, FileBadge,
-  LogIn, LogOut, User, Loader2
+  LogIn, LogOut, User, Loader2, Sparkles, Brain
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
@@ -22,21 +22,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
+import AIBadge from "./AIBadge";
 
 const convertToPdfTools = [
-  { title: "JPG to PDF", href: "/image-to-pdf", icon: Image, description: "Convert images to PDF" },
-  { title: "Word to PDF", href: "/tools/word-to-pdf", icon: FileText, description: "Convert Word documents" },
-  { title: "PowerPoint to PDF", href: "/tools/powerpoint-to-pdf", icon: Presentation, description: "Convert presentations" },
-  { title: "Excel to PDF", href: "/tools/excel-to-pdf", icon: Table, description: "Convert spreadsheets" },
-  { title: "HTML to PDF", href: "/tools/html-to-pdf", icon: Code, description: "Convert web pages" },
+  { title: "JPG to PDF", href: "/image-to-pdf", icon: Image, description: "AI-optimized conversion", ai: true },
+  { title: "Word to PDF", href: "/tools/word-to-pdf", icon: FileText, description: "Perfect formatting" },
+  { title: "PowerPoint to PDF", href: "/tools/powerpoint-to-pdf", icon: Presentation, description: "Preserve animations" },
+  { title: "Excel to PDF", href: "/tools/excel-to-pdf", icon: Table, description: "Keep formulas" },
+  { title: "HTML to PDF", href: "/tools/html-to-pdf", icon: Code, description: "Web to document" },
 ];
 
 const convertFromPdfTools = [
-  { title: "PDF to JPG", href: "/pdf-to-image", icon: FileImage, description: "Convert PDF to images" },
-  { title: "PDF to Word", href: "/tools/pdf-to-word", icon: FileType, description: "Convert to Word document" },
-  { title: "PDF to PowerPoint", href: "/tools/pdf-to-powerpoint", icon: Presentation, description: "Convert to presentation" },
-  { title: "PDF to Excel", href: "/tools/pdf-to-excel", icon: FileSpreadsheet, description: "Convert to spreadsheet" },
-  { title: "PDF to PDF/A", href: "/tools/pdf-to-pdfa", icon: FileBadge, description: "Convert to archival format" },
+  { title: "PDF to JPG", href: "/pdf-to-image", icon: FileImage, description: "AI-enhanced export", ai: true },
+  { title: "PDF to Word", href: "/tools/pdf-to-word", icon: FileType, description: "Smart conversion", ai: true },
+  { title: "PDF to PowerPoint", href: "/tools/pdf-to-powerpoint", icon: Presentation, description: "Editable slides" },
+  { title: "PDF to Excel", href: "/tools/pdf-to-excel", icon: FileSpreadsheet, description: "Extract tables", ai: true },
+  { title: "PDF to PDF/A", href: "/tools/pdf-to-pdfa", icon: FileBadge, description: "Archive format" },
 ];
 
 const Header = () => {
@@ -60,50 +61,68 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-      <div className="container mx-auto px-6 py-4">
+    <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
+      <div className="container mx-auto px-6 py-3">
         <div className="flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold text-foreground">
-            PDF Tools
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 text-xl font-display font-bold text-foreground">
+            <div className="w-9 h-9 rounded-xl bg-gradient-ai flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-white" />
+            </div>
+            <span>PDF Tools</span>
+            <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold bg-brand-ai/10 text-brand-ai rounded-full">
+              2026
+            </span>
           </Link>
           
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Link to="/merge" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2">
+                <Link to="/merge" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
                   Merge
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/split" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2">
+                <Link to="/split" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
                   Split
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/compress" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2">
+                <Link to="/compress" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
                   Compress
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/ocr" className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
+                  <Brain className="w-3.5 h-3.5 text-brand-ai" />
+                  AI OCR
                 </Link>
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-muted-foreground hover:text-foreground">
+                <NavigationMenuTrigger className="bg-transparent text-muted-foreground hover:text-foreground text-sm font-medium">
                   Convert to PDF
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-1 p-4 bg-popover border border-border rounded-lg shadow-lg">
+                  <ul className="grid w-[400px] gap-1 p-4 glass-card rounded-2xl shadow-card-hover">
                     {convertToPdfTools.map((tool) => (
                       <li key={tool.href}>
                         <NavigationMenuLink asChild>
                           <Link
                             to={tool.href}
                             className={cn(
-                              "flex items-center gap-3 select-none rounded-md p-3 leading-none no-underline outline-none transition-colors",
-                              "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              "flex items-center gap-3 select-none rounded-xl p-3 leading-none no-underline outline-none transition-colors",
+                              "hover:bg-muted focus:bg-muted"
                             )}
                           >
-                            <tool.icon className="h-5 w-5 text-primary" />
-                            <div>
-                              <div className="text-sm font-medium leading-none">{tool.title}</div>
+                            <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                              <tool.icon className="h-4 w-4 text-primary" />
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2">
+                                <div className="text-sm font-medium leading-none">{tool.title}</div>
+                                {tool.ai && <AIBadge variant="inline" glow={false} />}
+                              </div>
                               <p className="line-clamp-1 text-xs leading-snug text-muted-foreground mt-1">
                                 {tool.description}
                               </p>
@@ -117,24 +136,29 @@ const Header = () => {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-muted-foreground hover:text-foreground">
+                <NavigationMenuTrigger className="bg-transparent text-muted-foreground hover:text-foreground text-sm font-medium">
                   Convert from PDF
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-1 p-4 bg-popover border border-border rounded-lg shadow-lg">
+                  <ul className="grid w-[400px] gap-1 p-4 glass-card rounded-2xl shadow-card-hover">
                     {convertFromPdfTools.map((tool) => (
                       <li key={tool.href}>
                         <NavigationMenuLink asChild>
                           <Link
                             to={tool.href}
                             className={cn(
-                              "flex items-center gap-3 select-none rounded-md p-3 leading-none no-underline outline-none transition-colors",
-                              "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              "flex items-center gap-3 select-none rounded-xl p-3 leading-none no-underline outline-none transition-colors",
+                              "hover:bg-muted focus:bg-muted"
                             )}
                           >
-                            <tool.icon className="h-5 w-5 text-primary" />
-                            <div>
-                              <div className="text-sm font-medium leading-none">{tool.title}</div>
+                            <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                              <tool.icon className="h-4 w-4 text-primary" />
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2">
+                                <div className="text-sm font-medium leading-none">{tool.title}</div>
+                                {tool.ai && <AIBadge variant="inline" glow={false} />}
+                              </div>
                               <p className="line-clamp-1 text-xs leading-snug text-muted-foreground mt-1">
                                 {tool.description}
                               </p>
@@ -155,15 +179,15 @@ const Header = () => {
             ) : user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="sm" className="gap-2">
+                  <Button variant="outline" size="sm" className="gap-2 rounded-xl">
                     <User className="h-4 w-4" />
                     <span className="hidden sm:inline max-w-[120px] truncate">
                       {user.email}
                     </span>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={handleSignOut} className="gap-2 cursor-pointer">
+                <DropdownMenuContent align="end" className="glass-card rounded-xl">
+                  <DropdownMenuItem onClick={handleSignOut} className="gap-2 cursor-pointer rounded-lg">
                     <LogOut className="h-4 w-4" />
                     Sign out
                   </DropdownMenuItem>
@@ -171,13 +195,13 @@ const Header = () => {
               </DropdownMenu>
             ) : (
               <>
-                <Button variant="ghost" size="sm" asChild className="gap-2">
+                <Button variant="ghost" size="sm" asChild className="gap-2 rounded-xl hidden sm:inline-flex">
                   <Link to="/auth">
                     <LogIn className="h-4 w-4" />
-                    <span className="hidden sm:inline">Sign In</span>
+                    Sign In
                   </Link>
                 </Button>
-                <Button size="sm" asChild>
+                <Button size="sm" asChild className="rounded-xl bg-gradient-ai hover:opacity-90 transition-opacity font-display font-semibold">
                   <Link to="/merge">Get Started</Link>
                 </Button>
               </>
