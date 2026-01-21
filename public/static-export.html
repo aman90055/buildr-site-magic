@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free PDF Tools Online - Merge, Split, Compress PDFs | 2026 AI Edition</title>
+  <meta name="description" content="Free online AI-powered PDF tools to merge, split, compress, and convert PDF files. Fast, secure, and easy to use. No registration required.">
+  <meta name="author" content="PDF Tools" />
+  <link rel="canonical" href="https://pdftools.app" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    /* CSS Variables - 2026 AI Design System */
+    :root {
+      --background: 220 25% 98%;
+      --foreground: 220 30% 10%;
+      --card: 0 0% 100%;
+      --card-foreground: 220 30% 10%;
+      --popover: 0 0% 100%;
+      --popover-foreground: 220 30% 10%;
+      --primary: 235 85% 60%;
+      --primary-foreground: 0 0% 100%;
+      --secondary: 220 20% 96%;
+      --secondary-foreground: 220 30% 10%;
+      --muted: 220 20% 96%;
+      --muted-foreground: 220 15% 45%;
+      --accent: 180 85% 50%;
+      --accent-foreground: 220 30% 10%;
+      --color-blue: 235 85% 60%;
+      --color-green: 158 75% 48%;
+      --color-purple: 280 85% 60%;
+      --color-orange: 28 95% 55%;
+      --color-pink: 338 85% 60%;
+      --color-cyan: 180 85% 50%;
+      --color-ai: 260 85% 65%;
+      --destructive: 0 75% 55%;
+      --destructive-foreground: 0 0% 100%;
+      --border: 220 20% 90%;
+      --ring: 235 85% 60%;
+      --radius: 1rem;
+      --hero-gradient-start: 235 85% 60%;
+      --hero-gradient-mid: 280 85% 60%;
+      --hero-gradient-end: 180 85% 50%;
+      --glow-primary: 235 85% 60%;
+      --glow-accent: 180 85% 50%;
+      --glow-ai: 260 85% 65%;
+    }
+
+    .dark {
+      --background: 225 30% 6%;
+      --foreground: 0 0% 98%;
+      --card: 225 30% 10%;
+      --card-foreground: 0 0% 98%;
+      --popover: 225 30% 10%;
+      --popover-foreground: 0 0% 98%;
+      --primary: 235 90% 65%;
+      --primary-foreground: 0 0% 100%;
+      --secondary: 225 25% 14%;
+      --secondary-foreground: 0 0% 98%;
+      --muted: 225 25% 14%;
+      --muted-foreground: 220 15% 60%;
+      --accent: 180 90% 55%;
+      --accent-foreground: 225 30% 6%;
+      --color-blue: 235 90% 65%;
+      --color-green: 158 80% 52%;
+      --color-purple: 280 90% 65%;
+      --color-orange: 28 95% 60%;
+      --color-pink: 338 90% 65%;
+      --color-cyan: 180 90% 55%;
+      --color-ai: 260 90% 70%;
+      --destructive: 0 80% 50%;
+      --destructive-foreground: 0 0% 98%;
+      --border: 225 25% 18%;
+      --ring: 235 90% 65%;
+      --hero-gradient-start: 235 90% 65%;
+      --hero-gradient-mid: 280 90% 65%;
+      --hero-gradient-end: 180 90% 55%;
+    }
+
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: hsl(var(--background));
+      color: hsl(var(--foreground));
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .font-display {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* Utilities */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .text-gradient-ai {
+      background: linear-gradient(135deg, hsl(var(--color-ai)), hsl(var(--accent)), hsl(var(--primary)));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .bg-gradient-hero {
+      background: linear-gradient(135deg, 
+        hsl(var(--hero-gradient-start) / 0.08) 0%, 
+        hsl(var(--hero-gradient-mid) / 0.05) 50%, 
+        hsl(var(--hero-gradient-end) / 0.08) 100%);
+    }
+
+    .bg-gradient-ai {
+      background: linear-gradient(135deg, 
+        hsl(var(--primary)) 0%, 
+        hsl(var(--color-ai)) 50%, 
+        hsl(var(--accent)) 100%);
+    }
+
+    .bg-gradient-ai-subtle {
+      background: linear-gradient(135deg, 
+        hsl(var(--primary) / 0.1) 0%, 
+        hsl(var(--color-ai) / 0.08) 50%, 
+        hsl(var(--accent) / 0.1) 100%);
+    }
+
+    .glass {
+      background: hsl(var(--background) / 0.7);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid hsl(var(--border) / 0.5);
+    }
+
+    .glass-card {
+      background: hsl(var(--card) / 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid hsl(var(--border) / 0.3);
+    }
+
+    .glow-ai {
+      box-shadow: 0 0 25px hsl(var(--glow-ai) / 0.4),
+                  0 0 50px hsl(var(--glow-ai) / 0.2),
+                  0 0 75px hsl(var(--glow-ai) / 0.1);
+    }
+
+    /* Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(2deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px hsl(var(--color-ai) / 0.3); }
+      50% { box-shadow: 0 0 35px hsl(var(--color-ai) / 0.5), 0 0 50px hsl(var(--color-ai) / 0.3); }
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    .pulse-glow {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 0.75rem 0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: hsl(var(--foreground));
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-link {
+      color: hsl(var(--muted-foreground));
+      text-decoration: none;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: hsl(var(--foreground));
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      color: white;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-lg {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border-radius: 1rem;
+      height: 3.5rem;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid hsl(var(--border));
+      color: hsl(var(--foreground));
+    }
+
+    .btn-outline:hover {
+      background: hsl(var(--muted) / 0.5);
+    }
+
+    /* AI Badge */
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.375rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, hsl(var(--color-ai) / 0.15), hsl(var(--accent) / 0.15));
+      color: hsl(var(--color-ai));
+      border: 1px solid hsl(var(--color-ai) / 0.3);
+    }
+
+    .ai-badge-small {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.625rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      padding-top: 5rem;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(64px);
+    }
+
+    .hero-blob-1 {
+      top: -10rem;
+      right: -10rem;
+      width: 31.25rem;
+      height: 31.25rem;
+      background: linear-gradient(to bottom right, hsl(var(--primary) / 0.2), hsl(var(--color-ai) / 0.1), transparent);
+    }
+
+    .hero-blob-2 {
+      bottom: -10rem;
+      left: -10rem;
+      width: 31.25rem;
+      height: 31.25rem;
+      background: linear-gradient(to top right, hsl(var(--accent) / 0.2), hsl(var(--color-purple) / 0.1), transparent);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(to right, hsl(var(--border) / 0.3) 1px, transparent 1px),
+                        linear-gradient(to bottom, hsl(var(--border) / 0.3) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (min-width: 1024px) {
+      .hero-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+      }
+    }
+
+    .hero-badges {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .edition-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: hsl(var(--primary));
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: hsl(var(--foreground));
+    }
+
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 3.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-title {
+        font-size: 4rem;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: hsl(var(--muted-foreground));
+      max-width: 36rem;
+      font-weight: 300;
+    }
+
+    @media (min-width: 768px) {
+      .hero-subtitle {
+        font-size: 1.25rem;
+      }
+    }
+
+    .feature-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .feature-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .hero-cta {
+        flex-direction: row;
+      }
+    }
+
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding-top: 1rem;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: hsl(var(--foreground));
+    }
+
+    .hero-stat-label {
+      font-size: 0.75rem;
+      color: hsl(var(--muted-foreground));
+    }
+
+    .hero-divider {
+      width: 1px;
+      height: 2.5rem;
+      background: hsl(var(--border));
+    }
+
+    /* Tool Cards Grid */
+    .tool-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .tool-card {
+      position: relative;
+      padding: 1.5rem;
+      border-radius: 1.5rem;
+      text-decoration: none;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px hsl(var(--primary) / 0.15);
+    }
+
+    .tool-card-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+
+    .tool-card-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      transition: transform 0.3s;
+    }
+
+    .tool-card:hover .tool-card-icon {
+      transform: scale(1.1);
+    }
+
+    .tool-card-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: hsl(var(--foreground));
+      margin-bottom: 0.5rem;
+      transition: color 0.3s;
+    }
+
+    .tool-card:hover .tool-card-title {
+      color: hsl(var(--primary));
+    }
+
+    .tool-card-desc {
+      font-size: 0.875rem;
+      color: hsl(var(--muted-foreground));
+    }
+
+    /* Colors */
+    .bg-brand-blue { background: hsl(var(--color-blue)); }
+    .bg-brand-green { background: hsl(var(--color-green)); }
+    .bg-brand-purple { background: hsl(var(--color-purple)); }
+    .bg-brand-orange { background: hsl(var(--color-orange)); }
+    .bg-brand-pink { background: hsl(var(--color-pink)); }
+    .bg-brand-cyan { background: hsl(var(--color-cyan)); }
+    .bg-brand-ai { background: hsl(var(--color-ai)); }
+
+    .text-brand-blue { color: hsl(var(--color-blue)); }
+    .text-brand-green { color: hsl(var(--color-green)); }
+    .text-brand-purple { color: hsl(var(--color-purple)); }
+    .text-brand-orange { color: hsl(var(--color-orange)); }
+    .text-brand-pink { color: hsl(var(--color-pink)); }
+    .text-brand-cyan { color: hsl(var(--color-cyan)); }
+    .text-brand-ai { color: hsl(var(--color-ai)); }
+
+    /* Popular Tools Section */
+    .tools-section {
+      padding: 5rem 1.5rem;
+      max-width: 80rem;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: hsl(var(--color-ai));
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: hsl(var(--foreground));
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    @media (min-width: 768px) {
+      .section-title {
+        font-size: 3rem;
+      }
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: hsl(var(--muted-foreground));
+      max-width: 42rem;
+      margin: 0 auto;
+    }
+
+    .category {
+      margin-bottom: 3rem;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .category-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .category-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: hsl(var(--foreground));
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .tools-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .tools-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .tool-item {
+      position: relative;
+      display: block;
+      padding: 1.25rem;
+      border-radius: 1rem;
+      text-decoration: none;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .tool-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px hsl(var(--primary) / 0.15);
+    }
+
+    .tool-item-content {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tool-item-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 0.75rem;
+      background: hsl(var(--muted));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s;
+    }
+
+    .tool-item:hover .tool-item-icon {
+      transform: scale(1.1);
+    }
+
+    .tool-item-title {
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .tool-item:hover .tool-item-title {
+      color: hsl(var(--primary));
+    }
+
+    .tool-item-desc {
+      font-size: 0.875rem;
+      color: hsl(var(--muted-foreground));
+      padding-left: 3.25rem;
+    }
+
+    /* Features Section */
+    .features-section {
+      padding: 7rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .features-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, hsl(var(--muted) / 0.3), hsl(var(--background)));
+    }
+
+    .features-glow {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50rem;
+      height: 25rem;
+      background: linear-gradient(to bottom, hsl(var(--primary) / 0.05), transparent);
+      border-radius: 50%;
+      filter: blur(64px);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .feature-card {
+      padding: 2rem;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      transition: all 0.5s;
+      position: relative;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -15px hsl(var(--primary) / 0.15);
+    }
+
+    .feature-card-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .feature-card:hover .feature-card-top {
+      opacity: 1;
+    }
+
+    .feature-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+
+    .feature-card-icon {
+      padding: 0.75rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px -2px hsl(var(--primary) / 0.2);
+    }
+
+    .feature-card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: hsl(var(--foreground));
+      margin-bottom: 0.75rem;
+      transition: color 0.3s;
+    }
+
+    .feature-card:hover .feature-card-title {
+      color: hsl(var(--primary));
+    }
+
+    .feature-card-desc {
+      color: hsl(var(--muted-foreground));
+      line-height: 1.6;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      padding: 5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-card {
+      border-radius: 1.5rem;
+      padding: 2rem 3rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 1rem;
+      background: hsl(var(--muted));
+      margin-bottom: 1rem;
+      transition: transform 0.3s;
+    }
+
+    .stat-item:hover .stat-icon {
+      transform: scale(1.1);
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: hsl(var(--foreground));
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    @media (min-width: 768px) {
+      .stat-value {
+        font-size: 3rem;
+      }
+    }
+
+    .stat-label {
+      color: hsl(var(--muted-foreground));
+      font-weight: 500;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 7rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 62.5rem;
+      height: 37.5rem;
+      background: linear-gradient(to right, hsl(var(--primary) / 0.1), hsl(var(--color-ai) / 0.1), hsl(var(--accent) / 0.1));
+      border-radius: 50%;
+      filter: blur(64px);
+    }
+
+    .cta-content {
+      max-width: 56rem;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cta-badges {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: hsl(var(--foreground));
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    @media (min-width: 768px) {
+      .cta-title {
+        font-size: 3rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .cta-title {
+        font-size: 3.75rem;
+      }
+    }
+
+    .cta-subtitle {
+      font-size: 1.25rem;
+      color: hsl(var(--muted-foreground));
+      margin-bottom: 2.5rem;
+      max-width: 42rem;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 300;
+    }
+
+    .cta-features {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      font-size: 0.875rem;
+      color: hsl(var(--muted-foreground));
+    }
+
+    .cta-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .check-icon {
+      width: 1rem;
+      height: 1rem;
+      color: hsl(var(--color-green));
+    }
+
+    /* Footer */
+    .footer {
+      background: hsl(var(--muted) / 0.3);
+      border-top: 1px solid hsl(var(--border));
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+      }
+    }
+
+    .footer-brand {
+      max-width: 20rem;
+    }
+
+    .footer-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: hsl(var(--foreground));
+      text-decoration: none;
+      margin-bottom: 1rem;
+    }
+
+    .footer-desc {
+      color: hsl(var(--muted-foreground));
+      margin-bottom: 1rem;
+    }
+
+    .footer-copyright {
+      font-size: 0.875rem;
+      color: hsl(var(--muted-foreground));
+    }
+
+    .footer-title {
+      font-weight: 600;
+      color: hsl(var(--foreground));
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: hsl(var(--muted-foreground));
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: hsl(var(--foreground));
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid hsl(var(--border));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.875rem;
+      color: hsl(var(--muted-foreground));
+    }
+
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+      }
+    }
+
+    .footer-social {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .footer-social a {
+      color: hsl(var(--muted-foreground));
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-social a:hover {
+      color: hsl(var(--foreground));
+    }
+
+    /* Hide on mobile */
+    @media (max-width: 767px) {
+      .hide-mobile {
+        display: none;
+      }
+    }
+
+    /* Dark mode toggle */
+    .theme-toggle {
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid hsl(var(--border));
+      background: transparent;
+      color: hsl(var(--muted-foreground));
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .theme-toggle:hover {
+      background: hsl(var(--muted));
+      color: hsl(var(--foreground));
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header glass">
+    <div class="container">
+      <div class="header-inner">
+        <a href="/" class="logo font-display">
+          <div class="logo-icon bg-gradient-ai">
+            <i data-lucide="sparkles" style="width: 1.25rem; height: 1.25rem; color: white;"></i>
+          </div>
+          <span>PDF Tools</span>
+          <span class="ai-badge ai-badge-small hide-mobile">2026</span>
+        </a>
+        
+        <nav class="nav-links hide-mobile">
+          <a href="#" class="nav-link">Merge</a>
+          <a href="#" class="nav-link">Split</a>
+          <a href="#" class="nav-link" style="display: flex; align-items: center; gap: 0.375rem;">
+            <i data-lucide="brain" style="width: 0.875rem; height: 0.875rem; color: hsl(260, 85%, 65%);"></i>
+            Compress
+          </a>
+          <a href="#" class="nav-link" style="display: flex; align-items: center; gap: 0.375rem;">
+            <i data-lucide="brain" style="width: 0.875rem; height: 0.875rem; color: hsl(260, 85%, 65%);"></i>
+            AI OCR
+          </a>
+        </nav>
+        
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <button class="theme-toggle" onclick="document.body.classList.toggle('dark')">
+            <i data-lucide="sun" style="width: 1.25rem; height: 1.25rem;"></i>
+          </button>
+          <a href="#" class="btn btn-primary bg-gradient-ai font-display">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero bg-gradient-hero">
+      <div class="hero-bg">
+        <div class="hero-blob hero-blob-1 animate-float"></div>
+        <div class="hero-blob hero-blob-2 animate-float" style="animation-delay: -2s;"></div>
+        <div class="hero-grid"></div>
+      </div>
+      
+      <div class="container" style="position: relative;">
+        <div class="hero-content">
+          <!-- Left Content -->
+          <div style="display: flex; flex-direction: column; gap: 2rem;">
+            <div class="hero-badges animate-fade-in">
+              <div class="edition-badge glass">
+                <i data-lucide="sparkles" style="width: 1rem; height: 1rem;"></i>
+                <span class="font-display">2026 Edition</span>
+              </div>
+              <span class="ai-badge pulse-glow">
+                <i data-lucide="brain" style="width: 0.875rem; height: 0.875rem;"></i>
+                AI Powered
+              </span>
+            </div>
+            
+            <h1 class="hero-title font-display animate-fade-in" style="animation-delay: 0.1s;">
+              Next-Gen PDF Tools <span class="text-gradient-ai" style="display: block; margin-top: 0.5rem;">Powered by AI</span>
+            </h1>
+            
+            <p class="hero-subtitle animate-fade-in" style="animation-delay: 0.2s;">
+              Experience the future of document processing. Our AI understands your PDFs and optimizes every action for perfect results.
+            </p>
+
+            <div class="feature-badges animate-fade-in" style="animation-delay: 0.3s;">
+              <div class="feature-badge glass-card">
+                <i data-lucide="brain" style="width: 1rem; height: 1rem;" class="text-brand-ai"></i>
+                <span style="font-weight: 500; color: hsl(var(--foreground));">AI-Powered</span>
+              </div>
+              <div class="feature-badge glass-card">
+                <i data-lucide="zap" style="width: 1rem; height: 1rem;" class="text-brand-cyan"></i>
+                <span style="font-weight: 500; color: hsl(var(--foreground));">Lightning Fast</span>
+              </div>
+              <div class="feature-badge glass-card">
+                <i data-lucide="shield" style="width: 1rem; height: 1rem;" class="text-brand-green"></i>
+                <span style="font-weight: 500; color: hsl(var(--foreground));">Bank-Grade Security</span>
+              </div>
+            </div>
+
+            <div class="hero-cta animate-fade-in" style="animation-delay: 0.4s;">
+              <a href="#" class="btn btn-primary btn-lg bg-gradient-ai font-display" style="box-shadow: 0 10px 30px -10px hsl(var(--primary) / 0.4);">
+                Start Free with AI
+                <i data-lucide="arrow-right" style="width: 1.25rem; height: 1.25rem;"></i>
+              </a>
+              <a href="#tools" class="btn btn-outline btn-lg glass font-display">Explore All Tools</a>
+            </div>
+
+            <div class="hero-stats animate-fade-in" style="animation-delay: 0.5s;">
+              <div class="hero-stat">
+                <div class="hero-stat-value font-display">2M+</div>
+                <div class="hero-stat-label">PDFs Processed</div>
+              </div>
+              <div class="hero-divider"></div>
+              <div class="hero-stat">
+                <div class="hero-stat-value font-display">99.9%</div>
+                <div class="hero-stat-label">Accuracy Rate</div>
+              </div>
+              <div class="hero-divider"></div>
+              <div class="hero-stat">
+                <div class="hero-stat-value font-display">150+</div>
+                <div class="hero-stat-label">Countries</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right - Tool Cards -->
+          <div class="tool-cards hide-mobile">
+            <a href="#" class="tool-card glass-card animate-fade-in" style="animation-delay: 0.4s;">
+              <div class="tool-card-badge">
+                <span class="ai-badge ai-badge-small">AI</span>
+              </div>
+              <div class="tool-card-icon bg-brand-blue">
+                <i data-lucide="git-merge" style="width: 1.75rem; height: 1.75rem; color: white;"></i>
+              </div>
+              <h3 class="tool-card-title font-display">Merge PDF</h3>
+              <p class="tool-card-desc">AI-optimized combining</p>
+            </a>
+            
+            <a href="#" class="tool-card glass-card animate-fade-in" style="animation-delay: 0.5s;">
+              <div class="tool-card-badge">
+                <span class="ai-badge ai-badge-small">AI</span>
+              </div>
+              <div class="tool-card-icon bg-brand-green">
+                <i data-lucide="scissors" style="width: 1.75rem; height: 1.75rem; color: white;"></i>
+              </div>
+              <h3 class="tool-card-title font-display">Split PDF</h3>
+              <p class="tool-card-desc">Smart page detection</p>
+            </a>
+            
+            <a href="#" class="tool-card glass-card animate-fade-in" style="animation-delay: 0.6s;">
+              <div class="tool-card-badge">
+                <span class="ai-badge ai-badge-small">AI</span>
+              </div>
+              <div class="tool-card-icon bg-brand-purple">
+                <i data-lucide="minimize-2" style="width: 1.75rem; height: 1.75rem; color: white;"></i>
+              </div>
+              <h3 class="tool-card-title font-display">Compress PDF</h3>
+              <p class="tool-card-desc">AI compression engine</p>
+            </a>
+            
+            <a href="#" class="tool-card glass-card animate-fade-in" style="animation-delay: 0.7s;">
+              <div class="tool-card-badge">
+                <span class="ai-badge ai-badge-small">AI</span>
+              </div>
+              <div class="tool-card-icon bg-brand-orange">
+                <i data-lucide="file-text" style="width: 1.75rem; height: 1.75rem; color: white;"></i>
+              </div>
+              <h3 class="tool-card-title font-display">Convert PDF</h3>
+              <p class="tool-card-desc">Multi-format AI conversion</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Tools Section -->
+    <section id="tools" class="tools-section">
+      <div class="section-header">
+        <div class="section-label">
+          <i data-lucide="sparkles" style="width: 1.25rem; height: 1.25rem;"></i>
+          Complete Toolkit
+        </div>
+        <h2 class="section-title font-display">All PDF Tools You Need</h2>
+        <p class="section-subtitle">30+ professional tools, each enhanced with AI for the best results</p>
+      </div>
+      
+      <!-- Organize PDF Category -->
+      <div class="category animate-fade-in">
+        <div class="category-header">
+          <div class="category-icon bg-gradient-ai">
+            <i data-lucide="layout-grid" style="width: 1.25rem; height: 1.25rem; color: white;"></i>
+          </div>
+          <h3 class="category-title font-display">Organize PDF</h3>
+        </div>
+        <div class="tools-grid">
+          <a href="#" class="tool-item glass-card">
+            <div class="tool-card-badge"><span class="ai-badge ai-badge-small">AI</span></div>
+            <div class="tool-item-content">
+              <div class="tool-item-icon"><i data-lucide="git-merge" class="text-brand-orange" style="width: 1.25rem; height: 1.25rem;"></i></div>
+              <span class="tool-item-title text-brand-orange font-display">Merge PDF</span>
+            </div>
+            <p class="tool-item-desc">AI-optimized combining</p>
+          </a>
+          <a href="#" class="tool-item glass-card">
+            <div class="tool-card-badge"><span class="ai-badge ai-badge-small">AI</span></div>
+            <div class="tool-item-content">
+              <div class="tool-item-icon"><i data-lucide="scissors" class="text-brand-pink" style="width: 1.25rem; height: 1.25rem;"></i></div>
+              <span class="tool-item-title text-brand-pink font-display">Split PDF</span>
+            </div>
+            <p class="tool-item-desc">Smart page detection</p>
+          </a>
+          <a href="#" class="tool-item glass-card">
+            <div class="tool-card-badge"><span class="ai-badge ai-badge-small">AI</span></div>
+            <div class="tool-item-content">
+              <div class="tool-item-icon"><i data-lucide="trash-2" style="width: 1.25rem; height: 1.25rem; color: hsl(0, 75%, 55%);"></i></div>
+              <span class="tool-item-title font-display" style="color: hsl(0, 75%, 55%);">Remove Pages</span>
+            </div>
+            <p class="tool-item-desc">AI-suggested removal</p>
+          </a>
+          <a href="#" class="tool-item glass-card">
+            <div class="tool-card-badge"><span class="ai-badge ai-badge-small">AI</span></div>
+            <div class="tool-item-content">
+              <div class="tool-item-icon"><i data-lucide="file-output" class="text-brand-green" style="width: 1.25rem; height: 1.25rem;"></i></div>
+              <span class="tool-item-title text-brand-green font-display">Extract Pages</span>
+            </div>
+            <p class="tool-item-desc">Smart extraction</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- AI-Powered Category -->
+      <div class="category animate-fade-in" style="animation-delay: 0.1s;">
+        <div class="category-header">
+          <div class="category-icon bg-gradient-ai">
+            <i data-lucide="brain" style="width: 1.25rem; height: 1.25rem; color: white;"></i>
+          </div>
+          <h3 class="category-title font-display">AI-Powered</h3>
+        </div>
+        <div class="tools-grid">
+          <a href="#" class="tool-item glass-card">
+            <div class="tool-card-badge"><span class="ai-badge ai-badge-small">AI</span></div>
+            <div class="tool-item-content">
+              <div class="tool-item-icon"><i data-lucide="scan-text" class="text-brand-ai" style="width: 1.25rem; height: 1.25rem;"></i></div>
+              <span class="tool-item-title text-brand-ai font-display">Smart OCR</span>
+            </div>
+            <p class="tool-item-desc">99.9% accuracy AI OCR</p>
+          </a>
+          <a href="#" class="tool-item glass-card">
+            <div class="tool-card-badge"><span class="ai-badge ai-badge-small">AI</span></div>
+            <div class="tool-item-content">
+              <div class="tool-item-icon"><i data-lucide="brain" class="text-brand-purple" style="width: 1.25rem; height: 1.25rem;"></i></div>
+              <span class="tool-item-title text-brand-purple font-display">AI Analysis</span>
+            </div>
+            <p class="tool-item-desc">Summarize & extract</p>
+          </a>
+          <a href="#" class="tool-item glass-card">
+            <div class="tool-card-badge"><span class="ai-badge ai-badge-small">AI</span></div>
+            <div class="tool-item-content">
+              <div class="tool-item-icon"><i data-lucide="file-down" class="text-brand-green" style="width: 1.25rem; height: 1.25rem;"></i></div>
+              <span class="tool-item-title text-brand-green font-display">Compress PDF</span>
+            </div>
+            <p class="tool-item-desc">AI compression engine</p>
+          </a>
+          <a href="#" class="tool-item glass-card">
+            <div class="tool-card-badge"><span class="ai-badge ai-badge-small">AI</span></div>
+            <div class="tool-item-content">
+              <div class="tool-item-icon"><i data-lucide="wrench" class="text-brand-orange" style="width: 1.25rem; height: 1.25rem;"></i></div>
+              <span class="tool-item-title text-brand-orange font-display">Repair PDF</span>
+            </div>
+            <p class="tool-item-desc">Smart PDF repair</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Convert to PDF Category -->
+      <div class="category animate-fade-in" style="animation-delay: 0.2s;">
+        <div class="category-header">
+          <div class="category-icon bg-gradient-ai">
+            <i data-lucide="file-text" style="width: 1.25rem; height: 1.25rem; color: white;"></i>
+          </div>
+          <h3 class="category-title font-display">Convert to PDF</h3>
+        </div>
+        <div class="tools-grid">
+          <a href="#" class="tool-item glass-card">
+            <div class="tool-card-badge"><span class="ai-badge ai-badge-small">AI</span></div>
+            <div class="tool-item-content">
+              <div class="tool-item-icon"><i data-lucide="image" class="text-brand-blue" style="width: 1.25rem; height: 1.25rem;"></i></div>
+              <span class="tool-item-title text-brand-blue font-display">JPG to PDF</span>
+            </div>
+            <p class="tool-item-desc">AI image optimization</p>
+          </a>
+          <a href="#" class="tool-item glass-card">
+            <div class="tool-item-content">
+              <div class="tool-item-icon"><i data-lucide="file-text" class="text-brand-blue" style="width: 1.25rem; height: 1.25rem;"></i></div>
+              <span class="tool-item-title text-brand-blue font-display">Word to PDF</span>
+            </div>
+            <p class="tool-item-desc">Perfect formatting</p>
+          </a>
+          <a href="#" class="tool-item glass-card">
+            <div class="tool-item-content">
+              <div class="tool-item-icon"><i data-lucide="presentation" class="text-brand-orange" style="width: 1.25rem; height: 1.25rem;"></i></div>
+              <span class="tool-item-title text-brand-orange font-display">PowerPoint to PDF</span>
+            </div>
+            <p class="tool-item-desc">Preserve animations</p>
+          </a>
+          <a href="#" class="tool-item glass-card">
+            <div class="tool-item-content">
+              <div class="tool-item-icon"><i data-lucide="table" class="text-brand-green" style="width: 1.25rem; height: 1.25rem;"></i></div>
+              <span class="tool-item-title text-brand-green font-display">Excel to PDF</span>
+            </div>
+            <p class="tool-item-desc">Keep formulas</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <div class="features-bg"></div>
+      <div class="features-glow"></div>
+      
+      <div class="container" style="position: relative;">
+        <div class="section-header animate-fade-in">
+          <div class="section-label">
+            <i data-lucide="sparkles" style="width: 1.25rem; height: 1.25rem;"></i>
+            2026 AI Features
+          </div>
+          <h2 class="section-title font-display">
+            Supercharged with <span class="text-gradient-ai">Artificial Intelligence</span>
+          </h2>
+          <p class="section-subtitle">
+            Every tool is enhanced with AI to give you faster, smarter, and more accurate results than ever before.
+          </p>
+        </div>
+        
+        <div class="features-grid">
+          <div class="feature-card glass-card animate-fade-in">
+            <div class="feature-card-top" style="background: linear-gradient(to right, hsl(260, 85%, 65%), hsl(280, 85%, 60%));"></div>
+            <div class="feature-card-header">
+              <div class="feature-card-icon" style="background: linear-gradient(to bottom right, hsl(260, 85%, 65%), hsl(280, 85%, 60%));">
+                <i data-lucide="brain" style="width: 1.5rem; height: 1.5rem; color: white;"></i>
+              </div>
+              <span class="ai-badge ai-badge-small">AI</span>
+            </div>
+            <h3 class="feature-card-title font-display">AI Document Understanding</h3>
+            <p class="feature-card-desc">Our AI reads and understands your documents, automatically detecting structure, tables, and key information.</p>
+          </div>
+          
+          <div class="feature-card glass-card animate-fade-in" style="animation-delay: 0.1s;">
+            <div class="feature-card-top" style="background: linear-gradient(to right, hsl(180, 85%, 50%), hsl(235, 85%, 60%));"></div>
+            <div class="feature-card-header">
+              <div class="feature-card-icon" style="background: linear-gradient(to bottom right, hsl(180, 85%, 50%), hsl(235, 85%, 60%));">
+                <i data-lucide="file-search" style="width: 1.5rem; height: 1.5rem; color: white;"></i>
+              </div>
+              <span class="ai-badge ai-badge-small">AI</span>
+            </div>
+            <h3 class="feature-card-title font-display">Smart OCR Technology</h3>
+            <p class="feature-card-desc">Extract text from any scanned document or image with 99.9% accuracy using advanced neural networks.</p>
+          </div>
+          
+          <div class="feature-card glass-card animate-fade-in" style="animation-delay: 0.2s;">
+            <div class="feature-card-top" style="background: linear-gradient(to right, hsl(280, 85%, 60%), hsl(338, 85%, 60%));"></div>
+            <div class="feature-card-header">
+              <div class="feature-card-icon" style="background: linear-gradient(to bottom right, hsl(280, 85%, 60%), hsl(338, 85%, 60%));">
+                <i data-lucide="bot" style="width: 1.5rem; height: 1.5rem; color: white;"></i>
+              </div>
+              <span class="ai-badge ai-badge-small">AI</span>
+            </div>
+            <h3 class="feature-card-title font-display">AI PDF Assistant</h3>
+            <p class="feature-card-desc">Chat with your documents. Ask questions, get summaries, and extract insights instantly.</p>
+          </div>
+          
+          <div class="feature-card glass-card animate-fade-in" style="animation-delay: 0.3s;">
+            <div class="feature-card-top" style="background: linear-gradient(to right, hsl(28, 95%, 55%), hsl(338, 85%, 60%));"></div>
+            <div class="feature-card-header">
+              <div class="feature-card-icon" style="background: linear-gradient(to bottom right, hsl(28, 95%, 55%), hsl(338, 85%, 60%));">
+                <i data-lucide="zap" style="width: 1.5rem; height: 1.5rem; color: white;"></i>
+              </div>
+            </div>
+            <h3 class="feature-card-title font-display">Lightning Processing</h3>
+            <p class="feature-card-desc">Process documents in milliseconds with our optimized cloud infrastructure. No waiting, instant results.</p>
+          </div>
+          
+          <div class="feature-card glass-card animate-fade-in" style="animation-delay: 0.4s;">
+            <div class="feature-card-top" style="background: linear-gradient(to right, hsl(158, 75%, 48%), hsl(180, 85%, 50%));"></div>
+            <div class="feature-card-header">
+              <div class="feature-card-icon" style="background: linear-gradient(to bottom right, hsl(158, 75%, 48%), hsl(180, 85%, 50%));">
+                <i data-lucide="shield" style="width: 1.5rem; height: 1.5rem; color: white;"></i>
+              </div>
+            </div>
+            <h3 class="feature-card-title font-display">Bank-Grade Security</h3>
+            <p class="feature-card-desc">256-bit SSL encryption, automatic file deletion after processing. Your documents never leave secure servers.</p>
+          </div>
+          
+          <div class="feature-card glass-card animate-fade-in" style="animation-delay: 0.5s;">
+            <div class="feature-card-top" style="background: linear-gradient(to right, hsl(235, 85%, 60%), hsl(280, 85%, 60%));"></div>
+            <div class="feature-card-header">
+              <div class="feature-card-icon" style="background: linear-gradient(to bottom right, hsl(235, 85%, 60%), hsl(280, 85%, 60%));">
+                <i data-lucide="globe" style="width: 1.5rem; height: 1.5rem; color: white;"></i>
+              </div>
+            </div>
+            <h3 class="feature-card-title font-display">Works Everywhere</h3>
+            <p class="feature-card-desc">Access from any device, any browser. No downloads, no installations. Just upload and go.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="bg-gradient-ai-subtle" style="position: absolute; inset: 0;"></div>
+      <div class="container" style="position: relative;">
+        <div class="stats-card glass-card">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-icon">
+                <i data-lucide="file-text" class="text-brand-blue" style="width: 1.5rem; height: 1.5rem;"></i>
+              </div>
+              <div class="stat-value font-display">2M+</div>
+              <div class="stat-label">PDFs Processed</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">
+                <i data-lucide="brain" class="text-brand-ai" style="width: 1.5rem; height: 1.5rem;"></i>
+              </div>
+              <div class="stat-value font-display">99.9%</div>
+              <div class="stat-label">AI Accuracy</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">
+                <i data-lucide="users" class="text-brand-green" style="width: 1.5rem; height: 1.5rem;"></i>
+              </div>
+              <div class="stat-value font-display">150+</div>
+              <div class="stat-label">Countries</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">
+                <i data-lucide="zap" class="text-brand-orange" style="width: 1.5rem; height: 1.5rem;"></i>
+              </div>
+              <div class="stat-value font-display">&lt;1s</div>
+              <div class="stat-label">Avg. Process Time</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section bg-gradient-hero">
+      <div class="cta-bg"></div>
+      <div class="container" style="position: relative;">
+        <div class="cta-content">
+          <div class="cta-badges animate-fade-in">
+            <span class="ai-badge pulse-glow">
+              <i data-lucide="brain" style="width: 0.875rem; height: 0.875rem;"></i>
+              AI Powered
+            </span>
+            <span style="color: hsl(var(--muted-foreground)); font-weight: 500;">Free to use • No signup required</span>
+          </div>
+          
+          <h2 class="cta-title font-display animate-fade-in" style="animation-delay: 0.1s;">
+            Ready to Experience the <span class="text-gradient-ai">Future of PDFs?</span>
+          </h2>
+          
+          <p class="cta-subtitle animate-fade-in" style="animation-delay: 0.2s;">
+            Join millions of users who are already using our AI-powered tools to work smarter, not harder.
+          </p>
+
+          <div class="animate-fade-in" style="animation-delay: 0.3s;">
+            <a href="#" class="btn btn-primary btn-lg bg-gradient-ai font-display" style="font-size: 1.125rem; box-shadow: 0 10px 30px -10px hsl(var(--primary) / 0.4);">
+              <i data-lucide="sparkles" style="width: 1.25rem; height: 1.25rem;"></i>
+              Start Free with AI
+              <i data-lucide="arrow-right" style="width: 1.25rem; height: 1.25rem;"></i>
+            </a>
+          </div>
+          
+          <div class="cta-features animate-fade-in" style="animation-delay: 0.4s;">
+            <span class="cta-feature">
+              <svg class="check-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+              No file limits
+            </span>
+            <span class="cta-feature">
+              <svg class="check-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+              Unlimited processing
+            </span>
+            <span class="cta-feature">
+              <svg class="check-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+              AI-powered tools
+            </span>
+            <span class="cta-feature">
+              <svg class="check-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+              Bank-grade security
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container" style="position: relative;">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="footer-logo font-display">
+            <div class="logo-icon bg-gradient-ai">
+              <i data-lucide="sparkles" style="width: 1.25rem; height: 1.25rem; color: white;"></i>
+            </div>
+            PDF Tools
+          </a>
+          <p class="footer-desc">Next-generation AI-powered PDF tools. Merge, split, compress, and convert with unmatched accuracy and speed.</p>
+          <p class="footer-copyright">© 2026 PDF Tools. All rights reserved.</p>
+        </div>
+        
+        <div>
+          <h4 class="footer-title font-display">Core Tools</h4>
+          <ul class="footer-links">
+            <li><a href="#">Merge PDF</a></li>
+            <li><a href="#">Split PDF</a></li>
+            <li><a href="#">Compress PDF</a></li>
+            <li><a href="#">Convert PDF</a></li>
+            <li><a href="#">OCR PDF</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="footer-title font-display">More Tools</h4>
+          <ul class="footer-links">
+            <li><a href="#">Edit PDF</a></li>
+            <li><a href="#">Rotate PDF</a></li>
+            <li><a href="#">Protect PDF</a></li>
+            <li><a href="#">PDF to Image</a></li>
+            <li><a href="#">Image to PDF</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="footer-title font-display">Company</h4>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>Made with AI • Trusted by millions worldwide</p>
+        <div class="footer-social">
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>
