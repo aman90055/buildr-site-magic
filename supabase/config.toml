@@ -11,3 +11,6 @@ verify_jwt = false
 
 [functions.ai-generate-image]
 verify_jwt = false
+
+[functions.ai-compression-analyze]
+verify_jwt = false

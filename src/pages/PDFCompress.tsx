@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PDFCompressDropzone from "@/components/pdf/PDFCompressDropzone";
 import CompressionOptions from "@/components/pdf/CompressionOptions";
 import CompressActions from "@/components/pdf/CompressActions";
+import AICompressionAnalysis from "@/components/pdf/AICompressionAnalysis";
+import AIBadge from "@/components/AIBadge";
 import { usePDFCompress } from "@/hooks/usePDFCompress";
+import { useAICompressionAnalysis } from "@/hooks/useAICompressionAnalysis";
+import { Brain, Sparkles } from "lucide-react";
 
 export type CompressionLevel = number; // 1-100
 
@@ -14,14 +18,18 @@ const PDFCompress = () => {
   const [compressionLevel, setCompressionLevel] = useState<CompressionLevel>(50);
   
   const { compressFile, isProcessing, progress, downloadUrl, originalSize, compressedSize, reset } = usePDFCompress();
+  const { analyzeFile, isAnalyzing, analysis, reset: resetAnalysis } = useAICompressionAnalysis();
 
-  const handleFileAdded = (newFile: File) => {
+  const handleFileAdded = async (newFile: File) => {
     setFile(newFile);
+    // Automatically trigger AI analysis when file is added
+    await analyzeFile(newFile);
   };
 
   const handleRemoveFile = () => {
     setFile(null);
     reset();
+    resetAnalysis();
   };
 
   const handleCompress = async () => {
@@ -32,6 +40,11 @@ const PDFCompress = () => {
   const handleReset = () => {
     setFile(null);
     reset();
+    resetAnalysis();
+  };
+
+  const handleApplyRecommendation = (level: number) => {
+    setCompressionLevel(level);
   };
 
   const formatFileSize = (bytes: number) => {
@@ -49,10 +62,10 @@ const PDFCompress = () => {
   return (
     <>
       <Helmet>
-        <title>Compress PDF Files Online - Reduce PDF Size Free</title>
+        <title>AI-Powered PDF Compression - Smart Size Reduction</title>
         <meta
           name="description"
-          content="Reduce PDF file size while maintaining quality. Compress PDFs for easier sharing. Fast, free, and secure."
+          content="Compress PDFs with AI that automatically detects optimal settings. Reduce file size while maintaining quality. Fast, smart, and secure."
         />
       </Helmet>
 
@@ -63,11 +76,15 @@ const PDFCompress = () => {
           <div className="container mx-auto px-6">
             {/* Hero Section */}
             <div className="text-center mb-12 animate-fade-in">
+              <div className="inline-flex items-center gap-2 mb-4">
+                <AIBadge variant="default" glow />
+                <span className="text-sm text-muted-foreground">Smart Compression</span>
+              </div>
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Compress PDF Files
+                <span className="text-gradient-ai">AI-Powered</span> PDF Compression
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Reduce the file size of your PDFs while maintaining quality. Perfect for email attachments and faster uploads.
+                Our AI analyzes your PDF content and automatically recommends the optimal compression settings for the best balance of quality and file size.
               </p>
             </div>
 
@@ -79,7 +96,7 @@ const PDFCompress = () => {
                     <PDFCompressDropzone onFileAdded={handleFileAdded} disabled={isProcessing} />
                   ) : (
                     <>
-                      <div className="bg-card border border-border rounded-xl p-4">
+                      <div className="glass-card border border-border rounded-xl p-4">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -94,7 +111,7 @@ const PDFCompress = () => {
                           </div>
                           <button
                             onClick={handleRemoveFile}
-                            disabled={isProcessing}
+                            disabled={isProcessing || isAnalyzing}
                             className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
                           >
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -104,10 +121,18 @@ const PDFCompress = () => {
                         </div>
                       </div>
 
+                      {/* AI Analysis Section */}
+                      <AICompressionAnalysis
+                        analysis={analysis}
+                        isAnalyzing={isAnalyzing}
+                        onApplyRecommendation={handleApplyRecommendation}
+                        disabled={isProcessing}
+                      />
+
                       <CompressionOptions
                         compressionLevel={compressionLevel}
                         onLevelChange={setCompressionLevel}
-                        disabled={isProcessing}
+                        disabled={isProcessing || isAnalyzing}
                       />
 
                       <CompressActions
@@ -121,20 +146,8 @@ const PDFCompress = () => {
                 </div>
               ) : (
                 <div className="text-center space-y-6 animate-fade-in">
-                  <div className="w-20 h-20 mx-auto bg-accent/10 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-10 h-10 text-accent"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
+                  <div className="w-20 h-20 mx-auto bg-gradient-ai rounded-full flex items-center justify-center animate-pulse-glow">
+                    <Sparkles className="w-10 h-10 text-white" />
                   </div>
                   
                   <div>
@@ -142,7 +155,7 @@ const PDFCompress = () => {
                       PDF Compressed Successfully!
                     </h2>
                     <p className="text-muted-foreground mb-4">
-                      Reduced file size by {compressionPercentage}%
+                      Reduced file size by <span className="text-accent font-semibold">{compressionPercentage}%</span>
                     </p>
                     
                     <div className="flex items-center justify-center gap-8 text-sm">
@@ -150,7 +163,7 @@ const PDFCompress = () => {
                         <p className="text-muted-foreground">Original</p>
                         <p className="font-semibold text-foreground">{formatFileSize(originalSize || 0)}</p>
                       </div>
-                      <div className="text-accent">→</div>
+                      <div className="text-gradient-ai text-xl">→</div>
                       <div>
                         <p className="text-muted-foreground">Compressed</p>
                         <p className="font-semibold text-accent">{formatFileSize(compressedSize || 0)}</p>
@@ -162,7 +175,7 @@ const PDFCompress = () => {
                     <a
                       href={downloadUrl}
                       download="compressed.pdf"
-                      className="inline-flex items-center justify-center gap-2 bg-accent text-accent-foreground px-6 py-3 rounded-lg font-medium hover:bg-accent/90 transition-colors"
+                      className="inline-flex items-center justify-center gap-2 bg-gradient-ai text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity"
                     >
                       <svg
                         className="w-5 h-5"
@@ -181,7 +194,7 @@ const PDFCompress = () => {
                     </a>
                     <button
                       onClick={handleReset}
-                      className="inline-flex items-center justify-center gap-2 bg-secondary text-secondary-foreground px-6 py-3 rounded-lg font-medium hover:bg-secondary/80 transition-colors"
+                      className="inline-flex items-center justify-center gap-2 bg-secondary text-secondary-foreground px-6 py-3 rounded-xl font-medium hover:bg-secondary/80 transition-colors"
                     >
                       Compress Another PDF
                     </button>
