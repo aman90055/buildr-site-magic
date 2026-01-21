@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
 import AIBadge from "./AIBadge";
+import ThemeToggle from "./ThemeToggle";
 
 const convertToPdfTools = [
   { title: "JPG to PDF", href: "/image-to-pdf", icon: Image, description: "AI-optimized conversion", ai: true },
@@ -88,7 +89,8 @@ const Header = () => {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/compress" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
+                <Link to="/compress" className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
+                  <Brain className="w-3.5 h-3.5 text-brand-ai" />
                   Compress
                 </Link>
               </NavigationMenuItem>
@@ -173,7 +175,9 @@ const Header = () => {
             </NavigationMenuList>
           </NavigationMenu>
           
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            
             {loading ? (
               <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
             ) : user ? (
