@@ -44,7 +44,6 @@ import UnlockPDF from "./pages/tools/UnlockPDF";
 import SignPDF from "./pages/tools/SignPDF";
 import RedactPDF from "./pages/tools/RedactPDF";
 import ComparePDF from "./pages/tools/ComparePDF";
-import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -98,8 +97,6 @@ const App = () => (
               <Route path="/sign-pdf" element={<SignPDF />} />
               <Route path="/redact-pdf" element={<RedactPDF />} />
               <Route path="/compare-pdf" element={<ComparePDF />} />
-              {/* Company */}
-              <Route path="/about" element={<About />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

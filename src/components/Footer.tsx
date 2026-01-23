@@ -53,7 +53,7 @@ const Footer = () => {
           <div>
             <h4 className="font-display font-semibold text-foreground mb-4">Company</h4>
             <ul className="space-y-3">
-              <li><Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">About Us</Link></li>
+              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">About Us</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</a></li>
@@ -64,15 +64,11 @@ const Footer = () => {
         
         {/* Bottom bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
-            <p>Made with AI • Trusted by millions worldwide</p>
-            <span className="hidden md:inline">•</span>
-            <p className="font-medium">Make & Manage Edit by Aman Vishwakarma</p>
-          </div>
+          <p>Made with AI • Trusted by millions worldwide</p>
           <div className="flex items-center gap-6">
-            <a href="https://twitter.com/AmanVishwakarma" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Twitter</a>
-            <a href="https://linkedin.com/in/amanvishwakarma" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">LinkedIn</a>
-            <a href="https://github.com/amanvishwakarma" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
+            <a href="#" className="hover:text-foreground transition-colors">Twitter</a>
+            <a href="#" className="hover:text-foreground transition-colors">LinkedIn</a>
+            <a href="#" className="hover:text-foreground transition-colors">GitHub</a>
           </div>
         </div>
       </div>
