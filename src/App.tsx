@@ -8,6 +8,8 @@ import { ThemeProvider } from "next-themes";
 import AIChatWidget from "@/components/AIChatWidget";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 import PDFMerge from "./pages/PDFMerge";
 import PDFSplit from "./pages/PDFSplit";
 import PDFCompress from "./pages/PDFCompress";
@@ -60,6 +62,8 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/auth" element={<Auth />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
               {/* Core Tools */}
               <Route path="/merge" element={<PDFMerge />} />
               <Route path="/split" element={<PDFSplit />} />
