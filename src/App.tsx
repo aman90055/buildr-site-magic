@@ -10,6 +10,8 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Blog from "./pages/Blog";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import PDFMerge from "./pages/PDFMerge";
 import PDFSplit from "./pages/PDFSplit";
 import PDFCompress from "./pages/PDFCompress";
@@ -64,6 +66,8 @@ const App = () => (
               <Route path="/auth" element={<Auth />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
               {/* Core Tools */}
               <Route path="/merge" element={<PDFMerge />} />
               <Route path="/split" element={<PDFSplit />} />
