@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { Mail, MessageSquare, Send, MapPin, Clock, Github, Linkedin, Twitter } from "lucide-react";
 import { z } from "zod";
 
@@ -56,16 +57,31 @@ const Contact = () => {
 
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData,
+      });
 
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for reaching out. Aman will get back to you soon.",
-    });
+      if (error) {
+        throw new Error(error.message || 'Failed to send message');
+      }
 
-    setFormData({ name: "", email: "", subject: "", message: "" });
-    setIsSubmitting(false);
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for reaching out. Aman will get back to you soon.",
+      });
+
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error: any) {
+      console.error('Contact form error:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
