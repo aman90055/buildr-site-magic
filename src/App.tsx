@@ -11,6 +11,8 @@ import Auth from "./pages/Auth";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import FAQ from "./pages/FAQ";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import PDFMerge from "./pages/PDFMerge";
 import PDFSplit from "./pages/PDFSplit";
@@ -67,6 +69,8 @@ const App = () => (
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/faq" element={<FAQ />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               {/* Core Tools */}
               <Route path="/merge" element={<PDFMerge />} />

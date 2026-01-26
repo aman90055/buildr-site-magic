@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import NewsletterForm from "@/components/NewsletterForm";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -26,6 +27,7 @@ const Blog = () => {
       readTime: "3 min read",
       category: "Tutorial",
       icon: FileText,
+      slug: "merge-pdfs-guide",
     },
     {
       title: "OCR Technology: Extracting Text from Scanned Documents",
@@ -34,6 +36,7 @@ const Blog = () => {
       readTime: "4 min read",
       category: "Feature Guide",
       icon: Sparkles,
+      slug: "ocr-technology",
     },
     {
       title: "Best Practices for PDF Security",
@@ -42,6 +45,7 @@ const Blog = () => {
       readTime: "6 min read",
       category: "Security",
       icon: Shield,
+      slug: "pdf-security-best-practices",
     },
     {
       title: "Speed Up Your Workflow with Batch Processing",
@@ -50,6 +54,7 @@ const Blog = () => {
       readTime: "4 min read",
       category: "Productivity",
       icon: Zap,
+      slug: "batch-processing",
     },
     {
       title: "Converting Images to PDF: Complete Guide",
@@ -58,6 +63,7 @@ const Blog = () => {
       readTime: "3 min read",
       category: "Tutorial",
       icon: FileText,
+      slug: "image-to-pdf-guide",
     },
     {
       title: "What's New in Document Editor 2.0",
@@ -66,6 +72,7 @@ const Blog = () => {
       readTime: "5 min read",
       category: "Product Update",
       icon: Sparkles,
+      slug: "document-editor-2",
     },
   ];
 
@@ -147,9 +154,11 @@ const Blog = () => {
                         {featuredPost.readTime}
                       </span>
                     </div>
-                    <Button className="w-fit group">
-                      Read Article
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    <Button asChild className="w-fit group">
+                      <Link to={`/blog/${featuredPost.slug}`}>
+                        Read Article
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </Link>
                     </Button>
                   </div>
                 </div>
@@ -163,9 +172,10 @@ const Blog = () => {
               <h2 className="text-2xl font-bold mb-8">Latest Articles</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {blogPosts.map((post, index) => (
-                  <Card key={index} className="bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all hover:-translate-y-1 group cursor-pointer">
-                    <CardHeader>
-                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <Link key={index} to={`/blog/${post.slug}`}>
+                    <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all hover:-translate-y-1 group cursor-pointer">
+                      <CardHeader>
+                        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                         <post.icon className="w-6 h-6 text-primary" />
                       </div>
                       <Badge variant="outline" className="w-fit mb-2">
@@ -185,12 +195,13 @@ const Blog = () => {
                         <Calendar className="w-3 h-3" />
                         {post.date}
                       </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
-                        {post.readTime}
-                      </span>
-                    </CardFooter>
-                  </Card>
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {post.readTime}
+                        </span>
+                      </CardFooter>
+                    </Card>
+                  </Link>
                 ))}
               </div>
 
@@ -214,14 +225,7 @@ const Blog = () => {
               <p className="text-muted-foreground mb-8">
                 Subscribe to our newsletter for the latest tips, tutorials, and product updates.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/50"
-                />
-                <Button size="lg">Subscribe</Button>
-              </div>
+              <NewsletterForm />
             </div>
           </section>
         </main>
