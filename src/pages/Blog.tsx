@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -9,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { BookOpen, Calendar, Clock, ArrowRight, Sparkles, FileText, Zap, Shield } from "lucide-react";
 
 const Blog = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
   const featuredPost = {
     title: "Introducing AI-Powered PDF Compression: Reduce File Size by 90%",
     excerpt: "Learn how our new AI compression algorithm analyzes your PDFs and applies intelligent optimization to dramatically reduce file sizes while maintaining quality.",
@@ -78,6 +81,12 @@ const Blog = () => {
 
   const categories = ["All", "Tutorial", "Product Update", "Feature Guide", "Security", "Productivity"];
 
+  const filteredPosts = selectedCategory === "All" 
+    ? blogPosts 
+    : blogPosts.filter(post => post.category === selectedCategory);
+
+  const showFeaturedPost = selectedCategory === "All" || featuredPost.category === selectedCategory;
+
   return (
     <>
       <Helmet>
@@ -110,11 +119,17 @@ const Blog = () => {
                 {categories.map((category, index) => (
                   <Button
                     key={index}
-                    variant={index === 0 ? "default" : "outline"}
+                    variant={selectedCategory === category ? "default" : "outline"}
                     size="sm"
                     className="rounded-full"
+                    onClick={() => setSelectedCategory(category)}
                   >
                     {category}
+                    {category !== "All" && (
+                      <span className="ml-1.5 text-xs opacity-70">
+                        ({blogPosts.filter(p => p.category === category).length})
+                      </span>
+                    )}
                   </Button>
                 ))}
               </div>
@@ -122,56 +137,75 @@ const Blog = () => {
           </section>
 
           {/* Featured Post */}
-          <section className="pb-16">
-            <div className="container max-w-6xl mx-auto px-4">
-              <Card className="overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all">
-                <div className="grid md:grid-cols-2 gap-0">
-                  <div className="aspect-video md:aspect-auto relative overflow-hidden">
-                    <img
-                      src={featuredPost.image}
-                      alt={featuredPost.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent md:bg-gradient-to-r" />
-                  </div>
-                  <div className="p-6 md:p-8 flex flex-col justify-center">
-                    <Badge variant="secondary" className="w-fit mb-4">
-                      {featuredPost.category}
-                    </Badge>
-                    <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                      {featuredPost.title}
-                    </h2>
-                    <p className="text-muted-foreground mb-6">
-                      {featuredPost.excerpt}
-                    </p>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        {featuredPost.date}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
-                        {featuredPost.readTime}
-                      </span>
+          {showFeaturedPost && (
+            <section className="pb-16">
+              <div className="container max-w-6xl mx-auto px-4">
+                <Card className="overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all">
+                  <div className="grid md:grid-cols-2 gap-0">
+                    <div className="aspect-video md:aspect-auto relative overflow-hidden">
+                      <img
+                        src={featuredPost.image}
+                        alt={featuredPost.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent md:bg-gradient-to-r" />
                     </div>
-                    <Button asChild className="w-fit group">
-                      <Link to={`/blog/${featuredPost.slug}`}>
-                        Read Article
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                      </Link>
-                    </Button>
+                    <div className="p-6 md:p-8 flex flex-col justify-center">
+                      <Badge variant="secondary" className="w-fit mb-4">
+                        {featuredPost.category}
+                      </Badge>
+                      <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                        {featuredPost.title}
+                      </h2>
+                      <p className="text-muted-foreground mb-6">
+                        {featuredPost.excerpt}
+                      </p>
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          {featuredPost.date}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          {featuredPost.readTime}
+                        </span>
+                      </div>
+                      <Button asChild className="w-fit group">
+                        <Link to={`/blog/${featuredPost.slug}`}>
+                          Read Article
+                          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              </Card>
-            </div>
-          </section>
+                </Card>
+              </div>
+            </section>
+          )}
 
           {/* Blog Grid */}
           <section className="pb-20">
             <div className="container max-w-6xl mx-auto px-4">
-              <h2 className="text-2xl font-bold mb-8">Latest Articles</h2>
+              <h2 className="text-2xl font-bold mb-8">
+                {selectedCategory === "All" ? "Latest Articles" : `${selectedCategory} Articles`}
+                <span className="ml-2 text-lg font-normal text-muted-foreground">
+                  ({filteredPosts.length})
+                </span>
+              </h2>
+              {filteredPosts.length === 0 ? (
+                <div className="text-center py-12">
+                  <p className="text-muted-foreground">No articles found in this category.</p>
+                  <Button 
+                    variant="outline" 
+                    className="mt-4"
+                    onClick={() => setSelectedCategory("All")}
+                  >
+                    View All Articles
+                  </Button>
+                </div>
+              ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {blogPosts.map((post, index) => (
+                {filteredPosts.map((post, index) => (
                   <Link key={index} to={`/blog/${post.slug}`}>
                     <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all hover:-translate-y-1 group cursor-pointer">
                       <CardHeader>
@@ -204,13 +238,16 @@ const Blog = () => {
                   </Link>
                 ))}
               </div>
+              )}
 
               {/* Load More */}
-              <div className="text-center mt-12">
-                <Button variant="outline" size="lg">
-                  Load More Articles
-                </Button>
-              </div>
+              {filteredPosts.length > 0 && (
+                <div className="text-center mt-12">
+                  <Button variant="outline" size="lg">
+                    Load More Articles
+                  </Button>
+                </div>
+              )}
             </div>
           </section>
 
