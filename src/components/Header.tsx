@@ -27,6 +27,7 @@ import { useToast } from "@/hooks/use-toast";
 import AIBadge from "./AIBadge";
 import ThemeToggle from "./ThemeToggle";
 import SearchDialog from "./SearchDialog";
+import MobileNav from "./MobileNav";
 
 const convertToPdfTools = [
   { title: "JPG to PDF", href: "/image-to-pdf", icon: Image, description: "AI-optimized conversion", ai: true },
@@ -192,6 +193,9 @@ const Header = () => {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
+
+            {/* Mobile Navigation */}
+            <MobileNav />
           
             <div className="flex items-center gap-2">
               {/* Search Button */}
