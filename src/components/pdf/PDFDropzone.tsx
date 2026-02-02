@@ -1,12 +1,14 @@
 import { useCallback, useState } from "react";
 import { FileUp } from "lucide-react";
+import CameraCapture from "@/components/CameraCapture";
 
 interface PDFDropzoneProps {
   onFilesAdded: (files: File[]) => void;
   disabled?: boolean;
+  showCamera?: boolean;
 }
 
-const PDFDropzone = ({ onFilesAdded, disabled }: PDFDropzoneProps) => {
+const PDFDropzone = ({ onFilesAdded, disabled, showCamera = true }: PDFDropzoneProps) => {
   const [isDragging, setIsDragging] = useState(false);
 
   const validateFiles = (files: File[]) => {
@@ -103,6 +105,15 @@ const PDFDropzone = ({ onFilesAdded, disabled }: PDFDropzoneProps) => {
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <span className="px-2 py-1 bg-secondary rounded">PDF</span>
         </div>
+
+        {showCamera && (
+          <div className="mt-4 pt-4 border-t border-border/50">
+            <CameraCapture 
+              onCapture={(file) => onFilesAdded([file])} 
+              disabled={disabled} 
+            />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,12 +1,14 @@
 import { useState, useCallback, useRef } from "react";
 import { FileText } from "lucide-react";
+import CameraCapture from "@/components/CameraCapture";
 
 interface PDFConvertDropzoneProps {
   onFileAdded: (file: File) => void;
   disabled?: boolean;
+  showCamera?: boolean;
 }
 
-const PDFConvertDropzone = ({ onFileAdded, disabled }: PDFConvertDropzoneProps) => {
+const PDFConvertDropzone = ({ onFileAdded, disabled, showCamera = true }: PDFConvertDropzoneProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -103,6 +105,15 @@ const PDFConvertDropzone = ({ onFileAdded, disabled }: PDFConvertDropzoneProps) 
             or click to browse
           </p>
         </div>
+
+        {showCamera && (
+          <div className="mt-4 pt-4 border-t border-border/50">
+            <CameraCapture 
+              onCapture={onFileAdded} 
+              disabled={disabled} 
+            />
+          </div>
+        )}
       </div>
     </div>
   );
