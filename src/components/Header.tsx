@@ -12,7 +12,7 @@ import {
 import { 
   Image, FileText, Presentation, Table, Code,
   FileImage, FileType, FileSpreadsheet, FileBadge,
-  LogIn, LogOut, User, Loader2, Sparkles, Brain, Search, LayoutDashboard
+  LogIn, LogOut, User, Loader2, Sparkles, Brain, Search, LayoutDashboard, Gift
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
@@ -237,6 +237,12 @@ const Header = () => {
                       <Link to="/dashboard">
                         <LayoutDashboard className="h-4 w-4" />
                         Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild className="gap-2 cursor-pointer rounded-lg">
+                      <Link to="/refer">
+                        <Gift className="h-4 w-4" />
+                        Refer & Earn
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
