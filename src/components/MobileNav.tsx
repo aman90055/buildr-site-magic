@@ -5,7 +5,7 @@ import {
   Image, FileText, Presentation, Table, Code,
   FileImage, FileType, FileSpreadsheet, FileBadge,
   LogIn, LogOut, User, LayoutDashboard, Sparkles, Brain,
-  ChevronDown, ChevronUp
+  ChevronDown, ChevronUp, Gift
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
@@ -158,6 +158,10 @@ const MobileNav = () => {
                 <NavLink to="/dashboard">
                   <LayoutDashboard className="h-5 w-5 text-muted-foreground" />
                   <span>Dashboard</span>
+                </NavLink>
+                <NavLink to="/refer">
+                  <Gift className="h-5 w-5 text-muted-foreground" />
+                  <span>Refer & Earn</span>
                 </NavLink>
                 <div className="flex items-center gap-3 px-4 py-2 text-sm text-muted-foreground">
                   <User className="h-4 w-4" />
