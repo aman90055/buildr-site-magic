@@ -67,7 +67,12 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
             <p>Made with AI • Trusted by millions worldwide</p>
             <span className="hidden md:inline">•</span>
-            <p className="font-medium text-foreground">Made & Managed by Aman Vishwakarma</p>
+            <p className="font-medium text-foreground">
+              Managed by{" "}
+              <Link to="/about" className="underline underline-offset-2 hover:text-primary transition-colors">
+                Aman Vishwakarma
+              </Link>
+            </p>
           </div>
           <div className="flex items-center gap-6">
             <a href="https://twitter.com/AmanVishwakarma" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Twitter</a>
