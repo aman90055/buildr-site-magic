@@ -77,7 +77,7 @@ const Footer = () => {
           </div>
           <div className="flex items-center gap-6">
             <a href="https://twitter.com/AmanVishwakarma" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Twitter</a>
-            <a href="https://linkedin.com/in/amanvishwakarma" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/aman-vishwakarma-446708294" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">LinkedIn</a>
             <a href="https://github.com/amanvishwakarma" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
           </div>
         </div>
