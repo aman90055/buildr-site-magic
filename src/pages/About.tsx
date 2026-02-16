@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Code, Zap, Heart, Target, Users, Award, Rocket, Linkedin } from "lucide-react";
+import { Sparkles, Code, Zap, Heart, Target, Users, Award, Rocket, Linkedin, Twitter, Github } from "lucide-react";
 import amanPhoto from "@/assets/aman-vishwakarma.jpg";
 
 const About = () => {
@@ -127,7 +127,18 @@ const About = () => {
                       <div className="w-full h-full rounded-2xl bg-card flex flex-col items-center justify-center border border-border/50 p-6">
                         <img src={amanPhoto} alt="Aman Vishwakarma" className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover mb-4 border-4 border-primary/20" />
                         <h3 className="text-xl font-semibold">Aman Vishwakarma</h3>
-                        <p className="text-sm text-muted-foreground">Founder & Lead Developer</p>
+                        <p className="text-sm text-muted-foreground mb-3">Founder & Lead Developer</p>
+                        <div className="flex items-center gap-3">
+                          <a href="https://www.linkedin.com/in/aman-vishwakarma-446708294" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-[hsl(210,80%,40%)]/10 hover:bg-[hsl(210,80%,40%)]/20 flex items-center justify-center transition-colors">
+                            <Linkedin className="w-4 h-4 text-[hsl(210,80%,40%)]" />
+                          </a>
+                          <a href="https://twitter.com/AmanVishwakarma" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors">
+                            <Twitter className="w-4 h-4 text-primary" />
+                          </a>
+                          <a href="https://github.com/amanvishwakarma" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-muted hover:bg-muted/80 flex items-center justify-center transition-colors">
+                            <Github className="w-4 h-4 text-foreground" />
+                          </a>
+                        </div>
                       </div>
                     </div>
                     <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
