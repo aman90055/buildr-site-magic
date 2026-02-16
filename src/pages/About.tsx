@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles, Code, Zap, Heart, Target, Users, Award, Rocket } from "lucide-react";
+import amanPhoto from "@/assets/aman-vishwakarma.jpg";
 
 const About = () => {
   const stats = [
@@ -112,14 +113,10 @@ const About = () => {
                 <div className="order-1 md:order-2 flex justify-center">
                   <div className="relative">
                     <div className="w-64 h-64 md:w-80 md:h-80 rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-transparent p-1">
-                      <div className="w-full h-full rounded-2xl bg-card flex items-center justify-center border border-border/50">
-                        <div className="text-center">
-                          <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center">
-                            <span className="text-5xl font-bold text-primary-foreground">AV</span>
-                          </div>
-                          <h3 className="text-xl font-semibold">Aman Vishwakarma</h3>
-                          <p className="text-sm text-muted-foreground">Founder & Lead Developer</p>
-                        </div>
+                      <div className="w-full h-full rounded-2xl bg-card flex flex-col items-center justify-center border border-border/50 p-6">
+                        <img src={amanPhoto} alt="Aman Vishwakarma" className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover mb-4 border-4 border-primary/20" />
+                        <h3 className="text-xl font-semibold">Aman Vishwakarma</h3>
+                        <p className="text-sm text-muted-foreground">Founder & Lead Developer</p>
                       </div>
                     </div>
                     <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
