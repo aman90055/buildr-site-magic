@@ -3,7 +3,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles, Code, Zap, Heart, Target, Users, Award, Rocket } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sparkles, Code, Zap, Heart, Target, Users, Award, Rocket, Linkedin } from "lucide-react";
 import amanPhoto from "@/assets/aman-vishwakarma.jpg";
 
 const About = () => {
@@ -102,13 +103,23 @@ const About = () => {
                     that help thousands of users daily. I believe in building products that are not just 
                     functional but delightful to use.
                   </p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-6">
                     <Badge variant="secondary">React</Badge>
                     <Badge variant="secondary">TypeScript</Badge>
                     <Badge variant="secondary">AI/ML</Badge>
                     <Badge variant="secondary">PDF Processing</Badge>
                     <Badge variant="secondary">Full-Stack</Badge>
                   </div>
+                  <a
+                    href="https://www.linkedin.com/in/aman-vishwakarma-446708294"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="gap-2 rounded-xl bg-[hsl(210,80%,40%)] hover:bg-[hsl(210,80%,35%)] text-white">
+                      <Linkedin className="w-4 h-4" />
+                      Connect with me on LinkedIn
+                    </Button>
+                  </a>
                 </div>
                 <div className="order-1 md:order-2 flex justify-center">
                   <div className="relative">
