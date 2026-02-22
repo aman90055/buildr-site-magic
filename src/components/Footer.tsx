@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Heart, Coffee } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -20,6 +20,30 @@ const Footer = () => {
             <p className="text-muted-foreground mb-4 max-w-sm">
               Next-generation AI-powered PDF tools. Merge, split, compress, and convert with unmatched accuracy and speed.
             </p>
+            
+            {/* Donation Section */}
+            <div className="mb-4 p-3 rounded-lg bg-accent/50 border border-border/50">
+              <p className="text-sm font-medium text-foreground mb-2 flex items-center gap-1">
+                <Heart className="w-4 h-4 text-red-500" /> Support Us
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <a
+                  href="https://buymeacoffee.com/amanvishwakarma"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[hsl(45,100%,51%)] text-[hsl(0,0%,10%)] text-xs font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <Coffee className="w-3.5 h-3.5" /> Buy Me a Coffee
+                </a>
+                <a
+                  href="upi://pay?pa=amanvishwakarma@upi&pn=Aman%20Vishwakarma&cu=INR"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 transition-opacity"
+                >
+                  ₹ UPI Donate
+                </a>
+              </div>
+            </div>
+            
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} PDF Tools. All rights reserved.
             </p>
