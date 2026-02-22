@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://documents-edit-in.lovable.app/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/merge</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/split</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/compress</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/convert</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/ocr</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/edit-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/pdf-to-image</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/image-to-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/protect-pdf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/rotate-pdf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/remove-pages</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/extract-pages</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/add-watermark</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/add-page-numbers</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/organize-pdf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/word-to-pdf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/excel-to-pdf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/pdf-to-word</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/pdf-to-excel</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/jpg-to-png</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/png-to-jpg</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/image-compress</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/remove-background</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/scan-to-pdf</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/ai-summarizer</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/ai-translator</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/about</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/faq</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/contact</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/privacy</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
+</urlset>
