@@ -132,7 +132,7 @@ const About = () => {
                           <a href="https://www.linkedin.com/in/aman-vishwakarma-446708294" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-[hsl(210,80%,40%)]/10 hover:bg-[hsl(210,80%,40%)]/20 flex items-center justify-center transition-colors">
                             <Linkedin className="w-4 h-4 text-[hsl(210,80%,40%)]" />
                           </a>
-                          <a href="https://twitter.com/AmanVishwakarma" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors">
+                          <a href="https://x.com/AmanVishwa15356" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors">
                             <Twitter className="w-4 h-4 text-primary" />
                           </a>
                           <a href="https://github.com/amanvishwakarma" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-muted hover:bg-muted/80 flex items-center justify-center transition-colors">
