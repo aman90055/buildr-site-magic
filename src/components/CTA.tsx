@@ -65,6 +65,15 @@ const CTA = () => {
               Bank-grade security
             </span>
           </div>
+
+          {/* Share Section */}
+          <div className="mt-8 flex justify-center animate-fade-in" style={{ animationDelay: "0.5s" }}>
+            <ShareButtons 
+              title="Free PDF Tools Online - 50+ AI-Powered Tools" 
+              description="Check out these amazing free AI-powered PDF tools! Merge, split, compress & convert PDFs instantly."
+              url="https://documents-edit-in.lovable.app"
+            />
+          </div>
         </div>
       </div>
     </section>
