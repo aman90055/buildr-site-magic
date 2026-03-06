@@ -89,6 +89,7 @@ import CertificateMaker from "./pages/tools/CertificateMaker";
 import LetterWriter from "./pages/tools/LetterWriter";
 // Referral
 import ReferAndEarn from "./pages/ReferAndEarn";
+import Premium from "./pages/Premium";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -187,6 +188,7 @@ const App = () => (
               <Route path="/letter-writer" element={<LetterWriter />} />
               {/* Referral */}
               <Route path="/refer" element={<ReferAndEarn />} />
+              <Route path="/premium" element={<Premium />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
