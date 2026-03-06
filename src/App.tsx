@@ -188,6 +188,7 @@ const App = () => (
               <Route path="/letter-writer" element={<LetterWriter />} />
               {/* Referral */}
               <Route path="/refer" element={<ReferAndEarn />} />
+              <Route path="/premium" element={<Premium />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
