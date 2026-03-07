@@ -255,8 +255,8 @@ const blogPostsData: Record<string, {
     category: "Tutorial",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "The internet is full of PDF tools, but finding truly free ones that deliver quality results can be challenging. Here are the top 10 free PDF tools you absolutely need in 2026.",
       "## 1. PDF Merge Tool",
       "Combine multiple PDF files into one seamless document. Our merge tool handles unlimited files with drag-and-drop reordering.",
       "## 2. PDF Splitter",
