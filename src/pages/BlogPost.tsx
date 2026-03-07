@@ -58,8 +58,8 @@ const blogPostsData: Record<string, {
     category: "Tutorial",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "Merging PDF files doesn't have to be complicated. With our intuitive merge tool, you can combine multiple documents into a single PDF in just a few clicks. Here's your complete guide to mastering PDF merging.",
       "## Why Merge PDFs?",
       "There are countless scenarios where combining PDFs makes life easier:",
       "- Consolidating multiple reports into one comprehensive document",
