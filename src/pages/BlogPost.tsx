@@ -291,8 +291,8 @@ const blogPostsData: Record<string, {
     category: "Feature Guide",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "Artificial Intelligence is no longer a futuristic concept — it's actively reshaping how businesses and individuals handle documents every day. From smart compression to automatic text extraction, AI is making document management faster, smarter, and more accessible.",
       "## Smart Document Analysis",
       "AI can analyze document structure automatically, identifying headers, tables, images, and text blocks. This understanding enables:",
       "- Automatic table of contents generation",
