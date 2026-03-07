@@ -94,8 +94,8 @@ const blogPostsData: Record<string, {
     category: "Feature Guide",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "Optical Character Recognition (OCR) technology has transformed how we work with scanned documents and images. Our AI-powered OCR system takes this technology to the next level, delivering unprecedented accuracy and speed.",
       "## What is OCR?",
       "OCR is a technology that recognizes text within digital images. When you scan a paper document, it becomes an image file – the text isn't actually 'text' that you can select, copy, or edit. OCR analyzes these images and converts the visual representation of characters into actual text data.",
       "## Our AI-Powered Approach",
