@@ -40,7 +40,7 @@ const Premium = () => {
         "Email support",
       ],
       popular: false,
-      upiLink: "upi://pay?pa=amanvishwakarma@upi&pn=PDFTools&am=99&cu=INR&tn=PDFTools-Basic-Plan",
+      upiLink: "upi://pay?pa=7905970907@ibl&pn=PDFTools&am=99&cu=INR&tn=PDFTools-Basic-Plan",
     },
     {
       id: "pro",
@@ -61,7 +61,7 @@ const Premium = () => {
         "No ads",
       ],
       popular: true,
-      upiLink: "upi://pay?pa=amanvishwakarma@upi&pn=PDFTools&am=249&cu=INR&tn=PDFTools-Pro-Plan",
+      upiLink: "upi://pay?pa=7905970907@ibl&pn=PDFTools&am=249&cu=INR&tn=PDFTools-Pro-Plan",
     },
     {
       id: "enterprise",
@@ -82,7 +82,7 @@ const Premium = () => {
         "Unlimited batch processing",
       ],
       popular: false,
-      upiLink: "upi://pay?pa=amanvishwakarma@upi&pn=PDFTools&am=599&cu=INR&tn=PDFTools-Enterprise-Plan",
+      upiLink: "upi://pay?pa=7905970907@ibl&pn=PDFTools&am=599&cu=INR&tn=PDFTools-Enterprise-Plan",
     },
   ];
 

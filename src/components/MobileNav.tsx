@@ -5,7 +5,7 @@ import {
   Image, FileText, Presentation, Table, Code,
   FileImage, FileType, FileSpreadsheet, FileBadge,
   LogIn, LogOut, User, LayoutDashboard, Sparkles, Brain,
-  ChevronDown, ChevronUp, Gift
+  ChevronDown, ChevronUp, Gift, Crown
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
@@ -147,8 +147,17 @@ const MobileNav = () => {
                     {tool.ai && <AIBadge variant="inline" glow={false} />}
                   </NavLink>
                 ))}
-              </CollapsibleContent>
+            </CollapsibleContent>
             </Collapsible>
+
+            {/* Premium */}
+            <div className="px-4 mt-4 mb-2">
+              <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Upgrade</span>
+            </div>
+            <NavLink to="/premium">
+              <Crown className="h-5 w-5 text-amber-500" />
+              <span className="flex-1">Premium Plans</span>
+            </NavLink>
           </nav>
 
           {/* Footer / Auth */}
