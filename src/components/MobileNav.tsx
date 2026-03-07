@@ -5,7 +5,7 @@ import {
   Image, FileText, Presentation, Table, Code,
   FileImage, FileType, FileSpreadsheet, FileBadge,
   LogIn, LogOut, User, LayoutDashboard, Sparkles, Brain,
-  ChevronDown, ChevronUp, Gift
+  ChevronDown, ChevronUp, Gift, Crown
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
