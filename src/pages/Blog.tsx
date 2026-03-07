@@ -31,6 +31,7 @@ const Blog = () => {
       category: "Tutorial",
       icon: FileText,
       slug: "merge-pdfs-guide",
+      image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&auto=format&fit=crop&q=60",
     },
     {
       title: "OCR Technology: Extracting Text from Scanned Documents",
@@ -40,6 +41,7 @@ const Blog = () => {
       category: "Feature Guide",
       icon: Sparkles,
       slug: "ocr-technology",
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&auto=format&fit=crop&q=60",
     },
     {
       title: "Best Practices for PDF Security",
@@ -49,6 +51,7 @@ const Blog = () => {
       category: "Security",
       icon: Shield,
       slug: "pdf-security-best-practices",
+      image: "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=600&auto=format&fit=crop&q=60",
     },
     {
       title: "Speed Up Your Workflow with Batch Processing",
@@ -58,6 +61,7 @@ const Blog = () => {
       category: "Productivity",
       icon: Zap,
       slug: "batch-processing",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=60",
     },
     {
       title: "Converting Images to PDF: Complete Guide",
@@ -67,6 +71,7 @@ const Blog = () => {
       category: "Tutorial",
       icon: FileText,
       slug: "image-to-pdf-guide",
+      image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&auto=format&fit=crop&q=60",
     },
     {
       title: "What's New in Document Editor 2.0",
@@ -76,6 +81,7 @@ const Blog = () => {
       category: "Product Update",
       icon: Sparkles,
       slug: "document-editor-2",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format&fit=crop&q=60",
     },
     {
       title: "Top 10 Free PDF Tools You Need in 2026",
@@ -85,6 +91,7 @@ const Blog = () => {
       category: "Tutorial",
       icon: FileText,
       slug: "top-10-free-pdf-tools-2026",
+      image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=600&auto=format&fit=crop&q=60",
     },
     {
       title: "How AI is Revolutionizing Document Management",
@@ -94,6 +101,7 @@ const Blog = () => {
       category: "Feature Guide",
       icon: Sparkles,
       slug: "ai-document-management",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&auto=format&fit=crop&q=60",
     },
     {
       title: "PDF vs Word: When to Use Which Format",
@@ -103,6 +111,7 @@ const Blog = () => {
       category: "Tutorial",
       icon: FileText,
       slug: "pdf-vs-word-comparison",
+      image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&auto=format&fit=crop&q=60",
     },
     {
       title: "Secure Your Business Documents: A Complete Guide",
@@ -112,6 +121,7 @@ const Blog = () => {
       category: "Security",
       icon: Shield,
       slug: "secure-business-documents",
+      image: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?w=600&auto=format&fit=crop&q=60",
     },
     {
       title: "5 Ways to Reduce PDF File Size Without Losing Quality",
@@ -121,6 +131,7 @@ const Blog = () => {
       category: "Productivity",
       icon: Zap,
       slug: "reduce-pdf-file-size",
+      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=60",
     },
   ];
 
