@@ -61,7 +61,7 @@ const Premium = () => {
         "No ads",
       ],
       popular: true,
-      upiLink: "upi://pay?pa=amanvishwakarma@upi&pn=PDFTools&am=249&cu=INR&tn=PDFTools-Pro-Plan",
+      upiLink: "upi://pay?pa=7905970907@ibl&pn=PDFTools&am=249&cu=INR&tn=PDFTools-Pro-Plan",
     },
     {
       id: "enterprise",
