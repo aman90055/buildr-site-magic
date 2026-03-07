@@ -58,8 +58,8 @@ const blogPostsData: Record<string, {
     category: "Tutorial",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "Merging PDF files doesn't have to be complicated. With our intuitive merge tool, you can combine multiple documents into a single PDF in just a few clicks. Here's your complete guide to mastering PDF merging.",
       "## Why Merge PDFs?",
       "There are countless scenarios where combining PDFs makes life easier:",
       "- Consolidating multiple reports into one comprehensive document",
@@ -94,8 +94,8 @@ const blogPostsData: Record<string, {
     category: "Feature Guide",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "Optical Character Recognition (OCR) technology has transformed how we work with scanned documents and images. Our AI-powered OCR system takes this technology to the next level, delivering unprecedented accuracy and speed.",
       "## What is OCR?",
       "OCR is a technology that recognizes text within digital images. When you scan a paper document, it becomes an image file – the text isn't actually 'text' that you can select, copy, or edit. OCR analyzes these images and converts the visual representation of characters into actual text data.",
       "## Our AI-Powered Approach",
@@ -129,8 +129,8 @@ const blogPostsData: Record<string, {
     category: "Security",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "In an era of digital document sharing, securing your PDFs is more important than ever. This comprehensive guide covers everything you need to know about protecting sensitive information in PDF files.",
       "## Understanding PDF Security Layers",
       "PDF security isn't just about passwords. There are multiple layers of protection you can apply:",
       "**Document Open Password**: Prevents unauthorized users from viewing the document.",
@@ -173,8 +173,8 @@ const blogPostsData: Record<string, {
     category: "Productivity",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "Time is your most valuable resource. When you're dealing with dozens or hundreds of PDF files, processing them one by one simply isn't practical. That's where batch processing comes in.",
       "## What is Batch Processing?",
       "Batch processing allows you to apply the same operation to multiple files simultaneously. Instead of opening, processing, and saving each file individually, you can queue them all up and let our system handle them in one go.",
       "## Supported Batch Operations",
@@ -215,8 +215,8 @@ const blogPostsData: Record<string, {
     category: "Tutorial",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "Converting images to PDF is one of the most common document tasks. Whether you're creating a photo portfolio, digitizing receipts, or compiling screenshots, our image-to-PDF tool makes it simple.",
       "## Supported Image Formats",
       "Our converter works with all popular image formats:",
       "- JPEG/JPG",
@@ -255,8 +255,8 @@ const blogPostsData: Record<string, {
     category: "Tutorial",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "The internet is full of PDF tools, but finding truly free ones that deliver quality results can be challenging. Here are the top 10 free PDF tools you absolutely need in 2026.",
       "## 1. PDF Merge Tool",
       "Combine multiple PDF files into one seamless document. Our merge tool handles unlimited files with drag-and-drop reordering.",
       "## 2. PDF Splitter",
@@ -291,8 +291,8 @@ const blogPostsData: Record<string, {
     category: "Feature Guide",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "Artificial Intelligence is no longer a futuristic concept — it's actively reshaping how businesses and individuals handle documents every day. From smart compression to automatic text extraction, AI is making document management faster, smarter, and more accessible.",
       "## Smart Document Analysis",
       "AI can analyze document structure automatically, identifying headers, tables, images, and text blocks. This understanding enables:",
       "- Automatic table of contents generation",
@@ -329,8 +329,8 @@ const blogPostsData: Record<string, {
     category: "Tutorial",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "PDF and Word are the two most popular document formats in the world. But when should you use each one? This guide breaks down the key differences and helps you make the right choice.",
       "## When to Use PDF",
       "PDFs are ideal when you need:",
       "- **Fixed layout**: Documents look the same on every device and printer",
@@ -366,8 +366,8 @@ const blogPostsData: Record<string, {
     category: "Security",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "Data breaches cost businesses millions every year. Proper document security isn't optional — it's essential. This guide covers everything your business needs to know about securing digital documents.",
       "## The Cost of Poor Document Security",
       "According to industry reports:",
       "- The average data breach costs ₹15 crore in India",
@@ -408,8 +408,8 @@ const blogPostsData: Record<string, {
     category: "Productivity",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "Large PDF files are a common frustration — they're slow to upload, exceed email limits, and eat up storage. Here are 5 proven ways to shrink your PDFs without sacrificing quality.",
       "## 1. Use AI-Powered Compression",
       "Our AI compression tool analyzes every element in your PDF and applies the optimal compression algorithm. Unlike basic compression, AI preserves text sharpness while dramatically reducing image sizes.",
       "- Photos: Up to 90% size reduction",

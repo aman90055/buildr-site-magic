@@ -41,6 +41,45 @@ export type Database = {
         }
         Relationships: []
       }
+      payment_verifications: {
+        Row: {
+          amount: number
+          created_at: string
+          email: string
+          id: string
+          name: string
+          notes: string | null
+          plan: string
+          status: string
+          utr_number: string
+          verified_at: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          notes?: string | null
+          plan: string
+          status?: string
+          utr_number: string
+          verified_at?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          notes?: string | null
+          plan?: string
+          status?: string
+          utr_number?: string
+          verified_at?: string | null
+        }
+        Relationships: []
+      }
       pdf_jobs: {
         Row: {
           created_at: string
