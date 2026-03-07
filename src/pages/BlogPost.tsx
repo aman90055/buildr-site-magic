@@ -215,8 +215,8 @@ const blogPostsData: Record<string, {
     category: "Tutorial",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "Converting images to PDF is one of the most common document tasks. Whether you're creating a photo portfolio, digitizing receipts, or compiling screenshots, our image-to-PDF tool makes it simple.",
       "## Supported Image Formats",
       "Our converter works with all popular image formats:",
       "- JPEG/JPG",
