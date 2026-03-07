@@ -408,8 +408,8 @@ const blogPostsData: Record<string, {
     category: "Productivity",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "Large PDF files are a common frustration — they're slow to upload, exceed email limits, and eat up storage. Here are 5 proven ways to shrink your PDFs without sacrificing quality.",
       "## 1. Use AI-Powered Compression",
       "Our AI compression tool analyzes every element in your PDF and applies the optimal compression algorithm. Unlike basic compression, AI preserves text sharpness while dramatically reducing image sizes.",
       "- Photos: Up to 90% size reduction",
