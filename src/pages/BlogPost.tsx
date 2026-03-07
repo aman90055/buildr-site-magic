@@ -366,8 +366,8 @@ const blogPostsData: Record<string, {
     category: "Security",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "Data breaches cost businesses millions every year. Proper document security isn't optional — it's essential. This guide covers everything your business needs to know about securing digital documents.",
       "## The Cost of Poor Document Security",
       "According to industry reports:",
       "- The average data breach costs ₹15 crore in India",
