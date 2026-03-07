@@ -173,8 +173,8 @@ const blogPostsData: Record<string, {
     category: "Productivity",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "Time is your most valuable resource. When you're dealing with dozens or hundreds of PDF files, processing them one by one simply isn't practical. That's where batch processing comes in.",
       "## What is Batch Processing?",
       "Batch processing allows you to apply the same operation to multiple files simultaneously. Instead of opening, processing, and saving each file individually, you can queue them all up and let our system handle them in one go.",
       "## Supported Batch Operations",
