@@ -129,8 +129,8 @@ const blogPostsData: Record<string, {
     category: "Security",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "In an era of digital document sharing, securing your PDFs is more important than ever. This comprehensive guide covers everything you need to know about protecting sensitive information in PDF files.",
       "## Understanding PDF Security Layers",
       "PDF security isn't just about passwords. There are multiple layers of protection you can apply:",
       "**Document Open Password**: Prevents unauthorized users from viewing the document.",
