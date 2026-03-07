@@ -102,9 +102,21 @@ const Premium = () => {
       return;
     }
     setSubmitting(true);
-    // Simulate submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    const plan = plans.find(p => p.id === selectedPlan);
+    const { error } = await supabase.from("payment_verifications").insert({
+      name: name.trim(),
+      email: email.trim(),
+      utr_number: utrNumber.trim(),
+      plan: plan?.name || selectedPlan || "",
+      amount: parseInt(plan?.price.replace("₹", "") || "0"),
+    });
+
     setSubmitting(false);
+    if (error) {
+      toast.error("Submission failed. Please try again.");
+      return;
+    }
     toast.success("Payment verification submitted! We'll activate your plan within 24 hours.");
     setShowVerification(false);
     setUtrNumber("");
