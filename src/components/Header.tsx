@@ -12,7 +12,7 @@ import {
 import { 
   Image, FileText, Presentation, Table, Code,
   FileImage, FileType, FileSpreadsheet, FileBadge,
-  LogIn, LogOut, User, Loader2, Sparkles, Brain, Search, LayoutDashboard, Gift
+  LogIn, LogOut, User, Loader2, Sparkles, Brain, Search, LayoutDashboard, Gift, Crown
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
