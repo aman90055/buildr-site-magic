@@ -82,7 +82,7 @@ const Premium = () => {
         "Unlimited batch processing",
       ],
       popular: false,
-      upiLink: "upi://pay?pa=amanvishwakarma@upi&pn=PDFTools&am=599&cu=INR&tn=PDFTools-Enterprise-Plan",
+      upiLink: "upi://pay?pa=7905970907@ibl&pn=PDFTools&am=599&cu=INR&tn=PDFTools-Enterprise-Plan",
     },
   ];
 

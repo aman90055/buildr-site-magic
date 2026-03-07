@@ -263,11 +263,18 @@ const Blog = () => {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredPosts.map((post, index) => (
                   <Link key={index} to={`/blog/${post.slug}`}>
-                    <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all hover:-translate-y-1 group cursor-pointer">
+                    <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all hover:-translate-y-1 group cursor-pointer overflow-hidden">
+                      {post.image && (
+                        <div className="aspect-video overflow-hidden">
+                          <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                        </div>
+                      )}
                       <CardHeader>
-                        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                        <post.icon className="w-6 h-6 text-primary" />
-                      </div>
+                         {!post.image && (
+                           <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                             <post.icon className="w-6 h-6 text-primary" />
+                           </div>
+                         )}
                       <Badge variant="outline" className="w-fit mb-2">
                         {post.category}
                       </Badge>

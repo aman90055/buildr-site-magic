@@ -191,6 +191,12 @@ const Header = () => {
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/premium" className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
+                  <Crown className="w-3.5 h-3.5 text-amber-500" />
+                  Premium
+                </Link>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
 

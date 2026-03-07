@@ -147,8 +147,17 @@ const MobileNav = () => {
                     {tool.ai && <AIBadge variant="inline" glow={false} />}
                   </NavLink>
                 ))}
-              </CollapsibleContent>
+            </CollapsibleContent>
             </Collapsible>
+
+            {/* Premium */}
+            <div className="px-4 mt-4 mb-2">
+              <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Upgrade</span>
+            </div>
+            <NavLink to="/premium">
+              <Crown className="h-5 w-5 text-amber-500" />
+              <span className="flex-1">Premium Plans</span>
+            </NavLink>
           </nav>
 
           {/* Footer / Auth */}
