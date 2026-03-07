@@ -329,8 +329,8 @@ const blogPostsData: Record<string, {
     category: "Tutorial",
     author: "Aman Vishwakarma",
     authorRole: "Creator & Lead Developer",
+    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&auto=format&fit=crop&q=80",
     content: [
-      "PDF and Word are the two most popular document formats in the world. But when should you use each one? This guide breaks down the key differences and helps you make the right choice.",
       "## When to Use PDF",
       "PDFs are ideal when you need:",
       "- **Fixed layout**: Documents look the same on every device and printer",
