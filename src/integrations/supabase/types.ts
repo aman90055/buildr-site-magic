@@ -217,6 +217,50 @@ export type Database = {
         }
         Relationships: []
       }
+      user_premium_status: {
+        Row: {
+          activated_at: string
+          created_at: string
+          expires_at: string | null
+          id: string
+          is_active: boolean
+          payment_verification_id: string | null
+          plan: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          activated_at?: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean
+          payment_verification_id?: string | null
+          plan: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          activated_at?: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean
+          payment_verification_id?: string | null
+          plan?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_premium_status_payment_verification_id_fkey"
+            columns: ["payment_verification_id"]
+            isOneToOne: false
+            referencedRelation: "payment_verifications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_referral_stats: {
         Row: {
           created_at: string
