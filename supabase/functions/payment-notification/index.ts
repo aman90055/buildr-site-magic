@@ -27,7 +27,7 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         from: 'PDF Tools <onboarding@resend.dev>',
-        to: ['7905970907a@gmail.com'],
+        to: ['documentai999@gmail.com'],
         subject: `🔔 New Payment: ${plan} Plan - ₹${amount}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
