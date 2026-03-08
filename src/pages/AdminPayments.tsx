@@ -14,7 +14,7 @@ import { toast } from "sonner";
 import { Shield, CheckCircle, XCircle, Clock, Search, RefreshCw, IndianRupee } from "lucide-react";
 import { format } from "date-fns";
 
-const ADMIN_EMAIL = "7905970907a@gmail.com";
+const ADMIN_EMAIL = "documentai999@gmail.com";
 
 interface PaymentVerification {
   id: string;
