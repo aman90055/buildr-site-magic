@@ -65,6 +65,7 @@ const AdminPayments = () => {
   }, [user]);
 
   const updateStatus = async (id: string, status: string) => {
+    const payment = payments.find((p) => p.id === id);
     const updateData: Record<string, unknown> = { status };
     if (status === "verified") {
       updateData.verified_at = new Date().toISOString();
@@ -77,10 +78,23 @@ const AdminPayments = () => {
 
     if (error) {
       toast.error("Failed to update status");
-    } else {
-      toast.success(`Payment marked as ${status}`);
-      fetchPayments();
+      return;
     }
+
+    // Activate premium via edge function
+    if (status === "verified" && payment) {
+      const { data, error: premiumError } = await supabase.functions.invoke("activate-premium", {
+        body: { email: payment.email, plan: payment.plan, payment_verification_id: id },
+      });
+      if (premiumError) {
+        toast.warning("Payment verified but premium activation needs manual check");
+      } else if (data?.message) {
+        toast.info(data.message);
+      }
+    }
+
+    toast.success(`Payment marked as ${status}`);
+    fetchPayments();
   };
 
   const filtered = payments.filter((p) => {
