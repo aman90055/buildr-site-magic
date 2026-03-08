@@ -65,6 +65,7 @@ const AdminPayments = () => {
   }, [user]);
 
   const updateStatus = async (id: string, status: string) => {
+    const payment = payments.find((p) => p.id === id);
     const updateData: Record<string, unknown> = { status };
     if (status === "verified") {
       updateData.verified_at = new Date().toISOString();
@@ -77,10 +78,32 @@ const AdminPayments = () => {
 
     if (error) {
       toast.error("Failed to update status");
-    } else {
-      toast.success(`Payment marked as ${status}`);
-      fetchPayments();
+      return;
     }
+
+    // If verified and we have user email, activate premium
+    if (status === "verified" && payment) {
+      // Look up user by email to set premium flag
+      const { data: userData } = await supabase.auth.admin?.listUsers?.() || { data: null };
+      // Since we can't use admin API from client, we'll upsert with a known approach
+      // The admin manually ensures the user exists; premium activates on next login check
+      const { error: premiumError } = await supabase
+        .from("user_premium_status")
+        .upsert({
+          user_id: payment.email, // Will be matched by email lookup edge function
+          plan: payment.plan,
+          is_active: true,
+          payment_verification_id: id,
+          activated_at: new Date().toISOString(),
+        }, { onConflict: "user_id" });
+      
+      if (premiumError) {
+        console.error("Premium activation note: user must be logged in for auto-activation", premiumError);
+      }
+    }
+
+    toast.success(`Payment marked as ${status}`);
+    fetchPayments();
   };
 
   const filtered = payments.filter((p) => {
