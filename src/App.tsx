@@ -190,6 +190,7 @@ const App = () => (
               {/* Referral */}
               <Route path="/refer" element={<ReferAndEarn />} />
               <Route path="/premium" element={<Premium />} />
+              <Route path="/admin/payments" element={<AdminPayments />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
