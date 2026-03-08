@@ -103,19 +103,29 @@ const Premium = () => {
     setSubmitting(true);
     
     const plan = plans.find(p => p.id === selectedPlan);
+    const planName = plan?.name || selectedPlan || "";
+    const planAmount = parseInt(plan?.price.replace("₹", "") || "0");
+
     const { error } = await supabase.from("payment_verifications").insert({
       name: name.trim(),
       email: email.trim(),
       utr_number: utrNumber.trim(),
-      plan: plan?.name || selectedPlan || "",
-      amount: parseInt(plan?.price.replace("₹", "") || "0"),
+      plan: planName,
+      amount: planAmount,
     });
 
-    setSubmitting(false);
     if (error) {
+      setSubmitting(false);
       toast.error("Submission failed. Please try again.");
       return;
     }
+
+    // Send email notification (non-blocking)
+    supabase.functions.invoke("payment-notification", {
+      body: { name: name.trim(), email: email.trim(), utr_number: utrNumber.trim(), plan: planName, amount: planAmount },
+    }).catch(console.error);
+
+    setSubmitting(false);
     toast.success("Payment verification submitted! We'll activate your plan within 24 hours.");
     setShowVerification(false);
     setUtrNumber("");

@@ -90,6 +90,7 @@ import LetterWriter from "./pages/tools/LetterWriter";
 // Referral
 import ReferAndEarn from "./pages/ReferAndEarn";
 import Premium from "./pages/Premium";
+import AdminPayments from "./pages/AdminPayments";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
