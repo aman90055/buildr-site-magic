@@ -81,24 +81,15 @@ const AdminPayments = () => {
       return;
     }
 
-    // If verified and we have user email, activate premium
+    // Activate premium via edge function
     if (status === "verified" && payment) {
-      // Look up user by email to set premium flag
-      const { data: userData } = await supabase.auth.admin?.listUsers?.() || { data: null };
-      // Since we can't use admin API from client, we'll upsert with a known approach
-      // The admin manually ensures the user exists; premium activates on next login check
-      const { error: premiumError } = await supabase
-        .from("user_premium_status")
-        .upsert({
-          user_id: payment.email, // Will be matched by email lookup edge function
-          plan: payment.plan,
-          is_active: true,
-          payment_verification_id: id,
-          activated_at: new Date().toISOString(),
-        }, { onConflict: "user_id" });
-      
+      const { data, error: premiumError } = await supabase.functions.invoke("activate-premium", {
+        body: { email: payment.email, plan: payment.plan, payment_verification_id: id },
+      });
       if (premiumError) {
-        console.error("Premium activation note: user must be logged in for auto-activation", premiumError);
+        toast.warning("Payment verified but premium activation needs manual check");
+      } else if (data?.message) {
+        toast.info(data.message);
       }
     }
 
