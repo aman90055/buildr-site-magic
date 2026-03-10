@@ -99,6 +99,13 @@ const PDFCompress = () => {
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Our AI analyzes your PDF content and automatically recommends the optimal compression settings for the best balance of quality and file size.
               </p>
+              {!isPremium && !premiumLoading && (
+                <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent/50 border border-border text-sm text-muted-foreground">
+                  <Lock className="w-4 h-4" />
+                  Free plan: max 10MB per file.{" "}
+                  <Link to="/premium" className="text-primary font-semibold hover:underline">Upgrade to Premium</Link>
+                </div>
+              )}
             </div>
 
             {/* Main Tool Area */}
