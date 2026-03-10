@@ -62,10 +62,10 @@ const CertificateMaker = () => {
         page.drawRectangle({ x: 0, y: 0, width, height, color: rgb(1, 0.98, 0.95) });
 
         // Outer border
-        const borderWidth = 4;
-        page.drawRectangle({ x: 20, y: 20, width: width - 40, height: height - 40, borderColor: rgb(br, bg, bb), borderWidth, color: rgb(1, 1, 1, 0) });
+        const bw = 4;
+        page.drawRectangle({ x: 20, y: 20, width: width - 40, height: height - 40, borderColor: rgb(br, bg, bb), borderWidth: bw });
         // Inner border
-        page.drawRectangle({ x: 35, y: 35, width: width - 70, height: height - 70, borderColor: rgb(br, bg, bb), borderWidth: 1.5, color: rgb(1, 1, 1, 0) });
+        page.drawRectangle({ x: 35, y: 35, width: width - 70, height: height - 70, borderColor: rgb(br, bg, bb), borderWidth: 1.5 });
 
         // Corner decorations
         const cornerSize = 30;
