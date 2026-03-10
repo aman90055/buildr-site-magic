@@ -16,16 +16,26 @@ import { Link } from "react-router-dom";
 
 export type CompressionLevel = number; // 1-100
 
+const FREE_FILE_SIZE_LIMIT = 10 * 1024 * 1024; // 10MB
+
 const PDFCompress = () => {
   const [file, setFile] = useState<File | null>(null);
   const [compressionLevel, setCompressionLevel] = useState<CompressionLevel>(50);
   
   const { compressFile, isProcessing, progress, downloadUrl, originalSize, compressedSize, reset } = usePDFCompress();
   const { analyzeFile, isAnalyzing, analysis, reset: resetAnalysis } = useAICompressionAnalysis();
+  const { isPremium, loading: premiumLoading } = usePremium();
 
   const handleFileAdded = async (newFile: File) => {
+    if (!isPremium && newFile.size > FREE_FILE_SIZE_LIMIT) {
+      toast({
+        title: "File too large for free plan",
+        description: "Free users can compress files up to 10MB. Upgrade to Premium for unlimited file sizes.",
+        variant: "destructive",
+      });
+      return;
+    }
     setFile(newFile);
-    // Automatically trigger AI analysis when file is added
     await analyzeFile(newFile);
   };
 
