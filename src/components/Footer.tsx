@@ -90,7 +90,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
-            <p>Made with AI • Trusted by millions worldwide</p>
+            <p>Made with AI • Made in India 🇮🇳 • Trusted by millions worldwide</p>
             <span className="hidden md:inline">•</span>
             <p className="font-medium text-foreground">
               Managed by{" "}

@@ -9,9 +9,14 @@ import AICompressionAnalysis from "@/components/pdf/AICompressionAnalysis";
 import AIBadge from "@/components/AIBadge";
 import { usePDFCompress } from "@/hooks/usePDFCompress";
 import { useAICompressionAnalysis } from "@/hooks/useAICompressionAnalysis";
-import { Brain, Sparkles } from "lucide-react";
+import { usePremium } from "@/hooks/usePremium";
+import { Brain, Sparkles, Lock } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 export type CompressionLevel = number; // 1-100
+
+const FREE_FILE_SIZE_LIMIT = 10 * 1024 * 1024; // 10MB
 
 const PDFCompress = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -19,10 +24,18 @@ const PDFCompress = () => {
   
   const { compressFile, isProcessing, progress, downloadUrl, originalSize, compressedSize, reset } = usePDFCompress();
   const { analyzeFile, isAnalyzing, analysis, reset: resetAnalysis } = useAICompressionAnalysis();
+  const { isPremium, loading: premiumLoading } = usePremium();
 
   const handleFileAdded = async (newFile: File) => {
+    if (!isPremium && newFile.size > FREE_FILE_SIZE_LIMIT) {
+      toast({
+        title: "File too large for free plan",
+        description: "Free users can compress files up to 10MB. Upgrade to Premium for unlimited file sizes.",
+        variant: "destructive",
+      });
+      return;
+    }
     setFile(newFile);
-    // Automatically trigger AI analysis when file is added
     await analyzeFile(newFile);
   };
 
@@ -86,6 +99,13 @@ const PDFCompress = () => {
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Our AI analyzes your PDF content and automatically recommends the optimal compression settings for the best balance of quality and file size.
               </p>
+              {!isPremium && !premiumLoading && (
+                <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent/50 border border-border text-sm text-muted-foreground">
+                  <Lock className="w-4 h-4" />
+                  Free plan: max 10MB per file.{" "}
+                  <Link to="/premium" className="text-primary font-semibold hover:underline">Upgrade to Premium</Link>
+                </div>
+              )}
             </div>
 
             {/* Main Tool Area */}
