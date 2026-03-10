@@ -1,19 +1,20 @@
 import { SpellCheck } from "lucide-react";
-import ToolPageTemplate from "@/components/ToolPageTemplate";
+import AITextTool from "@/components/AITextTool";
 
 const AIGrammarCheck = () => (
-  <ToolPageTemplate
-    title="AI Grammar Checker"
-    description="AI-powered grammar, spelling, and style correction for your documents."
-    metaTitle="AI Grammar Checker - Fix Errors Instantly | PDF Tools"
-    metaDescription="Check and fix grammar, spelling, and style in PDF documents with AI."
+  <AITextTool
+    title="AI Grammar Check"
+    description="Fix grammar, spelling, and punctuation errors with AI precision."
+    metaTitle="AI Grammar Checker | PDF Tools"
+    metaDescription="Fix grammar and spelling errors instantly with AI."
     icon={SpellCheck}
-    color="from-green-500 to-emerald-600"
-    isAI
-    category="AI Tools"
-    acceptedFormats="PDF, DOCX, TXT"
-    features={["Grammar and spelling correction", "Style and tone suggestions", "Punctuation fixes", "Readability score", "Multi-language support", "Track changes view"]}
-    howItWorks={["Upload your document", "AI analyzes text for errors", "Review suggested corrections", "Apply fixes and download"]}
+    gradient="from-green-500 to-emerald-600"
+    systemPrompt="You are a professional grammar checker. Correct all grammar, spelling, and punctuation errors. First show the corrected text, then list the changes you made with explanations."
+    inputLabel="Text to Check"
+    inputPlaceholder="Paste your text here to check for grammar errors..."
+    outputLabel="Corrected Text"
+    actionLabel="Check Grammar"
   />
 );
+
 export default AIGrammarCheck;
