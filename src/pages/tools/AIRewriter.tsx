@@ -1,19 +1,20 @@
 import { RefreshCw } from "lucide-react";
-import ToolPageTemplate from "@/components/ToolPageTemplate";
+import AITextTool from "@/components/AITextTool";
 
 const AIRewriter = () => (
-  <ToolPageTemplate
-    title="AI Content Rewriter"
-    description="Rewrite and paraphrase document content with AI while maintaining original meaning."
-    metaTitle="AI Rewriter - Paraphrase Documents | PDF Tools"
-    metaDescription="Rewrite and paraphrase PDF content with AI for unique, polished text."
+  <AITextTool
+    title="AI Rewriter"
+    description="Rewrite text to improve clarity, tone, and readability while preserving meaning."
+    metaTitle="AI Text Rewriter | PDF Tools"
+    metaDescription="Rewrite and improve your text with AI."
     icon={RefreshCw}
-    color="from-amber-500 to-orange-600"
-    isAI
-    category="AI Tools"
-    acceptedFormats="PDF, DOCX, TXT"
-    features={["Smart paraphrasing", "Tone adjustment (formal/casual)", "Plagiarism-free output", "Vocabulary enhancement", "Sentence restructuring", "Paragraph-level rewriting"]}
-    howItWorks={["Upload your document", "Select rewriting style and tone", "AI rewrites the content", "Download rewritten document"]}
+    gradient="from-orange-500 to-red-600"
+    systemPrompt="You are a professional text rewriter. Rewrite the given text to be clearer, more engaging, and better structured while preserving the original meaning. Provide the rewritten version only."
+    inputLabel="Text to Rewrite"
+    inputPlaceholder="Paste the text you want to rewrite..."
+    outputLabel="Rewritten Text"
+    actionLabel="Rewrite"
   />
 );
+
 export default AIRewriter;

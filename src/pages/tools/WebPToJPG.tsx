@@ -1,18 +1,20 @@
 import { FileImage } from "lucide-react";
-import ToolPageTemplate from "@/components/ToolPageTemplate";
+import ImageConverterTool from "@/components/ImageConverterTool";
 
 const WebPToJPG = () => (
-  <ToolPageTemplate
+  <ImageConverterTool
     title="WebP to JPG"
     description="Convert modern WebP images to universally compatible JPG format."
-    metaTitle="WebP to JPG - Convert WebP to JPEG | PDF Tools"
-    metaDescription="Convert WebP images to JPG for universal compatibility."
+    metaTitle="WebP to JPG Converter | PDF Tools"
+    metaDescription="Convert WebP images to JPG format."
     icon={FileImage}
-    color="from-teal-500 to-teal-600"
-    category="Image Tools"
-    acceptedFormats="WebP"
-    features={["Universal compatibility", "Adjustable quality settings", "Fast conversion", "Batch processing", "No software required", "Works in browser"]}
-    howItWorks={["Upload WebP images", "Select quality settings", "Convert instantly", "Download JPG files"]}
+    gradient="from-orange-500 to-red-600"
+    acceptTypes="image/webp"
+    outputFormat="JPG"
+    outputMime="image/jpeg"
+    outputExt="jpg"
+    showQuality
   />
 );
+
 export default WebPToJPG;
