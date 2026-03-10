@@ -9,7 +9,10 @@ import AICompressionAnalysis from "@/components/pdf/AICompressionAnalysis";
 import AIBadge from "@/components/AIBadge";
 import { usePDFCompress } from "@/hooks/usePDFCompress";
 import { useAICompressionAnalysis } from "@/hooks/useAICompressionAnalysis";
-import { Brain, Sparkles } from "lucide-react";
+import { usePremium } from "@/hooks/usePremium";
+import { Brain, Sparkles, Lock } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 export type CompressionLevel = number; // 1-100
 
