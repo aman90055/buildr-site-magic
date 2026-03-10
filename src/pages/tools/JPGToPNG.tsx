@@ -1,18 +1,19 @@
 import { FileImage } from "lucide-react";
-import ToolPageTemplate from "@/components/ToolPageTemplate";
+import ImageConverterTool from "@/components/ImageConverterTool";
 
 const JPGToPNG = () => (
-  <ToolPageTemplate
+  <ImageConverterTool
     title="JPG to PNG"
     description="Convert JPG images to PNG format with lossless quality and transparency support."
-    metaTitle="JPG to PNG - Convert JPEG to PNG | PDF Tools"
-    metaDescription="Convert JPG to PNG with transparency support and lossless quality."
+    metaTitle="JPG to PNG Converter | PDF Tools"
+    metaDescription="Convert JPG images to PNG format with lossless quality."
     icon={FileImage}
-    color="from-purple-500 to-purple-600"
-    category="Image Tools"
-    acceptedFormats="JPG, JPEG"
-    features={["Lossless conversion", "Transparency support", "Higher quality output", "Batch conversion", "No compression artifacts", "Full color depth"]}
-    howItWorks={["Upload JPG images", "Choose output settings", "Process conversion", "Download PNG images"]}
+    gradient="from-blue-500 to-indigo-600"
+    acceptTypes="image/jpeg"
+    outputFormat="PNG"
+    outputMime="image/png"
+    outputExt="png"
   />
 );
+
 export default JPGToPNG;
