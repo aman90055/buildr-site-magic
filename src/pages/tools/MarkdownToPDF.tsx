@@ -89,7 +89,7 @@ Thank you for using our tool!`);
 
       setProgress(90);
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes], { type: "application/pdf" });
+      const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
       setDownloadUrl(URL.createObjectURL(blob));
       setProgress(100);
       toast({ title: "PDF Created!", description: "Markdown converted to PDF." });

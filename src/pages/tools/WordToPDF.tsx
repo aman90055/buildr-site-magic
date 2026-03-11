@@ -80,7 +80,7 @@ const WordToPDF = () => {
 
       setProgress(80);
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes], { type: "application/pdf" });
+      const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
       setDownloadUrl(URL.createObjectURL(blob));
       setProgress(100);
       toast({ title: "PDF Created!", description: "Your document has been converted to PDF." });

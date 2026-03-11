@@ -66,7 +66,7 @@ const SVGToPDF = () => {
       }
 
       const pdfBytes = await pdfDoc.save();
-      const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
+      const pdfBlob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
       setDownloadUrl(URL.createObjectURL(pdfBlob));
       setProgress(100);
       toast({ title: "PDF Created!", description: `${files.length} SVG files converted.` });

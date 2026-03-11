@@ -103,7 +103,7 @@ const HTMLToPDF = () => {
 
       setProgress(90);
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes], { type: "application/pdf" });
+      const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
       setDownloadUrl(URL.createObjectURL(blob));
       setProgress(100);
       toast({ title: "PDF Created!", description: "HTML converted to PDF successfully." });
