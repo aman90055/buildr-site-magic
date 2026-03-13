@@ -32,7 +32,7 @@ const PDFToPDFA = () => {
       if (!checkFileSizeLimit(f, isPremium)) return;
       setFile(f);
     }
-  }, []);
+  }, [isPremium]);
 
   const handleConvert = async () => {
     if (!file) return;
