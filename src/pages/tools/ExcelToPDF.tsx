@@ -8,6 +8,8 @@ import { Progress } from "@/components/ui/progress";
 import { Table, Upload, Download, RotateCcw } from "lucide-react";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { toast } from "@/hooks/use-toast";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const ExcelToPDF = () => {
   const [csvText, setCsvText] = useState("");
@@ -15,10 +17,12 @@ const ExcelToPDF = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const { isPremium } = usePremium();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
     if (!f) return;
+    if (!checkFileSizeLimit(f, isPremium)) return;
     setFile(f);
     const content = await f.text();
     setCsvText(content);

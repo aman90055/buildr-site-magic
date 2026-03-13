@@ -7,6 +7,8 @@ import { Progress } from "@/components/ui/progress";
 import { FileText, Upload, Download, RotateCcw } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import { toast } from "@/hooks/use-toast";
+import { usePremium } from "@/hooks/usePremium";
+import { filterFilesBySize } from "@/lib/fileSizeLimit";
 
 const SVGToPDF = () => {
   const [files, setFiles] = useState<File[]>([]);
@@ -14,11 +16,13 @@ const SVGToPDF = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const { isPremium } = usePremium();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = Array.from(e.target.files || []).filter(f => f.type === "image/svg+xml" || f.name.endsWith(".svg"));
-    if (selected.length === 0) return;
-    setFiles(prev => [...prev, ...selected]);
+    const validFiles = filterFilesBySize(selected, isPremium);
+    if (validFiles.length === 0) return;
+    setFiles(prev => [...prev, ...validFiles]);
     for (const f of selected) {
       const text = await f.text();
       const blob = new Blob([text], { type: "image/svg+xml" });

@@ -38,6 +38,7 @@ const ComparePDF = () => {
   const handleFile2Change = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile && selectedFile.type === "application/pdf") {
+      if (!checkFileSizeLimit(selectedFile, isPremium)) return;
       setFile2(selectedFile);
     }
   };

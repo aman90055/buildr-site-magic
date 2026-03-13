@@ -7,22 +7,31 @@ import { Progress } from "@/components/ui/progress";
 import { Shield, Upload, Download, RotateCcw } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import { toast } from "@/hooks/use-toast";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const PDFToPDFA = () => {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const { isPremium } = usePremium();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
-    if (f && f.type === "application/pdf") setFile(f);
+    if (f && f.type === "application/pdf") {
+      if (!checkFileSizeLimit(f, isPremium)) return;
+      setFile(f);
+    }
   };
 
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     const f = e.dataTransfer.files[0];
-    if (f && f.type === "application/pdf") setFile(f);
+    if (f && f.type === "application/pdf") {
+      if (!checkFileSizeLimit(f, isPremium)) return;
+      setFile(f);
+    }
   }, []);
 
   const handleConvert = async () => {
