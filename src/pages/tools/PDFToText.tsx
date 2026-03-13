@@ -31,8 +31,11 @@ const PDFToText = () => {
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     const f = e.dataTransfer.files[0];
-    if (f && f.type === "application/pdf") setFile(f);
-  }, []);
+    if (f && f.type === "application/pdf") {
+      if (!checkFileSizeLimit(f, isPremium)) return;
+      setFile(f);
+    }
+  }, [isPremium]);
 
   const handleExtract = async () => {
     if (!file) return;
