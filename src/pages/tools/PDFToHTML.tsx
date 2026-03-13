@@ -36,7 +36,6 @@ const PDFToHTML = () => {
       setFile(f);
     }
   }, [isPremium]);
-  }, []);
 
   const handleExtract = async () => {
     if (!file) return;
