@@ -23,7 +23,7 @@ const SVGToPDF = () => {
     const validFiles = filterFilesBySize(selected, isPremium);
     if (validFiles.length === 0) return;
     setFiles(prev => [...prev, ...validFiles]);
-    for (const f of selected) {
+    for (const f of validFiles) {
       const text = await f.text();
       const blob = new Blob([text], { type: "image/svg+xml" });
       setPreviews(prev => [...prev, URL.createObjectURL(blob)]);
