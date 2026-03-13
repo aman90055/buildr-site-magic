@@ -7,6 +7,8 @@ import { Progress } from "@/components/ui/progress";
 import { PenTool, Upload, Download, RotateCcw } from "lucide-react";
 import * as pdfjsLib from "pdfjs-dist";
 import { toast } from "@/hooks/use-toast";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
@@ -15,10 +17,14 @@ const PDFToSVG = () => {
   const [svgUrls, setSvgUrls] = useState<string[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
+  const { isPremium } = usePremium();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
-    if (f && f.type === "application/pdf") setFile(f);
+    if (f && f.type === "application/pdf") {
+      if (!checkFileSizeLimit(f, isPremium)) return;
+      setFile(f);
+    }
   };
 
   const handleDrop = useCallback((e: React.DragEvent) => {

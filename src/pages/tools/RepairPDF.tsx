@@ -8,6 +8,8 @@ import { Wrench, Upload, Download, RotateCcw, CheckCircle, Sparkles } from "luci
 import { PDFDocument } from "pdf-lib";
 import { toast } from "@/hooks/use-toast";
 import AIBadge from "@/components/AIBadge";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const RepairPDF = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -16,10 +18,12 @@ const RepairPDF = () => {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [repairInfo, setRepairInfo] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { isPremium } = usePremium();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile && selectedFile.type === "application/pdf") {
+      if (!checkFileSizeLimit(selectedFile, isPremium)) return;
       setFile(selectedFile);
     }
   };

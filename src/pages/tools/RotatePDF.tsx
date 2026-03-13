@@ -9,16 +9,20 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Progress } from "@/components/ui/progress";
 import { RotateCw, Download, RotateCcw } from "lucide-react";
 import { usePDFRotate, RotationDegrees } from "@/hooks/usePDFRotate";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const RotatePDF = () => {
   const [file, setFile] = useState<File | null>(null);
   const [rotation, setRotation] = useState<RotationDegrees>(90);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { rotateFile, isProcessing, progress, downloadUrl, reset } = usePDFRotate();
+  const { isPremium } = usePremium();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
+      if (!checkFileSizeLimit(selectedFile, isPremium)) return;
       setFile(selectedFile);
     }
   };

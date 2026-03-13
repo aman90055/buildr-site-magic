@@ -10,6 +10,8 @@ import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
 import { Hash, Download, RotateCcw } from "lucide-react";
 import { usePDFPageNumbers, PageNumberPosition } from "@/hooks/usePDFPageNumbers";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const AddPageNumbers = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -18,10 +20,12 @@ const AddPageNumbers = () => {
   const [fontSize, setFontSize] = useState(12);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { addPageNumbers, isProcessing, progress, downloadUrl, reset } = usePDFPageNumbers();
+  const { isPremium } = usePremium();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
+      if (!checkFileSizeLimit(selectedFile, isPremium)) return;
       setFile(selectedFile);
     }
   };

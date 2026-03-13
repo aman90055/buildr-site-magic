@@ -7,6 +7,8 @@ import { Progress } from "@/components/ui/progress";
 import { LayoutGrid, Upload, Download, RotateCcw, GripVertical, Sparkles } from "lucide-react";
 import { usePDFOrganize } from "@/hooks/usePDFOrganize";
 import AIBadge from "@/components/AIBadge";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const OrganizePDF = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -14,10 +16,12 @@ const OrganizePDF = () => {
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { loadPDF, reorganizePages, isProcessing, progress, downloadUrl, pageCount, reset } = usePDFOrganize();
+  const { isPremium } = usePremium();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile && selectedFile.type === "application/pdf") {
+      if (!checkFileSizeLimit(selectedFile, isPremium)) return;
       setFile(selectedFile);
       const count = await loadPDF(selectedFile);
       setPages(Array.from({ length: count }, (_, i) => ({ index: i, id: `page-${i}` })));
