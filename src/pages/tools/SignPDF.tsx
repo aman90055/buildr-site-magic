@@ -8,6 +8,8 @@ import { Input } from "@/components/ui/input";
 import { PenTool, Upload, Download, RotateCcw, Pen, Type } from "lucide-react";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import { toast } from "@/hooks/use-toast";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const SignPDF = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -22,10 +24,12 @@ const SignPDF = () => {
   const signatureInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
+  const { isPremium } = usePremium();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile && selectedFile.type === "application/pdf") {
+      if (!checkFileSizeLimit(selectedFile, isPremium)) return;
       setFile(selectedFile);
     }
   };

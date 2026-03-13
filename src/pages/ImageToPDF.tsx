@@ -7,6 +7,8 @@ import { useDropzone } from "react-dropzone";
 import { ImageIcon, Upload, Download, Trash2, RotateCcw } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import { toast } from "sonner";
+import { usePremium } from "@/hooks/usePremium";
+import { filterFilesBySize } from "@/lib/fileSizeLimit";
 
 interface ImageFile {
   id: string;
@@ -18,19 +20,21 @@ const ImageToPDF = () => {
   const [images, setImages] = useState<ImageFile[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const { isPremium } = usePremium();
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const imageFiles = acceptedFiles.filter((file) =>
       file.type.startsWith("image/")
     );
+    const validFiles = filterFilesBySize(imageFiles, isPremium);
 
-    const newImages: ImageFile[] = imageFiles.map((file) => ({
+    const newImages: ImageFile[] = validFiles.map((file) => ({
       id: crypto.randomUUID(),
       file,
       preview: URL.createObjectURL(file),
     }));
     setImages((prev) => [...prev, ...newImages]);
-  }, []);
+  }, [isPremium]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,

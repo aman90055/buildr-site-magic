@@ -9,6 +9,8 @@ import { EyeOff, Upload, Download, RotateCcw, Sparkles } from "lucide-react";
 import { PDFDocument, rgb } from "pdf-lib";
 import { toast } from "@/hooks/use-toast";
 import AIBadge from "@/components/AIBadge";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const RedactPDF = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -17,10 +19,12 @@ const RedactPDF = () => {
   const [progress, setProgress] = useState(0);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { isPremium } = usePremium();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile && selectedFile.type === "application/pdf") {
+      if (!checkFileSizeLimit(selectedFile, isPremium)) return;
       setFile(selectedFile);
     }
   };

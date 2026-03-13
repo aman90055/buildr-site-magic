@@ -7,6 +7,8 @@ import { Progress } from "@/components/ui/progress";
 import { Scan, Upload, Download, RotateCcw, ImageIcon } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import { toast } from "@/hooks/use-toast";
+import { usePremium } from "@/hooks/usePremium";
+import { filterFilesBySize } from "@/lib/fileSizeLimit";
 
 const ScanToPDF = () => {
   const [files, setFiles] = useState<File[]>([]);
@@ -15,17 +17,19 @@ const ScanToPDF = () => {
   const [progress, setProgress] = useState(0);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { isPremium } = usePremium();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.target.files || []).filter(f => 
       f.type.startsWith("image/")
     );
+    const validFiles = filterFilesBySize(selectedFiles, isPremium);
     
-    if (selectedFiles.length > 0) {
-      setFiles(prev => [...prev, ...selectedFiles]);
+    if (validFiles.length > 0) {
+      setFiles(prev => [...prev, ...validFiles]);
       
       // Generate previews
-      selectedFiles.forEach(file => {
+      validFiles.forEach(file => {
         const reader = new FileReader();
         reader.onload = (ev) => {
           setPreviews(prev => [...prev, ev.target?.result as string]);

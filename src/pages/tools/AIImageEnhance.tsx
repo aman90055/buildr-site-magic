@@ -7,6 +7,8 @@ import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { Sparkles, Download, Upload } from "lucide-react";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const AIImageEnhance = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -17,10 +19,12 @@ const AIImageEnhance = () => {
   const [sharpness, setSharpness] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const { isPremium } = usePremium();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
     if (!f) return;
+    if (!checkFileSizeLimit(f, isPremium)) return;
     setFile(f); setDownloadUrl(null);
     const reader = new FileReader();
     reader.onload = () => setPreview(reader.result as string);

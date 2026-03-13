@@ -1,6 +1,8 @@
 import { useState, useCallback, useRef } from "react";
 import { FileText } from "lucide-react";
 import CameraCapture from "@/components/CameraCapture";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 interface PDFConvertDropzoneProps {
   onFileAdded: (file: File) => void;
@@ -11,6 +13,7 @@ interface PDFConvertDropzoneProps {
 const PDFConvertDropzone = ({ onFileAdded, disabled, showCamera = true }: PDFConvertDropzoneProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { isPremium } = usePremium();
 
   const handleDragEnter = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -41,20 +44,22 @@ const PDFConvertDropzone = ({ onFileAdded, disabled, showCamera = true }: PDFCon
     const files = Array.from(e.dataTransfer.files);
     const pdfFile = files.find((file) => file.type === "application/pdf");
 
-    if (pdfFile) {
+    if (pdfFile && checkFileSizeLimit(pdfFile, isPremium)) {
       onFileAdded(pdfFile);
     }
-  }, [disabled, onFileAdded]);
+  }, [disabled, onFileAdded, isPremium]);
 
   const handleFileSelect = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files[0] && files[0].type === "application/pdf") {
-      onFileAdded(files[0]);
+      if (checkFileSizeLimit(files[0], isPremium)) {
+        onFileAdded(files[0]);
+      }
     }
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
-  }, [onFileAdded]);
+  }, [onFileAdded, isPremium]);
 
   const handleClick = () => {
     if (!disabled) {

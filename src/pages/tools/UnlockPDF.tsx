@@ -8,6 +8,8 @@ import { Unlock, Upload, Download, RotateCcw, KeyRound } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { PDFDocument } from "pdf-lib";
 import { toast } from "@/hooks/use-toast";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const UnlockPDF = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -16,10 +18,12 @@ const UnlockPDF = () => {
   const [progress, setProgress] = useState(0);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { isPremium } = usePremium();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile && selectedFile.type === "application/pdf") {
+      if (!checkFileSizeLimit(selectedFile, isPremium)) return;
       setFile(selectedFile);
     }
   };

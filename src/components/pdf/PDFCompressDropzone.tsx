@@ -1,5 +1,7 @@
 import { useState, useCallback, useRef } from "react";
 import { Minimize2 } from "lucide-react";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 interface PDFCompressDropzoneProps {
   onFileAdded: (file: File) => void;
@@ -9,6 +11,7 @@ interface PDFCompressDropzoneProps {
 const PDFCompressDropzone = ({ onFileAdded, disabled }: PDFCompressDropzoneProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { isPremium } = usePremium();
 
   const handleDragEnter = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -39,20 +42,22 @@ const PDFCompressDropzone = ({ onFileAdded, disabled }: PDFCompressDropzoneProps
     const files = Array.from(e.dataTransfer.files);
     const pdfFile = files.find((file) => file.type === "application/pdf");
 
-    if (pdfFile) {
+    if (pdfFile && checkFileSizeLimit(pdfFile, isPremium)) {
       onFileAdded(pdfFile);
     }
-  }, [disabled, onFileAdded]);
+  }, [disabled, onFileAdded, isPremium]);
 
   const handleFileSelect = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files[0] && files[0].type === "application/pdf") {
-      onFileAdded(files[0]);
+      if (checkFileSizeLimit(files[0], isPremium)) {
+        onFileAdded(files[0]);
+      }
     }
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
-  }, [onFileAdded]);
+  }, [onFileAdded, isPremium]);
 
   const handleClick = () => {
     if (!disabled) {

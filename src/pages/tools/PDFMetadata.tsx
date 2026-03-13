@@ -8,16 +8,20 @@ import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { Info, Download, Upload } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const PDFMetadata = () => {
   const [file, setFile] = useState<File | null>(null);
   const [meta, setMeta] = useState({ title: "", author: "", subject: "", keywords: "", creator: "" });
   const [isProcessing, setIsProcessing] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const { isPremium } = usePremium();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
     if (!f || f.type !== "application/pdf") return;
+    if (!checkFileSizeLimit(f, isPremium)) return;
     setFile(f);
     try {
       const pdf = await PDFDocument.load(await f.arrayBuffer(), { ignoreEncryption: true });

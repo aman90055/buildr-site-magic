@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { Lock, Upload, Download, RotateCcw, Eye, EyeOff, Shield } from "lucide-react";
 import { usePDFProtect } from "@/hooks/usePDFProtect";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const ProtectPDF = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -15,10 +17,12 @@ const ProtectPDF = () => {
   const [showPassword, setShowPassword] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { protectFile, isProcessing, progress, downloadUrl, reset } = usePDFProtect();
+  const { isPremium } = usePremium();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile && selectedFile.type === "application/pdf") {
+      if (!checkFileSizeLimit(selectedFile, isPremium)) return;
       setFile(selectedFile);
     }
   };

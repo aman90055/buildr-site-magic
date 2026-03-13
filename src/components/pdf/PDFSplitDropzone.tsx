@@ -2,6 +2,8 @@ import { useCallback, useState } from "react";
 import { FileUp } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import { toast } from "@/hooks/use-toast";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 interface PDFSplitDropzoneProps {
   onFileAdded: (file: File, pageCount: number) => void;
@@ -11,6 +13,7 @@ interface PDFSplitDropzoneProps {
 const PDFSplitDropzone = ({ onFileAdded, disabled }: PDFSplitDropzoneProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { isPremium } = usePremium();
 
   const processFile = async (file: File) => {
     if (file.type !== "application/pdf") {
@@ -21,6 +24,7 @@ const PDFSplitDropzone = ({ onFileAdded, disabled }: PDFSplitDropzoneProps) => {
       });
       return;
     }
+    if (!checkFileSizeLimit(file, isPremium)) return;
 
     setIsLoading(true);
     try {

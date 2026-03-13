@@ -9,16 +9,20 @@ import { ScanText, Upload, Copy, Download, RotateCcw, ImageIcon, Sparkles } from
 import { useAIOCR } from "@/hooks/useAIOCR";
 import { toast } from "@/hooks/use-toast";
 import AIBadge from "@/components/AIBadge";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const OCR = () => {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { processImage, isProcessing, progress, extractedText, reset } = useAIOCR();
+  const { isPremium } = usePremium();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
+      if (!checkFileSizeLimit(selectedFile, isPremium)) return;
       setFile(selectedFile);
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -32,6 +36,7 @@ const OCR = () => {
     e.preventDefault();
     const droppedFile = e.dataTransfer.files[0];
     if (droppedFile && droppedFile.type.startsWith("image/")) {
+      if (!checkFileSizeLimit(droppedFile, isPremium)) return;
       setFile(droppedFile);
       const reader = new FileReader();
       reader.onload = (ev) => {

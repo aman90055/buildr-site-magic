@@ -1,6 +1,8 @@
 import { useCallback, useState } from "react";
 import { FileUp } from "lucide-react";
 import CameraCapture from "@/components/CameraCapture";
+import { usePremium } from "@/hooks/usePremium";
+import { filterFilesBySize } from "@/lib/fileSizeLimit";
 
 interface PDFDropzoneProps {
   onFilesAdded: (files: File[]) => void;
@@ -10,9 +12,11 @@ interface PDFDropzoneProps {
 
 const PDFDropzone = ({ onFilesAdded, disabled, showCamera = true }: PDFDropzoneProps) => {
   const [isDragging, setIsDragging] = useState(false);
+  const { isPremium } = usePremium();
 
   const validateFiles = (files: File[]) => {
-    return files.filter((file) => file.type === "application/pdf");
+    const pdfFiles = files.filter((file) => file.type === "application/pdf");
+    return filterFilesBySize(pdfFiles, isPremium);
   };
 
   const handleDrag = useCallback((e: React.DragEvent) => {

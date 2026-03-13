@@ -7,6 +7,8 @@ import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { LucideIcon, Download, Upload } from "lucide-react";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 interface ImageConverterProps {
   title: string;
@@ -32,10 +34,12 @@ const ImageConverterTool = ({
   const [isProcessing, setIsProcessing] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [outputSize, setOutputSize] = useState<number>(0);
+  const { isPremium } = usePremium();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
     if (!f) return;
+    if (!checkFileSizeLimit(f, isPremium)) return;
     setFile(f);
     const reader = new FileReader();
     reader.onload = () => setPreview(reader.result as string);
