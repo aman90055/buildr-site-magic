@@ -1,6 +1,8 @@
 import { useState, useCallback, useRef } from "react";
 import { FileText } from "lucide-react";
 import CameraCapture from "@/components/CameraCapture";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 interface PDFConvertDropzoneProps {
   onFileAdded: (file: File) => void;

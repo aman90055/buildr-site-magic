@@ -1,5 +1,7 @@
 import { useState, useCallback, useRef } from "react";
 import { Minimize2 } from "lucide-react";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 interface PDFCompressDropzoneProps {
   onFileAdded: (file: File) => void;
