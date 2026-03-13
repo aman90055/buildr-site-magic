@@ -8,6 +8,8 @@ import { GitCompare, Upload, RotateCcw, FileText, Sparkles, ArrowLeftRight } fro
 import { PDFDocument } from "pdf-lib";
 import { toast } from "@/hooks/use-toast";
 import AIBadge from "@/components/AIBadge";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const ComparePDF = () => {
   const [file1, setFile1] = useState<File | null>(null);
@@ -23,10 +25,12 @@ const ComparePDF = () => {
   } | null>(null);
   const file1InputRef = useRef<HTMLInputElement>(null);
   const file2InputRef = useRef<HTMLInputElement>(null);
+  const { isPremium } = usePremium();
 
   const handleFile1Change = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile && selectedFile.type === "application/pdf") {
+      if (!checkFileSizeLimit(selectedFile, isPremium)) return;
       setFile1(selectedFile);
     }
   };
