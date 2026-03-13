@@ -36,6 +36,7 @@ const OCR = () => {
     e.preventDefault();
     const droppedFile = e.dataTransfer.files[0];
     if (droppedFile && droppedFile.type.startsWith("image/")) {
+      if (!checkFileSizeLimit(droppedFile, isPremium)) return;
       setFile(droppedFile);
       const reader = new FileReader();
       reader.onload = (ev) => {

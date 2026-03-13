@@ -7,16 +7,20 @@ import { toast } from "@/hooks/use-toast";
 import { ScanText, Upload, Loader2, Copy } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import AIBadge from "@/components/AIBadge";
+import { usePremium } from "@/hooks/usePremium";
+import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 
 const ImageToText = () => {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [text, setText] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const { isPremium } = usePremium();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
     if (!f) return;
+    if (!checkFileSizeLimit(f, isPremium)) return;
     setFile(f); setText("");
     const reader = new FileReader();
     reader.onload = () => setPreview(reader.result as string);
