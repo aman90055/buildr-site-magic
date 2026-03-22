@@ -798,20 +798,25 @@ const BlogPost = () => {
               <div className="flex items-center gap-4 pb-8 border-b border-border">
                 <span className="text-sm text-muted-foreground">Share:</span>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="icon" className="h-9 w-9">
-                    <Twitter className="w-4 h-4" />
+                  <Button variant="outline" size="icon" className="h-9 w-9" asChild>
+                    <a href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`} target="_blank" rel="noopener noreferrer">
+                      <Twitter className="w-4 h-4" />
+                    </a>
                   </Button>
-                  <Button variant="outline" size="icon" className="h-9 w-9">
-                    <Linkedin className="w-4 h-4" />
+                  <Button variant="outline" size="icon" className="h-9 w-9" asChild>
+                    <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`} target="_blank" rel="noopener noreferrer">
+                      <Linkedin className="w-4 h-4" />
+                    </a>
                   </Button>
-                  <Button variant="outline" size="icon" className="h-9 w-9">
-                    <Facebook className="w-4 h-4" />
+                  <Button variant="outline" size="icon" className="h-9 w-9" asChild>
+                    <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`} target="_blank" rel="noopener noreferrer">
+                      <Facebook className="w-4 h-4" />
+                    </a>
                   </Button>
-                  <Button variant="outline" size="icon" className="h-9 w-9">
-                    <Share2 className="w-4 h-4" />
-                  </Button>
-                  <Button variant="outline" size="icon" className="h-9 w-9">
-                    <Bookmark className="w-4 h-4" />
+                  <Button variant="outline" size="icon" className="h-9 w-9" asChild>
+                    <a href={`https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`} target="_blank" rel="noopener noreferrer">
+                      <Share2 className="w-4 h-4" />
+                    </a>
                   </Button>
                 </div>
               </div>
