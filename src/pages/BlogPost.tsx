@@ -708,11 +708,42 @@ const BlogPost = () => {
     });
   };
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": post.excerpt,
+    "image": post.image || "",
+    "author": { "@type": "Person", "name": post.author },
+    "publisher": {
+      "@type": "Organization",
+      "name": "PDF Tools",
+      "url": "https://documents-edit-in.lovable.app"
+    },
+    "datePublished": post.date,
+    "mainEntityOfPage": `https://documents-edit-in.lovable.app/blog/${slug}`
+  };
+
+  const shareUrl = `https://documents-edit-in.lovable.app/blog/${slug}`;
+  const encodedUrl = encodeURIComponent(shareUrl);
+  const encodedTitle = encodeURIComponent(post.title);
+
   return (
     <>
       <Helmet>
-        <title>{post.title} - Document Editor Blog</title>
+        <title>{post.title} - PDF Tools Blog</title>
         <meta name="description" content={post.excerpt} />
+        <link rel="canonical" href={`https://documents-edit-in.lovable.app/blog/${slug}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.excerpt} />
+        <meta property="og:image" content={post.image || ""} />
+        <meta property="og:url" content={shareUrl} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.excerpt} />
+        <meta name="twitter:image" content={post.image || ""} />
+        <script type="application/ld+json">{JSON.stringify(articleJsonLd)}</script>
       </Helmet>
 
       <div className="min-h-screen flex flex-col bg-background">
