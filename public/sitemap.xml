@@ -20,16 +20,71 @@
   <url><loc>https://documents-edit-in.lovable.app/excel-to-pdf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://documents-edit-in.lovable.app/pdf-to-word</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://documents-edit-in.lovable.app/pdf-to-excel</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/pdf-to-png</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/pdf-to-html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/pdf-to-text</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/pdf-to-powerpoint</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/pdf-to-epub</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/pdf-to-svg</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/html-to-pdf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/markdown-to-pdf</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/powerpoint-to-pdf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/svg-to-pdf</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/text-to-pdf</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://documents-edit-in.lovable.app/jpg-to-png</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://documents-edit-in.lovable.app/png-to-jpg</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/jpg-to-webp</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/webp-to-jpg</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://documents-edit-in.lovable.app/image-compress</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/image-resize</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/image-crop</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/image-rotate</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://documents-edit-in.lovable.app/remove-background</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://documents-edit-in.lovable.app/scan-to-pdf</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://documents-edit-in.lovable.app/ai-summarizer</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://documents-edit-in.lovable.app/ai-translator</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/sign-pdf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/redact-pdf</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/unlock-pdf</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/flatten-pdf</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/grayscale-pdf</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/repair-pdf</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/reverse-pdf</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/compare-pdf</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/crop-pdf</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/pdf-metadata</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/ai-summarizer</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/ai-translator</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/ai-rewriter</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/ai-grammar-check</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/ai-data-extractor</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/ai-image-enhance</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/image-to-text</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/certificate-maker</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/invoice-generator</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/resume-builder</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/letter-writer</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <!-- Blog pages -->
+  <url><loc>https://documents-edit-in.lovable.app/blog</loc><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/ai-powered-compression</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/merge-pdfs-guide</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/ocr-technology</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/pdf-security-best-practices</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/batch-processing</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/image-to-pdf-guide</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/top-10-free-pdf-tools-2026</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/ai-document-management</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/pdf-vs-word-comparison</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/secure-business-documents</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/reduce-pdf-file-size</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/pdf-accessibility-guide</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/digital-signature-guide</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/pdf-forms-guide</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/pdf-seo-optimization</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/blog/mobile-pdf-editing</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <!-- Info pages -->
   <url><loc>https://documents-edit-in.lovable.app/about</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://documents-edit-in.lovable.app/blog</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://documents-edit-in.lovable.app/faq</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://documents-edit-in.lovable.app/contact</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://documents-edit-in.lovable.app/privacy</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/premium</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://documents-edit-in.lovable.app/refer</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 </urlset>
