@@ -43,7 +43,7 @@ const Hero = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-foreground leading-[1.1] tracking-tight animate-fade-in" style={{ animationDelay: "0.1s" }}>
-              Next-Gen PDF Tools{" "}
+              Free PDF Tools Online{" "}
               <span className="text-gradient-ai block mt-2">Powered by AI</span>
             </h1>
             
