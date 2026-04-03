@@ -11,16 +11,18 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Free PDF Tools Online - Merge, Split, Compress & Convert PDFs | AI-Powered</title>
-        <meta name="description" content="Best free online PDF tools 2026: merge, split, compress, convert, OCR & edit PDFs instantly. AI-powered, fast, secure. No signup needed. 50+ tools available. Made in India." />
+        <title>Free PDF Tools Online - Merge, Split, Compress & Convert PDFs | AI-Powered 2026</title>
+        <meta name="description" content="Best free online PDF tools 2026: merge, split, compress, convert, OCR & edit PDFs instantly. 50+ AI-powered tools. Fast, secure, no signup. Made in India 🇮🇳. Trusted by millions." />
         <link rel="canonical" href="https://documents-edit-in.lovable.app/" />
-        <meta property="og:title" content="Free PDF Tools Online - 50+ AI-Powered PDF Tools" />
-        <meta property="og:description" content="Merge, split, compress, convert PDFs instantly. Free AI-powered tools, no signup. Trusted by millions." />
+        <meta name="keywords" content="free PDF tools, merge PDF, split PDF, compress PDF, convert PDF, OCR, PDF editor, AI PDF tools, PDF to Word, Word to PDF, image to PDF, best free PDF tools 2026" />
+        <meta property="og:title" content="Free PDF Tools Online - 50+ AI-Powered PDF Tools | 2026" />
+        <meta property="og:description" content="Best free PDF tools: merge, split, compress, convert PDFs instantly. AI-powered, no signup. 50+ tools. Made in India." />
         <meta property="og:url" content="https://documents-edit-in.lovable.app/" />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="PDF Tools - Free Online PDF Editor" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free PDF Tools Online - 50+ AI-Powered PDF Tools" />
-        <meta name="twitter:description" content="Merge, split, compress, convert PDFs instantly. Free AI-powered tools, no signup needed." />
+        <meta name="twitter:description" content="Merge, split, compress, convert PDFs instantly. Free AI-powered tools, no signup needed. Made in India." />
       </Helmet>
       <div className="min-h-screen">
         <Header />

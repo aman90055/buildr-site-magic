@@ -3,7 +3,7 @@ import { Sparkles, Heart, Coffee } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-muted/30 border-t border-border py-16 relative overflow-hidden">
+    <footer className="bg-muted/30 border-t border-border py-16 relative overflow-hidden" role="contentinfo" aria-label="Site footer">
       {/* Background decoration */}
       <div className="absolute bottom-0 left-0 w-[400px] h-[200px] bg-gradient-to-tr from-primary/5 to-transparent rounded-full blur-3xl" />
       
@@ -87,8 +87,33 @@ const Footer = () => {
           </div>
         </div>
         
+        {/* SEO Internal Links */}
+        <nav className="pt-8 border-t border-border mb-8" aria-label="Popular tool links">
+          <h4 className="font-display font-semibold text-foreground mb-3 text-sm">Popular Free Tools</h4>
+          <div className="flex flex-wrap gap-2 text-xs">
+            {[
+              { to: "/merge", label: "Merge PDF" },
+              { to: "/compress", label: "Compress PDF" },
+              { to: "/pdf-to-word", label: "PDF to Word" },
+              { to: "/word-to-pdf", label: "Word to PDF" },
+              { to: "/jpg-to-png", label: "JPG to PNG" },
+              { to: "/image-to-pdf", label: "Image to PDF" },
+              { to: "/ai-summarizer", label: "AI Summarizer" },
+              { to: "/certificate-maker", label: "Certificate Maker" },
+              { to: "/invoice-generator", label: "Invoice Generator" },
+              { to: "/resume-builder", label: "Resume Builder" },
+              { to: "/remove-background", label: "Remove Background" },
+              { to: "/sign-pdf", label: "Sign PDF" },
+            ].map(link => (
+              <Link key={link.to} to={link.to} className="px-2 py-1 rounded bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </nav>
+
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+        <div className="pt-4 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
             <p>Made with AI • Made in India 🇮🇳 • Trusted by millions worldwide</p>
             <span className="hidden md:inline">•</span>
