@@ -1,0 +1,29 @@
+{
+  "name": "PDF Tools - Free Online PDF Editor",
+  "short_name": "PDF Tools",
+  "description": "50+ Free AI-Powered PDF Tools. Merge, split, compress & convert PDFs instantly.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0e1a",
+  "theme_color": "#4338ca",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "lang": "en",
+  "orientation": "any"
+}
