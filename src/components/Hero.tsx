@@ -48,8 +48,8 @@ const Hero = () => {
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
-              Experience the future of document processing. Our AI understands your PDFs 
-              and optimizes every action for perfect results.
+              Merge, split, compress, convert & edit PDFs free online. 50+ AI-powered tools — 
+              no signup needed. Fast, secure & made in India 🇮🇳
             </p>
 
             {/* Feature badges */}
