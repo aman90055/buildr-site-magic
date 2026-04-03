@@ -18,7 +18,7 @@ const features = [
 
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-hero min-h-[90vh] flex items-center">
+    <section className="relative overflow-hidden bg-gradient-hero min-h-[90vh] flex items-center" aria-label="PDF Tools Hero - Free Online PDF Editor">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-gradient-to-br from-primary/20 via-brand-ai/10 to-transparent rounded-full blur-3xl animate-float" />
