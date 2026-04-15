@@ -66,7 +66,7 @@ const AdminPayments = () => {
 
   const updateStatus = async (id: string, status: string) => {
     const payment = payments.find((p) => p.id === id);
-    const updateData: Record<string, unknown> = { status };
+    const updateData: { status: string; verified_at?: string } = { status };
     if (status === "verified") {
       updateData.verified_at = new Date().toISOString();
     }

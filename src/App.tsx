@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "next-themes";
 import AIChatWidget from "@/components/AIChatWidget";
+import InstallPrompt from "@/components/InstallPrompt";
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
@@ -103,6 +104,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <AIChatWidget />
+          <InstallPrompt />
           <BrowserRouter>
             <ScrollToTop />
             <Routes>
