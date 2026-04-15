@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import AffiliateBanner from "@/components/ads/AffiliateBanner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
@@ -139,6 +140,9 @@ const ToolPageTemplate = ({
               </div>
             </div>
           </section>
+
+          {/* Sponsored */}
+          <AffiliateBanner variant="compact" className="max-w-3xl mx-auto px-4 py-6" />
         </main>
 
         <Footer />
