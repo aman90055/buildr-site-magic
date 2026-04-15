@@ -104,6 +104,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <AIChatWidget />
+          <InstallPrompt />
           <BrowserRouter>
             <ScrollToTop />
             <Routes>
