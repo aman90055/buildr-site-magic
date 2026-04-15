@@ -6,6 +6,7 @@ import Features from "@/components/Features";
 import Stats from "@/components/Stats";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import AffiliateBanner from "@/components/ads/AffiliateBanner";
 
 const Index = () => {
   return (
@@ -28,9 +29,12 @@ const Index = () => {
         <Header />
         <main>
           <Hero />
+          <AffiliateBanner variant="horizontal" maxItems={2} className="py-6" />
           <PopularTools />
+          <AffiliateBanner variant="compact" className="max-w-3xl mx-auto px-4 py-4" />
           <Features />
           <Stats />
+          <AffiliateBanner variant="horizontal" maxItems={2} className="py-6" />
           <CTA />
         </main>
         <Footer />
