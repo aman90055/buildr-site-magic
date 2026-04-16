@@ -40,7 +40,7 @@ const AdSlot = ({ adSlot, adFormat = "auto", className = "", style }: AdSlotProp
         ref={adRef}
         className="adsbygoogle"
         style={{ display: "block", ...style }}
-        data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+        data-ad-client="ca-pub-4830449684268109"
         data-ad-slot={adSlot}
         data-ad-format={adFormat}
         data-full-width-responsive="true"
