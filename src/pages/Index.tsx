@@ -7,6 +7,7 @@ import Stats from "@/components/Stats";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import AffiliateBanner from "@/components/ads/AffiliateBanner";
+import AdSlot from "@/components/ads/AdSlot";
 
 const Index = () => {
   return (
@@ -29,11 +30,14 @@ const Index = () => {
         <Header />
         <main>
           <Hero />
+          <AdSlot adSlot="1234567890" adFormat="horizontal" className="max-w-5xl mx-auto px-4 py-6" style={{ minHeight: 90 }} />
           <AffiliateBanner variant="horizontal" maxItems={2} className="py-6" />
           <PopularTools />
+          <AdSlot adSlot="2345678901" adFormat="auto" className="max-w-5xl mx-auto px-4 py-6" style={{ minHeight: 250 }} />
           <AffiliateBanner variant="compact" className="max-w-3xl mx-auto px-4 py-4" />
           <Features />
           <Stats />
+          <AdSlot adSlot="3456789012" adFormat="horizontal" className="max-w-5xl mx-auto px-4 py-6" style={{ minHeight: 90 }} />
           <AffiliateBanner variant="horizontal" maxItems={2} className="py-6" />
           <CTA />
         </main>
