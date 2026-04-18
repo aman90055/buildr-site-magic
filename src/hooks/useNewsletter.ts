@@ -24,9 +24,10 @@ export const useNewsletter = () => {
     setIsSubmitting(true);
 
     try {
+      const cleanEmail = email.trim().toLowerCase();
       const { error: dbError } = await supabase
         .from("newsletter_subscribers")
-        .insert({ email: email.trim().toLowerCase() });
+        .insert({ email: cleanEmail });
 
       if (dbError) {
         if (dbError.code === "23505") {
@@ -41,8 +42,15 @@ export const useNewsletter = () => {
         throw dbError;
       }
 
+      // Fire-and-forget admin notification (don't block UX)
+      supabase.functions
+        .invoke("send-newsletter-notification", {
+          body: { email: cleanEmail, source: window.location.pathname || "Website" },
+        })
+        .catch((err) => console.warn("Admin notification failed:", err));
+
       toast({
-        title: "Successfully Subscribed!",
+        title: "Successfully Subscribed! 🎉",
         description: "Thank you for subscribing to our newsletter.",
       });
       setEmail("");
