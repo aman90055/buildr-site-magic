@@ -317,46 +317,57 @@ const Blog = () => {
               ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredPosts.map((post, index) => (
-                  <Link key={index} to={`/blog/${post.slug}`}>
-                    <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all hover:-translate-y-1 group cursor-pointer overflow-hidden">
-                      {post.image && (
-                        <div className="aspect-video overflow-hidden">
-                          <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-                        </div>
-                      )}
-                      <CardHeader>
-                         {!post.image && (
-                           <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                             <post.icon className="w-6 h-6 text-primary" />
-                           </div>
-                         )}
-                      <Badge variant="outline" className="w-fit mb-2">
-                        {post.category}
-                      </Badge>
-                      <h3 className="text-lg font-semibold group-hover:text-primary transition-colors">
-                        {post.title}
-                      </h3>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground">
-                        {post.excerpt}
-                      </p>
-                    </CardContent>
-                    <CardFooter className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />
-                        {post.date}
-                      </span>
+                  <>
+                    <Link key={index} to={`/blog/${post.slug}`}>
+                      <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all hover:-translate-y-1 group cursor-pointer overflow-hidden">
+                        {post.image && (
+                          <div className="aspect-video overflow-hidden">
+                            <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                          </div>
+                        )}
+                        <CardHeader>
+                           {!post.image && (
+                             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                               <post.icon className="w-6 h-6 text-primary" />
+                             </div>
+                           )}
+                        <Badge variant="outline" className="w-fit mb-2">
+                          {post.category}
+                        </Badge>
+                        <h3 className="text-lg font-semibold group-hover:text-primary transition-colors">
+                          {post.title}
+                        </h3>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm text-muted-foreground">
+                          {post.excerpt}
+                        </p>
+                      </CardContent>
+                      <CardFooter className="flex items-center gap-4 text-sm text-muted-foreground">
                         <span className="flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          {post.readTime}
+                          <Calendar className="w-3 h-3" />
+                          {post.date}
                         </span>
-                      </CardFooter>
-                    </Card>
-                  </Link>
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {post.readTime}
+                          </span>
+                        </CardFooter>
+                      </Card>
+                    </Link>
+                    {(index + 1) % 6 === 0 && index < filteredPosts.length - 1 && (
+                      <div key={`ad-${index}`} className="md:col-span-2 lg:col-span-3">
+                        <AdSlot adSlot="7890123456" adFormat="horizontal" className="py-4" style={{ minHeight: 90 }} />
+                      </div>
+                    )}
+                  </>
                 ))}
               </div>
               )}
+
+              {/* Bottom ad before load more */}
+              <AdSlot adSlot="8901234567" adFormat="auto" className="max-w-5xl mx-auto py-6" style={{ minHeight: 250 }} />
+              <AffiliateBanner variant="compact" className="max-w-3xl mx-auto py-4" />
 
               {/* Load More */}
               {filteredPosts.length > 0 && (
