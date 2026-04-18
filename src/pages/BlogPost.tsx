@@ -6,6 +6,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Calendar, Clock, Share2, Bookmark, Twitter, Linkedin, Facebook, FileText, Sparkles, Shield, Zap } from "lucide-react";
+import AdSlot from "@/components/ads/AdSlot";
+import AffiliateBanner from "@/components/ads/AffiliateBanner";
+import { Fragment } from "react";
 
 const blogPostsData: Record<string, {
   title: string;
@@ -838,14 +841,36 @@ const BlogPost = () => {
             </section>
           )}
 
+          {/* Top in-content ad */}
+          <div className="container max-w-4xl mx-auto px-4 pt-4">
+            <AdSlot adSlot="9012345678" adFormat="horizontal" className="py-4" style={{ minHeight: 90 }} />
+          </div>
+
           {/* Article Content */}
           <article className="py-8">
             <div className="container max-w-4xl mx-auto px-4">
               <div className="prose prose-lg max-w-none">
-                {renderContent(post.content)}
+                {(() => {
+                  const rendered = renderContent(post.content);
+                  const mid = Math.floor(rendered.length / 2);
+                  return (
+                    <>
+                      {rendered.slice(0, mid)}
+                      <div className="my-8 not-prose">
+                        <AdSlot adSlot="0123456789" adFormat="auto" className="py-4" style={{ minHeight: 250 }} />
+                      </div>
+                      {rendered.slice(mid)}
+                    </>
+                  );
+                })()}
               </div>
             </div>
           </article>
+
+          {/* Sponsored after content */}
+          <div className="container max-w-4xl mx-auto px-4">
+            <AffiliateBanner variant="compact" className="py-4" />
+          </div>
 
           {/* Author Card */}
           <section className="py-8">
