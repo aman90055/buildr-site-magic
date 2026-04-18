@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -317,8 +317,8 @@ const Blog = () => {
               ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredPosts.map((post, index) => (
-                  <>
-                    <Link key={index} to={`/blog/${post.slug}`}>
+                  <Fragment key={index}>
+                    <Link to={`/blog/${post.slug}`}>
                       <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all hover:-translate-y-1 group cursor-pointer overflow-hidden">
                         {post.image && (
                           <div className="aspect-video overflow-hidden">
@@ -356,11 +356,11 @@ const Blog = () => {
                       </Card>
                     </Link>
                     {(index + 1) % 6 === 0 && index < filteredPosts.length - 1 && (
-                      <div key={`ad-${index}`} className="md:col-span-2 lg:col-span-3">
+                      <div className="md:col-span-2 lg:col-span-3">
                         <AdSlot adSlot="7890123456" adFormat="horizontal" className="py-4" style={{ minHeight: 90 }} />
                       </div>
                     )}
-                  </>
+                  </Fragment>
                 ))}
               </div>
               )}
