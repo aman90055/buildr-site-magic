@@ -18,19 +18,25 @@ const AdSlot = ({ adSlot, adFormat = "auto", className = "", style }: AdSlotProp
   const pushed = useRef(false);
 
   useEffect(() => {
-    if (pushed.current) return;
-    try {
-      if (window.adsbygoogle && adSlot) {
-        window.adsbygoogle.push({});
-        pushed.current = true;
+    if (pushed.current || !adSlot) return;
+    // Retry pushing until adsbygoogle script is loaded
+    const tryPush = (attempt = 0) => {
+      try {
+        if (typeof window !== "undefined" && (window as any).adsbygoogle) {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+          pushed.current = true;
+        } else if (attempt < 10) {
+          setTimeout(() => tryPush(attempt + 1), 500);
+        }
+      } catch (err) {
+        console.warn("AdSense push failed:", err);
       }
-    } catch {
-      // AdSense not loaded yet
-    }
+    };
+    tryPush();
   }, [adSlot]);
 
-  // If no AdSense slot configured, show a placeholder for affiliate/self-serve ads
-  if (!adSlot) {
+  // If no AdSense slot configured, render nothing (avoids empty ad calls with fake IDs)
+  if (!adSlot || adSlot.startsWith("123") || adSlot.startsWith("234") || adSlot.startsWith("345") || adSlot.startsWith("456") || adSlot.startsWith("567")) {
     return null;
   }
 
