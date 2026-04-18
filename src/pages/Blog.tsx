@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Calendar, Clock, ArrowRight, Sparkles, FileText, Zap, Shield } from "lucide-react";
+import AdSlot from "@/components/ads/AdSlot";
+import AffiliateBanner from "@/components/ads/AffiliateBanner";
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -288,6 +290,9 @@ const Blog = () => {
               </div>
             </section>
           )}
+
+          {/* Ad after featured */}
+          <AdSlot adSlot="6789012345" adFormat="horizontal" className="max-w-5xl mx-auto px-4 py-4" style={{ minHeight: 90 }} />
 
           {/* Blog Grid */}
           <section className="pb-20">
