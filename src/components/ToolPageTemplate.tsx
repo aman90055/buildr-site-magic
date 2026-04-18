@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import AffiliateBanner from "@/components/ads/AffiliateBanner";
+import AdSlot from "@/components/ads/AdSlot";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
@@ -141,8 +142,13 @@ const ToolPageTemplate = ({
             </div>
           </section>
 
+          {/* Ads */}
+          <AdSlot adSlot="4567890123" adFormat="auto" className="max-w-5xl mx-auto px-4 py-6" style={{ minHeight: 250 }} />
+
           {/* Sponsored */}
           <AffiliateBanner variant="compact" className="max-w-3xl mx-auto px-4 py-6" />
+
+          <AdSlot adSlot="5678901234" adFormat="horizontal" className="max-w-5xl mx-auto px-4 py-6" style={{ minHeight: 90 }} />
         </main>
 
         <Footer />
