@@ -1,12 +1,14 @@
-import { useState } from "react";
-import { PDFDocument } from "pdf-lib";
+import { useState, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { pdfWorker } from "@/lib/pdfWorkerClient";
+import { useProgress } from "@/hooks/useProgress";
 
 export const usePDFMerge = () => {
   const [isProcessing, setIsProcessing] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const { progress, eta, start, update, finish, cancel } = useProgress();
+  const abortRef = useRef<AbortSignal | null>(null);
 
   const mergeFiles = async (files: File[]) => {
     if (files.length < 2) {
@@ -19,55 +21,31 @@ export const usePDFMerge = () => {
     }
 
     setIsProcessing(true);
-    setProgress(0);
+    abortRef.current = start();
 
     try {
-      // Create a new PDF document
-      const mergedPdf = await PDFDocument.create();
-      const totalFiles = files.length;
+      // Read all files as ArrayBuffer in parallel
+      const buffers = await Promise.all(files.map((f) => f.arrayBuffer()));
 
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        
-        // Read the file as ArrayBuffer
-        const arrayBuffer = await file.arrayBuffer();
-        
-        // Load the PDF
-        const pdf = await PDFDocument.load(arrayBuffer);
-        
-        // Copy all pages from the source PDF
-        const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-        
-        // Add each page to the merged document
-        copiedPages.forEach((page) => mergedPdf.addPage(page));
-        
-        // Update progress
-        setProgress(((i + 1) / totalFiles) * 80);
-      }
+      // Run merge in Web Worker — UI stays responsive
+      const merged = await pdfWorker.run(
+        { op: "merge", payload: { files: buffers } },
+        { onProgress: update, signal: abortRef.current }
+      );
 
-      // Save the merged PDF
-      const mergedPdfBytes = await mergedPdf.save();
-      setProgress(90);
-
-      // Create a blob and download URL
-      const blob = new Blob([new Uint8Array(mergedPdfBytes)], { type: "application/pdf" });
+      const blob = new Blob([new Uint8Array(merged)], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       setDownloadUrl(url);
 
-      // Only log to database if user is authenticated
+      // Optional: log job for authenticated users
       const { data: { user } } = await supabase.auth.getUser();
-      
       if (user) {
         const fileName = `merged_${Date.now()}.pdf`;
         const filePath = `${user.id}/merged/${fileName}`;
-
-        await supabase.storage
-          .from("pdfs")
-          .upload(filePath, blob, {
-            contentType: "application/pdf",
-            upsert: false,
-          });
-
+        await supabase.storage.from("pdfs").upload(filePath, blob, {
+          contentType: "application/pdf",
+          upsert: false,
+        });
         await supabase.from("pdf_jobs").insert({
           user_id: user.id,
           job_type: "merge",
@@ -77,30 +55,31 @@ export const usePDFMerge = () => {
         });
       }
 
-      setProgress(100);
-
+      finish();
       toast({
         title: "Success!",
         description: `Successfully merged ${files.length} PDF files.`,
       });
     } catch (error) {
-      console.error("Error merging PDFs:", error);
-      toast({
-        title: "Error",
-        description: "Failed to merge PDF files. Please try again.",
-        variant: "destructive",
-      });
-
-      // Log failed job only if authenticated
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        await supabase.from("pdf_jobs").insert({
-          user_id: user.id,
-          job_type: "merge",
-          status: "failed",
-          input_files: files.map((f) => f.name),
-          error_message: error instanceof Error ? error.message : "Unknown error",
+      if ((error as Error)?.name === "AbortError") {
+        toast({ title: "Cancelled", description: "Merge cancelled." });
+      } else {
+        console.error("Error merging PDFs:", error);
+        toast({
+          title: "Error",
+          description: "Failed to merge PDF files. Please try again.",
+          variant: "destructive",
         });
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          await supabase.from("pdf_jobs").insert({
+            user_id: user.id,
+            job_type: "merge",
+            status: "failed",
+            input_files: files.map((f) => f.name),
+            error_message: error instanceof Error ? error.message : "Unknown error",
+          });
+        }
       }
     } finally {
       setIsProcessing(false);
@@ -108,18 +87,17 @@ export const usePDFMerge = () => {
   };
 
   const reset = () => {
-    if (downloadUrl) {
-      URL.revokeObjectURL(downloadUrl);
-    }
+    if (downloadUrl) URL.revokeObjectURL(downloadUrl);
     setDownloadUrl(null);
-    setProgress(0);
   };
 
   return {
     mergeFiles,
     isProcessing,
     progress,
+    eta,
     downloadUrl,
     reset,
+    cancel,
   };
 };
