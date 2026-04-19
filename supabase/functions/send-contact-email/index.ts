@@ -66,6 +66,25 @@ const handler = async (req: Request): Promise<Response> => {
       return new Response(JSON.stringify({ error: "Failed to send email" }), { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } });
     }
 
+    // Send confirmation email to the user
+    const confirmHtml = `<!DOCTYPE html><html><head><style>body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f3f4f6;margin:0;padding:20px}.container{max-width:600px;margin:0 auto;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.1)}.header{background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#06b6d4 100%);color:white;padding:32px 24px;text-align:center}.header h1{margin:0;font-size:24px;font-weight:700}.content{padding:32px 24px}.content p{color:#4b5563;font-size:15px;margin:0 0 16px}.message-box{background:#f9fafb;border-left:4px solid #6366f1;padding:16px;border-radius:6px;margin:20px 0;color:#374151;white-space:pre-wrap;font-size:14px}.footer{background:#f9fafb;padding:20px;text-align:center;color:#6b7280;font-size:12px;border-top:1px solid #e5e7eb}</style></head><body><div class="container"><div class="header"><h1>✅ Message Received!</h1></div><div class="content"><p>Hi <strong>${escapeHtml(name)}</strong>,</p><p>Thank you for reaching out to <strong>PDF Tools</strong>! We've received your message and our team will get back to you within <strong>24 hours</strong>.</p><p><strong>Your message summary:</strong></p><p style="margin:0 0 6px"><strong>Subject:</strong> ${escapeHtml(subject)}</p><div class="message-box">${escapeHtml(message)}</div><p>Meanwhile, feel free to explore our <strong>100% free</strong> tools at <a href="https://document-edit-in.lovable.app" style="color:#6366f1">document-edit-in.lovable.app</a></p><p style="color:#9ca3af;font-size:13px;margin-top:30px">If you didn't send this message, please ignore this email.</p></div><div class="footer"><p>PDF Tools • Made in India 🇮🇳 with ❤️</p><p>Managed by Aman Vishwakarma</p></div></div></body></html>`;
+
+    const confirmRes = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { "Authorization": `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: "PDF Tools <onboarding@resend.dev>",
+        to: [email],
+        subject: `✅ We received your message: ${subject}`,
+        html: confirmHtml,
+      }),
+    });
+
+    if (!confirmRes.ok) {
+      const errText = await confirmRes.text();
+      console.error("Contact confirmation email error:", errText);
+    }
+
     return new Response(JSON.stringify({ success: true, message: "Email sent successfully" }), { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } });
   } catch (error: any) {
     console.error("Error in send-contact-email function:", error);

@@ -112,11 +112,30 @@ const handler = async (req: Request): Promise<Response> => {
 
     if (!emailResponse.ok) {
       const errorText = await emailResponse.text();
-      console.error("Resend error:", errorText);
-      return new Response(
-        JSON.stringify({ error: "Failed to send notification" }),
-        { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
-      );
+      console.error("Resend admin error:", errorText);
+      // Don't fail the whole request if admin email fails — still try welcome email
+    }
+
+    // Send welcome email to the new subscriber
+    const welcomeHtml = `<!DOCTYPE html><html><head><style>body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f3f4f6;margin:0;padding:20px}.container{max-width:600px;margin:0 auto;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.1)}.header{background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#06b6d4 100%);color:white;padding:40px 24px;text-align:center}.header h1{margin:0;font-size:28px;font-weight:700}.header p{margin:10px 0 0;opacity:0.95;font-size:15px}.content{padding:32px 24px}.content h2{color:#111827;font-size:20px;margin:0 0 16px}.content p{color:#4b5563;font-size:15px;margin:0 0 16px}.feature-list{background:#f9fafb;border-radius:8px;padding:20px;margin:20px 0}.feature-list ul{margin:0;padding-left:20px;color:#374151}.feature-list li{margin-bottom:8px}.cta{text-align:center;margin:30px 0}.cta a{display:inline-block;background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);color:white;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px}.footer{background:#f9fafb;padding:20px;text-align:center;color:#6b7280;font-size:12px;border-top:1px solid #e5e7eb}</style></head><body><div class="container"><div class="header"><h1>🎉 Welcome Aboard!</h1><p>Thank you for subscribing to our newsletter</p></div><div class="content"><h2>Hey there! 👋</h2><p>Thanks a ton for joining the <strong>PDF Tools</strong> family! You're now part of a growing community of users who get the most out of our free, AI-powered tools.</p><div class="feature-list"><strong>Here's what you can expect from us:</strong><ul><li>🚀 Updates on new free tools & features</li><li>🤖 AI-powered productivity tips</li><li>💡 Hidden tricks for PDF & document workflows</li><li>🎁 Exclusive offers (don't worry, no spam!)</li></ul></div><p>Meanwhile, explore our <strong>100% free</strong> tools — no signup, no file size limits, no hidden charges.</p><div class="cta"><a href="https://document-edit-in.lovable.app">Explore Tools →</a></div><p style="font-size:13px;color:#9ca3af">If you didn't subscribe, just ignore this email — you won't hear from us again.</p></div><div class="footer"><p>PDF Tools • Made in India 🇮🇳 with ❤️</p><p>Managed by Aman Vishwakarma</p></div></div></body></html>`;
+
+    const welcomeRes = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "PDF Tools <onboarding@resend.dev>",
+        to: [email],
+        subject: "🎉 Welcome to PDF Tools — Thanks for subscribing!",
+        html: welcomeHtml,
+      }),
+    });
+
+    if (!welcomeRes.ok) {
+      const errorText = await welcomeRes.text();
+      console.error("Resend welcome error:", errorText);
     }
 
     return new Response(
