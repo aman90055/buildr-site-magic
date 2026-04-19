@@ -107,6 +107,11 @@ class PDFWorkerClient {
   /** Fallback for environments without Worker support. */
   private async runMainThread(op: PDFWorkerOp, onProgress?: ProgressFn): Promise<ArrayBuffer> {
     const { PDFDocument, degrees } = await import("pdf-lib");
+    const toAB = (u8: Uint8Array): ArrayBuffer => {
+      const out = new ArrayBuffer(u8.byteLength);
+      new Uint8Array(out).set(u8);
+      return out;
+    };
     if (op.op === "merge") {
       const merged = await PDFDocument.create();
       for (let i = 0; i < op.payload.files.length; i++) {
@@ -115,18 +120,16 @@ class PDFWorkerClient {
         pages.forEach((p) => merged.addPage(p));
         onProgress?.(((i + 1) / op.payload.files.length) * 90);
       }
-      const bytes = await merged.save();
       onProgress?.(100);
-      return bytes.buffer;
+      return toAB(await merged.save());
     }
     if (op.op === "split" || op.op === "extractPages") {
       const src = await PDFDocument.load(op.payload.file);
       const dest = await PDFDocument.create();
       const copied = await dest.copyPages(src, op.payload.pages.map((p) => p - 1));
       copied.forEach((p) => dest.addPage(p));
-      const bytes = await dest.save();
       onProgress?.(100);
-      return bytes.buffer;
+      return toAB(await dest.save());
     }
     if (op.op === "rotate") {
       const pdf = await PDFDocument.load(op.payload.file);
@@ -135,27 +138,24 @@ class PDFWorkerClient {
         const page = pdf.getPage(idx);
         page.setRotation(degrees((page.getRotation().angle + op.payload.rotation) % 360));
       });
-      const bytes = await pdf.save();
       onProgress?.(100);
-      return bytes.buffer;
+      return toAB(await pdf.save());
     }
     if (op.op === "removePages") {
       const pdf = await PDFDocument.load(op.payload.file);
       [...new Set(op.payload.pages.map((p) => p - 1))]
         .sort((a, b) => b - a)
         .forEach((idx) => pdf.removePage(idx));
-      const bytes = await pdf.save();
       onProgress?.(100);
-      return bytes.buffer;
+      return toAB(await pdf.save());
     }
     if (op.op === "reorder") {
       const src = await PDFDocument.load(op.payload.file);
       const dest = await PDFDocument.create();
       const copied = await dest.copyPages(src, op.payload.order.map((p) => p - 1));
       copied.forEach((p) => dest.addPage(p));
-      const bytes = await dest.save();
       onProgress?.(100);
-      return bytes.buffer;
+      return toAB(await dest.save());
     }
     throw new Error("Unsupported op");
   }
