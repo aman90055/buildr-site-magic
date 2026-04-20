@@ -31,15 +31,17 @@ const Index = () => {
         <Header />
         <main>
           <Hero />
-          <AdSlot adSlot={AD_SLOTS.header} adFormat="horizontal" className="max-w-5xl mx-auto px-4 py-6" style={{ minHeight: 90 }} />
+          <AdSlot config={AD_SLOTS.header} className="max-w-5xl mx-auto px-4 py-6" />
           <AffiliateBanner variant="horizontal" maxItems={2} className="py-6" />
           <PopularTools />
-          <AdSlot adSlot={AD_SLOTS.midContent} adFormat="auto" className="max-w-5xl mx-auto px-4 py-6" style={{ minHeight: 250 }} />
+          <AdSlot config={AD_SLOTS.midContent} className="max-w-5xl mx-auto px-4 py-6" />
           <AffiliateBanner variant="compact" className="max-w-3xl mx-auto px-4 py-4" />
           <Features />
           <Stats />
-          <AdSlot adSlot={AD_SLOTS.footer} adFormat="horizontal" className="max-w-5xl mx-auto px-4 py-6" style={{ minHeight: 90 }} />
+          <AdSlot config={AD_SLOTS.inArticle} className="max-w-3xl mx-auto px-4 py-6" />
+          <AdSlot config={AD_SLOTS.footer} className="max-w-5xl mx-auto px-4 py-6" />
           <AffiliateBanner variant="horizontal" maxItems={2} className="py-6" />
+          <AffiliateBanner variant="sidebar" maxItems={3} className="max-w-3xl mx-auto px-4 py-4" />
           <CTA />
         </main>
         <Footer />
