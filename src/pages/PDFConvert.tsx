@@ -130,14 +130,21 @@ const PDFConvert = () => {
                   )}
                 </div>
               ) : (
-                <ConversionResult
-                  conversionType={conversionType}
-                  imageUrls={imageUrls}
-                  extractedText={extractedText}
-                  onReset={handleReset}
-                />
+                <>
+                  <ConversionResult
+                    conversionType={conversionType}
+                    imageUrls={imageUrls}
+                    extractedText={extractedText}
+                    onReset={handleReset}
+                  />
+                  {/* High-CPM tool-result ad */}
+                  <AdSlot config={AD_SLOTS.toolResult} className="max-w-2xl mx-auto pt-6" />
+                </>
               )}
             </div>
+
+            {/* Related tools — internal linking */}
+            <RelatedTools currentSlug="/convert" category="Convert" limit={6} />
           </div>
         </main>
 
