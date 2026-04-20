@@ -8,6 +8,8 @@ import { ThemeProvider } from "next-themes";
 import AIChatWidget from "@/components/AIChatWidget";
 import InstallPrompt from "@/components/InstallPrompt";
 import ScrollToTop from "@/components/ScrollToTop";
+import StickyAd from "@/components/ads/StickyAd";
+import ExitIntentOffer from "@/components/ExitIntentOffer";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
@@ -106,6 +108,8 @@ const App = () => (
           <Sonner />
           <AIChatWidget />
           <InstallPrompt />
+          <StickyAd />
+          <ExitIntentOffer />
           <BrowserRouter>
             <ScrollToTop />
             <Routes>
