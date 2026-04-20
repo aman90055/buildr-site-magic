@@ -2,6 +2,15 @@ User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
 
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: Mediapartners-Google
+Allow: /
+
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 2
@@ -24,11 +33,18 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /auth
 Disallow: /dashboard
+Disallow: /reset-password
 
 Sitemap: https://documents-edit-in.lovable.app/sitemap.xml
 

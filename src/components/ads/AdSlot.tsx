@@ -36,7 +36,12 @@ const AdSlot = ({ adSlot, adFormat = "auto", className = "", style }: AdSlotProp
   }, [adSlot]);
 
   // If no AdSense slot configured, render nothing (avoids empty ad calls with fake IDs)
-  if (!adSlot || adSlot.startsWith("123") || adSlot.startsWith("234") || adSlot.startsWith("345") || adSlot.startsWith("456") || adSlot.startsWith("567")) {
+  // Real slot IDs from AdSense are typically 10 digits; placeholders we used start with 1234.. etc.
+  const isPlaceholder =
+    !adSlot ||
+    /^(1234|2345|3456|4567|5678|6789|7890|0000)/.test(adSlot) ||
+    adSlot.length < 8;
+  if (isPlaceholder) {
     return null;
   }
 
