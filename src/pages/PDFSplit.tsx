@@ -5,6 +5,9 @@ import Footer from "@/components/Footer";
 import PDFSplitDropzone from "@/components/pdf/PDFSplitDropzone";
 import PageSelector from "@/components/pdf/PageSelector";
 import SplitActions from "@/components/pdf/SplitActions";
+import AdSlot from "@/components/ads/AdSlot";
+import { AD_SLOTS } from "@/lib/adSlots";
+import RelatedTools from "@/components/RelatedTools";
 import { usePDFSplit } from "@/hooks/usePDFSplit";
 
 const PDFSplit = () => {

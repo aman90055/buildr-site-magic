@@ -6,6 +6,9 @@ import PDFConvertDropzone from "@/components/pdf/PDFConvertDropzone";
 import ConversionOptions from "@/components/pdf/ConversionOptions";
 import ConvertActions from "@/components/pdf/ConvertActions";
 import ConversionResult from "@/components/pdf/ConversionResult";
+import AdSlot from "@/components/ads/AdSlot";
+import { AD_SLOTS } from "@/lib/adSlots";
+import RelatedTools from "@/components/RelatedTools";
 import { usePDFConvert } from "@/hooks/usePDFConvert";
 
 export type ConversionType = "images" | "text";
