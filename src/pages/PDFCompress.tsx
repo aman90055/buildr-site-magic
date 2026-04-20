@@ -10,6 +10,9 @@ import AIBadge from "@/components/AIBadge";
 import { usePDFCompress } from "@/hooks/usePDFCompress";
 import { useAICompressionAnalysis } from "@/hooks/useAICompressionAnalysis";
 import { usePremium } from "@/hooks/usePremium";
+import AdSlot from "@/components/ads/AdSlot";
+import { AD_SLOTS } from "@/lib/adSlots";
+import RelatedTools from "@/components/RelatedTools";
 import { Brain, Sparkles, Lock } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
@@ -219,9 +222,15 @@ const PDFCompress = () => {
                       Compress Another PDF
                     </button>
                   </div>
+
+                  {/* High-CPM tool-result ad */}
+                  <AdSlot config={AD_SLOTS.toolResult} className="max-w-2xl mx-auto pt-4" />
                 </div>
               )}
             </div>
+
+            {/* Related tools — internal linking */}
+            <RelatedTools currentSlug="/compress" category="Optimize" limit={6} />
           </div>
         </main>
 
