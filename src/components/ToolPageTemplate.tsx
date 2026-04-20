@@ -1,6 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import AffiliateBanner from "@/components/ads/AffiliateBanner";
 import AdSlot from "@/components/ads/AdSlot";
+import { AD_SLOTS } from "@/lib/adSlots";
+import RelatedTools from "@/components/RelatedTools";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
@@ -142,13 +144,20 @@ const ToolPageTemplate = ({
             </div>
           </section>
 
-          {/* Ads */}
-          <AdSlot adSlot="4567890123" adFormat="auto" className="max-w-5xl mx-auto px-4 py-6" style={{ minHeight: 250 }} />
+          {/* High-CPM in-article ad after how-it-works */}
+          <AdSlot config={AD_SLOTS.inArticle} className="max-w-3xl mx-auto px-4 py-6" />
 
-          {/* Sponsored */}
+          {/* Related tools — internal linking + SEO */}
+          <RelatedTools category={category} limit={6} />
+
+          {/* Matched content / autorelaxed between sections */}
+          <AdSlot config={AD_SLOTS.midContent} className="max-w-5xl mx-auto px-4 py-6" />
+
+          {/* Sponsored affiliates */}
           <AffiliateBanner variant="compact" className="max-w-3xl mx-auto px-4 py-6" />
 
-          <AdSlot adSlot="5678901234" adFormat="horizontal" className="max-w-5xl mx-auto px-4 py-6" style={{ minHeight: 90 }} />
+          {/* Footer banner */}
+          <AdSlot config={AD_SLOTS.footer} className="max-w-5xl mx-auto px-4 py-6" />
         </main>
 
         <Footer />

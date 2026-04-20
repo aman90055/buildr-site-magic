@@ -18,7 +18,7 @@ const StickyAd = () => {
     return () => clearTimeout(t);
   }, []);
 
-  if (!visible || closed || !AD_SLOTS.sticky) return null;
+  if (!visible || closed || !AD_SLOTS.sticky?.slot) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-background/95 backdrop-blur border-t border-border shadow-lg">
@@ -32,7 +32,7 @@ const StickyAd = () => {
       >
         <X className="h-3 w-3" />
       </button>
-      <AdSlot adSlot={AD_SLOTS.sticky} adFormat="horizontal" style={{ minHeight: 60 }} />
+      <AdSlot config={AD_SLOTS.sticky} />
     </div>
   );
 };
