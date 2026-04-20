@@ -173,9 +173,15 @@ const PDFSplit = () => {
                       Split Another PDF
                     </button>
                   </div>
+
+                  {/* High-CPM tool-result ad */}
+                  <AdSlot config={AD_SLOTS.toolResult} className="max-w-2xl mx-auto pt-4" />
                 </div>
               )}
             </div>
+
+            {/* Related tools — internal linking */}
+            <RelatedTools currentSlug="/split" category="Organize" limit={6} />
           </div>
         </main>
 
