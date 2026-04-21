@@ -11,6 +11,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles, Upload, ArrowRight, CheckCircle, Zap, Shield, LucideIcon } from "lucide-react";
 import AIBadge from "@/components/AIBadge";
 
+interface FAQItem { question: string; answer: string; }
+
 interface ToolPageTemplateProps {
   title: string;
   description: string;
@@ -23,6 +25,10 @@ interface ToolPageTemplateProps {
   howItWorks: string[];
   acceptedFormats?: string;
   category: string;
+  /** Optional FAQs — auto-emits FAQPage JSON-LD + visible accordion */
+  faqs?: FAQItem[];
+  /** Optional long-form content paragraphs for SEO (1500+ words target) */
+  longFormContent?: { heading: string; body: string }[];
 }
 
 const ToolPageTemplate = ({
@@ -37,12 +43,42 @@ const ToolPageTemplate = ({
   howItWorks,
   acceptedFormats = "PDF, DOC, DOCX, JPG, PNG",
   category,
+  faqs,
+  longFormContent,
 }: ToolPageTemplateProps) => {
+  // Programmatic SEO: auto-emit HowTo + FAQPage JSON-LD for every tool page
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: title,
+    description: metaDescription,
+    step: howItWorks.map((step, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: `Step ${i + 1}`,
+      text: step,
+    })),
+  };
+
+  const faqSchema = faqs && faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
+  } : null;
+
   return (
     <>
       <Helmet>
         <title>{metaTitle}</title>
         <meta name="description" content={metaDescription} />
+        <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
+        {faqSchema && (
+          <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        )}
       </Helmet>
 
       <div className="min-h-screen flex flex-col bg-background">
@@ -144,8 +180,44 @@ const ToolPageTemplate = ({
             </div>
           </section>
 
-          {/* High-CPM in-article ad after how-it-works */}
+          {/* HIGH-CPM tool-result ad — placed where user attention is highest */}
+          <AdSlot config={AD_SLOTS.toolResult} className="max-w-3xl mx-auto px-4 py-6" />
+
+          {/* In-article ad after how-it-works */}
           <AdSlot config={AD_SLOTS.inArticle} className="max-w-3xl mx-auto px-4 py-6" />
+
+          {/* Long-form SEO content (programmatic) */}
+          {longFormContent && longFormContent.length > 0 && (
+            <section className="py-12">
+              <div className="container max-w-3xl mx-auto px-4 prose prose-slate dark:prose-invert">
+                {longFormContent.map((block, i) => (
+                  <div key={i} className="mb-8">
+                    <h2 className="text-2xl font-bold mb-3">{block.heading}</h2>
+                    <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{block.body}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* FAQs — visible accordion + JSON-LD already emitted above */}
+          {faqs && faqs.length > 0 && (
+            <section className="py-12 bg-muted/30">
+              <div className="container max-w-3xl mx-auto px-4">
+                <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+                <div className="space-y-4">
+                  {faqs.map((f, i) => (
+                    <Card key={i} className="bg-card/50 backdrop-blur-sm border-border/50">
+                      <CardContent className="p-6">
+                        <h3 className="font-semibold mb-2">{f.question}</h3>
+                        <p className="text-sm text-muted-foreground">{f.answer}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
 
           {/* Related tools — internal linking + SEO */}
           <RelatedTools category={category} limit={6} />
