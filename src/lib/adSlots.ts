@@ -80,3 +80,14 @@ export const AD_SLOTS: Record<string, AdSlotConfig> = {
 };
 
 export const ADSENSE_CLIENT = "ca-pub-4830449684268109";
+
+/**
+ * Global ads kill-switch.
+ * Default: OFF — keeps the site policy-clean while AdSense reviews the account
+ * (avoids "Low value content" and "Site Behavior: Navigation" violations from
+ * showing ads on under-built pages or near action buttons).
+ *
+ * Flip on AFTER AdSense approval by setting `VITE_ADS_ENABLED=true` in env.
+ */
+export const ADS_ENABLED: boolean =
+  ((import.meta as any).env?.VITE_ADS_ENABLED ?? "").toString().toLowerCase() === "true";
