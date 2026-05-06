@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { ADSENSE_CLIENT, type AdSlotConfig, type AdFormat } from "@/lib/adSlots";
+import { ADSENSE_CLIENT, ADS_ENABLED, type AdSlotConfig, type AdFormat } from "@/lib/adSlots";
 
 interface AdSlotProps {
   /** Either pass a full config object (preferred) or just a slot id + format */
@@ -10,6 +10,8 @@ interface AdSlotProps {
   fullWidthResponsive?: boolean;
   className?: string;
   style?: React.CSSProperties;
+  /** Hide the "Advertisement" label (default: shown — required for AdSense policy compliance) */
+  hideLabel?: boolean;
 }
 
 declare global {
@@ -26,11 +28,11 @@ const AdSlot = ({
   fullWidthResponsive,
   className = "",
   style,
+  hideLabel = false,
 }: AdSlotProps) => {
   const adRef = useRef<HTMLModElement>(null);
   const pushed = useRef(false);
 
-  // Resolve effective values from config or props
   const slot = config?.slot ?? adSlot ?? "";
   const format: AdFormat = config?.format ?? adFormat ?? "auto";
   const lkey = config?.layoutKey ?? layoutKey;
@@ -38,6 +40,7 @@ const AdSlot = ({
   const minH = config?.minHeight;
 
   useEffect(() => {
+    if (!ADS_ENABLED) return;
     if (pushed.current || !slot) return;
     const tryPush = (attempt = 0) => {
       try {
@@ -54,14 +57,15 @@ const AdSlot = ({
     tryPush();
   }, [slot]);
 
-  // Skip render if no slot or obvious placeholder
+  // Global kill-switch: while AdSense review is pending, render nothing.
+  if (!ADS_ENABLED) return null;
+
   const isPlaceholder =
     !slot ||
     /^(1234|2345|3456|4567|5678|6789|7890|0000)/.test(slot) ||
     slot.length < 8;
   if (isPlaceholder) return null;
 
-  // Build the ins attributes based on format
   const insStyle: React.CSSProperties =
     format === "in-article"
       ? { display: "block", textAlign: "center", ...style }
@@ -81,17 +85,21 @@ const AdSlot = ({
   } else if (format === "autorelaxed") {
     dataAttrs["data-ad-format"] = "autorelaxed";
   } else {
-    // auto / horizontal / rectangle / vertical
     dataAttrs["data-ad-format"] = format;
     if (fwr) dataAttrs["data-full-width-responsive"] = "true";
   }
 
   return (
     <div
-      className={`ad-container flex items-center justify-center ${className}`}
+      className={`ad-container flex flex-col items-center justify-center my-4 ${className}`}
       style={minH ? { minHeight: minH } : undefined}
     >
-      <ins ref={adRef} className="adsbygoogle" style={insStyle} {...dataAttrs} />
+      {!hideLabel && (
+        <span className="text-[10px] uppercase tracking-widest text-muted-foreground/70 mb-1 select-none">
+          Advertisement
+        </span>
+      )}
+      <ins ref={adRef} className="adsbygoogle w-full" style={insStyle} {...dataAttrs} />
     </div>
   );
 };

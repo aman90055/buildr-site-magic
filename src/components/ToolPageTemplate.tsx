@@ -180,10 +180,9 @@ const ToolPageTemplate = ({
             </div>
           </section>
 
-          {/* HIGH-CPM tool-result ad — placed where user attention is highest */}
-          <AdSlot config={AD_SLOTS.toolResult} className="max-w-3xl mx-auto px-4 py-6" />
-
-          {/* In-article ad after how-it-works */}
+          {/* In-article ad — placed AFTER content sections, away from action buttons,
+              to avoid AdSense "Site Behavior: Navigation" policy violation.
+              The toolResult slot stays only on actual result pages (Merge/Split/Compress/Convert). */}
           <AdSlot config={AD_SLOTS.inArticle} className="max-w-3xl mx-auto px-4 py-6" />
 
           {/* Long-form SEO content (programmatic) */}
