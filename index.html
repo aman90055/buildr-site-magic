@@ -258,10 +258,27 @@
       @keyframes splashLoader{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
     </style>
     <script>
-      window.addEventListener('DOMContentLoaded',function(){
-        var s=document.getElementById('splash-screen');
-        if(s){setTimeout(function(){s.style.opacity='0';s.style.visibility='hidden';setTimeout(function(){s.remove()},500)},1800)}
-      });
+      (function(){
+        function hideSplash(){
+          var s=document.getElementById('splash-screen');
+          if(!s) return;
+          s.style.opacity='0';
+          s.style.visibility='hidden';
+          setTimeout(function(){ s && s.remove(); },500);
+        }
+        // Hide once React mounts (root has children) OR after 2.5s max — whichever first.
+        var maxWait=setTimeout(hideSplash,2500);
+        var iv=setInterval(function(){
+          var root=document.getElementById('root');
+          if(root && root.childElementCount>0){
+            clearInterval(iv);
+            clearTimeout(maxWait);
+            setTimeout(hideSplash,150);
+          }
+        },100);
+        // Hard safety net
+        window.addEventListener('load',function(){ setTimeout(hideSplash,1500); });
+      })();
     </script>
 
     <div id="root"></div>
