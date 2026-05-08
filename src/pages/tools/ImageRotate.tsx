@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
-import { RotateCw, Download, Upload } from "lucide-react";
+import { RotateCw, Download } from "lucide-react";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
+import SmartFileInput from "@/components/SmartFileInput";
 
 const ImageRotate = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -18,8 +19,8 @@ const ImageRotate = () => {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const { isPremium } = usePremium();
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0];
+  const handleFiles = (files: File[]) => {
+    const f = files[0];
     if (!f) return;
     if (!checkFileSizeLimit(f, isPremium)) return;
     setFile(f); setDownloadUrl(null);
@@ -76,11 +77,14 @@ const ImageRotate = () => {
             </div>
             {!downloadUrl ? (
               <div className="space-y-6">
-                <label className="flex flex-col items-center gap-4 p-12 border-2 border-dashed border-border rounded-xl cursor-pointer hover:border-primary/50">
-                  {preview ? <img src={preview} alt="Preview" className="max-h-48 rounded-lg" /> : <Upload className="w-10 h-10 text-muted-foreground" />}
-                  <span className="text-muted-foreground">{file ? file.name : "Select an image"}</span>
-                  <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
-                </label>
+                <SmartFileInput
+                  onFilesAdded={handleFiles}
+                  accept="image/*"
+                  formats={["JPG", "PNG", "WEBP", "GIF"]}
+                  title="Drop image or use camera"
+                />
+                {preview && <img src={preview} alt="Preview" className="max-h-48 mx-auto rounded-lg border border-border/50" />}
+                {file && <p className="text-xs text-muted-foreground text-center">{file.name}</p>}
                 {file && (
                   <div className="space-y-2"><Label>Rotation Angle</Label>
                     <Select value={angle} onValueChange={setAngle}>

@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
-import { Crop, Download, Upload } from "lucide-react";
+import { Crop, Download } from "lucide-react";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
+import SmartFileInput from "@/components/SmartFileInput";
 
 const ImageCrop = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -23,8 +24,8 @@ const ImageCrop = () => {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const { isPremium } = usePremium();
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0];
+  const handleFiles = (files: File[]) => {
+    const f = files[0];
     if (!f) return;
     if (!checkFileSizeLimit(f, isPremium)) return;
     setFile(f); setDownloadUrl(null);
@@ -81,11 +82,14 @@ const ImageCrop = () => {
             </div>
             {!downloadUrl ? (
               <div className="space-y-6">
-                <label className="flex flex-col items-center gap-4 p-12 border-2 border-dashed border-border rounded-xl cursor-pointer hover:border-primary/50">
-                  {preview ? <img src={preview} alt="Preview" className="max-h-48 rounded-lg" /> : <Upload className="w-10 h-10 text-muted-foreground" />}
-                  <span className="text-muted-foreground">{file ? `${file.name} (${origW}×${origH})` : "Select an image"}</span>
-                  <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
-                </label>
+                <SmartFileInput
+                  onFilesAdded={handleFiles}
+                  accept="image/*"
+                  formats={["JPG", "PNG", "WEBP", "GIF"]}
+                  title="Drop image or use camera"
+                />
+                {preview && <img src={preview} alt="Preview" className="max-h-48 mx-auto rounded-lg border border-border/50" />}
+                {file && <p className="text-xs text-muted-foreground text-center">{file.name} ({origW}×{origH})</p>}
                 {file && (
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2"><Label>X Offset</Label><Input type="number" value={x} onChange={(e) => setX(Number(e.target.value))} min={0} max={origW} /></div>
