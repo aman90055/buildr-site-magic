@@ -101,6 +101,7 @@ const ImageResize = () => {
                 />
                 {preview && <img src={preview} alt="Preview" className="max-h-48 mx-auto rounded-lg border border-border/50" />}
                 {file && <p className="text-xs text-muted-foreground text-center">{file.name}</p>}
+                {file && (
                   <>
                     <p className="text-sm text-muted-foreground">Original: {origW} × {origH}px</p>
                     <div className="grid grid-cols-2 gap-4">
