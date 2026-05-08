@@ -60,6 +60,17 @@ const AdSlot = ({
   // Global kill-switch: while AdSense review is pending, render nothing.
   if (!ADS_ENABLED) return null;
 
+  // Policy: only render ads on long-form content routes (blog/about/faq/privacy/contact).
+  // This prevents "Site Behavior: Navigation" violations where ads on tool/upload
+  // pages can be confused with action buttons / navigation.
+  if (typeof window !== "undefined") {
+    const path = window.location.pathname;
+    const allowed = ["/blog", "/about", "/faq", "/privacy", "/contact"];
+    if (!allowed.some((p) => path === p || path.startsWith(p + "/"))) {
+      return null;
+    }
+  }
+
   const isPlaceholder =
     !slot ||
     /^(1234|2345|3456|4567|5678|6789|7890|0000)/.test(slot) ||
