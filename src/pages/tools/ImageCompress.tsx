@@ -77,11 +77,15 @@ const ImageCompress = () => {
             </div>
             {!downloadUrl ? (
               <div className="space-y-6">
-                <label className="flex flex-col items-center gap-4 p-12 border-2 border-dashed border-border rounded-xl cursor-pointer hover:border-primary/50">
-                  {preview ? <img src={preview} alt="Preview" className="max-h-48 rounded-lg" /> : <Upload className="w-10 h-10 text-muted-foreground" />}
-                  <span className="text-muted-foreground">{file ? `${file.name} (${fmt(file.size)})` : "Select an image"}</span>
-                  <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
-                </label>
+                <SmartFileInput
+                  onFilesAdded={handleFiles}
+                  accept="image/*"
+                  formats={["JPG", "PNG", "WEBP", "GIF"]}
+                  title="Drop image or use camera"
+                  subtitle="Click to browse, drop here, or capture live"
+                />
+                {preview && <img src={preview} alt="Preview" className="max-h-48 mx-auto rounded-lg border border-border/50" />}
+                {file && <p className="text-xs text-muted-foreground text-center">{file.name} ({fmt(file.size)})</p>}
                 {file && <div className="space-y-2"><Label>Quality: {quality}%</Label><Slider value={[quality]} onValueChange={(v) => setQuality(v[0])} min={10} max={100} step={5} /></div>}
                 <Button onClick={handleCompress} disabled={!file || isProcessing} className="w-full" size="lg">{isProcessing ? "Compressing..." : "Compress Image"}</Button>
               </div>
