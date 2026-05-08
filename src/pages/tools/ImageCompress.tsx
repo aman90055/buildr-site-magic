@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
-import { Minimize2, Download, Upload } from "lucide-react";
+import { Minimize2, Download } from "lucide-react";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
+import SmartFileInput from "@/components/SmartFileInput";
 
 const ImageCompress = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -19,8 +20,8 @@ const ImageCompress = () => {
   const [outputSize, setOutputSize] = useState(0);
   const { isPremium } = usePremium();
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0];
+  const handleFiles = (files: File[]) => {
+    const f = files[0];
     if (!f) return;
     if (!checkFileSizeLimit(f, isPremium)) return;
     setFile(f);
