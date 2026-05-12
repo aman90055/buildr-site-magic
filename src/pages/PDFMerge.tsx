@@ -5,8 +5,6 @@ import Footer from "@/components/Footer";
 import PDFDropzone from "@/components/pdf/PDFDropzone";
 import PDFFileList from "@/components/pdf/PDFFileList";
 import MergeActions from "@/components/pdf/MergeActions";
-import AdSlot from "@/components/ads/AdSlot";
-import { AD_SLOTS } from "@/lib/adSlots";
 import RelatedTools from "@/components/RelatedTools";
 import { usePDFMerge } from "@/hooks/usePDFMerge";
 
@@ -155,9 +153,6 @@ const PDFMerge = () => {
                       Merge More Files
                     </button>
                   </div>
-
-                  {/* High-CPM tool-result ad */}
-                  <AdSlot config={AD_SLOTS.toolResult} className="max-w-2xl mx-auto pt-4" />
                 </div>
               )}
             </div>
