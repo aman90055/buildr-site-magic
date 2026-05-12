@@ -4,11 +4,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
-import { ScanText, Upload, Loader2, Copy } from "lucide-react";
+import { ScanText, Loader2, Copy } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import AIBadge from "@/components/AIBadge";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
+import SmartFileInput from "@/components/SmartFileInput";
 
 const ImageToText = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -17,8 +18,8 @@ const ImageToText = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const { isPremium } = usePremium();
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0];
+  const handleFiles = (files: File[]) => {
+    const f = files[0];
     if (!f) return;
     if (!checkFileSizeLimit(f, isPremium)) return;
     setFile(f); setText("");
@@ -60,11 +61,16 @@ const ImageToText = () => {
               <p className="text-muted-foreground">Extract text from images with AI-powered OCR.</p>
             </div>
             <div className="space-y-6">
-              <label className="flex flex-col items-center gap-4 p-12 border-2 border-dashed border-border rounded-xl cursor-pointer hover:border-primary/50">
-                {preview ? <img src={preview} alt="Preview" className="max-h-48 rounded-lg" /> : <Upload className="w-10 h-10 text-muted-foreground" />}
-                <span className="text-muted-foreground">{file ? file.name : "Select an image"}</span>
-                <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
-              </label>
+              {preview && (
+                <div className="flex justify-center"><img src={preview} alt="Preview" className="max-h-48 rounded-xl border border-border" /></div>
+              )}
+              <SmartFileInput
+                onFilesAdded={handleFiles}
+                accept="image/*"
+                title={file ? file.name : "Drop image or use camera"}
+                subtitle="Click to browse, drop here, or capture live"
+                formats={["JPG", "PNG", "WEBP"]}
+              />
               <div className="flex gap-3">
                 <Button onClick={handleExtract} disabled={!file || isProcessing} className="flex-1">
                   {isProcessing ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Extracting...</> : "Extract Text"}

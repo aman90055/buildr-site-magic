@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
-import { LucideIcon, Download, Upload } from "lucide-react";
+import { LucideIcon, Download } from "lucide-react";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
+import SmartFileInput from "@/components/SmartFileInput";
 
 interface ImageConverterProps {
   title: string;
@@ -36,8 +37,8 @@ const ImageConverterTool = ({
   const [outputSize, setOutputSize] = useState<number>(0);
   const { isPremium } = usePremium();
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0];
+  const handleFiles = (files: File[]) => {
+    const f = files[0];
     if (!f) return;
     if (!checkFileSizeLimit(f, isPremium)) return;
     setFile(f);
@@ -102,11 +103,16 @@ const ImageConverterTool = ({
             </div>
             {!downloadUrl ? (
               <div className="space-y-6">
-                <label className="flex flex-col items-center gap-4 p-12 border-2 border-dashed border-border rounded-xl cursor-pointer hover:border-primary/50">
-                  {preview ? <img src={preview} alt="Preview" className="max-h-48 rounded-lg" /> : <Upload className="w-10 h-10 text-muted-foreground" />}
-                  <span className="text-muted-foreground">{file ? `${file.name} (${fmt(file.size)})` : "Select an image"}</span>
-                  <input type="file" accept={acceptTypes} onChange={handleFileChange} className="hidden" />
-                </label>
+                {preview && (
+                  <div className="flex justify-center"><img src={preview} alt="Preview" className="max-h-48 rounded-xl border border-border" /></div>
+                )}
+                <SmartFileInput
+                  onFilesAdded={handleFiles}
+                  accept={acceptTypes}
+                  title={file ? `${file.name} (${fmt(file.size)})` : `Drop ${outputFormat === "PDF" ? "image" : "file"} or use camera`}
+                  subtitle="Click to browse, drop here, or capture live"
+                  formats={[outputFormat]}
+                />
                 {showQuality && file && (
                   <div className="space-y-2"><Label>Quality: {quality}%</Label><Slider value={[quality]} onValueChange={(v) => setQuality(v[0])} min={10} max={100} step={5} /></div>
                 )}
