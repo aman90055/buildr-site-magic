@@ -32,18 +32,18 @@ import MobileNav from "./MobileNav";
 
 const convertToPdfTools = [
   { title: "JPG to PDF", href: "/image-to-pdf", icon: Image, description: "AI-optimized conversion", ai: true },
-  { title: "Word to PDF", href: "/tools/word-to-pdf", icon: FileText, description: "Perfect formatting" },
-  { title: "PowerPoint to PDF", href: "/tools/powerpoint-to-pdf", icon: Presentation, description: "Preserve animations" },
-  { title: "Excel to PDF", href: "/tools/excel-to-pdf", icon: Table, description: "Keep formulas" },
-  { title: "HTML to PDF", href: "/tools/html-to-pdf", icon: Code, description: "Web to document" },
+  { title: "Word to PDF", href: "/word-to-pdf", icon: FileText, description: "Perfect formatting" },
+  { title: "PowerPoint to PDF", href: "/powerpoint-to-pdf", icon: Presentation, description: "Preserve animations" },
+  { title: "Excel to PDF", href: "/excel-to-pdf", icon: Table, description: "Keep formulas" },
+  { title: "HTML to PDF", href: "/html-to-pdf", icon: Code, description: "Web to document" },
 ];
 
 const convertFromPdfTools = [
   { title: "PDF to JPG", href: "/pdf-to-image", icon: FileImage, description: "AI-enhanced export", ai: true },
-  { title: "PDF to Word", href: "/tools/pdf-to-word", icon: FileType, description: "Smart conversion", ai: true },
-  { title: "PDF to PowerPoint", href: "/tools/pdf-to-powerpoint", icon: Presentation, description: "Editable slides" },
-  { title: "PDF to Excel", href: "/tools/pdf-to-excel", icon: FileSpreadsheet, description: "Extract tables", ai: true },
-  { title: "PDF to PDF/A", href: "/tools/pdf-to-pdfa", icon: FileBadge, description: "Archive format" },
+  { title: "PDF to Word", href: "/pdf-to-word", icon: FileType, description: "Smart conversion", ai: true },
+  { title: "PDF to PowerPoint", href: "/pdf-to-powerpoint", icon: Presentation, description: "Editable slides" },
+  { title: "PDF to Excel", href: "/pdf-to-excel", icon: FileSpreadsheet, description: "Extract tables", ai: true },
+  { title: "PDF to PDF/A", href: "/pdf-to-pdfa", icon: FileBadge, description: "Archive format" },
 ];
 
 const Header = () => {
