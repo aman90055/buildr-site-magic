@@ -11,7 +11,7 @@ import { usePDFCompress } from "@/hooks/usePDFCompress";
 import { useAICompressionAnalysis } from "@/hooks/useAICompressionAnalysis";
 import { usePremium } from "@/hooks/usePremium";
 import RelatedTools from "@/components/RelatedTools";
-import { Brain, Sparkles, Lock } from "lucide-react";
+import { Sparkles, Lock } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 
