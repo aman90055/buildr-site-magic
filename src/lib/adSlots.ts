@@ -87,7 +87,6 @@ export const ADSENSE_CLIENT = "ca-pub-4830449684268109";
  * (avoids "Low value content" and "Site Behavior: Navigation" violations from
  * showing ads on under-built pages or near action buttons).
  *
- * Flip on AFTER AdSense approval by setting `VITE_ADS_ENABLED=true` in env.
+ * Flip on AFTER AdSense approval by changing this constant back to env-gated.
  */
-export const ADS_ENABLED: boolean =
-  ((import.meta as any).env?.VITE_ADS_ENABLED ?? "").toString().toLowerCase() === "true";
+export const ADS_ENABLED = false;
