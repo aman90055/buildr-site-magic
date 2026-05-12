@@ -5,8 +5,6 @@ import Footer from "@/components/Footer";
 import PDFSplitDropzone from "@/components/pdf/PDFSplitDropzone";
 import PageSelector from "@/components/pdf/PageSelector";
 import SplitActions from "@/components/pdf/SplitActions";
-import AdSlot from "@/components/ads/AdSlot";
-import { AD_SLOTS } from "@/lib/adSlots";
 import RelatedTools from "@/components/RelatedTools";
 import { usePDFSplit } from "@/hooks/usePDFSplit";
 
@@ -173,9 +171,6 @@ const PDFSplit = () => {
                       Split Another PDF
                     </button>
                   </div>
-
-                  {/* High-CPM tool-result ad */}
-                  <AdSlot config={AD_SLOTS.toolResult} className="max-w-2xl mx-auto pt-4" />
                 </div>
               )}
             </div>
