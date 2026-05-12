@@ -4,9 +4,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
-import { Eraser, Download, Upload, Loader2 } from "lucide-react";
+import { Eraser, Download, Loader2 } from "lucide-react";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
+import SmartFileInput from "@/components/SmartFileInput";
 
 const RemoveBackground = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -15,8 +16,8 @@ const RemoveBackground = () => {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const { isPremium } = usePremium();
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0];
+  const handleFiles = (files: File[]) => {
+    const f = files[0];
     if (!f) return;
     if (!checkFileSizeLimit(f, isPremium)) return;
     setFile(f); setDownloadUrl(null);
@@ -82,11 +83,16 @@ const RemoveBackground = () => {
             </div>
             {!downloadUrl ? (
               <div className="space-y-6">
-                <label className="flex flex-col items-center gap-4 p-12 border-2 border-dashed border-border rounded-xl cursor-pointer hover:border-primary/50">
-                  {preview ? <img src={preview} alt="Preview" className="max-h-48 rounded-lg" /> : <Upload className="w-10 h-10 text-muted-foreground" />}
-                  <span className="text-muted-foreground">{file ? file.name : "Select an image"}</span>
-                  <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
-                </label>
+                {preview && (
+                  <div className="flex justify-center"><img src={preview} alt="Preview" className="max-h-48 rounded-xl border border-border" /></div>
+                )}
+                <SmartFileInput
+                  onFilesAdded={handleFiles}
+                  accept="image/*"
+                  title={file ? file.name : "Drop image or use camera"}
+                  subtitle="Click to browse, drop here, or capture live"
+                  formats={["JPG", "PNG", "WEBP"]}
+                />
                 <Button onClick={handleRemoveBg} disabled={!file || isProcessing} className="w-full" size="lg">
                   {isProcessing ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Processing...</> : "Remove Background"}
                 </Button>
