@@ -57,7 +57,7 @@ const AdSlot = ({
     tryPush();
   }, [slot]);
 
-  // Global kill-switch: while AdSense review is pending, render nothing.
+  // Global kill-switch: while AdSense review is pending, render no ad UI at all.
   if (!ADS_ENABLED) return null;
 
   // Policy: only render ads on long-form content routes (blog/about/faq/privacy/contact).
@@ -101,8 +101,9 @@ const AdSlot = ({
   }
 
   return (
-    <div
-      className={`ad-container flex flex-col items-center justify-center my-4 ${className}`}
+    <aside
+      aria-label="Advertisement"
+      className={`ad-container flex flex-col items-center justify-center my-10 border-y border-border/60 bg-muted/20 py-6 ${className}`}
       style={minH ? { minHeight: minH } : undefined}
     >
       {!hideLabel && (
@@ -111,7 +112,7 @@ const AdSlot = ({
         </span>
       )}
       <ins ref={adRef} className="adsbygoogle w-full" style={insStyle} {...dataAttrs} />
-    </div>
+    </aside>
   );
 };
 

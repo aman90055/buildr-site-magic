@@ -6,8 +6,6 @@ import PDFConvertDropzone from "@/components/pdf/PDFConvertDropzone";
 import ConversionOptions from "@/components/pdf/ConversionOptions";
 import ConvertActions from "@/components/pdf/ConvertActions";
 import ConversionResult from "@/components/pdf/ConversionResult";
-import AdSlot from "@/components/ads/AdSlot";
-import { AD_SLOTS } from "@/lib/adSlots";
 import RelatedTools from "@/components/RelatedTools";
 import { usePDFConvert } from "@/hooks/usePDFConvert";
 
@@ -137,8 +135,6 @@ const PDFConvert = () => {
                     extractedText={extractedText}
                     onReset={handleReset}
                   />
-                  {/* High-CPM tool-result ad */}
-                  <AdSlot config={AD_SLOTS.toolResult} className="max-w-2xl mx-auto pt-6" />
                 </>
               )}
             </div>

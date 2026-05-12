@@ -16,18 +16,18 @@ import AIBadge from "./AIBadge";
 
 const convertToPdfTools = [
   { title: "JPG to PDF", href: "/image-to-pdf", icon: Image, ai: true },
-  { title: "Word to PDF", href: "/tools/word-to-pdf", icon: FileText },
-  { title: "PowerPoint to PDF", href: "/tools/powerpoint-to-pdf", icon: Presentation },
-  { title: "Excel to PDF", href: "/tools/excel-to-pdf", icon: Table },
-  { title: "HTML to PDF", href: "/tools/html-to-pdf", icon: Code },
+  { title: "Word to PDF", href: "/word-to-pdf", icon: FileText },
+  { title: "PowerPoint to PDF", href: "/powerpoint-to-pdf", icon: Presentation },
+  { title: "Excel to PDF", href: "/excel-to-pdf", icon: Table },
+  { title: "HTML to PDF", href: "/html-to-pdf", icon: Code },
 ];
 
 const convertFromPdfTools = [
   { title: "PDF to JPG", href: "/pdf-to-image", icon: FileImage, ai: true },
-  { title: "PDF to Word", href: "/tools/pdf-to-word", icon: FileType, ai: true },
-  { title: "PDF to PowerPoint", href: "/tools/pdf-to-powerpoint", icon: Presentation },
-  { title: "PDF to Excel", href: "/tools/pdf-to-excel", icon: FileSpreadsheet, ai: true },
-  { title: "PDF to PDF/A", href: "/tools/pdf-to-pdfa", icon: FileBadge },
+  { title: "PDF to Word", href: "/pdf-to-word", icon: FileType, ai: true },
+  { title: "PDF to PowerPoint", href: "/pdf-to-powerpoint", icon: Presentation },
+  { title: "PDF to Excel", href: "/pdf-to-excel", icon: FileSpreadsheet, ai: true },
+  { title: "PDF to PDF/A", href: "/pdf-to-pdfa", icon: FileBadge },
 ];
 
 const mainTools = [

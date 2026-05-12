@@ -51,6 +51,11 @@ interface AffiliateBannerProps {
 }
 
 const AffiliateBanner = ({ variant = "horizontal", maxItems = 2, className = "" }: AffiliateBannerProps) => {
+  // Keep sponsored partner blocks disabled during AdSense policy review so no
+  // monetized block can be mistaken for site navigation or download actions.
+  const affiliateEnabled = false;
+  if (!affiliateEnabled) return null;
+
   // Rotate affiliates based on day to show variety
   const dayIndex = new Date().getDate() % affiliates.length;
   const items = affiliates.slice(dayIndex, dayIndex + maxItems).concat(
