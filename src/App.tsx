@@ -105,11 +105,11 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <AIChatWidget />
-          <InstallPrompt />
-          <ExitIntentOffer />
           <BrowserRouter>
             <ScrollToTop />
+            <AIChatWidget />
+            <InstallPrompt />
+            <ExitIntentOffer />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/auth" element={<Auth />} />
