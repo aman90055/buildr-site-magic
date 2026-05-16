@@ -46,6 +46,6 @@ Disallow: /auth
 Disallow: /dashboard
 Disallow: /reset-password
 
-Sitemap: https://documents-edit-in.lovable.app/sitemap.xml
+Sitemap: https://document-edit-in.lovable.app/sitemap.xml
 
-Host: https://documents-edit-in.lovable.app
+Host: https://document-edit-in.lovable.app

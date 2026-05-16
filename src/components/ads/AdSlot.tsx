@@ -60,12 +60,12 @@ const AdSlot = ({
   // Global kill-switch: while AdSense review is pending, render no ad UI at all.
   if (!ADS_ENABLED) return null;
 
-  // Policy: only render ads on long-form content routes (blog/about/faq/privacy/contact).
+  // Policy: only render ads on homepage and long-form content routes.
   // This prevents "Site Behavior: Navigation" violations where ads on tool/upload
   // pages can be confused with action buttons / navigation.
   if (typeof window !== "undefined") {
     const path = window.location.pathname;
-    const allowed = ["/blog", "/about", "/faq", "/privacy", "/contact"];
+    const allowed = ["/", "/blog", "/about", "/faq", "/privacy", "/contact"];
     if (!allowed.some((p) => path === p || path.startsWith(p + "/"))) {
       return null;
     }

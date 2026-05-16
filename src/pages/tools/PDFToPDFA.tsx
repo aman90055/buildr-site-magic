@@ -40,7 +40,7 @@ const PDFToPDFA = () => {
     setProgress(20);
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const pdfDoc = await PDFDocument.load(arrayBuffer);
+      const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
       setProgress(50);
       pdfDoc.setTitle(file.name.replace(".pdf", ""));
       pdfDoc.setAuthor("PDF Tools - Made in India");

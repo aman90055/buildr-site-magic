@@ -25,7 +25,7 @@ const FAQ = () => {
         },
         {
           question: "Is Document Editor free to use?",
-          answer: "Yes! We offer a generous free tier that allows you to process documents with basic features. For advanced features like AI compression, batch processing, and unlimited file sizes, you can upgrade to our premium plans."
+          answer: "Yes! All core PDF tools are free to use, including compression, conversion, merge, split, editing, and batch workflows. There are no file-size limits."
         },
         {
           question: "Do I need to create an account?",
@@ -95,7 +95,7 @@ const FAQ = () => {
       faqs: [
         {
           question: "What is the maximum file size I can upload?",
-          answer: "Free users can upload files up to 50MB. Premium users have limits up to 500MB per file, with batch processing support for handling multiple large files efficiently."
+          answer: "There is no fixed file-size limit. Large files are processed in your browser, so actual performance depends on your device memory and browser."
         },
         {
           question: "How fast is the processing?",
@@ -103,7 +103,7 @@ const FAQ = () => {
         },
         {
           question: "Can I process multiple files at once?",
-          answer: "Yes! Our batch processing feature (available to all users) lets you upload and process multiple files simultaneously. Premium users get faster processing and higher concurrent file limits."
+          answer: "Yes! Batch processing is available to all users for supported tools like merge, image conversion, and page workflows."
         },
         {
           question: "What browsers are supported?",
@@ -117,7 +117,7 @@ const FAQ = () => {
       faqs: [
         {
           question: "What's included in the free plan?",
-          answer: "The free plan includes access to all basic PDF tools, standard compression, file conversions, and limited batch processing. You can process a generous number of documents each month at no cost."
+          answer: "The free plan includes all core PDF tools, AI-assisted compression, conversions, editing utilities, and supported batch processing with no file-size cap."
         },
         {
           question: "Can I cancel my subscription anytime?",

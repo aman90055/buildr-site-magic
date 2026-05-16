@@ -57,8 +57,8 @@ const ComparePDF = () => {
       setProgress(40);
 
       const [pdf1, pdf2] = await Promise.all([
-        PDFDocument.load(arrayBuffer1),
-        PDFDocument.load(arrayBuffer2)
+        PDFDocument.load(arrayBuffer1, { ignoreEncryption: true }),
+        PDFDocument.load(arrayBuffer2, { ignoreEncryption: true })
       ]);
       setProgress(60);
 

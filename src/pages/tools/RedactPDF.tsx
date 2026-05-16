@@ -39,7 +39,7 @@ const RedactPDF = () => {
       const arrayBuffer = await file.arrayBuffer();
       setProgress(40);
 
-      const pdfDoc = await PDFDocument.load(arrayBuffer);
+      const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
       const pages = pdfDoc.getPages();
       setProgress(60);
 

@@ -82,11 +82,7 @@ export const AD_SLOTS: Record<string, AdSlotConfig> = {
 export const ADSENSE_CLIENT = "ca-pub-4830449684268109";
 
 /**
- * Global ads kill-switch.
- * Default: OFF — keeps the site policy-clean while AdSense reviews the account
- * (avoids "Low value content" and "Site Behavior: Navigation" violations from
- * showing ads on under-built pages or near action buttons).
- *
- * Flip on AFTER AdSense approval by changing this constant back to env-gated.
+ * Global ads switch.
+ * Ads render only on safe content routes in AdSlot, never inside upload/action areas.
  */
-export const ADS_ENABLED = false;
+export const ADS_ENABLED = true;

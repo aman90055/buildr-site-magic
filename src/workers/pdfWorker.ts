@@ -29,7 +29,7 @@ function toAB(u8: Uint8Array): ArrayBuffer {
 async function merge(id: string, files: ArrayBuffer[]): Promise<ArrayBuffer> {
   const merged = await PDFDocument.create();
   for (let i = 0; i < files.length; i++) {
-    const pdf = await PDFDocument.load(files[i]);
+    const pdf = await PDFDocument.load(files[i], { ignoreEncryption: true });
     const pages = await merged.copyPages(pdf, pdf.getPageIndices());
     pages.forEach((p) => merged.addPage(p));
     post(id, { progress: ((i + 1) / files.length) * 90 });
@@ -38,7 +38,7 @@ async function merge(id: string, files: ArrayBuffer[]): Promise<ArrayBuffer> {
 }
 
 async function split(id: string, file: ArrayBuffer, pages: number[]): Promise<ArrayBuffer> {
-  const src = await PDFDocument.load(file);
+  const src = await PDFDocument.load(file, { ignoreEncryption: true });
   const dest = await PDFDocument.create();
   const indices = pages.map((p) => p - 1);
   const copied = await dest.copyPages(src, indices);
@@ -55,7 +55,7 @@ async function rotate(
   rotation: number,
   pages?: number[]
 ): Promise<ArrayBuffer> {
-  const pdf = await PDFDocument.load(file);
+  const pdf = await PDFDocument.load(file, { ignoreEncryption: true });
   const target = pages?.map((p) => p - 1) ?? pdf.getPageIndices();
   target.forEach((idx, i) => {
     const page = pdf.getPage(idx);
@@ -71,7 +71,7 @@ async function removePages(
   file: ArrayBuffer,
   pages: number[]
 ): Promise<ArrayBuffer> {
-  const pdf = await PDFDocument.load(file);
+  const pdf = await PDFDocument.load(file, { ignoreEncryption: true });
   const indicesDesc = [...new Set(pages.map((p) => p - 1))].sort((a, b) => b - a);
   indicesDesc.forEach((idx, i) => {
     pdf.removePage(idx);
@@ -81,7 +81,7 @@ async function removePages(
 }
 
 async function reorder(id: string, file: ArrayBuffer, order: number[]): Promise<ArrayBuffer> {
-  const src = await PDFDocument.load(file);
+  const src = await PDFDocument.load(file, { ignoreEncryption: true });
   const dest = await PDFDocument.create();
   const copied = await dest.copyPages(src, order.map((p) => p - 1));
   copied.forEach((p, i) => {

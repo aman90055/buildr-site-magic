@@ -96,7 +96,7 @@ const SignPDF = () => {
       const arrayBuffer = await file.arrayBuffer();
       setProgress(40);
 
-      const pdfDoc = await PDFDocument.load(arrayBuffer);
+      const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
       const pages = pdfDoc.getPages();
       const firstPage = pages[0];
       const { height } = firstPage.getSize();

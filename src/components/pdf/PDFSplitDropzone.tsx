@@ -29,7 +29,7 @@ const PDFSplitDropzone = ({ onFileAdded, disabled }: PDFSplitDropzoneProps) => {
     setIsLoading(true);
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const pdf = await PDFDocument.load(arrayBuffer);
+      const pdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
       const pageCount = pdf.getPageCount();
       onFileAdded(file, pageCount);
     } catch (error) {

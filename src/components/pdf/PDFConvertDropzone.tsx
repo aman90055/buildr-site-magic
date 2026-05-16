@@ -10,7 +10,7 @@ interface PDFConvertDropzoneProps {
   showCamera?: boolean;
 }
 
-const PDFConvertDropzone = ({ onFileAdded, disabled, showCamera = true }: PDFConvertDropzoneProps) => {
+const PDFConvertDropzone = ({ onFileAdded, disabled, showCamera = false }: PDFConvertDropzoneProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { isPremium } = usePremium();
@@ -113,8 +113,10 @@ const PDFConvertDropzone = ({ onFileAdded, disabled, showCamera = true }: PDFCon
 
         {showCamera && (
           <div className="mt-4 pt-4 border-t border-border/50">
-            <CameraCapture 
-              onCapture={onFileAdded} 
+            <CameraCapture
+              onCapture={(file) => {
+                if (file.type === "application/pdf") onFileAdded(file);
+              }}
               disabled={disabled} 
             />
           </div>
