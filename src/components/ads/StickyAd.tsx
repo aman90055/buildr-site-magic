@@ -22,7 +22,7 @@ const StickyAd = () => {
   // Only show on long-form/content routes.
   const path = typeof window !== "undefined" ? window.location.pathname : "/";
   const allowedPrefixes = ["/blog", "/about", "/faq", "/privacy", "/contact"];
-  const onAllowed = allowedPrefixes.some((p) => path.startsWith(p));
+  const onAllowed = path === "/" || allowedPrefixes.some((p) => path.startsWith(p));
   if (!onAllowed) return null;
 
   if (!visible || closed || !AD_SLOTS.sticky?.slot) return null;
