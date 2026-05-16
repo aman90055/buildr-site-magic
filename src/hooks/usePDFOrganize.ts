@@ -16,7 +16,7 @@ export const usePDFOrganize = () => {
   const loadPDF = useCallback(async (file: File): Promise<number> => {
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const pdfDoc = await PDFDocument.load(arrayBuffer);
+      const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
       const count = pdfDoc.getPageCount();
       setPageCount(count);
       return count;
@@ -39,7 +39,7 @@ export const usePDFOrganize = () => {
       const arrayBuffer = await file.arrayBuffer();
       setProgress(40);
 
-      const sourcePdf = await PDFDocument.load(arrayBuffer);
+      const sourcePdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
       const newPdf = await PDFDocument.create();
       setProgress(60);
 
