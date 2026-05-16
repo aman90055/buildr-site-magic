@@ -1088,13 +1088,13 @@ const BlogPost = () => {
     "publisher": {
       "@type": "Organization",
       "name": "PDF Tools",
-      "url": "https://documents-edit-in.lovable.app"
+      "url": "https://document-edit-in.lovable.app"
     },
     "datePublished": post.date,
-    "mainEntityOfPage": `https://documents-edit-in.lovable.app/blog/${slug}`
+    "mainEntityOfPage": `https://document-edit-in.lovable.app/blog/${slug}`
   };
 
-  const shareUrl = `https://documents-edit-in.lovable.app/blog/${slug}`;
+  const shareUrl = `https://document-edit-in.lovable.app/blog/${slug}`;
   const encodedUrl = encodeURIComponent(shareUrl);
   const encodedTitle = encodeURIComponent(post.title);
 
@@ -1103,7 +1103,7 @@ const BlogPost = () => {
       <Helmet>
         <title>{post.title} - PDF Tools Blog</title>
         <meta name="description" content={post.excerpt} />
-        <link rel="canonical" href={`https://documents-edit-in.lovable.app/blog/${slug}`} />
+        <link rel="canonical" href={`https://document-edit-in.lovable.app/blog/${slug}`} />
         <meta property="og:type" content="article" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
