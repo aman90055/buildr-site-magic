@@ -26,9 +26,10 @@ const EditPDF = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
-    if (selectedFile && selectedFile.type === "application/pdf") {
+    if (selectedFile && selectedFile.name.toLowerCase().endsWith(".pdf")) {
       if (!checkFileSizeLimit(selectedFile, isPremium)) return;
       setFile(selectedFile);
+      setDownloadUrl(null);
     }
   };
 
@@ -42,18 +43,22 @@ const EditPDF = () => {
       const arrayBuffer = await file.arrayBuffer();
       setProgress(40);
 
-      const pdfDoc = await PDFDocument.load(arrayBuffer);
+      const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
       const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
       setProgress(60);
 
       const pages = pdfDoc.getPages();
+      if (!pages.length) throw new Error("PDF has no pages");
       const firstPage = pages[0];
-      const { height } = firstPage.getSize();
+      const { width, height } = firstPage.getSize();
+      const safeFontSize = Math.min(Math.max(fontSize || 16, 8), 96);
+      const safeX = Math.min(Math.max(xPos || 0, 0), Math.max(width - 20, 0));
+      const safeY = Math.min(Math.max(yPos || 0, safeFontSize), Math.max(height - 10, safeFontSize));
 
       firstPage.drawText(text, {
-        x: xPos,
-        y: height - yPos,
-        size: fontSize,
+        x: safeX,
+        y: height - safeY,
+        size: safeFontSize,
         font,
         color: rgb(0, 0, 0),
       });
