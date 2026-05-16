@@ -24,7 +24,7 @@ export const usePDFProtect = () => {
       const arrayBuffer = await file.arrayBuffer();
       setProgress(40);
 
-      const pdfDoc = await PDFDocument.load(arrayBuffer);
+      const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
       setProgress(60);
 
       // Note: pdf-lib doesn't support password protection natively
