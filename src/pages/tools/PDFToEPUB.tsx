@@ -47,7 +47,7 @@ const PDFToEPUB = () => {
       for (let i = 1; i <= pdf.numPages; i++) {
         const page = await pdf.getPage(i);
         const content = await page.getTextContent();
-        const text = content.items.map((item: any) => item.str).join(" ").trim();
+        const text = content.items.map((item) => ("str" in item ? item.str : "")).join(" ").trim();
         if (text) {
           html += `<div class="page">\n<h2>Chapter ${i}</h2>\n`;
           text.split(/\.\s+/).forEach(sentence => {
