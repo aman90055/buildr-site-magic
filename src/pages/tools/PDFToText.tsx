@@ -45,7 +45,7 @@ const PDFToText = () => {
       for (let i = 1; i <= pdf.numPages; i++) {
         const page = await pdf.getPage(i);
         const content = await page.getTextContent();
-        result += content.items.map((item: any) => item.str).join(" ") + "\n\n";
+        result += content.items.map((item) => ("str" in item ? item.str : "")).join(" ") + "\n\n";
         setProgress(10 + (i / pdf.numPages) * 80);
       }
       setText(result.trim());
