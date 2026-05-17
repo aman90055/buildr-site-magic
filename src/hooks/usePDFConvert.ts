@@ -5,6 +5,7 @@ import type { ConversionType } from "@/pages/PDFConvert";
 import { openPDFDocument } from "@/lib/lazyLoaders";
 
 type PDFDocumentProxy = Awaited<ReturnType<typeof openPDFDocument>>;
+type PDFTextItem = { str: string };
 
 export const usePDFConvert = () => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -110,7 +111,8 @@ export const usePDFConvert = () => {
       const textContent = await page.getTextContent();
       
       const pageText = textContent.items
-        .map((item: any) => item.str)
+        .filter((item): item is PDFTextItem => "str" in item)
+        .map((item) => item.str)
         .join(" ");
       
       fullText += `--- Page ${i} ---\n${pageText}\n\n`;
