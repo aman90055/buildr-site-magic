@@ -6,12 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { BookOpen, Upload, Download, RotateCcw, Copy } from "lucide-react";
-import * as pdfjsLib from "pdfjs-dist";
 import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+import { openPDFDocument } from "@/lib/lazyLoaders";
 
 const PDFToEPUB = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -42,8 +40,7 @@ const PDFToEPUB = () => {
     setIsProcessing(true);
     setProgress(10);
     try {
-      const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await openPDFDocument(file);
 
       let html = `<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html>\n<html xmlns="http://www.w3.org/1999/xhtml">\n<head><title>${file.name}</title>\n<style>body{font-family:serif;line-height:1.8;padding:20px;max-width:700px;margin:0 auto;}h2{margin-top:2em;color:#333;border-bottom:1px solid #ccc;padding-bottom:4px;}.page{margin-bottom:2em;}</style>\n</head>\n<body>\n<h1>${file.name.replace(".pdf", "")}</h1>\n`;
 
