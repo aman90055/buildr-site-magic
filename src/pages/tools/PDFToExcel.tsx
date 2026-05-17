@@ -49,7 +49,8 @@ const PDFToExcel = () => {
 
         // Group items by Y position to detect rows
         const rows: Map<number, { x: number; text: string }[]> = new Map();
-        content.items.forEach((item: any) => {
+        content.items.forEach((item) => {
+          if (!("str" in item) || !("transform" in item)) return;
           const y = Math.round(item.transform[5]);
           if (!rows.has(y)) rows.set(y, []);
           rows.get(y)!.push({ x: item.transform[4], text: item.str });
