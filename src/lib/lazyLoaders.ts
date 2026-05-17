@@ -26,3 +26,13 @@ export const loadPDFJS = () => {
   }
   return pdfjsPromise;
 };
+
+export const openPDFDocument = async (file: File | ArrayBuffer) => {
+  const pdfjs = await loadPDFJS();
+  const buffer = file instanceof File ? await file.arrayBuffer() : file;
+
+  return pdfjs.getDocument({
+    data: new Uint8Array(buffer),
+    stopAtErrors: false,
+  }).promise;
+};
