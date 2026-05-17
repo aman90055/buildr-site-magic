@@ -51,7 +51,8 @@ const PDFToHTML = () => {
 
         // Group by Y position for paragraphs
         const rows: Map<number, string[]> = new Map();
-        content.items.forEach((item: any) => {
+        content.items.forEach((item) => {
+          if (!("str" in item) || !("transform" in item)) return;
           const y = Math.round(item.transform[5] / 5) * 5;
           if (!rows.has(y)) rows.set(y, []);
           rows.get(y)!.push(item.str);
