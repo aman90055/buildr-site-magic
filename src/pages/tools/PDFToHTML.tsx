@@ -6,12 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { Globe, Upload, Download, RotateCcw, Copy } from "lucide-react";
-import * as pdfjsLib from "pdfjs-dist";
 import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+import { openPDFDocument } from "@/lib/lazyLoaders";
 
 const PDFToHTML = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -42,8 +40,7 @@ const PDFToHTML = () => {
     setIsProcessing(true);
     setProgress(10);
     try {
-      const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await openPDFDocument(file);
       let html = `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>${file.name}</title>\n  <style>\n    body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; }\n    .page { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #eee; }\n    .page-header { color: #666; font-size: 12px; margin-bottom: 16px; }\n    p { margin: 8px 0; }\n  </style>\n</head>\n<body>\n`;
 
       for (let i = 1; i <= pdf.numPages; i++) {
@@ -54,7 +51,8 @@ const PDFToHTML = () => {
 
         // Group by Y position for paragraphs
         const rows: Map<number, string[]> = new Map();
-        content.items.forEach((item: any) => {
+        content.items.forEach((item) => {
+          if (!("str" in item) || !("transform" in item)) return;
           const y = Math.round(item.transform[5] / 5) * 5;
           if (!rows.has(y)) rows.set(y, []);
           rows.get(y)!.push(item.str);

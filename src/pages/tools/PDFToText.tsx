@@ -6,12 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { FileText, Upload, Download, RotateCcw, Copy } from "lucide-react";
-import * as pdfjsLib from "pdfjs-dist";
 import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+import { openPDFDocument } from "@/lib/lazyLoaders";
 
 const PDFToText = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -42,13 +40,12 @@ const PDFToText = () => {
     setIsProcessing(true);
     setProgress(10);
     try {
-      const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await openPDFDocument(file);
       let result = "";
       for (let i = 1; i <= pdf.numPages; i++) {
         const page = await pdf.getPage(i);
         const content = await page.getTextContent();
-        result += content.items.map((item: any) => item.str).join(" ") + "\n\n";
+        result += content.items.map((item) => ("str" in item ? item.str : "")).join(" ") + "\n\n";
         setProgress(10 + (i / pdf.numPages) * 80);
       }
       setText(result.trim());

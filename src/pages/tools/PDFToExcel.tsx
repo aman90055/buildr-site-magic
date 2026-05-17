@@ -6,12 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { Table, Upload, Download, RotateCcw, Copy } from "lucide-react";
-import * as pdfjsLib from "pdfjs-dist";
 import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+import { openPDFDocument } from "@/lib/lazyLoaders";
 
 const PDFToExcel = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -42,8 +40,7 @@ const PDFToExcel = () => {
     setIsProcessing(true);
     setProgress(10);
     try {
-      const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await openPDFDocument(file);
       let allCsv = "";
 
       for (let i = 1; i <= pdf.numPages; i++) {
@@ -52,7 +49,8 @@ const PDFToExcel = () => {
 
         // Group items by Y position to detect rows
         const rows: Map<number, { x: number; text: string }[]> = new Map();
-        content.items.forEach((item: any) => {
+        content.items.forEach((item) => {
+          if (!("str" in item) || !("transform" in item)) return;
           const y = Math.round(item.transform[5]);
           if (!rows.has(y)) rows.set(y, []);
           rows.get(y)!.push({ x: item.transform[4], text: item.str });
