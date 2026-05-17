@@ -5,12 +5,10 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Image, Upload, Download, RotateCcw } from "lucide-react";
-import * as pdfjsLib from "pdfjs-dist";
 import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+import { openPDFDocument } from "@/lib/lazyLoaders";
 
 const PDFToPNG = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -42,8 +40,7 @@ const PDFToPNG = () => {
     setIsProcessing(true);
     setProgress(10);
     try {
-      const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await openPDFDocument(file);
       const pngs: string[] = [];
 
       for (let i = 1; i <= pdf.numPages; i++) {
