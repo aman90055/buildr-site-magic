@@ -1,11 +1,10 @@
 import { useState } from "react";
-import * as pdfjsLib from "pdfjs-dist";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import type { ConversionType } from "@/pages/PDFConvert";
+import { openPDFDocument } from "@/lib/lazyLoaders";
 
-// Set up the worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+type PDFDocumentProxy = Awaited<ReturnType<typeof openPDFDocument>>;
 
 export const usePDFConvert = () => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -23,7 +22,7 @@ export const usePDFConvert = () => {
       const arrayBuffer = await file.arrayBuffer();
       setProgress(10);
 
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await openPDFDocument(arrayBuffer);
       const numPages = pdf.numPages;
       setProgress(20);
 
@@ -73,7 +72,7 @@ export const usePDFConvert = () => {
     }
   };
 
-  const convertToImages = async (pdf: pdfjsLib.PDFDocumentProxy, numPages: number) => {
+  const convertToImages = async (pdf: PDFDocumentProxy, numPages: number) => {
     const urls: string[] = [];
     const scale = 2; // Higher scale for better quality
 
@@ -103,7 +102,7 @@ export const usePDFConvert = () => {
     setProgress(100);
   };
 
-  const extractText = async (pdf: pdfjsLib.PDFDocumentProxy, numPages: number) => {
+  const extractText = async (pdf: PDFDocumentProxy, numPages: number) => {
     let fullText = "";
 
     for (let i = 1; i <= numPages; i++) {
