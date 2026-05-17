@@ -9,6 +9,7 @@ import { Contrast, Download, Upload } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
+import { openPDFDocument } from "@/lib/lazyLoaders";
 
 const GrayscalePDF = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -29,9 +30,7 @@ const GrayscalePDF = () => {
     if (!file) return;
     setIsProcessing(true); setProgress(20);
     try {
-      const pdfjsLib = await import("pdfjs-dist");
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
-      const pdfDoc = await pdfjsLib.getDocument(await file.arrayBuffer()).promise;
+      const pdfDoc = await openPDFDocument(file);
       setProgress(30);
 
       const newPdf = await PDFDocument.create();
