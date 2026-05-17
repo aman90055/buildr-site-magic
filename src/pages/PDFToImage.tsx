@@ -5,10 +5,8 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useDropzone } from "react-dropzone";
 import { FileImage, Upload, Download, RotateCcw } from "lucide-react";
-import * as pdfjsLib from "pdfjs-dist";
 import { toast } from "sonner";
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+import { openPDFDocument } from "@/lib/lazyLoaders";
 
 const PDFToImage = () => {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
@@ -34,8 +32,7 @@ const PDFToImage = () => {
     setIsProcessing(true);
 
     try {
-      const arrayBuffer = await pdfFile.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await openPDFDocument(pdfFile);
       const pageImages: string[] = [];
 
       for (let i = 1; i <= pdf.numPages; i++) {
