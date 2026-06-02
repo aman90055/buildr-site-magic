@@ -34,13 +34,31 @@ const AdminPayments = () => {
   const navigate = useNavigate();
   const [payments, setPayments] = useState<PaymentVerification[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState<string>("all");
 
+  // Check admin role server-side
   useEffect(() => {
-    if (!authLoading && (!user || user.email !== ADMIN_EMAIL)) {
+    if (authLoading) return;
+    if (!user) {
       navigate("/");
+      return;
     }
+    (async () => {
+      const { data } = await supabase
+        .from("user_roles")
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("role", "admin")
+        .maybeSingle();
+      if (!data) {
+        setIsAdmin(false);
+        navigate("/");
+      } else {
+        setIsAdmin(true);
+      }
+    })();
   }, [user, authLoading, navigate]);
 
   const fetchPayments = async () => {
@@ -59,10 +77,10 @@ const AdminPayments = () => {
   };
 
   useEffect(() => {
-    if (user?.email === ADMIN_EMAIL) {
+    if (isAdmin) {
       fetchPayments();
     }
-  }, [user]);
+  }, [isAdmin]);
 
   const updateStatus = async (id: string, status: string) => {
     const payment = payments.find((p) => p.id === id);
