@@ -147,11 +147,11 @@ const AdminPayments = () => {
     totalRevenue: payments.filter((p) => p.status === "verified").reduce((sum, p) => sum + p.amount, 0),
   };
 
-  if (authLoading) {
+  if (authLoading || isAdmin === null) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   }
 
-  if (!user || user.email !== ADMIN_EMAIL) return null;
+  if (!isAdmin) return null;
 
   return (
     <>
