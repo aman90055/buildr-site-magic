@@ -1,5 +1,15 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
+import { z } from "https://esm.sh/zod@3.23.8";
+
+const requestSchema = z.object({
+  fileName: z.string().max(255),
+  fileSize: z.number().finite().nonnegative().max(500_000_000),
+  hasTextContent: z.boolean(),
+  hasImageContent: z.boolean(),
+});
+
+const sanitize = (s: string) => s.replace(/[\r\n`]/g, " ").slice(0, 255);
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
