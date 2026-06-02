@@ -1,5 +1,15 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
+import { z } from "https://esm.sh/zod@3.23.8";
+
+const requestSchema = z.object({
+  fileName: z.string().max(255),
+  fileSize: z.number().finite().nonnegative().max(500_000_000),
+  hasTextContent: z.boolean(),
+  hasImageContent: z.boolean(),
+});
+
+const sanitize = (s: string) => s.replace(/[\r\n`]/g, " ").slice(0, 255);
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -31,12 +41,16 @@ serve(async (req) => {
       return new Response(JSON.stringify({ error: "Rate limit exceeded" }), { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
 
-    const { fileName, fileSize, hasTextContent, hasImageContent } = await req.json();
+    const parsed = requestSchema.safeParse(await req.json());
+    if (!parsed.success) {
+      return new Response(JSON.stringify({ error: "Invalid input", details: parsed.error.flatten().fieldErrors }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
+    const { fileName, fileSize, hasTextContent, hasImageContent } = parsed.data;
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
     const fileSizeMB = (fileSize / (1024 * 1024)).toFixed(2);
-    const prompt = `Analyze this PDF file for optimal compression settings:\n- File name: ${fileName}\n- File size: ${fileSizeMB} MB\n- Contains text content: ${hasTextContent ? "Yes" : "No"}\n- Contains images: ${hasImageContent ? "Yes" : "No"}\n\nBased on this information, recommend the optimal compression level (1-100, where higher = more compression) and explain why.`;
+    const prompt = `Analyze this PDF file for optimal compression settings:\n- File name: ${sanitize(fileName)}\n- File size: ${fileSizeMB} MB\n- Contains text content: ${hasTextContent ? "Yes" : "No"}\n- Contains images: ${hasImageContent ? "Yes" : "No"}\n\nBased on this information, recommend the optimal compression level (1-100, where higher = more compression) and explain why.`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
