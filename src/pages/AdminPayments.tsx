@@ -14,7 +14,7 @@ import { toast } from "sonner";
 import { Shield, CheckCircle, XCircle, Clock, Search, RefreshCw, IndianRupee } from "lucide-react";
 import { format } from "date-fns";
 
-const ADMIN_EMAIL = "documentai999@gmail.com";
+
 
 interface PaymentVerification {
   id: string;
@@ -34,13 +34,31 @@ const AdminPayments = () => {
   const navigate = useNavigate();
   const [payments, setPayments] = useState<PaymentVerification[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState<string>("all");
 
+  // Check admin role server-side
   useEffect(() => {
-    if (!authLoading && (!user || user.email !== ADMIN_EMAIL)) {
+    if (authLoading) return;
+    if (!user) {
       navigate("/");
+      return;
     }
+    (async () => {
+      const { data } = await supabase
+        .from("user_roles")
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("role", "admin")
+        .maybeSingle();
+      if (!data) {
+        setIsAdmin(false);
+        navigate("/");
+      } else {
+        setIsAdmin(true);
+      }
+    })();
   }, [user, authLoading, navigate]);
 
   const fetchPayments = async () => {
@@ -59,10 +77,10 @@ const AdminPayments = () => {
   };
 
   useEffect(() => {
-    if (user?.email === ADMIN_EMAIL) {
+    if (isAdmin) {
       fetchPayments();
     }
-  }, [user]);
+  }, [isAdmin]);
 
   const updateStatus = async (id: string, status: string) => {
     const payment = payments.find((p) => p.id === id);
@@ -129,11 +147,11 @@ const AdminPayments = () => {
     totalRevenue: payments.filter((p) => p.status === "verified").reduce((sum, p) => sum + p.amount, 0),
   };
 
-  if (authLoading) {
+  if (authLoading || isAdmin === null) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   }
 
-  if (!user || user.email !== ADMIN_EMAIL) return null;
+  if (!isAdmin) return null;
 
   return (
     <>
