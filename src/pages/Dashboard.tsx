@@ -185,8 +185,9 @@ const Dashboard = () => {
               </Card>
             </div>
 
-            {/* Referral Widget */}
-            <div className="mb-8">
+            {/* Rewards Widgets */}
+            <div className="grid md:grid-cols-2 gap-4 mb-8">
+              <DailyCheckinWidget />
               <ReferralWidget />
             </div>
 
