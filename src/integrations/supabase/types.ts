@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      daily_checkins: {
+        Row: {
+          checkin_date: string
+          created_at: string
+          credits_earned: number
+          id: string
+          streak_day: number
+          user_id: string
+        }
+        Insert: {
+          checkin_date?: string
+          created_at?: string
+          credits_earned?: number
+          id?: string
+          streak_day?: number
+          user_id: string
+        }
+        Update: {
+          checkin_date?: string
+          created_at?: string
+          credits_earned?: number
+          id?: string
+          streak_day?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           email: string
@@ -326,6 +353,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      claim_daily_checkin: { Args: never; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

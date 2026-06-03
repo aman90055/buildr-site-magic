@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useAuth } from "@/hooks/useAuth";
+import DailyCheckinWidget from "@/components/DailyCheckinWidget";
 import { useReferral } from "@/hooks/useReferral";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -64,6 +65,11 @@ const ReferAndEarn = () => {
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Share PDF Tools with friends and earn credits, discounts, and points for every successful referral!
               </p>
+            </div>
+
+            {/* Daily Check-in */}
+            <div className="mb-8">
+              <DailyCheckinWidget />
             </div>
 
             {/* Referral Code & Share */}
