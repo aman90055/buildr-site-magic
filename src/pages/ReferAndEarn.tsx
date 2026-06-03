@@ -67,6 +67,11 @@ const ReferAndEarn = () => {
               </p>
             </div>
 
+            {/* Daily Check-in */}
+            <div className="mb-8">
+              <DailyCheckinWidget />
+            </div>
+
             {/* Referral Code & Share */}
             <Card className="mb-8 bg-card/50 backdrop-blur-sm border-border/50 overflow-hidden">
               <div className="bg-gradient-ai p-6 text-white">
