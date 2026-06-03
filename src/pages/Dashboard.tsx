@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import ReferralWidget from "@/components/ReferralWidget";
+import DailyCheckinWidget from "@/components/DailyCheckinWidget";
 import {
   LayoutDashboard, FileText, Clock, CheckCircle2, XCircle, Loader2,
   Merge, Scissors, FileDown, ImageIcon, FileImage, ScanText, Pencil,
