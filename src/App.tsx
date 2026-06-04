@@ -94,6 +94,7 @@ import LetterWriter from "./pages/tools/LetterWriter";
 import ReferAndEarn from "./pages/ReferAndEarn";
 import Premium from "./pages/Premium";
 import AdminPayments from "./pages/AdminPayments";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -197,6 +198,8 @@ const App = () => (
               <Route path="/refer" element={<ReferAndEarn />} />
               <Route path="/premium" element={<Premium />} />
               <Route path="/admin/payments" element={<AdminPayments />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
