@@ -14,6 +14,7 @@ import {
   Crown, Check, Zap, Shield, Sparkles, Star, Upload, 
   IndianRupee, ArrowRight, Clock, FileText, Users 
 } from "lucide-react";
+import RazorpayCheckoutButton from "@/components/RazorpayCheckoutButton";
 
 const Premium = () => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
@@ -200,13 +201,20 @@ const Premium = () => {
                         ))}
                       </ul>
                     </CardContent>
-                    <CardFooter>
-                      <Button 
-                        className="w-full group" 
-                        variant={plan.popular ? "default" : "outline"}
+                    <CardFooter className="flex flex-col gap-2">
+                      <RazorpayCheckoutButton
+                        plan={plan.id as "basic" | "pro" | "enterprise"}
+                        amount={parseInt(plan.price.replace("₹", ""))}
+                        planName={plan.name}
+                        className="w-full"
+                      />
+                      <Button
+                        className="w-full group"
+                        variant="outline"
+                        size="sm"
                         onClick={() => handlePayNow(plan.id)}
                       >
-                        Pay with UPI
+                        Or Pay with UPI (manual)
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </CardFooter>
