@@ -77,21 +77,21 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Activate premium (30 days)
+    // Activate premium (30 days) — deactivate old, insert new
     const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
     await admin
       .from("user_premium_status")
-      .upsert(
-        {
-          user_id: userId,
-          plan,
-          is_active: true,
-          activated_at: new Date().toISOString(),
-          expires_at: expiresAt,
-          payment_verification_id: pv.id,
-        },
-        { onConflict: "user_id" }
-      );
+      .update({ is_active: false })
+      .eq("user_id", userId);
+
+    await admin.from("user_premium_status").insert({
+      user_id: userId,
+      plan,
+      is_active: true,
+      activated_at: new Date().toISOString(),
+      expires_at: expiresAt,
+      payment_verification_id: pv.id,
+    });
 
     return new Response(JSON.stringify({ success: true, plan, expires_at: expiresAt }), {
       status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
