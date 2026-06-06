@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { X, Sparkles, Coffee, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { canShowExitIntent, markExitIntentShown } from "@/lib/siteSettings";
 
 /**
  * Exit-intent modal — converts leaving traffic into Premium / donations.
  * Triggers on desktop mouse-leave or mobile rapid scroll-up.
- * Once-per-session.
+ * Respects owner-configured enable flag + cooldown (default 3 days).
  */
 const ExitIntentOffer = () => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
+    if (!canShowExitIntent()) return;
     if (sessionStorage.getItem("exit-offer-shown")) return;
 
     let lastScrollY = window.scrollY;
@@ -19,7 +21,9 @@ const ExitIntentOffer = () => {
 
     const trigger = () => {
       if (sessionStorage.getItem("exit-offer-shown")) return;
+      if (!canShowExitIntent()) return;
       sessionStorage.setItem("exit-offer-shown", "1");
+      markExitIntentShown();
       setShow(true);
     };
 
