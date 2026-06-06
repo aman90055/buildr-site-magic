@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { ADSENSE_CLIENT, ADS_ENABLED, type AdSlotConfig, type AdFormat } from "@/lib/adSlots";
+import { isAdsEnabled } from "@/lib/siteSettings";
 
 interface AdSlotProps {
   /** Either pass a full config object (preferred) or just a slot id + format */
@@ -59,6 +60,8 @@ const AdSlot = ({
 
   // Global kill-switch: while AdSense review is pending, render no ad UI at all.
   if (!ADS_ENABLED) return null;
+  // Owner-tunable runtime switch (Admin Dashboard → Settings).
+  if (!isAdsEnabled()) return null;
 
   // Policy: only render ads on homepage and long-form content routes.
   // This prevents "Site Behavior: Navigation" violations where ads on tool/upload
