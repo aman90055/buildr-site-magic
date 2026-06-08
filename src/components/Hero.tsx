@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, FileText, Merge, Split, Minimize2, Sparkles, Brain, Zap, Shield, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import AIBadge from "./AIBadge";
+import { trackCTA, trackToolCard } from "@/lib/analytics";
 
 const tools = [
   { to: "/merge", icon: Merge, label: "Merge PDF", desc: "AI-optimized combining", color: "bg-brand-blue", ai: true },
