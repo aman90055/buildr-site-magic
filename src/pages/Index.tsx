@@ -6,7 +6,7 @@ import Features from "@/components/Features";
 import Stats from "@/components/Stats";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
-import AffiliateBanner from "@/components/ads/AffiliateBanner";
+import HomeContent from "@/components/HomeContent";
 import AdSlot from "@/components/ads/AdSlot";
 import { AD_SLOTS } from "@/lib/adSlots";
 
@@ -31,17 +31,12 @@ const Index = () => {
         <Header />
         <main>
           <Hero />
-          <AdSlot config={AD_SLOTS.header} className="max-w-5xl mx-auto px-4 py-6" />
-          <AffiliateBanner variant="horizontal" maxItems={2} className="py-6" />
           <PopularTools />
-          <AdSlot config={AD_SLOTS.midContent} className="max-w-5xl mx-auto px-4 py-6" />
-          <AffiliateBanner variant="compact" className="max-w-3xl mx-auto px-4 py-4" />
           <Features />
+          <HomeContent />
           <Stats />
-          <AdSlot config={AD_SLOTS.inArticle} className="max-w-3xl mx-auto px-4 py-6" />
+          {/* Single, modest ad slot well below the fold — AdSense friendlier */}
           <AdSlot config={AD_SLOTS.footer} className="max-w-5xl mx-auto px-4 py-6" />
-          <AffiliateBanner variant="horizontal" maxItems={2} className="py-6" />
-          <AffiliateBanner variant="sidebar" maxItems={3} className="max-w-3xl mx-auto px-4 py-4" />
           <CTA />
         </main>
         <Footer />
