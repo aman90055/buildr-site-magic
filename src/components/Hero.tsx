@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, FileText, Merge, Split, Minimize2, Sparkles, Brain, Zap, Shield, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import AIBadge from "./AIBadge";
+import { trackCTA, trackToolCard } from "@/lib/analytics";
 
 const tools = [
   { to: "/merge", icon: Merge, label: "Merge PDF", desc: "AI-optimized combining", color: "bg-brand-blue", ai: true },
@@ -29,99 +30,103 @@ const Hero = () => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.3)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.3)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]" />
       </div>
 
-      <div className="container relative mx-auto px-6 py-20 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="container relative mx-auto px-4 sm:px-6 py-14 sm:py-20 lg:py-24">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left Content */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* 2026 Badge */}
-            <div className="inline-flex items-center gap-3 animate-fade-in">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-primary/20 text-primary text-sm font-medium">
+            <div className="inline-flex flex-wrap items-center gap-2 sm:gap-3 animate-fade-in">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass border-primary/20 text-primary text-xs sm:text-sm font-medium">
                 <Sparkles className="w-4 h-4" />
-                <span className="font-display">2026 Edition</span>
+                <span className="font-display tracking-wide">2026 Edition</span>
               </div>
               <AIBadge />
             </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-foreground leading-[1.1] tracking-tight animate-fade-in" style={{ animationDelay: "0.1s" }}>
+
+            <h1
+              className="text-[2.25rem] leading-[1.05] sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold tracking-tight animate-fade-in bg-gradient-to-br from-foreground via-primary to-brand-ai bg-clip-text text-transparent drop-shadow-[0_2px_12px_hsl(var(--primary)/0.25)]"
+              style={{ animationDelay: "0.1s" }}
+            >
               Free PDF Tools Online
             </h1>
-            
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
-              Merge, split, compress, convert & edit PDFs free online. 50+ AI-powered tools — 
+
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
+              Merge, split, compress, convert & edit PDFs free online. 50+ AI-powered tools —
               no signup needed. Fast, secure & made in India 🇮🇳
             </p>
 
             {/* Feature badges */}
-            <div className="flex flex-wrap gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+            <div className="flex flex-wrap gap-2 sm:gap-3 animate-fade-in" style={{ animationDelay: "0.3s" }}>
               {features.map((feature, i) => (
-                <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm">
+                <div key={i} className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full glass-card text-xs sm:text-sm">
                   <feature.icon className={`w-4 h-4 ${feature.color}`} />
-                  <span className="font-medium text-foreground">{feature.title}</span>
+                  <span className="font-medium text-foreground whitespace-nowrap">{feature.title}</span>
                 </div>
               ))}
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-              <Button size="lg" className="text-base shadow-cta group bg-gradient-ai hover:opacity-90 transition-opacity h-14 px-8 rounded-2xl font-display font-semibold" asChild>
-                <Link to="/merge">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+              <Button size="lg" className="text-base shadow-cta group bg-gradient-ai hover:opacity-90 transition-opacity h-12 sm:h-14 px-6 sm:px-8 rounded-2xl font-display font-semibold w-full sm:w-auto" asChild>
+                <Link to="/merge" onClick={() => trackCTA("Start Free with AI", "hero", "/merge")}>
                   Start Free with AI
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="text-base h-14 px-8 rounded-2xl glass border-border hover:bg-muted/50 font-display" asChild>
-                <a href="#tools">Explore All Tools</a>
+              <Button size="lg" variant="outline" className="text-base h-12 sm:h-14 px-6 sm:px-8 rounded-2xl glass border-border hover:bg-muted/50 font-display w-full sm:w-auto" asChild>
+                <a href="#tools" onClick={() => trackCTA("Explore All Tools", "hero", "#tools")}>Explore All Tools</a>
               </Button>
             </div>
 
             {/* Trust Stats */}
-            <div className="flex items-center gap-8 pt-4 animate-fade-in" style={{ animationDelay: "0.5s" }}>
+            <div className="flex flex-wrap items-center gap-4 sm:gap-8 pt-2 sm:pt-4 animate-fade-in" style={{ animationDelay: "0.5s" }}>
               <div className="text-center">
-                <div className="text-2xl font-display font-bold text-foreground">2M+</div>
-                <div className="text-xs text-muted-foreground">PDFs Processed</div>
+                <div className="text-xl sm:text-2xl font-display font-bold text-foreground">2M+</div>
+                <div className="text-[11px] sm:text-xs text-muted-foreground">PDFs Processed</div>
               </div>
-              <div className="w-px h-10 bg-border" />
+              <div className="w-px h-8 sm:h-10 bg-border" />
               <div className="text-center">
-                <div className="text-2xl font-display font-bold text-foreground">99.9%</div>
-                <div className="text-xs text-muted-foreground">Accuracy Rate</div>
+                <div className="text-xl sm:text-2xl font-display font-bold text-foreground">99.9%</div>
+                <div className="text-[11px] sm:text-xs text-muted-foreground">Accuracy Rate</div>
               </div>
-              <div className="w-px h-10 bg-border" />
+              <div className="w-px h-8 sm:h-10 bg-border" />
               <div className="text-center">
-                <div className="text-2xl font-display font-bold text-foreground">150+</div>
-                <div className="text-xs text-muted-foreground">Countries</div>
+                <div className="text-xl sm:text-2xl font-display font-bold text-foreground">150+</div>
+                <div className="text-[11px] sm:text-xs text-muted-foreground">Countries</div>
               </div>
             </div>
           </div>
 
           {/* Right - Tool Cards */}
-          <div className="grid grid-cols-2 gap-4 animate-slide-in-right">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 animate-slide-in-right">
             {tools.map((tool, i) => (
               <Link
                 key={tool.to}
                 to={tool.to}
-                className="group relative p-6 glass-card rounded-3xl hover:shadow-card-hover transition-all duration-500 animate-fade-in overflow-hidden"
+                onClick={() => trackToolCard(tool.label.toLowerCase().replace(/\s+/g, "_"), "hero")}
+                className="group relative p-4 sm:p-6 glass-card rounded-2xl sm:rounded-3xl hover:shadow-card-hover transition-all duration-500 animate-fade-in overflow-hidden"
                 style={{ animationDelay: `${0.4 + i * 0.1}s` }}
               >
                 {/* AI Badge */}
                 {tool.ai && (
-                  <div className="absolute top-3 right-3">
+                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3">
                     <AIBadge variant="small" glow={false} />
                   </div>
                 )}
-                
+
                 {/* Hover Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-ai opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl" />
-                
-                <div className={`w-14 h-14 ${tool.color} rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}>
-                  <tool.icon className="w-7 h-7 text-white" />
+                <div className="absolute inset-0 bg-gradient-ai opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl sm:rounded-3xl" />
+
+                <div className={`w-11 h-11 sm:w-14 sm:h-14 ${tool.color} rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-5 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}>
+                  <tool.icon className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
                 </div>
-                <h3 className="font-display font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
+                <h3 className="font-display font-semibold text-base sm:text-lg text-foreground mb-1 sm:mb-2 group-hover:text-primary transition-colors">
                   {tool.label}
                 </h3>
-                <p className="text-sm text-muted-foreground">{tool.desc}</p>
-                
+                <p className="text-xs sm:text-sm text-muted-foreground">{tool.desc}</p>
+
                 {/* Arrow indicator */}
-                <div className="mt-4 flex items-center text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-[-10px] group-hover:translate-x-0">
+                <div className="mt-3 sm:mt-4 hidden sm:flex items-center text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-[-10px] group-hover:translate-x-0">
                   <span className="text-sm font-medium">Try now</span>
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </div>
