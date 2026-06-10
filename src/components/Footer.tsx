@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { Sparkles, Heart, Coffee } from "lucide-react";
+import ToolSEOSection from "@/components/ToolSEOSection";
 
 const Footer = () => {
   return (
+    <>
+    <ToolSEOSection />
     <footer className="bg-muted/30 border-t border-border py-16 relative overflow-hidden" role="contentinfo" aria-label="Site footer">
       {/* Background decoration */}
       <div className="absolute bottom-0 left-0 w-[400px] h-[200px] bg-gradient-to-tr from-primary/5 to-transparent rounded-full blur-3xl" />
@@ -132,6 +135,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+    </>
   );
 };
 
