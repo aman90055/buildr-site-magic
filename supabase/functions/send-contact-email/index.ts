@@ -49,7 +49,7 @@ const handler = async (req: Request): Promise<Response> => {
       return new Response(JSON.stringify({ error: "Email service not configured" }), { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } });
     }
 
-    const OWNER_EMAIL = Deno.env.get("CONTACT_OWNER_EMAIL") || "documentai999@gmail.com";
+    const OWNER_EMAIL = Deno.env.get("CONTACT_OWNER_EMAIL") || "support@documenteditpro.ai";
 
     const emailResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",

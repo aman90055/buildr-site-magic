@@ -73,7 +73,7 @@ const Careers = () => {
                   </p>
                 </div>
                 <Button asChild>
-                  <a href={`mailto:documentai999@gmail.com?subject=Application — ${o.title}`}>
+                  <a href={`mailto:support@documenteditpro.ai?subject=Application — ${o.title}`}>
                     Apply
                   </a>
                 </Button>
@@ -89,7 +89,7 @@ const Careers = () => {
             We're always open to exceptional people. Tell us how you'd help.
           </p>
           <Button asChild>
-            <a href="mailto:documentai999@gmail.com?subject=Open application">Send open application</a>
+            <a href="mailto:support@documenteditpro.ai?subject=Open application">Send open application</a>
           </Button>
         </section>
       </main>

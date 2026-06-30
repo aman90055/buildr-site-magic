@@ -6,7 +6,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const ADMIN_EMAIL = "documentai999@gmail.com";
+const ADMIN_EMAIL = "support@documenteditpro.ai";
 
 function escapeHtml(text: string): string {
   const map: Record<string, string> = {

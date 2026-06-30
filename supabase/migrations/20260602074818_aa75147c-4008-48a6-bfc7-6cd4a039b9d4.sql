@@ -33,7 +33,7 @@ $$;
 INSERT INTO public.user_roles (user_id, role)
 SELECT id, 'admin'::public.app_role
 FROM auth.users
-WHERE email = 'documentai999@gmail.com'
+WHERE email = 'support@documenteditpro.ai'
 ON CONFLICT DO NOTHING;
 
 -- 2. Fix payment_verifications
