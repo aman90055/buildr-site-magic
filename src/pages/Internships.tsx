@@ -47,7 +47,7 @@ const Internships = () => {
               <p className="text-sm text-muted-foreground mb-3">{t.focus}</p>
               <p className="text-sm font-medium text-foreground">{t.stipend}</p>
               <Button className="mt-4" asChild>
-                <a href={`mailto:support@documenteditpro.ai?subject=Internship application — ${t.title}`}>
+                <a href={`mailto:documentai999@gmail.com?subject=Internship application — ${t.title}`}>
                   Apply now
                 </a>
               </Button>
