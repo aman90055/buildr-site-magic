@@ -228,6 +228,16 @@ const App = () => (
                 <Route path="/ai-grammar-check" element={<AIGrammarCheck />} />
                 <Route path="/ai-rewriter" element={<AIRewriter />} />
                 <Route path="/ai-data-extractor" element={<AIDataExtractor />} />
+                <Route path="/ai-cover-letter" element={<AICoverLetter />} />
+                <Route path="/ai-email-writer" element={<AIEmailWriter />} />
+                <Route path="/ai-blog-writer" element={<AIBlogWriter />} />
+                <Route path="/ai-code-explainer" element={<AICodeExplainer />} />
+                <Route path="/ai-math-solver" element={<AIMathSolver />} />
+                <Route path="/ai-idea-generator" element={<AIIdeaGenerator />} />
+                <Route path="/ai-hashtag-generator" element={<AIHashtagGenerator />} />
+                <Route path="/ai-youtube-titles" element={<AIYouTubeTitles />} />
+                <Route path="/ai-tweet-generator" element={<AITweetGenerator />} />
+                <Route path="/ai-resume-analyzer" element={<AIResumeAnalyzer />} />
                 <Route path="/resume-builder" element={<ResumeBuilder />} />
                 <Route path="/invoice-generator" element={<InvoiceGenerator />} />
                 <Route path="/certificate-maker" element={<CertificateMaker />} />
