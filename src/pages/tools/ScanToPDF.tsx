@@ -171,6 +171,12 @@ const ScanToPDF = () => {
                     </p>
                   </div>
 
+                  <div className="flex justify-center">
+                    <CameraCapture onCapture={handleCameraCapture} disabled={isProcessing} />
+                  </div>
+
+
+
                   {previews.length > 0 && (
                     <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
                       {previews.map((preview, index) => (
