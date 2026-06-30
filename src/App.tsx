@@ -128,6 +128,7 @@ const Careers = lazy(() => import("./pages/Careers"));
 const Internships = lazy(() => import("./pages/Internships"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const CaseStudies = lazy(() => import("./pages/CaseStudies"));
+const Tools = lazy(() => import("./pages/Tools"));
 
 const queryClient = new QueryClient();
 
