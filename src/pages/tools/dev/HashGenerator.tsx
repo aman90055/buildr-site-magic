@@ -8,6 +8,13 @@ import { toast } from "@/hooks/use-toast";
 
 const ALGOS = ["SHA-1", "SHA-256", "SHA-384", "SHA-512"] as const;
 
+const DEV_RELATED = [
+  { name: "UUID Generator", href: "/tools/uuid-generator" },
+  { name: "JWT Decoder", href: "/tools/jwt-decoder" },
+  { name: "Base64", href: "/tools/base64" },
+  { name: "Password Generator", href: "/tools/password-generator" },
+];
+
 async function hash(text: string, algo: typeof ALGOS[number]) {
   const buf = new TextEncoder().encode(text);
   const digest = await crypto.subtle.digest(algo, buf);
