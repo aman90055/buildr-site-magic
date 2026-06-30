@@ -134,7 +134,7 @@ const About = () => {
                         <h3 className="text-xl font-semibold">Aman Vishwakarma</h3>
                         <p className="text-sm text-muted-foreground mb-3">Founder & Lead Developer</p>
                         <div className="flex items-center gap-3">
-                          <a href="https://www.linkedin.com/in/aman-vishwakarma-446708294" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-[hsl(210,80%,40%)]/10 hover:bg-[hsl(210,80%,40%)]/20 flex items-center justify-center transition-colors">
+                          <a href="https://www.linkedin.com/in/aman-vishwakarma-ai/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-[hsl(210,80%,40%)]/10 hover:bg-[hsl(210,80%,40%)]/20 flex items-center justify-center transition-colors">
                             <Linkedin className="w-4 h-4 text-[hsl(210,80%,40%)]" />
                           </a>
                           <a href="https://x.com/AmanVishwa15356" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors">
