@@ -16,35 +16,47 @@ export type Database = {
     Tables: {
       contact_messages: {
         Row: {
+          attempts: number
           created_at: string
           delivery_status: string
           email: string
           id: string
+          last_attempt_at: string | null
           message: string
           name: string
+          next_retry_at: string | null
           provider_error: Json | null
+          sent_at: string | null
           subject: string
           updated_at: string
         }
         Insert: {
+          attempts?: number
           created_at?: string
           delivery_status?: string
           email: string
           id?: string
+          last_attempt_at?: string | null
           message: string
           name: string
+          next_retry_at?: string | null
           provider_error?: Json | null
+          sent_at?: string | null
           subject: string
           updated_at?: string
         }
         Update: {
+          attempts?: number
           created_at?: string
           delivery_status?: string
           email?: string
           id?: string
+          last_attempt_at?: string | null
           message?: string
           name?: string
+          next_retry_at?: string | null
           provider_error?: Json | null
+          sent_at?: string | null
           subject?: string
           updated_at?: string
         }
