@@ -39,13 +39,16 @@ const Index = () => {
         <main>
           <Hero />
           <PartnerLogos />
+          <AdsterraBanner728 />
           <PopularTools />
           <AnimatedStatsSection />
           <Features />
           <PromoCards className="py-12" location="home_features" />
+          <AdsterraNative />
           <HomeSections />
           <TestimonialsCarousel />
           <HomeContent />
+          <div className="flex justify-center py-6"><AdsterraBanner300 /></div>
           <Stats />
           <AdSlot config={AD_SLOTS.footer} className="max-w-5xl mx-auto px-4 py-6" />
           <CTA />
