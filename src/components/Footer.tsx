@@ -84,6 +84,10 @@ const Footer = () => {
               <li><Link to="/refer" className="text-muted-foreground hover:text-foreground transition-colors">Refer & Earn</Link></li>
               <li><Link to="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</Link></li>
               <li><Link to="/faq" className="text-muted-foreground hover:text-foreground transition-colors">FAQ</Link></li>
+              <li><Link to="/help" className="text-muted-foreground hover:text-foreground transition-colors">Help Center</Link></li>
+              <li><Link to="/roadmap" className="text-muted-foreground hover:text-foreground transition-colors">Roadmap</Link></li>
+              <li><Link to="/changelog" className="text-muted-foreground hover:text-foreground transition-colors">Changelog</Link></li>
+              <li><Link to="/newsletter" className="text-muted-foreground hover:text-foreground transition-colors">Newsletter</Link></li>
               <li><Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</Link></li>
               <li><Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link></li>
             </ul>

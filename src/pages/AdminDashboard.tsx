@@ -71,6 +71,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [payments, setPayments] = useState<PaymentRow[]>([]);
   const [users, setUsers] = useState<AuthUser[]>([]);
+  const [toolUsage, setToolUsage] = useState<{ job_type: string; total: number; completed: number; failed: number }[]>([]);
   const [search, setSearch] = useState("");
 
   // Date range
@@ -110,9 +111,10 @@ const AdminDashboard = () => {
 
   const fetchAll = async () => {
     setLoading(true);
-    const [paymentsRes, usersRes] = await Promise.all([
+    const [paymentsRes, usersRes, jobsRes] = await Promise.all([
       supabase.from("payment_verifications").select("id, amount, plan, status, created_at, email").order("created_at", { ascending: false }),
       supabase.functions.invoke("admin-users-list", { method: "GET" }),
+      supabase.from("pdf_jobs").select("job_type, status").limit(5000).order("created_at", { ascending: false }),
     ]);
 
     if (paymentsRes.error) toast.error("Failed to load payments");
@@ -120,6 +122,24 @@ const AdminDashboard = () => {
 
     if (usersRes.error) toast.error("Failed to load users: " + usersRes.error.message);
     else setUsers((usersRes.data as { users: AuthUser[] })?.users || []);
+
+    if (!jobsRes.error && jobsRes.data) {
+      const agg = new Map<string, { total: number; completed: number; failed: number }>();
+      for (const row of jobsRes.data as { job_type: string; status: string }[]) {
+        const k = row.job_type || "unknown";
+        const a = agg.get(k) ?? { total: 0, completed: 0, failed: 0 };
+        a.total += 1;
+        if (row.status === "completed") a.completed += 1;
+        else if (row.status === "failed") a.failed += 1;
+        agg.set(k, a);
+      }
+      setToolUsage(
+        Array.from(agg.entries())
+          .map(([job_type, v]) => ({ job_type, ...v }))
+          .sort((a, b) => b.total - a.total)
+          .slice(0, 12),
+      );
+    }
 
     setLoading(false);
   };
@@ -486,6 +506,49 @@ const AdminDashboard = () => {
                             <TableCell className="text-sm text-muted-foreground">
                               {r.lastSeen ? format(new Date(r.lastSeen), "dd MMM, HH:mm") : "—"}
                             </TableCell>
+                          </TableRow>
+                        );
+                      })
+                    )}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+
+            {/* Tool Usage */}
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Activity className="w-5 h-5" /> Top Tools by Usage
+                </CardTitle>
+                <p className="text-xs text-muted-foreground">
+                  Aggregated from {toolUsage.reduce((s, r) => s + r.total, 0).toLocaleString()} recent jobs
+                </p>
+              </CardHeader>
+              <CardContent className="p-0">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Tool</TableHead>
+                      <TableHead className="text-right">Total</TableHead>
+                      <TableHead className="text-right">Completed</TableHead>
+                      <TableHead className="text-right">Failed</TableHead>
+                      <TableHead className="text-right">Success rate</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {toolUsage.length === 0 ? (
+                      <TableRow><TableCell colSpan={5} className="text-center py-8 text-muted-foreground">No job data yet</TableCell></TableRow>
+                    ) : (
+                      toolUsage.map((r) => {
+                        const rate = r.total > 0 ? ((r.completed / r.total) * 100).toFixed(0) : "—";
+                        return (
+                          <TableRow key={r.job_type}>
+                            <TableCell className="font-medium capitalize">{r.job_type.replace(/[-_]/g, " ")}</TableCell>
+                            <TableCell className="text-right">{r.total.toLocaleString()}</TableCell>
+                            <TableCell className="text-right text-green-600">{r.completed.toLocaleString()}</TableCell>
+                            <TableCell className="text-right text-red-600">{r.failed.toLocaleString()}</TableCell>
+                            <TableCell className="text-right">{rate === "—" ? "—" : `${rate}%`}</TableCell>
                           </TableRow>
                         );
                       })
