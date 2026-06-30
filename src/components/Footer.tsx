@@ -151,7 +151,7 @@ const Footer = () => {
           <div className="flex items-center gap-6">
             <a href="https://x.com/AmanVishwa15356" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">X (Twitter)</a>
             <a href="https://www.linkedin.com/in/aman-vishwakarma-ai/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">LinkedIn</a>
-            <a href="https://github.com/amanvishwakarma" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
+            <a href="https://github.com/aman90055" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
           </div>
         </div>
       </div>
