@@ -140,7 +140,21 @@ const FAQ = () => {
       <Helmet>
         <title>FAQ - Document Editor | Frequently Asked Questions</title>
         <meta name="description" content="Find answers to common questions about Document Editor's PDF tools, features, pricing, and security. Get help with merging, compressing, converting, and more." />
+        <link rel="canonical" href="https://docunova-ai.lovable.app/faq" />
+        <meta property="og:title" content="FAQ - Document Editor | Frequently Asked Questions" />
+        <meta property="og:description" content="Answers to common questions about Document Editor's PDF tools, features, pricing, and security." />
+        <meta property="og:url" content="https://docunova-ai.lovable.app/faq" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqCategories.flatMap(c => c.faqs).map(f => ({
+            "@type": "Question",
+            name: f.question,
+            acceptedAnswer: { "@type": "Answer", text: f.answer }
+          }))
+        })}</script>
       </Helmet>
+
       
       <div className="min-h-screen flex flex-col bg-background">
         <Header />
