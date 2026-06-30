@@ -12,9 +12,10 @@ const tools = [
 ];
 
 const features = [
-  { icon: Brain, title: "AI-Powered", desc: "Next-gen document intelligence", color: "text-brand-ai" },
-  { icon: Zap, title: "Lightning Fast", desc: "Process in milliseconds", color: "text-brand-cyan" },
-  { icon: Shield, title: "Bank-Grade Security", desc: "End-to-end encryption", color: "text-brand-green" },
+  { icon: Brain, title: "AI-Powered Automation", color: "text-brand-ai" },
+  { icon: Zap, title: "Fast Processing", color: "text-brand-cyan" },
+  { icon: Shield, title: "Enterprise-Grade Security", color: "text-brand-green" },
+  { icon: Globe, title: "Mobile Optimized", color: "text-brand-purple" },
 ];
 
 const Hero = () => {
