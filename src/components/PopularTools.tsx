@@ -437,7 +437,7 @@ const PopularTools = () => {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search 70+ tools — try 'compress', 'word', 'ocr'…"
+              placeholder="Search 100+ tools — try 'compress', 'word', 'ocr'…"
               aria-label="Search tools"
               className="flex-1 bg-transparent px-3 py-3.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
             />
