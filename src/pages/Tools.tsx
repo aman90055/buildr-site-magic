@@ -141,46 +141,46 @@ export default function Tools() {
 
       <Header />
 
-      <main className="pt-24 pb-16">
-        <div className="container mx-auto px-4 max-w-7xl">
-          {/* Hero */}
-          <div className="text-center mb-10">
-            <Badge variant="secondary" className="mb-4 gap-1.5">
-              <LayoutGrid className="h-3.5 w-3.5" />
-              {allTools.length}+ tools available
+      <main className="pt-20 pb-10">
+        <div className="container mx-auto px-4 max-w-6xl">
+          {/* Hero — compact */}
+          <div className="text-center mb-5">
+            <Badge variant="secondary" className="mb-2 gap-1.5 text-xs">
+              <LayoutGrid className="h-3 w-3" />
+              {allTools.length}+ tools
             </Badge>
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-3">
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-1">
               Find the right tool, fast
             </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Search by name, action or file type. Filter by category. Every tool runs free, in your browser, with no signup.
+            <p className="text-muted-foreground text-sm max-w-xl mx-auto">
+              Search by name or filter by category. All free, in-browser.
             </p>
           </div>
 
           {/* Search */}
-          <div className="relative max-w-2xl mx-auto mb-8">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+          <div className="relative max-w-xl mx-auto mb-4">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search merge, compress, OCR, translate, resume…"
-              className="pl-12 pr-12 h-14 text-base rounded-2xl bg-card/50 backdrop-blur-xl border-border/60 focus-visible:ring-2 focus-visible:ring-primary/40"
+              placeholder="Search merge, compress, OCR, translate…"
+              className="pl-9 pr-9 h-10 text-sm rounded-xl bg-card/50 backdrop-blur-xl border-border/60"
               aria-label="Search tools"
             />
             {query && (
               <button
                 onClick={() => setQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition"
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition"
                 aria-label="Clear search"
               >
-                <X className="h-4 w-4" />
+                <X className="h-3.5 w-3.5" />
               </button>
             )}
           </div>
 
-          {/* Category chips */}
-          <div className="flex flex-wrap justify-center gap-2 mb-10">
+          {/* Category chips — compact */}
+          <div className="flex flex-wrap justify-center gap-1.5 mb-5">
             {categories.map(c => {
               const active = activeCategory === c.key;
               return (
@@ -188,14 +188,14 @@ export default function Tools() {
                   key={c.key}
                   onClick={() => setActiveCategory(c.key)}
                   className={[
-                    "px-4 py-2 rounded-full text-sm font-medium border transition-all",
+                    "px-2.5 py-1 rounded-full text-xs font-medium border transition-all",
                     active
-                      ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20"
+                      ? "bg-primary text-primary-foreground border-primary"
                       : "bg-card/40 backdrop-blur border-border/60 text-muted-foreground hover:text-foreground hover:border-border",
                   ].join(" ")}
                 >
                   {c.label}
-                  <span className={`ml-2 text-xs ${active ? "opacity-80" : "opacity-60"}`}>
+                  <span className={`ml-1 text-[10px] ${active ? "opacity-80" : "opacity-60"}`}>
                     {c.count}
                   </span>
                 </button>
@@ -205,25 +205,25 @@ export default function Tools() {
 
           {/* Results */}
           {filtered.length === 0 ? (
-            <div className="text-center py-20">
-              <Search className="h-10 w-10 mx-auto text-muted-foreground/50 mb-3" />
-              <p className="text-lg font-medium mb-1">No tools match “{query}”</p>
-              <p className="text-sm text-muted-foreground mb-6">
-                Try a broader keyword like “pdf”, “image”, or “ai”.
+            <div className="text-center py-12">
+              <Search className="h-8 w-8 mx-auto text-muted-foreground/50 mb-2" />
+              <p className="text-sm font-medium mb-1">No tools match “{query}”</p>
+              <p className="text-xs text-muted-foreground mb-4">
+                Try “pdf”, “image”, or “ai”.
               </p>
-              <Button variant="outline" onClick={() => { setQuery(""); setActiveCategory("all"); }}>
+              <Button size="sm" variant="outline" onClick={() => { setQuery(""); setActiveCategory("all"); }}>
                 Reset filters
               </Button>
             </div>
           ) : (
             <>
-              <p className="text-sm text-muted-foreground mb-4">
-                Showing <span className="font-semibold text-foreground">{filtered.length}</span> tool{filtered.length === 1 ? "" : "s"}
+              <p className="text-xs text-muted-foreground mb-3">
+                <span className="font-semibold text-foreground">{filtered.length}</span> tool{filtered.length === 1 ? "" : "s"}
                 {activeCategory !== "all" && activeCategory !== "recent" && (
-                  <> in <span className="font-semibold text-foreground">{CATEGORY_META[activeCategory].title}</span></>
+                  <> · {CATEGORY_META[activeCategory].title}</>
                 )}
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5">
                 {filtered.map(tool => {
                   const Icon = CATEGORY_ICONS[tool.category];
                   return (
@@ -231,26 +231,15 @@ export default function Tools() {
                       key={tool.slug}
                       to={tool.slug}
                       onClick={() => pushRecent(tool.slug)}
-                      className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-2xl"
+                      className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
+                      title={tool.short}
                     >
-                      <Card className="h-full p-5 bg-card/50 backdrop-blur-xl border-border/60 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-0.5">
-                        <div className="flex items-start gap-3 mb-3">
-                          <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                            <Icon className="h-5 w-5 text-primary" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h3 className="font-semibold leading-tight mb-0.5 truncate">{tool.name}</h3>
-                            <Badge variant="outline" className="text-[10px] uppercase tracking-wide px-1.5 py-0">
-                              {tool.category}
-                            </Badge>
-                          </div>
+                      <Card className="h-full p-3 bg-card/50 backdrop-blur-xl border-border/60 hover:border-primary/40 hover:shadow-md hover:shadow-primary/5 transition-all duration-200 hover:-translate-y-0.5">
+                        <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                          <Icon className="h-4 w-4 text-primary" />
                         </div>
-                        <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
-                          {tool.short}
-                        </p>
-                        <div className="flex items-center text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                          Open tool <ArrowRight className="h-3.5 w-3.5 ml-1 group-hover:translate-x-0.5 transition-transform" />
-                        </div>
+                        <h3 className="font-semibold text-xs leading-tight line-clamp-2 mb-0.5">{tool.name}</h3>
+                        <p className="text-[10px] uppercase tracking-wide text-muted-foreground/70">{tool.category}</p>
                       </Card>
                     </Link>
                   );
@@ -259,10 +248,10 @@ export default function Tools() {
             </>
           )}
 
-          {/* Category quick-jump */}
-          <div className="mt-16 pt-10 border-t border-border/50">
-            <h2 className="text-2xl font-bold mb-6 text-center">Browse by category</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          {/* Category quick-jump — compact */}
+          <div className="mt-10 pt-6 border-t border-border/50">
+            <h2 className="text-sm font-semibold mb-3 text-center text-muted-foreground uppercase tracking-wide">Browse by category</h2>
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2">
               {(Object.keys(CATEGORY_META) as ToolCategory[]).map(c => {
                 const Icon = CATEGORY_ICONS[c];
                 const count = allTools.filter(t => t.category === c).length;
@@ -270,11 +259,11 @@ export default function Tools() {
                   <Link
                     key={c}
                     to={`/category/${c}`}
-                    className="group p-4 rounded-xl bg-card/40 backdrop-blur border border-border/60 hover:border-primary/50 transition-all"
+                    className="group p-2.5 rounded-lg bg-card/40 backdrop-blur border border-border/60 hover:border-primary/50 transition-all text-center"
                   >
-                    <Icon className="h-6 w-6 text-primary mb-2" />
-                    <div className="font-semibold text-sm">{CATEGORY_META[c].title}</div>
-                    <div className="text-xs text-muted-foreground mt-1">{count} tools →</div>
+                    <Icon className="h-4 w-4 text-primary mx-auto mb-1" />
+                    <div className="font-semibold text-xs leading-tight">{c}</div>
+                    <div className="text-[10px] text-muted-foreground">{count}</div>
                   </Link>
                 );
               })}
