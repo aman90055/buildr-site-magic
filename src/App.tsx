@@ -83,6 +83,16 @@ const AITranslator = lazy(() => import("./pages/tools/AITranslator"));
 const AIGrammarCheck = lazy(() => import("./pages/tools/AIGrammarCheck"));
 const AIRewriter = lazy(() => import("./pages/tools/AIRewriter"));
 const AIDataExtractor = lazy(() => import("./pages/tools/AIDataExtractor"));
+const AICoverLetter = lazy(() => import("./pages/tools/AICoverLetter"));
+const AIEmailWriter = lazy(() => import("./pages/tools/AIEmailWriter"));
+const AIBlogWriter = lazy(() => import("./pages/tools/AIBlogWriter"));
+const AICodeExplainer = lazy(() => import("./pages/tools/AICodeExplainer"));
+const AIMathSolver = lazy(() => import("./pages/tools/AIMathSolver"));
+const AIIdeaGenerator = lazy(() => import("./pages/tools/AIIdeaGenerator"));
+const AIHashtagGenerator = lazy(() => import("./pages/tools/AIHashtagGenerator"));
+const AIYouTubeTitles = lazy(() => import("./pages/tools/AIYouTubeTitles"));
+const AITweetGenerator = lazy(() => import("./pages/tools/AITweetGenerator"));
+const AIResumeAnalyzer = lazy(() => import("./pages/tools/AIResumeAnalyzer"));
 const ResumeBuilder = lazy(() => import("./pages/tools/ResumeBuilder"));
 const InvoiceGenerator = lazy(() => import("./pages/tools/InvoiceGenerator"));
 const CertificateMaker = lazy(() => import("./pages/tools/CertificateMaker"));
@@ -218,6 +228,16 @@ const App = () => (
                 <Route path="/ai-grammar-check" element={<AIGrammarCheck />} />
                 <Route path="/ai-rewriter" element={<AIRewriter />} />
                 <Route path="/ai-data-extractor" element={<AIDataExtractor />} />
+                <Route path="/ai-cover-letter" element={<AICoverLetter />} />
+                <Route path="/ai-email-writer" element={<AIEmailWriter />} />
+                <Route path="/ai-blog-writer" element={<AIBlogWriter />} />
+                <Route path="/ai-code-explainer" element={<AICodeExplainer />} />
+                <Route path="/ai-math-solver" element={<AIMathSolver />} />
+                <Route path="/ai-idea-generator" element={<AIIdeaGenerator />} />
+                <Route path="/ai-hashtag-generator" element={<AIHashtagGenerator />} />
+                <Route path="/ai-youtube-titles" element={<AIYouTubeTitles />} />
+                <Route path="/ai-tweet-generator" element={<AITweetGenerator />} />
+                <Route path="/ai-resume-analyzer" element={<AIResumeAnalyzer />} />
                 <Route path="/resume-builder" element={<ResumeBuilder />} />
                 <Route path="/invoice-generator" element={<InvoiceGenerator />} />
                 <Route path="/certificate-maker" element={<CertificateMaker />} />

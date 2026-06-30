@@ -11,6 +11,7 @@ import { toast } from "@/hooks/use-toast";
 import AIBadge from "@/components/AIBadge";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
+import CameraCapture from "@/components/CameraCapture";
 
 const OCR = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -45,6 +46,14 @@ const OCR = () => {
       reader.readAsDataURL(droppedFile);
     }
   };
+  const handleCameraCapture = (capturedFile: File) => {
+    if (!checkFileSizeLimit(capturedFile, isPremium)) return;
+    setFile(capturedFile);
+    const reader = new FileReader();
+    reader.onload = (ev) => setPreview(ev.target?.result as string);
+    reader.readAsDataURL(capturedFile);
+  };
+
 
   const handleExtract = async () => {
     if (!preview) return;
@@ -155,6 +164,12 @@ const OCR = () => {
                       </div>
                     )}
                   </div>
+
+                  <div className="flex justify-center">
+                    <CameraCapture onCapture={handleCameraCapture} disabled={isProcessing} />
+                  </div>
+
+
 
                   {/* Actions */}
                   {preview && (

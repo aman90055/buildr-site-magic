@@ -9,6 +9,7 @@ import { PDFDocument } from "pdf-lib";
 import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { filterFilesBySize } from "@/lib/fileSizeLimit";
+import CameraCapture from "@/components/CameraCapture";
 
 const ScanToPDF = () => {
   const [files, setFiles] = useState<File[]>([]);
@@ -37,6 +38,15 @@ const ScanToPDF = () => {
         reader.readAsDataURL(file);
       });
     }
+  };
+
+  const handleCameraCapture = (file: File) => {
+    const validFiles = filterFilesBySize([file], isPremium);
+    if (validFiles.length === 0) return;
+    setFiles(prev => [...prev, ...validFiles]);
+    const reader = new FileReader();
+    reader.onload = (ev) => setPreviews(prev => [...prev, ev.target?.result as string]);
+    reader.readAsDataURL(file);
   };
 
   const handleRemoveFile = (index: number) => {
@@ -160,6 +170,12 @@ const ScanToPDF = () => {
                       Supports JPG, PNG. You can add multiple images.
                     </p>
                   </div>
+
+                  <div className="flex justify-center">
+                    <CameraCapture onCapture={handleCameraCapture} disabled={isProcessing} />
+                  </div>
+
+
 
                   {previews.length > 0 && (
                     <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">

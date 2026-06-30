@@ -9,6 +9,7 @@ import { PDFDocument } from "pdf-lib";
 import { toast } from "sonner";
 import { usePremium } from "@/hooks/usePremium";
 import { filterFilesBySize } from "@/lib/fileSizeLimit";
+import CameraCapture from "@/components/CameraCapture";
 
 interface ImageFile {
   id: string;
@@ -40,6 +41,17 @@ const ImageToPDF = () => {
     onDrop,
     accept: { "image/*": [".jpg", ".jpeg", ".png", ".gif", ".webp"] },
   });
+  const handleCameraCapture = (file: File) => {
+    const valid = filterFilesBySize([file], isPremium);
+    if (valid.length === 0) return;
+    const newImages: ImageFile[] = valid.map((f) => ({
+      id: crypto.randomUUID(),
+      file: f,
+      preview: URL.createObjectURL(f),
+    }));
+    setImages((prev) => [...prev, ...newImages]);
+  };
+
 
   const removeImage = (id: string) => {
     setImages((prev) => {
@@ -142,6 +154,12 @@ const ImageToPDF = () => {
                       or click to browse (JPG, PNG, GIF, WebP)
                     </p>
                   </div>
+
+                  <div className="flex justify-center">
+                    <CameraCapture onCapture={handleCameraCapture} disabled={isProcessing} />
+                  </div>
+
+
 
                   {images.length > 0 && (
                     <>
