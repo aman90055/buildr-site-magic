@@ -115,6 +115,11 @@ import Press from "./pages/Press";
 import Enterprise from "./pages/Enterprise";
 import ApiDocs from "./pages/ApiDocs";
 import Workspace from "./pages/Workspace";
+import AIHub from "./pages/AIHub";
+import AITool from "./pages/AITool";
+import Integrations from "./pages/Integrations";
+import Growth from "./pages/Growth";
+import SocialKit from "./pages/SocialKit";
 
 const queryClient = new QueryClient();
 
