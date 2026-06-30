@@ -1,46 +1,68 @@
-import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect, useMemo } from "react";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
 import { useToast } from "@/hooks/use-toast";
-import { FileText, Loader2, Mail } from "lucide-react";
+import { FileText, Loader2, Mail, Phone, KeyRound } from "lucide-react";
 
-const authSchema = z.object({
-  email: z.string().trim().email({ message: "Please enter a valid email address" }).max(255),
-  password: z.string().min(6, { message: "Password must be at least 6 characters" }).max(100),
-});
-
-type AuthFormValues = z.infer<typeof authSchema>;
+const emailSchema = z.string().trim().email().max(255);
+const passwordSchema = z.string().min(6).max(100);
+// E.164 phone (e.g., +919876543210)
+const phoneSchema = z.string().trim().regex(/^\+[1-9]\d{6,14}$/, "Use international format e.g. +919876543210");
 
 const Auth = () => {
+  const { user, loading, signIn, signUp } = useAuth();
+  const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const { toast } = useToast();
+
+  const nextPath = useMemo(() => {
+    const raw = params.get("next") || "/";
+    return raw.startsWith("/") ? raw : "/";
+  }, [params]);
+
+  const [tab, setTab] = useState<"password" | "email-otp" | "phone-otp">("password");
   const [mode, setMode] = useState<"login" | "signup" | "forgot">("login");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-  const { user, loading, signIn, signUp } = useAuth();
-  const navigate = useNavigate();
-  const { toast } = useToast();
 
-  const form = useForm<AuthFormValues>({
-    resolver: zodResolver(authSchema),
-    defaultValues: { email: "", password: "" },
-  });
+  // password form state
+  const [pwEmail, setPwEmail] = useState("");
+  const [pwPassword, setPwPassword] = useState("");
+  const [pwError, setPwError] = useState<string | null>(null);
+
+  // email otp state
+  const [otpEmail, setOtpEmail] = useState("");
+  const [emailOtpSent, setEmailOtpSent] = useState(false);
+  const [emailOtpCode, setEmailOtpCode] = useState("");
+
+  // phone otp state
+  const [otpPhone, setOtpPhone] = useState("");
+  const [phoneOtpSent, setPhoneOtpSent] = useState(false);
+  const [phoneOtpCode, setPhoneOtpCode] = useState("");
 
   useEffect(() => {
-    if (user && !loading) navigate("/");
-  }, [user, loading, navigate]);
+    if (user && !loading) navigate(nextPath, { replace: true });
+  }, [user, loading, navigate, nextPath]);
 
   const handleGoogleSignIn = async () => {
     setIsGoogleLoading(true);
     try {
+      // store intended next path so we can redirect after session is set
+      sessionStorage.setItem("auth_next", nextPath);
       const result = await lovable.auth.signInWithOAuth("google", {
         redirect_uri: window.location.origin,
       });
@@ -52,45 +74,43 @@ const Auth = () => {
         });
         setIsGoogleLoading(false);
       }
-      // On redirect, browser navigates away — no further action needed.
-    } catch (e) {
-      toast({
-        title: "Error",
-        description: "Could not start Google sign-in.",
-        variant: "destructive",
-      });
+    } catch {
+      toast({ title: "Error", description: "Could not start Google sign-in.", variant: "destructive" });
       setIsGoogleLoading(false);
     }
   };
 
   const handleForgotPassword = async () => {
-    const email = form.getValues("email");
-    const parsed = z.string().email().safeParse(email);
+    const parsed = emailSchema.safeParse(pwEmail);
     if (!parsed.success) {
-      form.setError("email", { message: "Enter a valid email to reset password" });
+      setPwError("Enter a valid email to reset password");
       return;
     }
     setIsSubmitting(true);
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    const { error } = await supabase.auth.resetPasswordForEmail(pwEmail, {
       redirectTo: `${window.location.origin}/reset-password`,
     });
     setIsSubmitting(false);
     if (error) {
       toast({ title: "Reset failed", description: error.message, variant: "destructive" });
     } else {
-      toast({
-        title: "Check your email",
-        description: "We've sent a password reset link to your inbox.",
-      });
+      toast({ title: "Check your email", description: "We've sent a password reset link." });
       setMode("login");
     }
   };
 
-  const onSubmit = async (values: AuthFormValues) => {
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPwError(null);
+    const emailOk = emailSchema.safeParse(pwEmail);
+    const passOk = passwordSchema.safeParse(pwPassword);
+    if (!emailOk.success) return setPwError("Please enter a valid email.");
+    if (!passOk.success) return setPwError("Password must be at least 6 characters.");
+
     setIsSubmitting(true);
     try {
       if (mode === "login") {
-        const { error } = await signIn(values.email, values.password);
+        const { error } = await signIn(pwEmail, pwPassword);
         if (error) {
           toast({
             title: "Login failed",
@@ -100,11 +120,11 @@ const Auth = () => {
             variant: "destructive",
           });
         } else {
-          toast({ title: "Welcome back!", description: "Logged in successfully." });
-          navigate("/");
+          toast({ title: "Welcome back!" });
+          navigate(nextPath, { replace: true });
         }
-      } else if (mode === "signup") {
-        const { error } = await signUp(values.email, values.password);
+      } else {
+        const { error } = await signUp(pwEmail, pwPassword);
         if (error) {
           toast({
             title: "Sign up failed",
@@ -115,13 +135,87 @@ const Auth = () => {
           });
         } else {
           toast({ title: "Account created!", description: "Check your email to verify." });
-          navigate("/");
+          navigate(nextPath, { replace: true });
         }
       }
-    } catch {
-      toast({ title: "Error", description: "Unexpected error. Try again.", variant: "destructive" });
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  // Email OTP
+  const sendEmailOtp = async () => {
+    const parsed = emailSchema.safeParse(otpEmail);
+    if (!parsed.success) {
+      toast({ title: "Invalid email", description: "Please enter a valid email.", variant: "destructive" });
+      return;
+    }
+    setIsSubmitting(true);
+    const { error } = await supabase.auth.signInWithOtp({
+      email: otpEmail,
+      options: { shouldCreateUser: true, emailRedirectTo: `${window.location.origin}${nextPath}` },
+    });
+    setIsSubmitting(false);
+    if (error) {
+      toast({ title: "Could not send code", description: error.message, variant: "destructive" });
+    } else {
+      setEmailOtpSent(true);
+      toast({ title: "Code sent", description: "Check your email for the 6-digit code." });
+    }
+  };
+
+  const verifyEmailOtp = async () => {
+    if (emailOtpCode.length < 6) return;
+    setIsSubmitting(true);
+    const { error } = await supabase.auth.verifyOtp({
+      email: otpEmail,
+      token: emailOtpCode,
+      type: "email",
+    });
+    setIsSubmitting(false);
+    if (error) {
+      toast({ title: "Verification failed", description: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Signed in!" });
+      navigate(nextPath, { replace: true });
+    }
+  };
+
+  // Phone OTP
+  const sendPhoneOtp = async () => {
+    const parsed = phoneSchema.safeParse(otpPhone);
+    if (!parsed.success) {
+      toast({ title: "Invalid phone", description: parsed.error.issues[0].message, variant: "destructive" });
+      return;
+    }
+    setIsSubmitting(true);
+    const { error } = await supabase.auth.signInWithOtp({
+      phone: otpPhone,
+      options: { shouldCreateUser: true },
+    });
+    setIsSubmitting(false);
+    if (error) {
+      toast({ title: "Could not send SMS", description: error.message, variant: "destructive" });
+    } else {
+      setPhoneOtpSent(true);
+      toast({ title: "Code sent", description: "Check your phone for the 6-digit code." });
+    }
+  };
+
+  const verifyPhoneOtp = async () => {
+    if (phoneOtpCode.length < 6) return;
+    setIsSubmitting(true);
+    const { error } = await supabase.auth.verifyOtp({
+      phone: otpPhone,
+      token: phoneOtpCode,
+      type: "sms",
+    });
+    setIsSubmitting(false);
+    if (error) {
+      toast({ title: "Verification failed", description: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Signed in!" });
+      navigate(nextPath, { replace: true });
     }
   };
 
@@ -134,22 +228,22 @@ const Auth = () => {
   }
 
   const titleMap = {
-    login: { title: "Welcome back", desc: "Sign in to access your dashboard and saved jobs" },
-    signup: { title: "Create an account", desc: "Sign up to save jobs and unlock more features" },
-    forgot: { title: "Reset your password", desc: "We'll email you a secure link to reset it" },
+    login: { title: "Welcome back", desc: "Sign in to continue" },
+    signup: { title: "Create your account", desc: "Sign up free — no credit card required" },
+    forgot: { title: "Reset your password", desc: "We'll email you a secure link" },
   };
 
   return (
     <>
       <Helmet>
-        <title>{mode === "login" ? "Login" : mode === "signup" ? "Sign Up" : "Reset Password"} | PDF Tools</title>
-        <meta name="description" content="Sign in with Google or email to save your PDF jobs and access cloud features." />
+        <title>{mode === "login" ? "Login" : mode === "signup" ? "Sign Up" : "Reset Password"} | Document Edit Pro AI</title>
+        <meta name="description" content="Sign in with Google, email OTP, phone OTP, or password to access free PDF, AI & productivity tools." />
       </Helmet>
 
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-secondary/50 to-background p-4">
         <Link to="/" className="flex items-center gap-2 mb-8">
           <FileText className="h-8 w-8 text-primary" />
-          <span className="text-2xl font-bold text-foreground">PDF Tools</span>
+          <span className="text-2xl font-bold text-foreground">Document Edit Pro AI</span>
         </Link>
 
         <Card className="w-full max-w-md">
@@ -181,91 +275,128 @@ const Auth = () => {
                 </Button>
 
                 <div className="relative my-4">
-                  <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t border-border" />
-                  </div>
+                  <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-border" /></div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-card px-2 text-muted-foreground">Or with email</span>
+                    <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
                   </div>
                 </div>
-              </>
-            )}
 
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input type="email" placeholder="you@example.com" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <Tabs value={tab} onValueChange={(v) => setTab(v as typeof tab)} className="w-full">
+                  <TabsList className="grid w-full grid-cols-3">
+                    <TabsTrigger value="password"><KeyRound className="h-4 w-4 mr-1" />Password</TabsTrigger>
+                    <TabsTrigger value="email-otp"><Mail className="h-4 w-4 mr-1" />Email OTP</TabsTrigger>
+                    <TabsTrigger value="phone-otp"><Phone className="h-4 w-4 mr-1" />Phone OTP</TabsTrigger>
+                  </TabsList>
 
-                {mode !== "forgot" && (
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
+                  {/* Password tab */}
+                  <TabsContent value="password" className="mt-4">
+                    <form onSubmit={handlePasswordSubmit} className="space-y-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="pw-email">Email</Label>
+                        <Input id="pw-email" type="email" placeholder="you@example.com" value={pwEmail} onChange={(e) => setPwEmail(e.target.value)} required />
+                      </div>
+                      <div className="space-y-2">
                         <div className="flex items-center justify-between">
-                          <FormLabel>Password</FormLabel>
+                          <Label htmlFor="pw-password">Password</Label>
                           {mode === "login" && (
-                            <button
-                              type="button"
-                              onClick={() => setMode("forgot")}
-                              className="text-xs text-primary hover:underline"
-                            >
+                            <button type="button" onClick={() => setMode("forgot")} className="text-xs text-primary hover:underline">
                               Forgot password?
                             </button>
                           )}
                         </div>
-                        <FormControl>
-                          <Input type="password" placeholder="••••••••" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                )}
+                        <Input id="pw-password" type="password" placeholder="••••••••" value={pwPassword} onChange={(e) => setPwPassword(e.target.value)} required />
+                      </div>
+                      {pwError && <p className="text-sm text-destructive">{pwError}</p>}
+                      <Button type="submit" className="w-full" disabled={isSubmitting}>
+                        {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> {mode === "login" ? "Signing in..." : "Creating..."}</> : (mode === "login" ? "Sign In" : "Sign Up")}
+                      </Button>
+                    </form>
+                  </TabsContent>
 
-                {mode === "forgot" ? (
-                  <Button
-                    type="button"
-                    className="w-full"
-                    disabled={isSubmitting}
-                    onClick={handleForgotPassword}
-                  >
-                    {isSubmitting ? (
-                      <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending link...</>
+                  {/* Email OTP tab */}
+                  <TabsContent value="email-otp" className="mt-4 space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="otp-email">Email</Label>
+                      <Input id="otp-email" type="email" placeholder="you@example.com" value={otpEmail} onChange={(e) => setOtpEmail(e.target.value)} disabled={emailOtpSent} />
+                    </div>
+                    {!emailOtpSent ? (
+                      <Button className="w-full" onClick={sendEmailOtp} disabled={isSubmitting}>
+                        {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Mail className="mr-2 h-4 w-4" />}
+                        Send code
+                      </Button>
                     ) : (
-                      <><Mail className="mr-2 h-4 w-4" /> Send reset link</>
+                      <>
+                        <div className="space-y-2">
+                          <Label>Enter 6-digit code</Label>
+                          <InputOTP maxLength={6} value={emailOtpCode} onChange={setEmailOtpCode}>
+                            <InputOTPGroup>
+                              {[0,1,2,3,4,5].map(i => <InputOTPSlot key={i} index={i} />)}
+                            </InputOTPGroup>
+                          </InputOTP>
+                        </div>
+                        <Button className="w-full" onClick={verifyEmailOtp} disabled={isSubmitting || emailOtpCode.length < 6}>
+                          {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                          Verify & continue
+                        </Button>
+                        <button type="button" onClick={() => { setEmailOtpSent(false); setEmailOtpCode(""); }} className="text-sm text-primary hover:underline w-full text-center">
+                          Use a different email
+                        </button>
+                      </>
                     )}
-                  </Button>
-                ) : (
-                  <Button type="submit" className="w-full" disabled={isSubmitting || isGoogleLoading}>
-                    {isSubmitting ? (
-                      <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> {mode === "login" ? "Signing in..." : "Creating account..."}</>
+                  </TabsContent>
+
+                  {/* Phone OTP tab */}
+                  <TabsContent value="phone-otp" className="mt-4 space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="otp-phone">Phone (with country code)</Label>
+                      <Input id="otp-phone" type="tel" placeholder="+919876543210" value={otpPhone} onChange={(e) => setOtpPhone(e.target.value)} disabled={phoneOtpSent} />
+                      <p className="text-xs text-muted-foreground">Use international format starting with +.</p>
+                    </div>
+                    {!phoneOtpSent ? (
+                      <Button className="w-full" onClick={sendPhoneOtp} disabled={isSubmitting}>
+                        {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Phone className="mr-2 h-4 w-4" />}
+                        Send SMS code
+                      </Button>
                     ) : (
-                      mode === "login" ? "Sign In" : "Sign Up"
+                      <>
+                        <div className="space-y-2">
+                          <Label>Enter 6-digit code</Label>
+                          <InputOTP maxLength={6} value={phoneOtpCode} onChange={setPhoneOtpCode}>
+                            <InputOTPGroup>
+                              {[0,1,2,3,4,5].map(i => <InputOTPSlot key={i} index={i} />)}
+                            </InputOTPGroup>
+                          </InputOTP>
+                        </div>
+                        <Button className="w-full" onClick={verifyPhoneOtp} disabled={isSubmitting || phoneOtpCode.length < 6}>
+                          {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                          Verify & continue
+                        </Button>
+                        <button type="button" onClick={() => { setPhoneOtpSent(false); setPhoneOtpCode(""); }} className="text-sm text-primary hover:underline w-full text-center">
+                          Use a different phone
+                        </button>
+                      </>
                     )}
-                  </Button>
-                )}
-              </form>
-            </Form>
+                  </TabsContent>
+                </Tabs>
+              </>
+            )}
+
+            {mode === "forgot" && (
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="forgot-email">Email</Label>
+                  <Input id="forgot-email" type="email" placeholder="you@example.com" value={pwEmail} onChange={(e) => setPwEmail(e.target.value)} />
+                </div>
+                {pwError && <p className="text-sm text-destructive">{pwError}</p>}
+                <Button className="w-full" onClick={handleForgotPassword} disabled={isSubmitting}>
+                  {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...</> : <><Mail className="mr-2 h-4 w-4" /> Send reset link</>}
+                </Button>
+              </div>
+            )}
 
             <div className="mt-6 text-center text-sm">
               {mode === "forgot" ? (
-                <button
-                  type="button"
-                  onClick={() => setMode("login")}
-                  className="text-primary hover:underline font-medium"
-                >
+                <button type="button" onClick={() => setMode("login")} className="text-primary hover:underline font-medium">
                   Back to sign in
                 </button>
               ) : (
@@ -275,10 +406,7 @@ const Auth = () => {
                   </span>{" "}
                   <button
                     type="button"
-                    onClick={() => {
-                      setMode(mode === "login" ? "signup" : "login");
-                      form.reset();
-                    }}
+                    onClick={() => setMode(mode === "login" ? "signup" : "login")}
                     className="text-primary hover:underline font-medium"
                   >
                     {mode === "login" ? "Sign up" : "Sign in"}
