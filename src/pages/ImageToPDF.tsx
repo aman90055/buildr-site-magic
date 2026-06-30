@@ -9,6 +9,7 @@ import { PDFDocument } from "pdf-lib";
 import { toast } from "sonner";
 import { usePremium } from "@/hooks/usePremium";
 import { filterFilesBySize } from "@/lib/fileSizeLimit";
+import CameraCapture from "@/components/CameraCapture";
 
 interface ImageFile {
   id: string;
