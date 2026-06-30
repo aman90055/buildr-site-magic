@@ -110,20 +110,26 @@ const Hero = () => {
                 key={tool.to}
                 to={tool.to}
                 onClick={() => trackToolCard(tool.label.toLowerCase().replace(/\s+/g, "_"), "hero")}
-                className="group relative p-4 sm:p-6 glass-card rounded-2xl sm:rounded-3xl hover:shadow-card-hover transition-all duration-500 animate-fade-in overflow-hidden"
-                style={{ animationDelay: `${0.4 + i * 0.1}s` }}
+                className="group relative p-4 sm:p-6 glass-card rounded-2xl sm:rounded-3xl transition-all duration-500 animate-fade-in overflow-hidden hover:-translate-y-1"
+                style={{
+                  animationDelay: `${0.4 + i * 0.1}s`,
+                  // @ts-expect-error css var
+                  ["--tool-glow"]: tool.glow,
+                }}
               >
-                {/* AI Badge */}
+                {/* Animated gradient border */}
+                <span aria-hidden className="pointer-events-none absolute inset-0 rounded-2xl sm:rounded-3xl p-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(135deg, ${tool.glow}, transparent 60%)`, WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)", WebkitMaskComposite: "xor", maskComposite: "exclude" }} />
+
+                {/* Color halo */}
+                <span aria-hidden className="pointer-events-none absolute -inset-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-3xl" style={{ background: `radial-gradient(circle at 50% 0%, ${tool.glow} 0%, transparent 60%)` }} />
+
                 {tool.ai && (
-                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3">
+                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-10">
                     <AIBadge variant="small" glow={false} />
                   </div>
                 )}
 
-                {/* Hover Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-ai opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl sm:rounded-3xl" />
-
-                <div className={`w-11 h-11 sm:w-14 sm:h-14 ${tool.color} rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-5 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}>
+                <div className={`relative w-11 h-11 sm:w-14 sm:h-14 ${tool.color} rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3`} style={{ boxShadow: `0 10px 30px -10px ${tool.glow}` }}>
                   <tool.icon className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
                 </div>
                 <h3 className="font-display font-semibold text-base sm:text-lg text-foreground mb-1 sm:mb-2 group-hover:text-primary transition-colors">
