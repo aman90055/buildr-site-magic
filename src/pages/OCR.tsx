@@ -11,6 +11,7 @@ import { toast } from "@/hooks/use-toast";
 import AIBadge from "@/components/AIBadge";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
+import CameraCapture from "@/components/CameraCapture";
 
 const OCR = () => {
   const [file, setFile] = useState<File | null>(null);
