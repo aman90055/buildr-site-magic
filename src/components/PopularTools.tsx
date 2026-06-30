@@ -191,7 +191,7 @@ const ToolCard = ({
     <Link
       to={tool.href}
       onClick={() => onOpen(tool.href)}
-      className="group relative block rounded-[22px] p-[1.5px] bg-gradient-to-br from-white/40 via-white/10 to-white/5 dark:from-white/15 dark:via-white/5 dark:to-white/0 hover:from-blue-400/60 hover:via-purple-400/40 hover:to-cyan-400/60 transition-all duration-300 hover:-translate-y-1.5 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+      className="group relative block rounded-[16px] p-[1px] bg-gradient-to-br from-white/40 via-white/10 to-white/5 dark:from-white/15 dark:via-white/5 dark:to-white/0 hover:from-blue-400/60 hover:via-purple-400/40 hover:to-cyan-400/60 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
     >
       <div className="relative h-full rounded-[20px] bg-white/70 dark:bg-slate-900/60 backdrop-blur-2xl backdrop-saturate-150 p-5 overflow-hidden border border-white/40 dark:border-white/5 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.15)] dark:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.7)] group-hover:shadow-[0_20px_50px_-15px_rgba(59,130,246,0.45)] dark:group-hover:shadow-[0_20px_50px_-15px_rgba(99,102,241,0.55)] transition-all duration-300">
         <div className={`pointer-events-none absolute -top-16 -right-16 w-40 h-40 rounded-full bg-gradient-to-br ${grad} opacity-0 group-hover:opacity-30 dark:group-hover:opacity-40 blur-3xl transition-opacity duration-300`} />
