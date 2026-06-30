@@ -98,6 +98,10 @@ import AdminPayments from "./pages/AdminPayments";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 import CategoryPage from "./pages/CategoryPage";
+import Roadmap from "./pages/Roadmap";
+import Changelog from "./pages/Changelog";
+import HelpCenter from "./pages/HelpCenter";
+import Newsletter from "./pages/Newsletter";
 
 const queryClient = new QueryClient();
 
@@ -205,6 +209,10 @@ const App = () => (
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
               {/* Category landing pages */}
               <Route path="/category/:slug" element={<CategoryPage />} />
+              <Route path="/roadmap" element={<Roadmap />} />
+              <Route path="/changelog" element={<Changelog />} />
+              <Route path="/help" element={<HelpCenter />} />
+              <Route path="/newsletter" element={<Newsletter />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
