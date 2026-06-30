@@ -88,8 +88,8 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "contact@documenteditor.com",
-      link: "mailto:contact@documenteditor.com",
+      value: "documentai999@gmail.com",
+      link: "mailto:documentai999@gmail.com",
     },
     {
       icon: MapPin,

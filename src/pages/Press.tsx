@@ -69,7 +69,7 @@ export default function Press() {
           <Card className="p-6">
             <h3 className="font-semibold mb-2">Media contact</h3>
             <p className="text-sm text-muted-foreground mb-4">For interviews, partnerships, and press.</p>
-            <Button asChild><a href="mailto:support@documenteditpro.ai"><Mail className="w-4 h-4 mr-2" />support@documenteditpro.ai</a></Button>
+            <Button asChild><a href="mailto:documentai999@gmail.com"><Mail className="w-4 h-4 mr-2" />documentai999@gmail.com</a></Button>
           </Card>
         </div>
       </main>

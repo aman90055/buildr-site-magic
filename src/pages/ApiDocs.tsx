@@ -71,7 +71,7 @@ export default function ApiDocs() {
         <Card className="p-6 bg-gradient-to-br from-primary/5 to-cyan-500/5 border-primary/20">
           <h3 className="text-xl font-semibold mb-2">Request early access</h3>
           <p className="text-muted-foreground mb-4">The API is in private beta. Email us with your use case and expected volume.</p>
-          <Button asChild><a href="mailto:support@documenteditpro.ai?subject=API%20early%20access">Request API key</a></Button>
+          <Button asChild><a href="mailto:documentai999@gmail.com?subject=API%20early%20access">Request API key</a></Button>
         </Card>
       </main>
       <Footer />

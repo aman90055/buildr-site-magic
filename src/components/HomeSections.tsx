@@ -212,11 +212,11 @@ const HomeSections = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
             <a
-              href="mailto:support@documenteditpro.ai"
+              href="mailto:documentai999@gmail.com"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl glass-card hover:shadow-card-hover transition-all"
             >
               <Mail className="w-5 h-5 text-primary" />
-              <span className="font-medium">support@documenteditpro.ai</span>
+              <span className="font-medium">documentai999@gmail.com</span>
             </a>
             <div className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl glass-card">
               <Globe className="w-5 h-5 text-brand-cyan" />
