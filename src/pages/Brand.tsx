@@ -21,7 +21,7 @@ export default function Brand() {
         <meta name="description" content="Official brand guidelines, logos, colors, and typography for Document Edit Pro AI." />
         <link rel="canonical" href="https://docunova-ai.lovable.app/brand" />
       </Helmet>
-      <Navbar />
+      <Header />
       <main className="container mx-auto px-4 py-16 max-w-5xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Brand Kit</h1>
         <p className="text-muted-foreground mb-12 text-lg">
