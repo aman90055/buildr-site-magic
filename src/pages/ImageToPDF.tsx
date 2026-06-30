@@ -155,6 +155,12 @@ const ImageToPDF = () => {
                     </p>
                   </div>
 
+                  <div className="flex justify-center">
+                    <CameraCapture onCapture={handleCameraCapture} disabled={isProcessing} />
+                  </div>
+
+
+
                   {images.length > 0 && (
                     <>
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
