@@ -72,6 +72,22 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
+    // SECURITY: Verify this email was actually just subscribed (prevents abusing
+    // this endpoint to spam arbitrary addresses via our Resend account).
+    const { data: subRow, error: subErr } = await supabase
+      .from("newsletter_subscribers")
+      .select("email, is_active, subscribed_at")
+      .eq("email", email)
+      .eq("is_active", true)
+      .gte("subscribed_at", new Date(Date.now() - 5 * 60 * 1000).toISOString())
+      .maybeSingle();
+    if (subErr || !subRow) {
+      return new Response(
+        JSON.stringify({ error: "Subscription not found" }),
+        { status: 403, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
     if (!RESEND_API_KEY) {
       return new Response(
@@ -79,6 +95,7 @@ const handler = async (req: Request): Promise<Response> => {
         { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
+
 
     // Get total subscriber count for context
     const { count: totalCount } = await supabase
