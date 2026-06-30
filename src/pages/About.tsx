@@ -5,7 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Code, Zap, Heart, Target, Users, Award, Rocket, Linkedin, Twitter, Github } from "lucide-react";
-import amanPhoto from "@/assets/aman-vishwakarma.jpg";
+import amanPhotoAsset from "@/assets/aman-vishwakarma.png.asset.json";
+const amanPhoto = amanPhotoAsset.url;
 
 const About = () => {
   const stats = [
