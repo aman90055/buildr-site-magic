@@ -11,6 +11,21 @@ function escapeHtml(text: string): string {
   return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
+function jsonResponse(body: Record<string, unknown>, status = 200): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "Content-Type": "application/json", ...corsHeaders },
+  });
+}
+
+function getProviderMessage(details: any): string {
+  const message = typeof details?.message === "string" ? details.message.toLowerCase() : "";
+  if (message.includes("api key") || message.includes("invalid")) {
+    return "Your message was saved, but email delivery needs a valid mail API key.";
+  }
+  return "Your message was saved, but email delivery is temporarily unavailable.";
+}
+
 async function checkRateLimit(supabase: any, identifier: string, functionName: string, limit: number, windowMs: number): Promise<boolean> {
   const windowStart = new Date(Date.now() - windowMs).toISOString();
   const { count } = await supabase.from("rate_limits").select("*", { count: "exact", head: true }).eq("identifier", identifier).eq("function_name", functionName).gte("window_start", windowStart);
@@ -26,30 +41,51 @@ const handler = async (req: Request): Promise<Response> => {
     const supabase = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     const identifier = req.headers.get("x-forwarded-for") || "unknown";
     if (!await checkRateLimit(supabase, identifier, "send-contact-email", 3, 60000)) {
-      return new Response(JSON.stringify({ error: "Rate limit exceeded. Please try again later." }), { status: 429, headers: { "Content-Type": "application/json", ...corsHeaders } });
+      return jsonResponse({ error: "Rate limit exceeded. Please try again later." }, 429);
     }
 
     const { name, email, subject, message } = await req.json();
 
     if (!name || !email || !subject || !message) {
-      return new Response(JSON.stringify({ error: "Missing required fields" }), { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } });
+      return jsonResponse({ error: "Missing required fields" }, 400);
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return new Response(JSON.stringify({ error: "Invalid email format" }), { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } });
+      return jsonResponse({ error: "Invalid email format" }, 400);
     }
 
     if (name.length > 100 || email.length > 255 || subject.length > 200 || message.length > 2000) {
-      return new Response(JSON.stringify({ error: "Field length exceeded" }), { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } });
+      return jsonResponse({ error: "Field length exceeded" }, 400);
+    }
+
+    const { data: savedMessage, error: saveError } = await supabase
+      .from("contact_messages")
+      .insert({
+        name,
+        email,
+        subject,
+        message,
+        delivery_status: "pending",
+      })
+      .select("id")
+      .single();
+
+    if (saveError) {
+      console.error("Contact message save error:", saveError.message);
+      return jsonResponse({ error: "Could not save your message. Please email documentai999@gmail.com directly." }, 500);
     }
 
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
     if (!RESEND_API_KEY) {
-      return new Response(JSON.stringify({ error: "Email service not configured" }), { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } });
+      return jsonResponse({
+        success: true,
+        queued: true,
+        message: "Message saved successfully. Email delivery is not configured yet.",
+      }, 202);
     }
 
-    const OWNER_EMAIL = Deno.env.get("CONTACT_OWNER_EMAIL") || "support@documenteditpro.ai";
+    const OWNER_EMAIL = Deno.env.get("CONTACT_OWNER_EMAIL") || "documentai999@gmail.com";
 
     const emailResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -66,8 +102,22 @@ const handler = async (req: Request): Promise<Response> => {
     const responseData = await emailResponse.json();
     if (!emailResponse.ok) {
       console.error("Resend error (owner):", emailResponse.status, JSON.stringify(responseData));
-      return new Response(JSON.stringify({ error: "Failed to send email", details: responseData }), { status: 502, headers: { "Content-Type": "application/json", ...corsHeaders } });
+      await supabase
+        .from("contact_messages")
+        .update({ delivery_status: "failed", provider_error: responseData })
+        .eq("id", savedMessage.id);
+
+      return jsonResponse({
+        success: true,
+        queued: true,
+        message: getProviderMessage(responseData),
+      }, 202);
     }
+
+    await supabase
+      .from("contact_messages")
+      .update({ delivery_status: "sent", provider_error: null })
+      .eq("id", savedMessage.id);
 
     // Confirmation to user (will only deliver once Resend domain is verified; safely ignore errors in sandbox)
     try {
@@ -90,10 +140,10 @@ const handler = async (req: Request): Promise<Response> => {
       console.warn("Confirmation email error:", e);
     }
 
-    return new Response(JSON.stringify({ success: true, message: "Email sent successfully" }), { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } });
+    return jsonResponse({ success: true, message: "Email sent successfully" });
   } catch (error: any) {
     console.error("Error in send-contact-email function:", error);
-    return new Response(JSON.stringify({ error: "Failed to send email" }), { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } });
+    return jsonResponse({ error: "Failed to send email" }, 500);
   }
 };
 
