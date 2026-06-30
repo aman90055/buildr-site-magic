@@ -1,6 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Brain, Zap, Shield, Sparkles, FileSearch, Bot, Lock, Globe } from "lucide-react";
-import AIBadge from "./AIBadge";
+import { Lightbulb, Zap, Shield, Star, FileSearch, MessageSquare, Lock, Globe } from "lucide-react";
 
 const features = [
   {
