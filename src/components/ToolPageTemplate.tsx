@@ -128,7 +128,6 @@ const ToolPageTemplate = ({
           <section className="py-16 bg-muted/30">
             <div className="container max-w-6xl mx-auto px-4">
               <h2 className="text-3xl font-bold text-center mb-12">
-                {isAI && <Sparkles className="w-6 h-6 text-brand-ai inline mr-2" />}
                 Key Features
               </h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
