@@ -5,10 +5,10 @@ import AIBadge from "./AIBadge";
 import { trackCTA, trackToolCard } from "@/lib/analytics";
 
 const tools = [
-  { to: "/merge", icon: Merge, label: "Merge PDF", desc: "AI-optimized combining", color: "bg-brand-blue", ai: true },
-  { to: "/split", icon: Split, label: "Split PDF", desc: "Smart page detection", color: "bg-brand-green", ai: true },
-  { to: "/compress", icon: Minimize2, label: "Compress PDF", desc: "AI compression engine", color: "bg-brand-purple", ai: true },
-  { to: "/convert", icon: FileText, label: "Convert PDF", desc: "Multi-format AI conversion", color: "bg-brand-orange", ai: true },
+  { to: "/merge", icon: Merge, label: "Merge PDF", desc: "AI-optimized combining", color: "bg-brand-blue", glow: "hsl(var(--brand-blue))", ai: true },
+  { to: "/split", icon: Split, label: "Split PDF", desc: "Smart page detection", color: "bg-brand-green", glow: "hsl(var(--brand-green))", ai: true },
+  { to: "/compress", icon: Minimize2, label: "Compress PDF", desc: "AI compression engine", color: "bg-brand-purple", glow: "hsl(var(--brand-purple))", ai: true },
+  { to: "/convert", icon: FileText, label: "Convert PDF", desc: "Multi-format AI conversion", color: "bg-brand-orange", glow: "hsl(var(--brand-orange))", ai: true },
 ];
 
 const features = [
