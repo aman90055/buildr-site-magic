@@ -110,7 +110,6 @@ const IframeBanner = ({ adKey, width, height, placement }: IframeBannerConfig) =
 /** 728×90 leaderboard — desktop. */
 const AdsterraBanner728Inner = () => (
   <IframeBanner
-    key="728"
     adKey="0808815f2478d610f9a03c21a2d74230"
     width={728}
     height={90}
