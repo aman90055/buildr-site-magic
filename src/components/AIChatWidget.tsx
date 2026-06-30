@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { MessageCircle, Send, X, Bot, User, Loader2, Sparkles } from "lucide-react";
+import { MessageCircle, Send, X, MessageSquare, User, Loader2, Star } from "lucide-react";
 import { useAIChat } from "@/hooks/useAIChat";
 
 const AIChatWidget = () => {
