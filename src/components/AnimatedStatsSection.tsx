@@ -5,7 +5,7 @@ const stats = [
   { icon: FileCheck2, end: 2, suffix: "M+", label: "PDFs Processed", color: "text-brand-blue" },
   { icon: Users, end: 250, suffix: "K+", label: "Active Users", color: "text-brand-purple" },
   { icon: Globe2, end: 150, suffix: "+", label: "Countries Served", color: "text-brand-cyan" },
-  { icon: Sparkles, end: 99.9, suffix: "%", decimals: 1, label: "Accuracy Rate", color: "text-brand-ai" },
+  { icon: Star, end: 99.9, suffix: "%", decimals: 1, label: "Accuracy Rate", color: "text-brand-ai" },
 ];
 
 const AnimatedStatsSection = () => {
