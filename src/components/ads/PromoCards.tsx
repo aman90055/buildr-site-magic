@@ -138,54 +138,6 @@ const PromoCards = ({
                   </div>
 
                   <span className="mt-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md text-sm font-semibold text-foreground group-hover:bg-white/20 group-hover:border-white/30 transition-all w-full sm:w-fit">
-
-          {cards.map((card) => {
-            const Icon = card.icon;
-            return (
-              <a
-                key={card.id}
-                href={card.url}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                onClick={() => handleClick(card)}
-                onAuxClick={(e) => {
-                  if (e.button === 1) handleClick(card);
-                }}
-                className="group relative block overflow-hidden rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.25)] transition-all duration-300 hover:scale-[1.02] hover:border-white/25 hover:shadow-[0_12px_48px_rgba(56,189,248,0.2)]"
-                data-promo-id={card.id}
-              >
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5" />
-                <div
-                  className={`pointer-events-none absolute -top-20 -right-20 w-56 h-56 rounded-full blur-3xl transition-colors ${card.glow} group-hover:opacity-80`}
-                />
-                <div
-                  className={`pointer-events-none absolute -bottom-20 -left-20 w-56 h-56 rounded-full blur-3xl opacity-60 ${card.glow}`}
-                />
-
-                <div className="relative flex flex-col gap-4 p-6 h-full">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`flex-shrink-0 w-12 h-12 rounded-2xl bg-gradient-to-br ${card.accent} flex items-center justify-center shadow-lg`}
-                    >
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
-                    {card.badge && (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-white/10 border border-white/15 text-foreground/80">
-                        {card.badge}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold text-foreground mb-1.5">
-                      {card.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {card.description}
-                    </p>
-                  </div>
-
-                  <span className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md text-sm font-semibold text-foreground group-hover:bg-white/20 group-hover:border-white/30 transition-all w-fit">
                     {card.cta}
                     <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </span>
