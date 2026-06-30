@@ -10,6 +10,7 @@ import {
   Filter,
 } from "lucide-react";
 import AIBadge from "./AIBadge";
+import { useToolIcon } from "@/lib/toolIcons";
 
 type Tool = {
   title: string;
