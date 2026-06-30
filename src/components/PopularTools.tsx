@@ -167,6 +167,9 @@ const toolCategories = [
       { title: "AI Tweet Generator", description: "Viral tweets", href: "/ai-tweet-generator", icon: Type, ai: true },
       { title: "AI Summarizer", description: "Instant summaries", href: "/ai-summarizer", icon: Lightbulb, ai: true },
       { title: "AI Data Extractor", description: "Tables & data", href: "/ai-data-extractor", icon: Database, ai: true },
+      { title: "AI Image Generator", description: "Text to image", href: "/ai-hub", icon: ImageIcon, ai: true },
+      { title: "AI Hub", description: "All AI tools", href: "/ai-hub", icon: Sparkles, ai: true },
+      { title: "Social Media Kit", description: "Posts & captions", href: "/social-kit", icon: Type, ai: true },
     ],
   },
   {
