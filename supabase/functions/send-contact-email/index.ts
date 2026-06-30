@@ -77,7 +77,22 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-    if (!RESEND_API_KEY) {
+    // Resend keys always start with "re_" and are ~30+ chars. Reject missing/malformed keys early.
+    const isValidResendKey = typeof RESEND_API_KEY === "string"
+      && RESEND_API_KEY.startsWith("re_")
+      && RESEND_API_KEY.length >= 20
+      && !/\s/.test(RESEND_API_KEY);
+
+    if (!isValidResendKey) {
+      console.error("RESEND_API_KEY missing or malformed:", {
+        present: !!RESEND_API_KEY,
+        length: RESEND_API_KEY?.length ?? 0,
+        startsWithRe: RESEND_API_KEY?.startsWith("re_") ?? false,
+      });
+      await supabase
+        .from("contact_messages")
+        .update({ delivery_status: "failed", provider_error: { reason: "RESEND_API_KEY missing or malformed" } })
+        .eq("id", savedMessage.id);
       return jsonResponse({
         success: true,
         queued: true,
