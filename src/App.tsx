@@ -125,6 +125,18 @@ import Careers from "./pages/Careers";
 import Internships from "./pages/Internships";
 import Portfolio from "./pages/Portfolio";
 import CaseStudies from "./pages/CaseStudies";
+// Developer Tools
+import UUIDGenerator from "./pages/tools/dev/UUIDGenerator";
+import HashGenerator from "./pages/tools/dev/HashGenerator";
+import JWTDecoder from "./pages/tools/dev/JWTDecoder";
+import URLEncoder from "./pages/tools/dev/URLEncoder";
+import RegexTester from "./pages/tools/dev/RegexTester";
+import MinifyBeautify from "./pages/tools/dev/MinifyBeautify";
+import TimestampConverter from "./pages/tools/dev/TimestampConverter";
+import PasswordGenerator from "./pages/tools/dev/PasswordGenerator";
+import LoremIpsum from "./pages/tools/dev/LoremIpsum";
+import Base64Tool from "./pages/tools/dev/Base64";
+import JSONFormatter from "./pages/tools/dev/JSONFormatter";
 
 const queryClient = new QueryClient();
 
@@ -260,6 +272,18 @@ const App = () => (
               <Route path="/internships" element={<Internships />} />
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/case-studies" element={<CaseStudies />} />
+              {/* Developer Tools */}
+              <Route path="/tools/uuid-generator" element={<UUIDGenerator />} />
+              <Route path="/tools/hash-generator" element={<HashGenerator />} />
+              <Route path="/tools/jwt-decoder" element={<JWTDecoder />} />
+              <Route path="/tools/url-encoder" element={<URLEncoder />} />
+              <Route path="/tools/regex-tester" element={<RegexTester />} />
+              <Route path="/tools/minify-beautify" element={<MinifyBeautify />} />
+              <Route path="/tools/timestamp-converter" element={<TimestampConverter />} />
+              <Route path="/tools/password-generator" element={<PasswordGenerator />} />
+              <Route path="/tools/lorem-ipsum" element={<LoremIpsum />} />
+              <Route path="/tools/base64" element={<Base64Tool />} />
+              <Route path="/tools/json-formatter" element={<JSONFormatter />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
