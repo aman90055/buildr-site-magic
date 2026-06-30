@@ -41,7 +41,7 @@ const Index = () => {
           <PopularTools />
           <AnimatedStatsSection />
           <Features />
-          <PromoSetAvProfile className="py-10" />
+          <PromoCards className="py-12" location="home_features" />
           <HomeSections />
           <TestimonialsCarousel />
           <HomeContent />
