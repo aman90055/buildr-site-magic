@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, FileText, Merge, Split, Minimize2, Star, Lightbulb, Zap, Shield, Globe } from "lucide-react";
+import { ArrowRight, FileText, Merge, Split, Minimize2, Sparkles, Lightbulb, Zap, Shield, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import AIBadge from "./AIBadge";
 import { trackCTA, trackToolCard } from "@/lib/analytics";
