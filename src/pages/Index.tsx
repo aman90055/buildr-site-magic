@@ -14,6 +14,9 @@ import PartnerLogos from "@/components/PartnerLogos";
 import AnimatedStatsSection from "@/components/AnimatedStatsSection";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import PromoCards from "@/components/ads/PromoCards";
+import HeroSearch from "@/components/home/HeroSearch";
+import PricingTeaser from "@/components/home/PricingTeaser";
+import HomeFAQ from "@/components/home/HomeFAQ";
 
 
 const Index = () => {
@@ -37,6 +40,7 @@ const Index = () => {
         <Header />
         <main>
           <Hero />
+          <HeroSearch />
           <PartnerLogos />
           <PopularTools />
           <AnimatedStatsSection />
@@ -44,6 +48,8 @@ const Index = () => {
           <PromoCards className="py-12" location="home_features" />
           <HomeSections />
           <TestimonialsCarousel />
+          <PricingTeaser />
+          <HomeFAQ />
           <HomeContent />
           <Stats />
           <AdSlot config={AD_SLOTS.footer} className="max-w-5xl mx-auto px-4 py-6" />
