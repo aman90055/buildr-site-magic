@@ -56,7 +56,27 @@ const PDFMerge = () => {
           name="description"
           content="Combine multiple PDF files into one document. Fast, free, and secure PDF merger tool. No registration required."
         />
+        <link rel="canonical" href="https://docunova-ai.lovable.app/merge" />
+        <meta property="og:title" content="Merge PDF Files Online - Free PDF Merger Tool" />
+        <meta property="og:description" content="Combine multiple PDF files into one document. Fast, free, and secure PDF merger tool." />
+        <meta property="og:url" content="https://docunova-ai.lovable.app/merge" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          name: "How to Merge PDF Files Online for Free",
+          description: "Combine multiple PDF files into one in seconds. Free, no signup, secure browser processing.",
+          totalTime: "PT1M",
+          estimatedCost: { "@type": "MonetaryAmount", currency: "USD", value: "0" },
+          supply: [{ "@type": "HowToSupply", name: "Two or more PDF files" }],
+          tool: [{ "@type": "HowToTool", name: "Document Edit Pro AI - Merge PDF" }],
+          step: [
+            { "@type": "HowToStep", position: 1, name: "Upload PDFs", text: "Click 'Select Files' and choose the PDF files you want to combine." },
+            { "@type": "HowToStep", position: 2, name: "Reorder pages", text: "Drag-and-drop the files to set the order you want." },
+            { "@type": "HowToStep", position: 3, name: "Merge & download", text: "Click 'Merge PDF' and download the combined file instantly." }
+          ]
+        })}</script>
       </Helmet>
+
 
       <div className="min-h-screen flex flex-col">
         <Header />
