@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import {
   FileText, FileType2, Brain, Image as ImageIcon, FileSignature,
-  Wrench, Star, Trophy, BookOpen, Mail, Globe, ArrowRight,
+  Wrench, Trophy, BookOpen, Mail, Globe, ArrowRight,
 } from "lucide-react";
 
 const services = [
@@ -61,12 +61,7 @@ const whyUs = [
   "Fast, Secure & Scalable Infrastructure",
 ];
 
-const testimonials = [
-  { quote: "The best free PDF and AI toolkit I've used. Everything works in one place.", author: "Priya S." },
-  { quote: "AI PDF Chat saves hours of manual reading and research.", author: "Rahul M." },
-  { quote: "Perfect for students, freelancers, and businesses.", author: "Anita K." },
-  { quote: "Fast, secure, and incredibly easy to use.", author: "David L." },
-];
+// Testimonials moved to TestimonialsCarousel component
 
 const awards = [
   "Trusted by thousands of users worldwide",
@@ -152,32 +147,7 @@ const HomeSections = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-16 sm:py-20 bg-muted/30" aria-label="What our users say">
-        <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight mb-3">
-              What Our Users Say
-            </h2>
-            <p className="text-muted-foreground">Real feedback from our community.</p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {testimonials.map((t, i) => (
-              <Card key={i} className="glass-card border-border/40">
-                <CardContent className="p-6">
-                  <div className="flex gap-1 mb-3 text-brand-orange">
-                    {Array.from({ length: 5 }).map((_, j) => (
-                      <Star key={j} className="w-4 h-4 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-sm text-foreground/90 leading-relaxed mb-4">"{t.quote}"</p>
-                  <p className="text-xs text-muted-foreground font-medium">— {t.author}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Testimonials handled by TestimonialsCarousel in Index */}
 
       {/* Awards & Recognition */}
       <section className="py-16 sm:py-20" aria-label="Awards and recognition">

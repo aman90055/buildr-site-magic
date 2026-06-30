@@ -133,6 +133,10 @@ export default {
           "50%": { backgroundPosition: "100% 50%" },
           "100%": { backgroundPosition: "0% 50%" }
         },
+        "marquee": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -145,6 +149,7 @@ export default {
         "pulse-subtle": "pulse-subtle 2s ease-in-out infinite",
         "spin-slow": "spin-slow 8s linear infinite",
         "gradient-shift": "gradient-shift 8s ease infinite",
+        "marquee": "marquee 30s linear infinite",
       },
       backgroundSize: {
         '300%': '300% 300%',

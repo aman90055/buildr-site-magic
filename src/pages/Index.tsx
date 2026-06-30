@@ -10,6 +10,9 @@ import HomeSections from "@/components/HomeSections";
 import HomeContent from "@/components/HomeContent";
 import AdSlot from "@/components/ads/AdSlot";
 import { AD_SLOTS } from "@/lib/adSlots";
+import PartnerLogos from "@/components/PartnerLogos";
+import AnimatedStatsSection from "@/components/AnimatedStatsSection";
+import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 
 const Index = () => {
   return (
@@ -32,12 +35,14 @@ const Index = () => {
         <Header />
         <main>
           <Hero />
+          <PartnerLogos />
           <PopularTools />
+          <AnimatedStatsSection />
           <Features />
           <HomeSections />
+          <TestimonialsCarousel />
           <HomeContent />
           <Stats />
-          {/* Single, modest ad slot well below the fold — AdSense friendlier */}
           <AdSlot config={AD_SLOTS.footer} className="max-w-5xl mx-auto px-4 py-6" />
           <CTA />
         </main>
