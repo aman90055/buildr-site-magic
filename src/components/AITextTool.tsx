@@ -38,17 +38,67 @@ const AITextTool = ({
   const handleProcess = async () => {
     if (!input.trim()) { toast({ title: "Error", description: "Please enter some text.", variant: "destructive" }); return; }
     setIsProcessing(true);
+    setOutput("");
     try {
       const prompt = getFullPrompt ? getFullPrompt(input) : input;
-      const { data, error } = await supabase.functions.invoke("ai-chat", {
-        body: { message: prompt, systemPrompt },
+      const messages = [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: prompt },
+      ];
+
+      // Call ai-chat with a streaming SSE response and accumulate deltas.
+      const { data: { session } } = await supabase.auth.getSession();
+      const SUPABASE_URL = (import.meta as any).env.VITE_SUPABASE_URL;
+      const ANON = (import.meta as any).env.VITE_SUPABASE_PUBLISHABLE_KEY || (import.meta as any).env.VITE_SUPABASE_ANON_KEY;
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/ai-chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: ANON,
+          Authorization: `Bearer ${session?.access_token || ANON}`,
+        },
+        body: JSON.stringify({ messages, type: "chat" }),
       });
-      if (error) throw error;
-      setOutput(data?.reply || data?.response || "No response received.");
-      toast({ title: "Done!" });
-    } catch (err) {
+
+      if (!res.ok) {
+        const errText = await res.text().catch(() => "");
+        if (res.status === 429) throw new Error("Rate limit reached. Please wait a minute and try again.");
+        if (res.status === 402) throw new Error("AI credits exhausted. Please contact the site owner.");
+        throw new Error(errText || `AI error (${res.status})`);
+      }
+
+      const reader = res.body?.getReader();
+      if (!reader) throw new Error("No response stream");
+      const decoder = new TextDecoder();
+      let buf = "";
+      let full = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += decoder.decode(value, { stream: true });
+        const lines = buf.split("\n");
+        buf = lines.pop() || "";
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed.startsWith("data:")) continue;
+          const payload = trimmed.slice(5).trim();
+          if (!payload || payload === "[DONE]") continue;
+          try {
+            const json = JSON.parse(payload);
+            const delta = json?.choices?.[0]?.delta?.content || json?.choices?.[0]?.message?.content || "";
+            if (delta) {
+              full += delta;
+              setOutput(full);
+            }
+          } catch { /* ignore partial chunks */ }
+        }
+      }
+
+      if (!full) setOutput("No response received.");
+      else toast({ title: "Done!" });
+    } catch (err: any) {
       console.error(err);
-      toast({ title: "Error", description: "AI processing failed. Please try again.", variant: "destructive" });
+      toast({ title: "Error", description: err?.message || "AI processing failed. Please try again.", variant: "destructive" });
     } finally { setIsProcessing(false); }
   };
 
