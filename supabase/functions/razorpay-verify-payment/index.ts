@@ -33,8 +33,8 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, plan, amount } = await req.json();
-    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature || !plan) {
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = await req.json();
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
       return new Response(JSON.stringify({ error: "Missing fields" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -51,6 +51,43 @@ Deno.serve(async (req) => {
       });
     }
 
+    // SECURITY: Fetch plan from Razorpay order notes (set server-side on create) —
+    // never trust the client-supplied plan field.
+    const keyId = Deno.env.get("RAZORPAY_KEY_ID")!;
+    const rzpAuth = btoa(`${keyId}:${keySecret}`);
+    const orderRes = await fetch(`https://api.razorpay.com/v1/orders/${razorpay_order_id}`, {
+      headers: { Authorization: `Basic ${rzpAuth}` },
+    });
+    if (!orderRes.ok) {
+      return new Response(JSON.stringify({ error: "Order lookup failed" }), {
+        status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const order = await orderRes.json();
+    const plan = String(order?.notes?.plan || "").toLowerCase();
+    const orderUserId = String(order?.notes?.user_id || "");
+    const PLAN_PRICES_INR: Record<string, number> = { basic: 99, pro: 249, enterprise: 599 };
+    if (!PLAN_PRICES_INR[plan]) {
+      return new Response(JSON.stringify({ error: "Invalid plan on order" }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    // Ensure the verifying user matches the order creator
+    if (orderUserId && orderUserId !== claims.claims.sub) {
+      return new Response(JSON.stringify({ error: "Order does not belong to this user" }), {
+        status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    // Verify amount matches expected plan price (in paise)
+    const expectedPaise = PLAN_PRICES_INR[plan] * 100;
+    if (Number(order?.amount) !== expectedPaise) {
+      return new Response(JSON.stringify({ error: "Amount mismatch" }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const verifiedAmount = PLAN_PRICES_INR[plan];
+
+
     const admin = createClient(supabaseUrl, serviceKey);
     const userId = claims.claims.sub;
     const email = claims.claims.email ?? "";
@@ -63,7 +100,7 @@ Deno.serve(async (req) => {
         email,
         utr_number: razorpay_payment_id,
         plan,
-        amount: Number(amount) || 0,
+        amount: verifiedAmount,
         status: "verified",
         verified_at: new Date().toISOString(),
         notes: `Razorpay order: ${razorpay_order_id}`,
