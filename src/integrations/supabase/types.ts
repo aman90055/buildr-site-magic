@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      contact_messages: {
+        Row: {
+          created_at: string
+          delivery_status: string
+          email: string
+          id: string
+          message: string
+          name: string
+          provider_error: Json | null
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          delivery_status?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          provider_error?: Json | null
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          delivery_status?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          provider_error?: Json | null
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       daily_checkins: {
         Row: {
           checkin_date: string
