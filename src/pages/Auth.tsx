@@ -37,7 +37,8 @@ const Auth = () => {
   const [tab, setTab] = useState<"password" | "email-otp" | "phone-otp">("password");
   const [mode, setMode] = useState<"login" | "signup" | "forgot">("login");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+ const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+ const [isAppleLoading, setIsAppleLoading] = useState(false);
 
   // password form state
   const [pwEmail, setPwEmail] = useState("");
