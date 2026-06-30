@@ -13,7 +13,7 @@ import { AD_SLOTS } from "@/lib/adSlots";
 import PartnerLogos from "@/components/PartnerLogos";
 import AnimatedStatsSection from "@/components/AnimatedStatsSection";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
-import PromoSetAvProfile from "@/components/ads/PromoSetAvProfile";
+import PromoCards from "@/components/ads/PromoCards";
 
 
 const Index = () => {
