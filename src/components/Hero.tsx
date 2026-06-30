@@ -35,11 +35,11 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-6 sm:space-y-8">
-            {/* 2026 Badge */}
+            {/* Launch Badge */}
             <div className="inline-flex flex-wrap items-center gap-2 sm:gap-3 animate-fade-in">
               <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass border-primary/20 text-primary text-xs sm:text-sm font-medium">
                 <Sparkles className="w-4 h-4" />
-                <span className="font-display tracking-wide">2026 Edition</span>
+                <span className="font-display tracking-wide">🚀 100+ Free AI, PDF & Productivity Tools</span>
               </div>
               <AIBadge />
             </div>
@@ -48,12 +48,14 @@ const Hero = () => {
               className="text-[2.25rem] leading-[1.05] sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold tracking-tight animate-fade-in bg-gradient-to-br from-foreground via-primary to-brand-ai bg-clip-text text-transparent drop-shadow-[0_2px_12px_hsl(var(--primary)/0.25)]"
               style={{ animationDelay: "0.1s" }}
             >
-              Free PDF Tools Online
+              One Platform for PDFs, AI, Documents, Images & Productivity
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
-              Merge, split, compress, convert & edit PDFs free online. 50+ AI-powered tools —
-              no signup needed. Fast, secure & made in India 🇮🇳
+              Document Edit Pro AI helps individuals, students, professionals, and
+              businesses manage documents smarter. Edit, convert, organize,
+              summarize, sign, and collaborate using 100+ powerful tools — all from
+              a single modern workspace.
             </p>
 
             {/* Feature badges */}
