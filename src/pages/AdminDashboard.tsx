@@ -515,6 +515,49 @@ const AdminDashboard = () => {
               </CardContent>
             </Card>
 
+            {/* Tool Usage */}
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Activity className="w-5 h-5" /> Top Tools by Usage
+                </CardTitle>
+                <p className="text-xs text-muted-foreground">
+                  Aggregated from {toolUsage.reduce((s, r) => s + r.total, 0).toLocaleString()} recent jobs
+                </p>
+              </CardHeader>
+              <CardContent className="p-0">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Tool</TableHead>
+                      <TableHead className="text-right">Total</TableHead>
+                      <TableHead className="text-right">Completed</TableHead>
+                      <TableHead className="text-right">Failed</TableHead>
+                      <TableHead className="text-right">Success rate</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {toolUsage.length === 0 ? (
+                      <TableRow><TableCell colSpan={5} className="text-center py-8 text-muted-foreground">No job data yet</TableCell></TableRow>
+                    ) : (
+                      toolUsage.map((r) => {
+                        const rate = r.total > 0 ? ((r.completed / r.total) * 100).toFixed(0) : "—";
+                        return (
+                          <TableRow key={r.job_type}>
+                            <TableCell className="font-medium capitalize">{r.job_type.replace(/[-_]/g, " ")}</TableCell>
+                            <TableCell className="text-right">{r.total.toLocaleString()}</TableCell>
+                            <TableCell className="text-right text-green-600">{r.completed.toLocaleString()}</TableCell>
+                            <TableCell className="text-right text-red-600">{r.failed.toLocaleString()}</TableCell>
+                            <TableCell className="text-right">{rate === "—" ? "—" : `${rate}%`}</TableCell>
+                          </TableRow>
+                        );
+                      })
+                    )}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+
             {/* Users list */}
             <Card>
               <CardHeader>
