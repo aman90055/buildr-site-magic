@@ -48,7 +48,7 @@ const PDFToSVG = () => {
         const canvas = document.createElement("canvas");
         canvas.width = viewport.width;
         canvas.height = viewport.height;
-        await page.render({ canvasContext: canvas.getContext("2d")!, viewport }).promise;
+        await page.render({ canvas, canvasContext: canvas.getContext("2d")!, viewport }).promise;
 
         // Convert canvas to SVG with embedded image
         const dataUrl = canvas.toDataURL("image/png");

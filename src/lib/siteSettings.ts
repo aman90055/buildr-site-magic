@@ -5,6 +5,7 @@
 
 export const SETTINGS_KEYS = {
   adsEnabled: "site.adsEnabled",
+  adsterraEnabled: "site.adsterraEnabled",
   exitIntentEnabled: "site.exitIntentEnabled",
   exitIntentCooldownDays: "site.exitIntentCooldownDays",
   exitIntentLastShown: "site.exitIntentLastShown",
@@ -33,6 +34,7 @@ export const setNum = (key: string, val: number) => {
 };
 
 export const isAdsEnabled = () => getBool(SETTINGS_KEYS.adsEnabled, true);
+export const isAdsterraEnabled = () => getBool(SETTINGS_KEYS.adsterraEnabled, true);
 export const isExitIntentEnabled = () => getBool(SETTINGS_KEYS.exitIntentEnabled, true);
 export const exitIntentCooldownDays = () => getNum(SETTINGS_KEYS.exitIntentCooldownDays, 3);
 

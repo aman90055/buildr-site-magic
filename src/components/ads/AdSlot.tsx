@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { ADSENSE_CLIENT, ADS_ENABLED, type AdSlotConfig, type AdFormat } from "@/lib/adSlots";
 import { isAdsEnabled } from "@/lib/siteSettings";
+import { trackAdEvent } from "@/lib/adAnalytics";
 
 interface AdSlotProps {
   /** Either pass a full config object (preferred) or just a slot id + format */
@@ -56,6 +57,33 @@ const AdSlot = ({
       }
     };
     tryPush();
+
+    // Impression tracking — fire when slot first scrolls into view.
+    const el = adRef.current;
+    if (!el) return;
+    let impressionFired = false;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting && !impressionFired) {
+            impressionFired = true;
+            trackAdEvent("adsense", slot, "impression");
+            io.disconnect();
+            break;
+          }
+        }
+      },
+      { threshold: 0.3 },
+    );
+    io.observe(el);
+
+    const onClick = () => trackAdEvent("adsense", slot, "click");
+    el.addEventListener("click", onClick, true);
+
+    return () => {
+      io.disconnect();
+      el.removeEventListener("click", onClick, true);
+    };
   }, [slot]);
 
   // Global kill-switch: while AdSense review is pending, render no ad UI at all.
