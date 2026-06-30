@@ -200,7 +200,7 @@ const Dashboard = () => {
               <TabsContent value="overview" className="space-y-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
-                    { label: "Total Jobs", value: stats.total, icon: FileText, color: "text-muted-foreground/50" },
+                    { label: "Total Jobs", value: stats.total, icon: FileText, color: "text-muted-foreground" },
                     { label: "Completed", value: stats.completed, icon: CheckCircle2, color: "text-green-500/60", num: "text-green-500" },
                     { label: "In Progress", value: stats.pending, icon: Clock, color: "text-blue-500/60", num: "text-blue-500" },
                     { label: "Failed", value: stats.failed, icon: XCircle, color: "text-destructive/60", num: "text-destructive" },
