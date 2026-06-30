@@ -381,15 +381,29 @@ const AdminDashboard = () => {
                   <SettingsIcon className="w-5 h-5" /> Site Settings
                 </CardTitle>
               </CardHeader>
-              <CardContent className="grid sm:grid-cols-3 gap-6">
+              <CardContent className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="flex items-center justify-between gap-4">
                   <div>
                     <Label className="font-semibold">AdSense ads</Label>
-                    <p className="text-xs text-muted-foreground">Show or hide all ad slots</p>
+                    <p className="text-xs text-muted-foreground">Show or hide AdSense slots</p>
                   </div>
                   <Switch
                     checked={adsOn}
-                    onCheckedChange={(v) => { setAdsOn(v); setBool(SETTINGS_KEYS.adsEnabled, v); toast.success(`Ads ${v ? "enabled" : "disabled"}`); }}
+                    onCheckedChange={(v) => { setAdsOn(v); setBool(SETTINGS_KEYS.adsEnabled, v); toast.success(`AdSense ${v ? "enabled" : "disabled"}`); }}
+                  />
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <Label className="font-semibold">Adsterra ads</Label>
+                    <p className="text-xs text-muted-foreground">Disable to avoid AdSense policy conflicts (reload required)</p>
+                  </div>
+                  <Switch
+                    checked={adsterraOn}
+                    onCheckedChange={(v) => {
+                      setAdsterraOn(v);
+                      setBool(SETTINGS_KEYS.adsterraEnabled, v);
+                      toast.success(`Adsterra ${v ? "enabled" : "disabled"} — reload to apply`);
+                    }}
                   />
                 </div>
                 <div className="flex items-center justify-between gap-4">
@@ -417,6 +431,67 @@ const AdminDashboard = () => {
                     }}
                   />
                 </div>
+              </CardContent>
+            </Card>
+
+            {/* Ad Performance */}
+            <Card className="mb-8">
+              <CardHeader>
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <CardTitle className="flex items-center gap-2">
+                    <BarChart3 className="w-5 h-5" /> Ad Performance
+                  </CardTitle>
+                  <div className="flex gap-2">
+                    <Button size="sm" variant="outline" onClick={() => setAdStats(getAdStats())}>
+                      <RefreshCw className="w-4 h-4 mr-1" /> Refresh
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => { clearAdStats(); setAdStats([]); toast.success("Ad stats cleared"); }}
+                    >
+                      <Trash2 className="w-4 h-4 mr-1" /> Reset
+                    </Button>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Local per-browser tracking — open this dashboard from the device you want to inspect.
+                </p>
+              </CardHeader>
+              <CardContent className="p-0">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Network</TableHead>
+                      <TableHead>Placement</TableHead>
+                      <TableHead className="text-right">Impressions</TableHead>
+                      <TableHead className="text-right">Clicks</TableHead>
+                      <TableHead className="text-right">CTR</TableHead>
+                      <TableHead>Last seen</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {adStats.length === 0 ? (
+                      <TableRow><TableCell colSpan={6} className="text-center py-8 text-muted-foreground">No ad events recorded yet</TableCell></TableRow>
+                    ) : (
+                      adStats.map((r) => {
+                        const ctr = r.impressions > 0 ? ((r.clicks / r.impressions) * 100).toFixed(2) : "—";
+                        return (
+                          <TableRow key={`${r.network}-${r.placement}`}>
+                            <TableCell><Badge variant="outline" className="capitalize">{r.network}</Badge></TableCell>
+                            <TableCell className="font-medium">{r.placement}</TableCell>
+                            <TableCell className="text-right">{r.impressions.toLocaleString()}</TableCell>
+                            <TableCell className="text-right">{r.clicks.toLocaleString()}</TableCell>
+                            <TableCell className="text-right">{ctr === "—" ? "—" : `${ctr}%`}</TableCell>
+                            <TableCell className="text-sm text-muted-foreground">
+                              {r.lastSeen ? format(new Date(r.lastSeen), "dd MMM, HH:mm") : "—"}
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })
+                    )}
+                  </TableBody>
+                </Table>
               </CardContent>
             </Card>
 
