@@ -13,6 +13,7 @@ import { AD_SLOTS } from "@/lib/adSlots";
 import PartnerLogos from "@/components/PartnerLogos";
 import AnimatedStatsSection from "@/components/AnimatedStatsSection";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import { AdsterraBanner728, AdsterraNative } from "@/components/AdsterraAds";
 
 const Index = () => {
   return (
@@ -37,8 +38,10 @@ const Index = () => {
           <Hero />
           <PartnerLogos />
           <PopularTools />
+          <AdsterraBanner728 />
           <AnimatedStatsSection />
           <Features />
+          <AdsterraNative />
           <HomeSections />
           <TestimonialsCarousel />
           <HomeContent />

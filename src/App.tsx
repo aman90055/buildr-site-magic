@@ -9,6 +9,7 @@ import AIChatWidget from "@/components/AIChatWidget";
 import InstallPrompt from "@/components/InstallPrompt";
 import ScrollToTop from "@/components/ScrollToTop";
 import ExitIntentOffer from "@/components/ExitIntentOffer";
+import { AdsterraGlobalScripts } from "@/components/AdsterraAds";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
@@ -112,6 +113,7 @@ const App = () => (
             <AIChatWidget />
             <InstallPrompt />
             <ExitIntentOffer />
+            <AdsterraGlobalScripts />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/auth" element={<Auth />} />
