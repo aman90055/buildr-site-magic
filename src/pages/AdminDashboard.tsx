@@ -15,13 +15,14 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { toast } from "sonner";
 import {
   Shield, IndianRupee, TrendingUp, Users, Crown, Mail, RefreshCw, Search,
-  Calendar, Activity, ArrowUpRight, Download, Settings as SettingsIcon,
+  Calendar, Activity, ArrowUpRight, Download, Settings as SettingsIcon, BarChart3, Trash2,
 } from "lucide-react";
 import { format, subMonths, startOfMonth, startOfDay, subDays, differenceInCalendarDays } from "date-fns";
 import {
-  SETTINGS_KEYS, isAdsEnabled, isExitIntentEnabled, exitIntentCooldownDays,
+  SETTINGS_KEYS, isAdsEnabled, isAdsterraEnabled, isExitIntentEnabled, exitIntentCooldownDays,
   setBool, setNum,
 } from "@/lib/siteSettings";
+import { getAdStats, clearAdStats } from "@/lib/adAnalytics";
 
 interface AuthUser {
   id: string;
