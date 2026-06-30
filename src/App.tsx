@@ -120,6 +120,10 @@ import AITool from "./pages/AITool";
 import Integrations from "./pages/Integrations";
 import Growth from "./pages/Growth";
 import SocialKit from "./pages/SocialKit";
+import Careers from "./pages/Careers";
+import Internships from "./pages/Internships";
+import Portfolio from "./pages/Portfolio";
+import CaseStudies from "./pages/CaseStudies";
 
 const queryClient = new QueryClient();
 
