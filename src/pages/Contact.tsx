@@ -107,7 +107,7 @@ const Contact = () => {
 
   const socialLinks = [
     { icon: Twitter, label: "Twitter", href: "https://twitter.com/AmanVishwakarma" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/amanvishwakarma" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/aman-vishwakarma-ai/" },
     { icon: Github, label: "GitHub", href: "https://github.com/amanvishwakarma" },
   ];
 
