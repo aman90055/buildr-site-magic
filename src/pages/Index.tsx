@@ -7,6 +7,7 @@ import Stats from "@/components/Stats";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import HomeSections from "@/components/HomeSections";
+import HomeContent from "@/components/HomeContent";
 import AdSlot from "@/components/ads/AdSlot";
 import { AD_SLOTS } from "@/lib/adSlots";
 
