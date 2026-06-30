@@ -126,6 +126,8 @@ const App = () => (
             <AIChatWidget />
             <InstallPrompt />
             <ExitIntentOffer />
+            <AdsterraGlobalScripts />
+            
             
             <Routes>
               <Route path="/" element={<Index />} />
