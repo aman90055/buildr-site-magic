@@ -196,7 +196,7 @@ const toolCategories = [
     ],
   },
 ];
-import { FileSearch } from "lucide-react";
+
 
 const gradientPalette = [
   "from-blue-500 via-blue-600 to-indigo-600",
