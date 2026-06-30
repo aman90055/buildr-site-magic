@@ -1,4 +1,4 @@
-import { Brain, FileText, Users, Zap } from "lucide-react";
+import { Lightbulb, FileText, Users, Zap } from "lucide-react";
 
 const stats = [
   { value: "2M+", label: "PDFs Processed", icon: FileText, color: "text-brand-blue" },
