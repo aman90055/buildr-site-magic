@@ -34,7 +34,6 @@ const EXTRA_TOOLS: ToolMeta[] = [
 ];
 
 function getAllTools(): ToolMeta[] {
-  // Combine registry, NAME_MAP entries (via getToolMeta), and extras. Dedupe by slug.
   const slugs = new Set<string>();
   const out: ToolMeta[] = [];
   const push = (t: ToolMeta | null) => {
@@ -43,8 +42,6 @@ function getAllTools(): ToolMeta[] {
     out.push(t);
   };
   Object.values(TOOL_REGISTRY).forEach(push);
-  // pull every NAME_MAP entry via the helper
-  // toolRegistry exposes getToolMeta for known slugs; iterate the known list:
   [
     "/edit-pdf","/protect-pdf","/image-to-pdf","/pdf-to-image","/remove-pages",
     "/extract-pages","/organize-pdf","/scan-to-pdf","/reverse-pdf","/repair-pdf",
@@ -144,7 +141,6 @@ export default function Tools() {
 
       <main className="pt-20 pb-10">
         <div className="container mx-auto px-4 max-w-6xl">
-          {/* Hero — compact */}
           <div className="text-center mb-5">
             <Badge variant="secondary" className="mb-2 gap-1.5 text-xs">
               <LayoutGrid className="h-3 w-3" />
@@ -158,7 +154,6 @@ export default function Tools() {
             </p>
           </div>
 
-          {/* Search */}
           <div className="relative max-w-xl mx-auto mb-4">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
@@ -180,7 +175,6 @@ export default function Tools() {
             )}
           </div>
 
-          {/* Category chips — compact */}
           <div className="flex flex-wrap justify-center gap-1.5 mb-5">
             {categories.map(c => {
               const active = activeCategory === c.key;
@@ -204,52 +198,102 @@ export default function Tools() {
             })}
           </div>
 
-          {/* Results */}
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-xs text-muted-foreground">
+              <span className="font-semibold text-foreground">{filtered.length}</span> tool{filtered.length === 1 ? "" : "s"}
+              {activeCategory !== "all" && activeCategory !== "recent" && (
+                <> · {CATEGORY_META[activeCategory].title}</>
+              )}
+            </p>
+            <div className="flex items-center rounded-lg border border-border/60 bg-card/40 backdrop-blur overflow-hidden">
+              <button
+                onClick={() => setViewMode("grid")}
+                className={[
+                  "p-1.5 transition",
+                  viewMode === "grid" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground",
+                ].join(" ")}
+                aria-label="Grid view"
+              >
+                <LayoutGrid className="h-3.5 w-3.5" />
+              </button>
+              <button
+                onClick={() => setViewMode("list")}
+                className={[
+                  "p-1.5 transition",
+                  viewMode === "list" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground",
+                ].join(" ")}
+                aria-label="List view"
+              >
+                <List className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          </div>
+
           {filtered.length === 0 ? (
             <div className="text-center py-12">
               <Search className="h-8 w-8 mx-auto text-muted-foreground/50 mb-2" />
-              <p className="text-sm font-medium mb-1">No tools match “{query}”</p>
+              <p className="text-sm font-medium mb-1">No tools match "{query}"</p>
               <p className="text-xs text-muted-foreground mb-4">
-                Try “pdf”, “image”, or “ai”.
+                Try "pdf", "image", or "ai".
               </p>
               <Button size="sm" variant="outline" onClick={() => { setQuery(""); setActiveCategory("all"); }}>
                 Reset filters
               </Button>
             </div>
+          ) : viewMode === "grid" ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5">
+              {filtered.map(tool => {
+                const Icon = CATEGORY_ICONS[tool.category];
+                return (
+                  <Link
+                    key={tool.slug}
+                    to={tool.slug}
+                    onClick={() => pushRecent(tool.slug)}
+                    className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
+                    title={tool.short}
+                  >
+                    <Card className="h-full p-3 bg-card/50 backdrop-blur-xl border-border/60 hover:border-primary/40 hover:shadow-md hover:shadow-primary/5 transition-all duration-200 hover:-translate-y-0.5">
+                      <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <Icon className="h-4 w-4 text-primary" />
+                      </div>
+                      <h3 className="font-semibold text-xs leading-tight line-clamp-2 mb-0.5">{tool.name}</h3>
+                      <p className="text-[10px] uppercase tracking-wide text-muted-foreground/70">{tool.category}</p>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
           ) : (
-            <>
-              <p className="text-xs text-muted-foreground mb-3">
-                <span className="font-semibold text-foreground">{filtered.length}</span> tool{filtered.length === 1 ? "" : "s"}
-                {activeCategory !== "all" && activeCategory !== "recent" && (
-                  <> · {CATEGORY_META[activeCategory].title}</>
-                )}
-              </p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5">
-                {filtered.map(tool => {
-                  const Icon = CATEGORY_ICONS[tool.category];
-                  return (
-                    <Link
-                      key={tool.slug}
-                      to={tool.slug}
-                      onClick={() => pushRecent(tool.slug)}
-                      className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
-                      title={tool.short}
-                    >
-                      <Card className="h-full p-3 bg-card/50 backdrop-blur-xl border-border/60 hover:border-primary/40 hover:shadow-md hover:shadow-primary/5 transition-all duration-200 hover:-translate-y-0.5">
-                        <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                          <Icon className="h-4 w-4 text-primary" />
-                        </div>
-                        <h3 className="font-semibold text-xs leading-tight line-clamp-2 mb-0.5">{tool.name}</h3>
-                        <p className="text-[10px] uppercase tracking-wide text-muted-foreground/70">{tool.category}</p>
-                      </Card>
-                    </Link>
-                  );
-                })}
-              </div>
-            </>
+            <div className="flex flex-col gap-2">
+              {filtered.map(tool => {
+                const Icon = CATEGORY_ICONS[tool.category];
+                return (
+                  <Link
+                    key={tool.slug}
+                    to={tool.slug}
+                    onClick={() => pushRecent(tool.slug)}
+                    className="group flex items-center gap-3 p-3 rounded-xl bg-card/40 backdrop-blur border border-border/60 hover:border-primary/40 hover:bg-card/60 transition-all"
+                    title={tool.short}
+                  >
+                    <div className="shrink-0 h-9 w-9 rounded-lg bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Icon className="h-4 w-4 text-primary" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-semibold text-sm leading-tight">{tool.name}</h3>
+                      <p className="text-xs text-muted-foreground truncate">{tool.short}</p>
+                    </div>
+                    <div className="hidden sm:flex items-center gap-1.5 shrink-0">
+                      <Badge variant="secondary" className="text-[10px] px-1.5 py-0.5">
+                        {tool.category}
+                      </Badge>
+                      <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition" />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           )}
 
-          {/* Category quick-jump — compact */}
           <div className="mt-10 pt-6 border-t border-border/50">
             <h2 className="text-sm font-semibold mb-3 text-center text-muted-foreground uppercase tracking-wide">Browse by category</h2>
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2">
