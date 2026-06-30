@@ -134,7 +134,7 @@ export default function ToolIconManager() {
   if (!isAdmin) {
     return (
       <div className="min-h-screen flex flex-col">
-        <Navbar />
+        <Header />
         <main className="flex-1 flex items-center justify-center pt-24">
           <Card className="p-8 text-center max-w-md">
             <ShieldAlert className="w-10 h-10 text-destructive mx-auto mb-3" />
@@ -154,7 +154,7 @@ export default function ToolIconManager() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Header />
       <main className="flex-1 pt-24 pb-16">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
