@@ -10,6 +10,7 @@ import {
   Filter,
 } from "lucide-react";
 import AIBadge from "./AIBadge";
+import { useToolIcon } from "@/lib/toolIcons";
 
 type Tool = {
   title: string;
@@ -187,6 +188,7 @@ const ToolCard = ({
   onOpen: (href: string) => void;
 }) => {
   const grad = pickGradient(tool.catIndex, tool.idx);
+  const customIcon = useToolIcon(tool.href);
   return (
     <Link
       to={tool.href}
@@ -222,8 +224,12 @@ const ToolCard = ({
         )}
 
         <div className="relative flex flex-col h-full">
-          <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${grad} flex items-center justify-center shadow-lg shadow-black/10 group-hover:shadow-xl group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 mb-4 ring-1 ring-white/40 dark:ring-white/10`}>
-            <tool.icon className="w-6 h-6 text-white drop-shadow" strokeWidth={2.2} />
+          <div className={`w-12 h-12 rounded-2xl ${customIcon ? "bg-white dark:bg-slate-800" : `bg-gradient-to-br ${grad}`} flex items-center justify-center shadow-lg shadow-black/10 group-hover:shadow-xl group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 mb-4 ring-1 ring-white/40 dark:ring-white/10 overflow-hidden`}>
+            {customIcon ? (
+              <img src={customIcon} alt="" className="w-full h-full object-cover" />
+            ) : (
+              <tool.icon className="w-6 h-6 text-white drop-shadow" strokeWidth={2.2} />
+            )}
           </div>
 
           <h4 className="font-display font-semibold text-[15px] leading-tight text-foreground group-hover:text-primary transition-colors duration-300 mb-1.5">
