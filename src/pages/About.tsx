@@ -116,7 +116,7 @@ const About = () => {
                     <Badge variant="secondary">Full-Stack</Badge>
                   </div>
                   <a
-                    href="https://www.linkedin.com/in/aman-vishwakarma-446708294"
+                    href="https://www.linkedin.com/in/aman-vishwakarma-ai/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
