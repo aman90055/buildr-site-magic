@@ -100,7 +100,7 @@ Deno.serve(async (req) => {
         email,
         utr_number: razorpay_payment_id,
         plan,
-        amount: Number(amount) || 0,
+        amount: verifiedAmount,
         status: "verified",
         verified_at: new Date().toISOString(),
         notes: `Razorpay order: ${razorpay_order_id}`,
