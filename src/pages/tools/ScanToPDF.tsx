@@ -40,6 +40,15 @@ const ScanToPDF = () => {
     }
   };
 
+  const handleCameraCapture = (file: File) => {
+    const validFiles = filterFilesBySize([file], isPremium);
+    if (validFiles.length === 0) return;
+    setFiles(prev => [...prev, ...validFiles]);
+    const reader = new FileReader();
+    reader.onload = (ev) => setPreviews(prev => [...prev, ev.target?.result as string]);
+    reader.readAsDataURL(file);
+  };
+
   const handleRemoveFile = (index: number) => {
     setFiles(prev => prev.filter((_, i) => i !== index));
     setPreviews(prev => prev.filter((_, i) => i !== index));
