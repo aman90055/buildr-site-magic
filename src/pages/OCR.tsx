@@ -46,6 +46,14 @@ const OCR = () => {
       reader.readAsDataURL(droppedFile);
     }
   };
+  const handleCameraCapture = (capturedFile: File) => {
+    if (!checkFileSizeLimit(capturedFile, isPremium)) return;
+    setFile(capturedFile);
+    const reader = new FileReader();
+    reader.onload = (ev) => setPreview(ev.target?.result as string);
+    reader.readAsDataURL(capturedFile);
+  };
+
 
   const handleExtract = async () => {
     if (!preview) return;
