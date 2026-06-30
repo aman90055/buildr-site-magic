@@ -13,6 +13,7 @@ import { AD_SLOTS } from "@/lib/adSlots";
 import PartnerLogos from "@/components/PartnerLogos";
 import AnimatedStatsSection from "@/components/AnimatedStatsSection";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import PromoSetAvProfile from "@/components/ads/PromoSetAvProfile";
 
 
 const Index = () => {
@@ -40,6 +41,7 @@ const Index = () => {
           <PopularTools />
           <AnimatedStatsSection />
           <Features />
+          <PromoSetAvProfile className="py-10" />
           <HomeSections />
           <TestimonialsCarousel />
           <HomeContent />
