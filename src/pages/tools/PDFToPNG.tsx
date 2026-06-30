@@ -49,7 +49,7 @@ const PDFToPNG = () => {
         const canvas = document.createElement("canvas");
         canvas.width = viewport.width;
         canvas.height = viewport.height;
-        await page.render({ canvasContext: canvas.getContext("2d")!, viewport }).promise;
+        await page.render({ canvas, canvasContext: canvas.getContext("2d")!, viewport }).promise;
         pngs.push(canvas.toDataURL("image/png"));
         setProgress(10 + (i / pdf.numPages) * 80);
       }

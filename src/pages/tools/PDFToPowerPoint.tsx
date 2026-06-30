@@ -49,7 +49,7 @@ const PDFToPowerPoint = () => {
         canvas.width = viewport.width;
         canvas.height = viewport.height;
         const ctx = canvas.getContext("2d")!;
-        await page.render({ canvasContext: ctx, viewport }).promise;
+        await page.render({ canvas, canvasContext: ctx, viewport }).promise;
         pageImages.push(canvas.toDataURL("image/png"));
         setProgress(10 + (i / pdf.numPages) * 80);
       }
