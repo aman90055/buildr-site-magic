@@ -120,6 +120,10 @@ import AITool from "./pages/AITool";
 import Integrations from "./pages/Integrations";
 import Growth from "./pages/Growth";
 import SocialKit from "./pages/SocialKit";
+import Careers from "./pages/Careers";
+import Internships from "./pages/Internships";
+import Portfolio from "./pages/Portfolio";
+import CaseStudies from "./pages/CaseStudies";
 
 const queryClient = new QueryClient();
 
@@ -250,6 +254,10 @@ const App = () => (
               <Route path="/integrations" element={<Integrations />} />
               <Route path="/growth" element={<Growth />} />
               <Route path="/social-kit" element={<SocialKit />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/internships" element={<Internships />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/case-studies" element={<CaseStudies />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
