@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, FileText, Merge, Split, Minimize2, Star, Lightbulb, Zap, Shield, Globe } from "lucide-react";
+import { ArrowRight, FileText, Merge, Split, Minimize2, Sparkles, Lightbulb, Zap, Shield, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import AIBadge from "./AIBadge";
 import { trackCTA, trackToolCard } from "@/lib/analytics";
 
 const tools = [
-  { to: "/merge", icon: Merge, label: "Merge PDF", desc: "AI-optimized combining", color: "bg-brand-blue", ai: true },
-  { to: "/split", icon: Split, label: "Split PDF", desc: "Smart page detection", color: "bg-brand-green", ai: true },
-  { to: "/compress", icon: Minimize2, label: "Compress PDF", desc: "AI compression engine", color: "bg-brand-purple", ai: true },
-  { to: "/convert", icon: FileText, label: "Convert PDF", desc: "Multi-format AI conversion", color: "bg-brand-orange", ai: true },
+  { to: "/merge", icon: Merge, label: "Merge PDF", desc: "AI-optimized combining", color: "bg-brand-blue", glow: "hsl(var(--brand-blue))", ai: true },
+  { to: "/split", icon: Split, label: "Split PDF", desc: "Smart page detection", color: "bg-brand-green", glow: "hsl(var(--brand-green))", ai: true },
+  { to: "/compress", icon: Minimize2, label: "Compress PDF", desc: "AI compression engine", color: "bg-brand-purple", glow: "hsl(var(--brand-purple))", ai: true },
+  { to: "/convert", icon: FileText, label: "Convert PDF", desc: "Multi-format AI conversion", color: "bg-brand-orange", glow: "hsl(var(--brand-orange))", ai: true },
 ];
 
 const features = [
@@ -35,14 +35,22 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-6 sm:space-y-8">
-            {/* Launch Badge — hidden per owner request */}
-            <div className="hidden" aria-hidden="true" />
+            {/* Sparkle pill */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-card border border-primary/30 text-xs sm:text-sm animate-fade-in shadow-[0_0_24px_hsl(var(--primary)/0.25)]">
+              <Sparkles className="w-3.5 h-3.5 text-brand-ai animate-pulse" />
+              <span className="font-medium bg-gradient-to-r from-primary via-brand-ai to-accent bg-clip-text text-transparent">
+                The 2026 AI Document Suite
+              </span>
+            </div>
 
             <h1
-              className="text-[2.25rem] leading-[1.05] sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold tracking-tight animate-fade-in bg-gradient-to-br from-foreground via-primary to-brand-ai bg-clip-text text-transparent drop-shadow-[0_2px_12px_hsl(var(--primary)/0.25)]"
+              className="relative text-[2.25rem] leading-[1.05] sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold tracking-tight animate-fade-in"
               style={{ animationDelay: "0.1s" }}
             >
-              One Platform for PDFs, AI, Documents, Images & Productivity
+              <span className="bg-[linear-gradient(120deg,hsl(var(--foreground)),hsl(var(--primary)),hsl(var(--brand-ai)),hsl(var(--accent)),hsl(var(--primary)))] bg-[length:300%_300%] bg-clip-text text-transparent animate-gradient-shift drop-shadow-[0_2px_18px_hsl(var(--primary)/0.35)]">
+                One Platform for PDFs, AI, Documents, Images &amp; Productivity
+              </span>
+              <span aria-hidden className="absolute -bottom-2 left-0 h-1 w-24 sm:w-32 rounded-full bg-gradient-to-r from-primary via-brand-ai to-accent blur-[2px] opacity-80" />
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
@@ -102,20 +110,26 @@ const Hero = () => {
                 key={tool.to}
                 to={tool.to}
                 onClick={() => trackToolCard(tool.label.toLowerCase().replace(/\s+/g, "_"), "hero")}
-                className="group relative p-4 sm:p-6 glass-card rounded-2xl sm:rounded-3xl hover:shadow-card-hover transition-all duration-500 animate-fade-in overflow-hidden"
-                style={{ animationDelay: `${0.4 + i * 0.1}s` }}
+                className="group relative p-4 sm:p-6 glass-card rounded-2xl sm:rounded-3xl transition-all duration-500 animate-fade-in overflow-hidden hover:-translate-y-1"
+                style={{
+                  animationDelay: `${0.4 + i * 0.1}s`,
+                  // @ts-expect-error css var
+                  ["--tool-glow"]: tool.glow,
+                }}
               >
-                {/* AI Badge */}
+                {/* Animated gradient border */}
+                <span aria-hidden className="pointer-events-none absolute inset-0 rounded-2xl sm:rounded-3xl p-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(135deg, ${tool.glow}, transparent 60%)`, WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)", WebkitMaskComposite: "xor", maskComposite: "exclude" }} />
+
+                {/* Color halo */}
+                <span aria-hidden className="pointer-events-none absolute -inset-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-3xl" style={{ background: `radial-gradient(circle at 50% 0%, ${tool.glow} 0%, transparent 60%)` }} />
+
                 {tool.ai && (
-                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3">
+                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-10">
                     <AIBadge variant="small" glow={false} />
                   </div>
                 )}
 
-                {/* Hover Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-ai opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl sm:rounded-3xl" />
-
-                <div className={`w-11 h-11 sm:w-14 sm:h-14 ${tool.color} rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-5 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}>
+                <div className={`relative w-11 h-11 sm:w-14 sm:h-14 ${tool.color} rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3`} style={{ boxShadow: `0 10px 30px -10px ${tool.glow}` }}>
                   <tool.icon className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
                 </div>
                 <h3 className="font-display font-semibold text-base sm:text-lg text-foreground mb-1 sm:mb-2 group-hover:text-primary transition-colors">
