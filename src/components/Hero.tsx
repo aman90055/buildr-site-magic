@@ -71,7 +71,7 @@ const Hero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
               <Button size="lg" className="text-base shadow-cta group bg-gradient-ai hover:opacity-90 transition-opacity h-12 sm:h-14 px-6 sm:px-8 rounded-2xl font-display font-semibold w-full sm:w-auto" asChild>
-                <Link to="/auth" onClick={() => trackCTA("Start Free Now", "hero", "/auth")}>
+                <Link to="/auth?next=/merge" onClick={() => trackCTA("Start Free Now", "hero", "/auth")}>
                   Start Free Now
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
