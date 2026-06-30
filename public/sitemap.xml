@@ -144,4 +144,8 @@
   <url><loc>https://document-edit-in.lovable.app/enterprise</loc><lastmod>2026-06-30</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://document-edit-in.lovable.app/api-docs</loc><lastmod>2026-06-30</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://document-edit-in.lovable.app/workspace</loc><lastmod>2026-06-30</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://docunova-ai.lovable.app/careers</loc><lastmod>2026-06-30</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://docunova-ai.lovable.app/internships</loc><lastmod>2026-06-30</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://docunova-ai.lovable.app/portfolio</loc><lastmod>2026-06-30</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://docunova-ai.lovable.app/case-studies</loc><lastmod>2026-06-30</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
 </urlset>
