@@ -96,6 +96,7 @@ import ReferAndEarn from "./pages/ReferAndEarn";
 import Premium from "./pages/Premium";
 import AdminPayments from "./pages/AdminPayments";
 import AdminDashboard from "./pages/AdminDashboard";
+import ToolIconManager from "./pages/admin/ToolIconManager";
 import NotFound from "./pages/NotFound";
 import CategoryPage from "./pages/CategoryPage";
 import Roadmap from "./pages/Roadmap";
@@ -237,6 +238,7 @@ const App = () => (
               <Route path="/admin/payments" element={<AdminPayments />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/admin/tool-icons" element={<ToolIconManager />} />
               {/* Category landing pages */}
               <Route path="/category/:slug" element={<CategoryPage />} />
               <Route path="/roadmap" element={<Roadmap />} />
