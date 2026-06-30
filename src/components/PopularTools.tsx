@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { 
   ImageIcon, FileImage, FileDown, Merge, Scissors, Pencil, Lock, ScanText,
   Trash2, FileOutput, LayoutGrid, Scan, Wrench, FileText, Presentation, Table,
-  Globe, FileArchive, RotateCw, Hash, Droplets, Crop, Unlock, PenTool, EyeOff, GitCompare, Sparkles, Brain,
+  Globe, FileArchive, RotateCw, Hash, Droplets, Crop, Unlock, PenTool, EyeOff, GitCompare, Star, Lightbulb,
   ArrowDownUp, Layers, Contrast, Info, BookOpen, FileCode, Type,
   Minimize2, Maximize, Eraser, RefreshCw, Languages, SpellCheck, Database,
   Receipt, Award, Mail, FileUser
