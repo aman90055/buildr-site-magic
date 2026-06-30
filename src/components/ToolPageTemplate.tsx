@@ -91,7 +91,7 @@ const ToolPageTemplate = ({
                 <Badge variant="outline" className="border-primary/30 text-primary">
                   {category}
                 </Badge>
-                {isAI && <AIBadge variant="inline" glow />}
+                
               </div>
 
               <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center mx-auto mb-6`}>
