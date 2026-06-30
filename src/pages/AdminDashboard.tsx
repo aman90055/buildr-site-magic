@@ -272,11 +272,6 @@ const AdminDashboard = () => {
                 <Button variant="outline" size="sm" onClick={fetchAll} disabled={loading}>
                   <RefreshCw className={`w-4 h-4 mr-1 ${loading ? "animate-spin" : ""}`} /> Refresh
                 </Button>
-                <Link to="/admin/tool-icons">
-                  <Button size="sm" variant="outline">
-                    Tool Icons <ArrowUpRight className="w-3 h-3 ml-1" />
-                  </Button>
-                </Link>
                 <Link to="/admin/payments">
                   <Button size="sm" variant="default">
                     Payments <ArrowUpRight className="w-3 h-3 ml-1" />

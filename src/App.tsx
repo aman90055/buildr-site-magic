@@ -96,7 +96,6 @@ import ReferAndEarn from "./pages/ReferAndEarn";
 import Premium from "./pages/Premium";
 import AdminPayments from "./pages/AdminPayments";
 import AdminDashboard from "./pages/AdminDashboard";
-import ToolIconManager from "./pages/admin/ToolIconManager";
 import NotFound from "./pages/NotFound";
 import CategoryPage from "./pages/CategoryPage";
 import Roadmap from "./pages/Roadmap";
@@ -125,45 +124,6 @@ import Careers from "./pages/Careers";
 import Internships from "./pages/Internships";
 import Portfolio from "./pages/Portfolio";
 import CaseStudies from "./pages/CaseStudies";
-// Developer Tools
-import UUIDGenerator from "./pages/tools/dev/UUIDGenerator";
-import HashGenerator from "./pages/tools/dev/HashGenerator";
-import JWTDecoder from "./pages/tools/dev/JWTDecoder";
-import URLEncoder from "./pages/tools/dev/URLEncoder";
-import RegexTester from "./pages/tools/dev/RegexTester";
-import MinifyBeautify from "./pages/tools/dev/MinifyBeautify";
-import TimestampConverter from "./pages/tools/dev/TimestampConverter";
-import PasswordGenerator from "./pages/tools/dev/PasswordGenerator";
-import LoremIpsum from "./pages/tools/dev/LoremIpsum";
-import Base64Tool from "./pages/tools/dev/Base64";
-import JSONFormatter from "./pages/tools/dev/JSONFormatter";
-// Utility Tools
-import EMICalculator from "./pages/tools/util/EMICalculator";
-import GSTCalculator from "./pages/tools/util/GSTCalculator";
-import AgeCalculator from "./pages/tools/util/AgeCalculator";
-import PercentageCalculator from "./pages/tools/util/PercentageCalculator";
-import UnitConverter from "./pages/tools/util/UnitConverter";
-import CurrencyConverter from "./pages/tools/util/CurrencyConverter";
-import TimezoneConverter from "./pages/tools/util/TimezoneConverter";
-import TextCounter from "./pages/tools/util/TextCounter";
-import TextCase from "./pages/tools/util/TextCase";
-// File Tools
-import ZipExtractor from "./pages/tools/file/ZipExtractor";
-import FileCompressor from "./pages/tools/file/FileCompressor";
-import FileRename from "./pages/tools/file/FileRename";
-import ChecksumViewer from "./pages/tools/file/ChecksumViewer";
-// Office / Data Tools
-import ExcelViewer from "./pages/tools/office/ExcelViewer";
-import WordViewer from "./pages/tools/office/WordViewer";
-import PPTViewer from "./pages/tools/office/PPTViewer";
-import CSVViewer from "./pages/tools/office/CSVViewer";
-import JsonCsvXml from "./pages/tools/office/JsonCsvXml";
-import JsonValidator from "./pages/tools/office/JsonValidator";
-// Social Tools
-import SocialBioGenerator from "./pages/tools/social/SocialBioGenerator";
-import UsernameGenerator from "./pages/tools/social/UsernameGenerator";
-import HashtagGenerator from "./pages/tools/social/HashtagGenerator";
-import SocialLinksHub from "./pages/tools/social/SocialLinksHub";
 
 const queryClient = new QueryClient();
 
@@ -277,7 +237,6 @@ const App = () => (
               <Route path="/admin/payments" element={<AdminPayments />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              <Route path="/admin/tool-icons" element={<ToolIconManager />} />
               {/* Category landing pages */}
               <Route path="/category/:slug" element={<CategoryPage />} />
               <Route path="/roadmap" element={<Roadmap />} />
@@ -299,45 +258,6 @@ const App = () => (
               <Route path="/internships" element={<Internships />} />
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/case-studies" element={<CaseStudies />} />
-              {/* Developer Tools */}
-              <Route path="/tools/uuid-generator" element={<UUIDGenerator />} />
-              <Route path="/tools/hash-generator" element={<HashGenerator />} />
-              <Route path="/tools/jwt-decoder" element={<JWTDecoder />} />
-              <Route path="/tools/url-encoder" element={<URLEncoder />} />
-              <Route path="/tools/regex-tester" element={<RegexTester />} />
-              <Route path="/tools/minify-beautify" element={<MinifyBeautify />} />
-              <Route path="/tools/timestamp-converter" element={<TimestampConverter />} />
-              <Route path="/tools/password-generator" element={<PasswordGenerator />} />
-              <Route path="/tools/lorem-ipsum" element={<LoremIpsum />} />
-              <Route path="/tools/base64" element={<Base64Tool />} />
-              <Route path="/tools/json-formatter" element={<JSONFormatter />} />
-              {/* Utility Tools */}
-              <Route path="/tools/emi-calculator" element={<EMICalculator />} />
-              <Route path="/tools/gst-calculator" element={<GSTCalculator />} />
-              <Route path="/tools/age-calculator" element={<AgeCalculator />} />
-              <Route path="/tools/percentage-calculator" element={<PercentageCalculator />} />
-              <Route path="/tools/unit-converter" element={<UnitConverter />} />
-              <Route path="/tools/currency-converter" element={<CurrencyConverter />} />
-              <Route path="/tools/timezone-converter" element={<TimezoneConverter />} />
-              <Route path="/tools/text-counter" element={<TextCounter />} />
-              <Route path="/tools/text-case" element={<TextCase />} />
-              {/* File Tools */}
-              <Route path="/tools/zip-extractor" element={<ZipExtractor />} />
-              <Route path="/tools/file-compressor" element={<FileCompressor />} />
-              <Route path="/tools/file-rename" element={<FileRename />} />
-              <Route path="/tools/checksum-viewer" element={<ChecksumViewer />} />
-              {/* Office / Data Tools */}
-              <Route path="/tools/excel-viewer" element={<ExcelViewer />} />
-              <Route path="/tools/word-viewer" element={<WordViewer />} />
-              <Route path="/tools/ppt-viewer" element={<PPTViewer />} />
-              <Route path="/tools/csv-viewer" element={<CSVViewer />} />
-              <Route path="/tools/json-csv-xml" element={<JsonCsvXml />} />
-              <Route path="/tools/json-validator" element={<JsonValidator />} />
-              {/* Social Tools */}
-              <Route path="/tools/bio-generator" element={<SocialBioGenerator />} />
-              <Route path="/tools/username-generator" element={<UsernameGenerator />} />
-              <Route path="/tools/hashtag-generator" element={<HashtagGenerator />} />
-              <Route path="/tools/social-links-hub" element={<SocialLinksHub />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
