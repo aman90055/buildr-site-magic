@@ -122,6 +122,21 @@ const toolCategories = [
   },
 ];
 
+// Premium gradient palette for tool icons
+const gradientPalette = [
+  "from-blue-500 via-blue-600 to-indigo-600",
+  "from-purple-500 via-fuchsia-500 to-pink-500",
+  "from-cyan-400 via-sky-500 to-blue-600",
+  "from-emerald-400 via-teal-500 to-cyan-600",
+  "from-orange-400 via-amber-500 to-rose-500",
+  "from-pink-500 via-rose-500 to-red-500",
+  "from-indigo-500 via-violet-500 to-purple-600",
+  "from-teal-400 via-emerald-500 to-green-600",
+];
+
+const pickGradient = (catIndex: number, idx: number) =>
+  gradientPalette[(catIndex * 3 + idx) % gradientPalette.length];
+
 const PopularTools = () => {
   const totalTools = toolCategories.reduce((sum, cat) => sum + cat.tools.length, 0);
 
@@ -136,53 +151,68 @@ const PopularTools = () => {
           All {totalTools}+ Tools You Need
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          {totalTools}+ professional tools across PDF, Image, Document & AI categories
+          {totalTools}+ premium tools across PDF, Image, Document & Smart categories
         </p>
       </div>
-      
-      <div className="space-y-12">
+
+      <div className="space-y-14">
         {toolCategories.map((category, catIndex) => (
-          <div key={catIndex} className="animate-fade-in-up" style={{ animationDelay: `${catIndex * 0.1}s` }}>
+          <div key={catIndex} className="animate-fade-in-up" style={{ animationDelay: `${catIndex * 0.08}s` }}>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-ai flex items-center justify-center">
+              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
                 <category.icon className="w-5 h-5 text-white" />
               </div>
-              <h3 className="font-display font-semibold text-xl text-foreground">
+              <h3 className="font-display font-semibold text-xl md:text-2xl text-foreground tracking-tight">
                 {category.title}
               </h3>
-              <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
+              <span className="text-xs font-medium text-muted-foreground bg-muted/60 backdrop-blur px-2.5 py-1 rounded-full border border-border/50">
                 {category.tools.length} tools
               </span>
             </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {category.tools.map((tool, index) => (
-                <Link
-                  key={index}
-                  to={tool.href}
-                  className="group relative block p-5 rounded-2xl glass-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 overflow-hidden"
-                >
-                  {tool.ai && (
-                    <div className="absolute top-3 right-3">
-                      <AIBadge variant="inline" glow={false} />
+
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
+              {category.tools.map((tool, index) => {
+                const grad = pickGradient(catIndex, index);
+                return (
+                  <Link
+                    key={index}
+                    to={tool.href}
+                    className="group relative block rounded-[22px] p-[1.5px] bg-gradient-to-br from-white/40 via-white/10 to-white/5 dark:from-white/15 dark:via-white/5 dark:to-white/0 hover:from-blue-400/60 hover:via-purple-400/40 hover:to-cyan-400/60 transition-all duration-500 hover:-translate-y-1.5 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                  >
+                    <div className="relative h-full rounded-[20px] bg-white/70 dark:bg-slate-900/60 backdrop-blur-2xl backdrop-saturate-150 p-5 overflow-hidden shadow-[0_8px_30px_-12px_rgba(15,23,42,0.15)] dark:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.6)] group-hover:shadow-[0_20px_50px_-15px_rgba(59,130,246,0.45)] transition-shadow duration-500">
+                      <div className={`pointer-events-none absolute -top-16 -right-16 w-40 h-40 rounded-full bg-gradient-to-br ${grad} opacity-0 group-hover:opacity-30 blur-3xl transition-opacity duration-500`} />
+                      <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.6),transparent_50%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_50%)]" />
+
+                      {tool.ai && (
+                        <div className="absolute top-3 right-3 z-10">
+                          <AIBadge variant="inline" glow={false} />
+                        </div>
+                      )}
+
+                      <div className="relative flex flex-col h-full">
+                        <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${grad} flex items-center justify-center shadow-lg shadow-black/10 group-hover:shadow-xl group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500 mb-4 ring-1 ring-white/40 dark:ring-white/10`}>
+                          <tool.icon className="w-6 h-6 text-white drop-shadow" strokeWidth={2.2} />
+                        </div>
+
+                        <h4 className="font-display font-semibold text-[15px] leading-tight text-foreground group-hover:text-primary transition-colors mb-1.5">
+                          {tool.title}
+                        </h4>
+                        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2 mb-4">
+                          {tool.description}
+                        </p>
+
+                        <div className="mt-auto flex items-center justify-between">
+                          <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300">
+                            Open Tool
+                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
+                          </span>
+                          <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-br ${grad} opacity-60 group-hover:opacity-100 group-hover:scale-150 transition-all duration-300`} />
+                        </div>
+                      </div>
                     </div>
-                  )}
-                  
-                  <div className="absolute inset-0 bg-gradient-ai opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl" />
-                  
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <tool.icon className={`w-5 h-5 ${tool.color}`} />
-                    </div>
-                    <h4 className={`font-display font-semibold ${tool.color} group-hover:text-primary transition-colors`}>
-                      {tool.title}
-                    </h4>
-                  </div>
-                  <p className="text-sm text-muted-foreground pl-13">
-                    {tool.description}
-                  </p>
-                </Link>
-              ))}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         ))}
