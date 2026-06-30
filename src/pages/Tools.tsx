@@ -91,6 +91,7 @@ export default function Tools() {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<ToolCategory | "all" | "recent">("all");
   const [recent, setRecent] = useState<string[]>(() => getRecent());
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   useEffect(() => {
     const onStorage = () => setRecent(getRecent());
