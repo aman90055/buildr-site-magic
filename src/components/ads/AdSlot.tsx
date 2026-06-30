@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { ADSENSE_CLIENT, ADS_ENABLED, type AdSlotConfig, type AdFormat } from "@/lib/adSlots";
 import { isAdsEnabled } from "@/lib/siteSettings";
+import { trackAdEvent } from "@/lib/adAnalytics";
 
 interface AdSlotProps {
   /** Either pass a full config object (preferred) or just a slot id + format */
