@@ -76,8 +76,8 @@ export default function Workspace() {
               <div key={j.id} className="p-4 flex items-center gap-3">
                 <FileText className="w-5 h-5 text-muted-foreground" />
                 <div className="flex-1 min-w-0">
-                  <div className="font-medium truncate">{j.file_name || "Untitled"}</div>
-                  <div className="text-xs text-muted-foreground">{j.tool_type} · {new Date(j.created_at).toLocaleString()}</div>
+                  <div className="font-medium truncate">{j.output_file || j.job_type || "Untitled"}</div>
+                  <div className="text-xs text-muted-foreground">{j.job_type} · {new Date(j.created_at).toLocaleString()}</div>
                 </div>
                 <span className="text-xs px-2 py-1 rounded bg-muted">{j.status}</span>
               </div>
