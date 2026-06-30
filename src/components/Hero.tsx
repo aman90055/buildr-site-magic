@@ -41,7 +41,7 @@ const Hero = () => {
                 <Sparkles className="w-4 h-4" />
                 <span className="font-display tracking-wide">🚀 100+ Free AI, PDF & Productivity Tools</span>
               </div>
-              <AIBadge />
+              
             </div>
 
             <h1
