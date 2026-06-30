@@ -101,10 +101,3 @@ export default function HashGenerator() {
     </ToolShell>
   );
 }
-
-const DEV_RELATED = [
-  { name: "UUID Generator", href: "/tools/uuid-generator" },
-  { name: "JWT Decoder", href: "/tools/jwt-decoder" },
-  { name: "Base64", href: "/tools/base64" },
-  { name: "Password Generator", href: "/tools/password-generator" },
-];
