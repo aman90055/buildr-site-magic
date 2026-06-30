@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import {
   FileText, FileType2, Brain, Image as ImageIcon, FileSignature,
-  Wrench, Star, Trophy, BookOpen, Mail, Globe, ArrowRight,
+  Wrench, Trophy, BookOpen, Mail, Globe, ArrowRight,
 } from "lucide-react";
 
 const services = [
@@ -61,12 +61,7 @@ const whyUs = [
   "Fast, Secure & Scalable Infrastructure",
 ];
 
-const testimonials = [
-  { quote: "The best free PDF and AI toolkit I've used. Everything works in one place.", author: "Priya S." },
-  { quote: "AI PDF Chat saves hours of manual reading and research.", author: "Rahul M." },
-  { quote: "Perfect for students, freelancers, and businesses.", author: "Anita K." },
-  { quote: "Fast, secure, and incredibly easy to use.", author: "David L." },
-];
+// Testimonials moved to TestimonialsCarousel component
 
 const awards = [
   "Trusted by thousands of users worldwide",
