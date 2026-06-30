@@ -1,0 +1,43 @@
+# Document Edit Pro AI
+
+> All-in-one productivity platform with 100+ free tools for PDFs, AI document analysis, file conversion, image editing, document generation, and developer utilities.
+
+Document Edit Pro AI helps individuals, students, professionals, and businesses manage documents smarter. Edit, convert, organize, summarize, sign, and collaborate from one modern workspace. Most processing runs client-side in the browser for privacy.
+
+## Pages
+
+- [Home](/): Overview of the platform and featured tools.
+- [Pricing & Premium](/premium): Free vs Premium feature comparison.
+- [Blog](/blog): Tutorials and guides on PDF, AI, and productivity tools.
+- [FAQ](/faq): Common questions about tools, privacy, and limits.
+- [About](/about): Mission and platform overview.
+- [Contact](/contact): Support, partnerships, and enterprise inquiries.
+
+## Tool Categories
+
+- [Organize PDFs](/category/organize): Merge, split, rotate, reorder, extract and remove pages.
+- [Convert](/category/convert): PDF ↔ Word, Excel, PowerPoint, JPG, PNG, HTML, TXT.
+- [Edit](/category/edit): Edit text, add watermarks, page numbers, signatures.
+- [AI Tools](/category/ai): PDF chat, summarizer, translator, resume analyzer, content writer.
+- [Image Tools](/category/image): Compress, resize, crop, convert, background removal.
+- [Security](/category/security): Protect, unlock, redact, sign PDFs.
+- [Documents](/category/documents): Invoice, NDA, offer letter, certificate generators.
+
+## Popular Tools
+
+- [Merge PDF](/merge): Combine multiple PDFs into one.
+- [Split PDF](/split): Split a PDF into separate files by range or page.
+- [Compress PDF](/compress): AI-powered PDF compression with quality control.
+- [PDF to Word](/pdf-to-word): Convert PDFs to editable Word documents.
+- [Word to PDF](/word-to-pdf): Convert DOCX files to PDF.
+- [PDF to JPG](/pdf-to-jpg): Export PDF pages as JPG images.
+- [JPG to PDF](/jpg-to-pdf): Combine images into a single PDF.
+- [Protect PDF](/protect): Add passwords and permissions.
+- [Unlock PDF](/unlock): Remove password protection from PDFs you own.
+- [AI PDF Chat](/tools/aichat): Ask questions about your PDF documents.
+- [AI Summarizer](/tools/aisummarize): Generate concise summaries of long documents.
+
+## Optional
+
+- [Refer & Earn](/refer): Referral program details.
+- [Donate](/donate): Support the project.
