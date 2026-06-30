@@ -80,8 +80,10 @@ const AdminDashboard = () => {
 
   // Settings UI state (synced from localStorage)
   const [adsOn, setAdsOn] = useState(isAdsEnabled());
+  const [adsterraOn, setAdsterraOn] = useState(isAdsterraEnabled());
   const [exitOn, setExitOn] = useState(isExitIntentEnabled());
   const [cooldown, setCooldown] = useState(exitIntentCooldownDays());
+  const [adStats, setAdStats] = useState(() => getAdStats());
 
   useEffect(() => {
     if (authLoading) return;
