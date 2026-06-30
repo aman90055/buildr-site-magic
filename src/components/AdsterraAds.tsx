@@ -1,14 +1,60 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { isAdsterraEnabled } from "@/lib/siteSettings";
+import { trackAdEvent } from "@/lib/adAnalytics";
 
 /**
- * Adsterra Native Banner (container-based)
+ * Wires an ad container to track impressions (on mount + intersection)
+ * and clicks (any click bubbling up from the iframe/anchor).
  */
+const useAdTracking = (
+  ref: React.RefObject<HTMLDivElement>,
+  placement: string,
+) => {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    let impressionFired = false;
+    const fireImpression = () => {
+      if (impressionFired) return;
+      impressionFired = true;
+      trackAdEvent("adsterra", placement, "impression");
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            fireImpression();
+            io.disconnect();
+            break;
+          }
+        }
+      },
+      { threshold: 0.3 },
+    );
+    io.observe(el);
+
+    const onClick = () => trackAdEvent("adsterra", placement, "click");
+    el.addEventListener("click", onClick, true);
+
+    return () => {
+      io.disconnect();
+      el.removeEventListener("click", onClick, true);
+    };
+  }, [ref, placement]);
+};
+
+/** Responsive Adsterra Native — works on every breakpoint (container based). */
 export const AdsterraNative = () => {
   const ref = useRef<HTMLDivElement>(null);
   const loaded = useRef(false);
+  const enabled = isAdsterraEnabled();
+
+  useAdTracking(ref, "native-banner");
 
   useEffect(() => {
-    if (loaded.current || !ref.current) return;
+    if (!enabled || loaded.current || !ref.current) return;
     loaded.current = true;
     const s = document.createElement("script");
     s.async = true;
@@ -16,8 +62,9 @@ export const AdsterraNative = () => {
     s.src =
       "//pl29713522.effectivecpmnetwork.com/155691d0aff80d6fc9b1187a19ffefe3/invoke.js";
     ref.current.appendChild(s);
-  }, []);
+  }, [enabled]);
 
+  if (!enabled) return null;
   return (
     <div ref={ref} className="my-6 flex justify-center w-full overflow-hidden">
       <div id="container-155691d0aff80d6fc9b1187a19ffefe3" />
@@ -25,12 +72,11 @@ export const AdsterraNative = () => {
   );
 };
 
-/**
- * Adsterra Banner 728x90 (iframe)
- */
-export const AdsterraBanner728 = () => {
+/** Adsterra 728×90 iframe banner — desktop only. */
+const AdsterraBanner728Inner = () => {
   const ref = useRef<HTMLDivElement>(null);
   const loaded = useRef(false);
+  useAdTracking(ref, "banner-728x90");
 
   useEffect(() => {
     if (loaded.current || !ref.current) return;
@@ -54,10 +100,32 @@ export const AdsterraBanner728 = () => {
 };
 
 /**
- * Loads Adsterra Social Bar + Popunder globally (once).
+ * Responsive Adsterra banner.
+ * - Desktop (≥768px) → 728×90 iframe
+ * - Mobile/Tablet (<768px) → Native banner (fluid)
+ * Re-evaluates on resize so SPA navigation between breakpoints works.
  */
+export const AdsterraBanner728 = () => {
+  const [isDesktop, setIsDesktop] = useState<boolean>(() =>
+    typeof window === "undefined" ? true : window.innerWidth >= 768,
+  );
+  const enabled = isAdsterraEnabled();
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onChange = () => setIsDesktop(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  if (!enabled) return null;
+  return isDesktop ? <AdsterraBanner728Inner /> : <AdsterraNative />;
+};
+
+/** Loads Social Bar + Popunder globally (once) — respects admin toggle. */
 export const AdsterraGlobalScripts = () => {
   useEffect(() => {
+    if (!isAdsterraEnabled()) return;
     const w = window as unknown as { __adsterraLoaded?: boolean };
     if (w.__adsterraLoaded) return;
     w.__adsterraLoaded = true;
@@ -72,6 +140,9 @@ export const AdsterraGlobalScripts = () => {
       s.async = true;
       document.body.appendChild(s);
     });
+
+    // Treat global script load as a single impression for "social-bar".
+    trackAdEvent("adsterra", "social-bar", "impression");
   }, []);
 
   return null;
