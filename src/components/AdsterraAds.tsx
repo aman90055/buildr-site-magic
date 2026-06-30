@@ -3,8 +3,7 @@ import { isAdsterraEnabled } from "@/lib/siteSettings";
 import { trackAdEvent } from "@/lib/adAnalytics";
 
 /**
- * Wires an ad container to track impressions (on mount + intersection)
- * and clicks (any click bubbling up from the iframe/anchor).
+ * Impression (on intersection) + click tracking for any ad container.
  */
 const useAdTracking = (
   ref: React.RefObject<HTMLDivElement>,
@@ -14,10 +13,10 @@ const useAdTracking = (
     const el = ref.current;
     if (!el) return;
 
-    let impressionFired = false;
+    let fired = false;
     const fireImpression = () => {
-      if (impressionFired) return;
-      impressionFired = true;
+      if (fired) return;
+      fired = true;
       trackAdEvent("adsterra", placement, "impression");
     };
 
@@ -37,7 +36,6 @@ const useAdTracking = (
 
     const onClick = () => trackAdEvent("adsterra", placement, "click");
     el.addEventListener("click", onClick, true);
-
     return () => {
       io.disconnect();
       el.removeEventListener("click", onClick, true);
@@ -45,7 +43,9 @@ const useAdTracking = (
   }, [ref, placement]);
 };
 
-/** Responsive Adsterra Native — works on every breakpoint (container based). */
+/* ------------------------------------------------------------------ */
+/* Native banner (responsive, container based)                         */
+/* ------------------------------------------------------------------ */
 export const AdsterraNative = () => {
   const ref = useRef<HTMLDivElement>(null);
   const loaded = useRef(false);
@@ -60,50 +60,110 @@ export const AdsterraNative = () => {
     s.async = true;
     s.setAttribute("data-cfasync", "false");
     s.src =
-      "//pl29713522.effectivecpmnetwork.com/155691d0aff80d6fc9b1187a19ffefe3/invoke.js";
+      "//pl30135546.effectivecpmnetwork.com/7b86d1ea5986c2f007703310d325c14a/invoke.js";
     ref.current.appendChild(s);
   }, [enabled]);
 
   if (!enabled) return null;
   return (
     <div ref={ref} className="my-6 flex justify-center w-full overflow-hidden">
-      <div id="container-155691d0aff80d6fc9b1187a19ffefe3" />
+      <div id="container-7b86d1ea5986c2f007703310d325c14a" />
     </div>
   );
 };
 
-/** Adsterra 728×90 iframe banner — desktop only. */
-const AdsterraBanner728Inner = () => {
+/* ------------------------------------------------------------------ */
+/* Iframe banners (highperformanceformat.com)                          */
+/* ------------------------------------------------------------------ */
+interface IframeBannerConfig {
+  key: string;
+  width: number;
+  height: number;
+  placement: string;
+}
+
+const IframeBanner = ({ key: adKey, width, height, placement }: IframeBannerConfig) => {
   const ref = useRef<HTMLDivElement>(null);
   const loaded = useRef(false);
-  useAdTracking(ref, "banner-728x90");
+  useAdTracking(ref, placement);
 
   useEffect(() => {
     if (loaded.current || !ref.current) return;
     loaded.current = true;
     const cfg = document.createElement("script");
-    cfg.text = `atOptions = { 'key':'c9ba4b0fe96b924859e1b8da1f258722','format':'iframe','height':90,'width':728,'params':{} };`;
+    cfg.text = `atOptions = { 'key':'${adKey}','format':'iframe','height':${height},'width':${width},'params':{} };`;
     const inv = document.createElement("script");
-    inv.src =
-      "//www.highperformanceformat.com/c9ba4b0fe96b924859e1b8da1f258722/invoke.js";
+    inv.src = `//www.highperformanceformat.com/${adKey}/invoke.js`;
     ref.current.appendChild(cfg);
     ref.current.appendChild(inv);
-  }, []);
+  }, [adKey, width, height]);
 
   return (
     <div
       ref={ref}
       className="my-6 flex justify-center w-full overflow-hidden"
-      style={{ minHeight: 90 }}
+      style={{ minHeight: height, minWidth: width }}
+    />
+  );
+};
+
+/** 728×90 leaderboard — desktop. */
+const AdsterraBanner728Inner = () => (
+  <IframeBanner
+    key="728"
+    adKey="0808815f2478d610f9a03c21a2d74230"
+    width={728}
+    height={90}
+    placement="banner-728x90"
+  />
+);
+
+/** 300×250 medium rectangle — works on all breakpoints. */
+export const AdsterraBanner300 = () => {
+  const enabled = isAdsterraEnabled();
+  if (!enabled) return null;
+  return (
+    <IframeBanner
+      adKey="67ef1b077b40ae6bd633e096f153ebb9"
+      width={300}
+      height={250}
+      placement="banner-300x250"
+    />
+  );
+};
+
+/** 160×300 small skyscraper — sidebar/mobile. */
+export const AdsterraBanner160x300 = () => {
+  const enabled = isAdsterraEnabled();
+  if (!enabled) return null;
+  return (
+    <IframeBanner
+      adKey="3c62615c74568e491d2fc840cd9a3290"
+      width={160}
+      height={300}
+      placement="banner-160x300"
+    />
+  );
+};
+
+/** 160×600 wide skyscraper — desktop sidebar. */
+export const AdsterraBanner160x600 = () => {
+  const enabled = isAdsterraEnabled();
+  if (!enabled) return null;
+  return (
+    <IframeBanner
+      adKey="8e3a3573b6a8b37023e5e9e98f74a2a7"
+      width={160}
+      height={600}
+      placement="banner-160x600"
     />
   );
 };
 
 /**
- * Responsive Adsterra banner.
+ * Responsive top banner.
  * - Desktop (≥768px) → 728×90 iframe
- * - Mobile/Tablet (<768px) → Native banner (fluid)
- * Re-evaluates on resize so SPA navigation between breakpoints works.
+ * - Mobile/Tablet (<768px) → Native banner
  */
 export const AdsterraBanner728 = () => {
   const [isDesktop, setIsDesktop] = useState<boolean>(() =>
@@ -122,7 +182,9 @@ export const AdsterraBanner728 = () => {
   return isDesktop ? <AdsterraBanner728Inner /> : <AdsterraNative />;
 };
 
-/** Loads Social Bar + Popunder globally (once) — respects admin toggle. */
+/* ------------------------------------------------------------------ */
+/* Global Social Bar + Popunder scripts (load once per session)        */
+/* ------------------------------------------------------------------ */
 export const AdsterraGlobalScripts = () => {
   useEffect(() => {
     if (!isAdsterraEnabled()) return;
@@ -131,8 +193,10 @@ export const AdsterraGlobalScripts = () => {
     w.__adsterraLoaded = true;
 
     const urls = [
-      "//pl29713523.effectivecpmnetwork.com/95/81/e8/9581e8ee045c8057cf31d3832cf5423a.js",
-      "//pl29713521.effectivecpmnetwork.com/a3/b3/9f/a3b39ff884c02ad5a6a9e13e0b265ef1.js",
+      // Social bar
+      "//pl30135545.effectivecpmnetwork.com/a3/1c/e9/a31ce9fcb2bd1565e5197fad0fc2137b.js",
+      // Popunder
+      "//pl30135547.effectivecpmnetwork.com/29/10/fa/2910facd87554b229366214f60d47087.js",
     ];
     urls.forEach((src) => {
       const s = document.createElement("script");
@@ -141,9 +205,15 @@ export const AdsterraGlobalScripts = () => {
       document.body.appendChild(s);
     });
 
-    // Treat global script load as a single impression for "social-bar".
     trackAdEvent("adsterra", "social-bar", "impression");
   }, []);
 
   return null;
 };
+
+/**
+ * Adsterra "Smart" direct link — wrap any element/button with this
+ * component to route the click to the smart-link offer URL.
+ */
+export const ADSTERRA_SMART_LINK =
+  "https://www.effectivecpmnetwork.com/ixshsbtu1p?key=c6365c6b657fbd1fb4e84bce207a106b";
