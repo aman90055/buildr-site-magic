@@ -35,7 +35,7 @@ export default function Enterprise() {
             architecture so your files never leave your devices.
           </p>
           <div className="flex gap-3 justify-center mt-6">
-            <Button size="lg" asChild><a href="mailto:documentai999@gmail.com?subject=Enterprise%20inquiry">Talk to sales</a></Button>
+            <Button size="lg" asChild><a href="mailto:support@documenteditpro.ai?subject=Enterprise%20inquiry">Talk to sales</a></Button>
             <Button size="lg" variant="outline" asChild><Link to="/workspace">Open workspace</Link></Button>
           </div>
         </div>
@@ -53,7 +53,7 @@ export default function Enterprise() {
         <Card className="p-8 bg-gradient-to-br from-primary/5 to-cyan-500/5 border-primary/20">
           <h2 className="text-2xl font-bold mb-2">Custom pricing for 25+ seats</h2>
           <p className="text-muted-foreground mb-4">Volume discounts, dedicated onboarding, and priority support.</p>
-          <Button asChild><a href="mailto:documentai999@gmail.com?subject=Enterprise%20quote">Request a quote</a></Button>
+          <Button asChild><a href="mailto:support@documenteditpro.ai?subject=Enterprise%20quote">Request a quote</a></Button>
         </Card>
       </main>
       <Footer />

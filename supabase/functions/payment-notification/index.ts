@@ -92,7 +92,7 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         from: 'PDF Tools <onboarding@resend.dev>',
-        to: ['documentai999@gmail.com'],
+        to: ['support@documenteditpro.ai'],
         subject: `🔔 New Payment: ${safePlan} Plan - ₹${safeAmount}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
