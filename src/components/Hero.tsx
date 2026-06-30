@@ -47,7 +47,7 @@ const Hero = () => {
               className="relative text-[2.25rem] leading-[1.05] sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold tracking-tight animate-fade-in"
               style={{ animationDelay: "0.1s" }}
             >
-              <span className="bg-[linear-gradient(120deg,hsl(var(--foreground)),hsl(var(--primary)),hsl(var(--brand-ai)),hsl(var(--accent)),hsl(var(--primary)))] bg-[length:300%_300%] bg-clip-text text-transparent animate-gradient-shift drop-shadow-[0_2px_18px_hsl(var(--primary)/0.35)]">
+              <span className="bg-[linear-gradient(120deg,hsl(var(--foreground)),hsl(var(--primary)),hsl(var(--brand-ai)),hsl(var(--accent)),hsl(var(--primary)))] bg-[length:300%_300%] bg-clip-text text-transparent animate-gradient-shift">
                 One Platform for PDFs, AI, Documents, Images &amp; Productivity
               </span>
               <span aria-hidden className="absolute -bottom-2 left-0 h-1 w-24 sm:w-32 rounded-full bg-gradient-to-r from-primary via-brand-ai to-accent blur-[2px] opacity-80" />
