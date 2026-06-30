@@ -41,6 +41,17 @@ const ImageToPDF = () => {
     onDrop,
     accept: { "image/*": [".jpg", ".jpeg", ".png", ".gif", ".webp"] },
   });
+  const handleCameraCapture = (file: File) => {
+    const valid = filterFilesBySize([file], isPremium);
+    if (valid.length === 0) return;
+    const newImages: ImageFile[] = valid.map((f) => ({
+      id: crypto.randomUUID(),
+      file: f,
+      preview: URL.createObjectURL(f),
+    }));
+    setImages((prev) => [...prev, ...newImages]);
+  };
+
 
   const removeImage = (id: string) => {
     setImages((prev) => {
