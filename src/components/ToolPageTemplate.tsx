@@ -8,8 +8,7 @@ import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles, Upload, ArrowRight, CheckCircle, Zap, Shield, LucideIcon } from "lucide-react";
-import AIBadge from "@/components/AIBadge";
+import { Star, Upload, ArrowRight, CheckCircle, Zap, Shield, LucideIcon } from "lucide-react";
 
 interface FAQItem { question: string; answer: string; }
 
