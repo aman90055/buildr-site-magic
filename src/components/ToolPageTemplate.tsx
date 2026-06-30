@@ -172,7 +172,7 @@ const ToolPageTemplate = ({
                   <Zap className="w-4 h-4 text-primary" /> Lightning Fast
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Sparkles className="w-4 h-4 text-brand-ai" /> AI-Enhanced
+                  <Star className="w-4 h-4 text-brand-ai" /> Enhanced
                 </div>
               </div>
             </div>
