@@ -434,7 +434,7 @@ const PopularTools = () => {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 animate-fade-in-up">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 animate-fade-in-up">
             {filtered.map((tool) => (
               <ToolCard
                 key={tool.href + tool.title}
@@ -463,7 +463,7 @@ const PopularTools = () => {
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                 {category.tools.map((tool, index) => {
                   const flat = allTools.find(
                     (t) => t.href === tool.href && t.title === tool.title
