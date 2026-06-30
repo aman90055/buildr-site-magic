@@ -115,6 +115,11 @@ import Press from "./pages/Press";
 import Enterprise from "./pages/Enterprise";
 import ApiDocs from "./pages/ApiDocs";
 import Workspace from "./pages/Workspace";
+import AIHub from "./pages/AIHub";
+import AITool from "./pages/AITool";
+import Integrations from "./pages/Integrations";
+import Growth from "./pages/Growth";
+import SocialKit from "./pages/SocialKit";
 
 const queryClient = new QueryClient();
 
@@ -239,6 +244,12 @@ const App = () => (
               <Route path="/enterprise" element={<Enterprise />} />
               <Route path="/api-docs" element={<ApiDocs />} />
               <Route path="/workspace" element={<Workspace />} />
+              {/* Global SaaS Modules */}
+              <Route path="/ai-hub" element={<AIHub />} />
+              <Route path="/ai/:slug" element={<AITool />} />
+              <Route path="/integrations" element={<Integrations />} />
+              <Route path="/growth" element={<Growth />} />
+              <Route path="/social-kit" element={<SocialKit />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

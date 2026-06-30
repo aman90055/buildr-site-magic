@@ -93,6 +93,10 @@ const Footer = () => {
               <li><Link to="/enterprise" className="text-muted-foreground hover:text-foreground transition-colors">Enterprise</Link></li>
               <li><Link to="/api-docs" className="text-muted-foreground hover:text-foreground transition-colors">Developer API</Link></li>
               <li><Link to="/workspace" className="text-muted-foreground hover:text-foreground transition-colors">Cloud Workspace</Link></li>
+              <li><Link to="/ai-hub" className="text-muted-foreground hover:text-foreground transition-colors">AI Ecosystem</Link></li>
+              <li><Link to="/integrations" className="text-muted-foreground hover:text-foreground transition-colors">Integrations</Link></li>
+              <li><Link to="/growth" className="text-muted-foreground hover:text-foreground transition-colors">Growth Programs</Link></li>
+              <li><Link to="/social-kit" className="text-muted-foreground hover:text-foreground transition-colors">Social Kit</Link></li>
               <li><Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</Link></li>
               <li><Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link></li>
               <li><Link to="/terms" className="text-muted-foreground hover:text-foreground transition-colors">Terms & Conditions</Link></li>
