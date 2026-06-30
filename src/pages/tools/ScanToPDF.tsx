@@ -9,6 +9,7 @@ import { PDFDocument } from "pdf-lib";
 import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { filterFilesBySize } from "@/lib/fileSizeLimit";
+import CameraCapture from "@/components/CameraCapture";
 
 const ScanToPDF = () => {
   const [files, setFiles] = useState<File[]>([]);
