@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
   Search, X, ArrowRight, FolderOpen, FileType2, PenLine, Sparkles,
-  Image as ImageIcon, ShieldCheck, FileText, LayoutGrid,
+  Image as ImageIcon, ShieldCheck, FileText, LayoutGrid, List, ArrowUpRight,
 } from "lucide-react";
 import {
   CATEGORY_META,
