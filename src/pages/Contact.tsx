@@ -67,8 +67,8 @@ const Contact = () => {
       }
 
       toast({
-        title: "Message Sent!",
-        description: "Thank you for reaching out. Aman will get back to you soon.",
+        title: data?.queued ? "Message Saved!" : "Message Sent!",
+        description: data?.message || "Thank you for reaching out. Aman will get back to you soon.",
       });
 
       setFormData({ name: "", email: "", subject: "", message: "" });
