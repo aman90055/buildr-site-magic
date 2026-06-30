@@ -10,9 +10,9 @@ import { Link } from "react-router-dom";
 
 interface Job {
   id: string;
-  tool_type: string | null;
+  job_type: string | null;
   status: string | null;
-  file_name: string | null;
+  output_file: string | null;
   created_at: string;
 }
 
@@ -28,7 +28,7 @@ export default function Workspace() {
       setAuthed(true);
       const { data } = await supabase
         .from("pdf_jobs")
-        .select("id, tool_type, status, file_name, created_at")
+        .select("id, job_type, status, output_file, created_at")
         .order("created_at", { ascending: false })
         .limit(50);
       setJobs((data as Job[]) || []);
