@@ -301,6 +301,10 @@ const Blog = () => {
       <Helmet>
         <title>Blog - Document Editor | PDF Tips, Tutorials & Updates</title>
         <meta name="description" content="Stay updated with the latest PDF tips, tutorials, and product updates from Document Editor. Learn how to make the most of our AI-powered tools." />
+        <link rel="canonical" href="https://docunova-ai.lovable.app/blog" />
+        <meta property="og:title" content="Document Editor Blog — PDF Tips, Tutorials & Updates" />
+        <meta property="og:description" content="The latest PDF tips, tutorials and product updates from Document Editor. Get more from our AI-powered document tools." />
+        <meta property="og:url" content="https://docunova-ai.lovable.app/blog" />
       </Helmet>
       
       <div className="min-h-screen flex flex-col bg-background">
