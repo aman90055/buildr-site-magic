@@ -1,5 +1,5 @@
 import AnimatedCounter from "./AnimatedCounter";
-import { Users, FileCheck2, Globe2, Sparkles } from "lucide-react";
+import { Users, FileCheck2, Globe2, Star } from "lucide-react";
 
 const stats = [
   { icon: FileCheck2, end: 2, suffix: "M+", label: "PDFs Processed", color: "text-brand-blue" },
