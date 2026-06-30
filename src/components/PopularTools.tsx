@@ -356,7 +356,7 @@ const PopularTools = () => {
           </span>
         </div>
         <h2 className="font-display font-bold text-4xl md:text-5xl text-foreground mb-4 tracking-tight">
-          All {totalTools}+ Tools You Need
+          All 100+ Tools You Need
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           Search, filter and pin favorites across PDF, Image, Document & Smart categories.
