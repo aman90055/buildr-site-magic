@@ -102,6 +102,14 @@ import Roadmap from "./pages/Roadmap";
 import Changelog from "./pages/Changelog";
 import HelpCenter from "./pages/HelpCenter";
 import Newsletter from "./pages/Newsletter";
+import Terms from "./pages/legal/Terms";
+import Cookies from "./pages/legal/Cookies";
+import Disclaimer from "./pages/legal/Disclaimer";
+import DMCA from "./pages/legal/DMCA";
+import Refund from "./pages/legal/Refund";
+import Editorial from "./pages/legal/Editorial";
+import AIUsage from "./pages/legal/AIUsage";
+import Accessibility from "./pages/legal/Accessibility";
 
 const queryClient = new QueryClient();
 
@@ -129,6 +137,14 @@ const App = () => (
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/cookies" element={<Cookies />} />
+              <Route path="/disclaimer" element={<Disclaimer />} />
+              <Route path="/dmca" element={<DMCA />} />
+              <Route path="/refund" element={<Refund />} />
+              <Route path="/editorial-policy" element={<Editorial />} />
+              <Route path="/ai-usage-policy" element={<AIUsage />} />
+              <Route path="/accessibility" element={<Accessibility />} />
               {/* Core Tools */}
               <Route path="/merge" element={<PDFMerge />} />
               <Route path="/split" element={<PDFSplit />} />
