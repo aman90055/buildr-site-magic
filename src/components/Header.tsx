@@ -108,6 +108,11 @@ const Header = () => {
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
+                <Link to="/tools" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
+                  All Tools
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
                 <Link to="/merge" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
                   Merge
                 </Link>
