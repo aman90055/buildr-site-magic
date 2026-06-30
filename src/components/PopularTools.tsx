@@ -24,19 +24,19 @@ const toolCategories = [
     ]
   },
   {
-    title: "AI-Powered",
-    icon: Brain,
+    title: "Smart Tools",
+    icon: Lightbulb,
     tools: [
       { title: "Smart OCR", description: "99.9% accuracy AI OCR", href: "/ocr", icon: ScanText, color: "text-brand-ai", ai: true },
-      { title: "AI Analysis", description: "Summarize & extract", href: "/ocr", icon: Brain, color: "text-brand-purple", ai: true },
+      { title: "Smart Analysis", description: "Summarize & extract", href: "/ocr", icon: Lightbulb, color: "text-brand-purple", ai: true },
       { title: "Compress PDF", description: "AI compression engine", href: "/compress", icon: FileDown, color: "text-brand-green", ai: true },
       { title: "Repair PDF", description: "Smart PDF repair", href: "/repair-pdf", icon: Wrench, color: "text-brand-orange", ai: true },
-      { title: "AI Summarizer", description: "Instant PDF summaries", href: "/ai-summarizer", icon: Brain, color: "text-brand-cyan", ai: true },
+      { title: "Smart Summarizer", description: "Instant PDF summaries", href: "/ai-summarizer", icon: Lightbulb, color: "text-brand-cyan", ai: true },
       { title: "AI Translator", description: "Translate documents", href: "/ai-translator", icon: Languages, color: "text-brand-blue", ai: true },
       { title: "AI Grammar Check", description: "Fix errors instantly", href: "/ai-grammar-check", icon: SpellCheck, color: "text-brand-green", ai: true },
       { title: "AI Rewriter", description: "Paraphrase content", href: "/ai-rewriter", icon: RefreshCw, color: "text-brand-orange", ai: true },
       { title: "AI Data Extractor", description: "Extract tables & data", href: "/ai-data-extractor", icon: Database, color: "text-brand-purple", ai: true },
-      { title: "AI Image Enhance", description: "Upscale & sharpen", href: "/ai-image-enhance", icon: Sparkles, color: "text-brand-pink", ai: true },
+      { title: "Image Enhance", description: "Upscale & sharpen", href: "/ai-image-enhance", icon: Star, color: "text-brand-pink", ai: true },
       { title: "Remove Background", description: "AI background removal", href: "/remove-background", icon: Eraser, color: "text-destructive", ai: true },
       { title: "Image to Text", description: "OCR from images", href: "/image-to-text", icon: ScanText, color: "text-brand-ai", ai: true },
     ]
@@ -129,7 +129,7 @@ const PopularTools = () => {
     <section id="tools" className="py-20 px-6 max-w-7xl mx-auto">
       <div className="text-center mb-16">
         <div className="inline-flex items-center gap-2 mb-4">
-          <Sparkles className="w-5 h-5 text-brand-ai" />
+          <Star className="w-5 h-5 text-brand-ai" />
           <span className="text-brand-ai font-display font-medium text-sm uppercase tracking-wider">Complete Toolkit</span>
         </div>
         <h2 className="font-display font-bold text-4xl md:text-5xl text-foreground mb-4 tracking-tight">
