@@ -101,6 +101,7 @@ const ReferAndEarn = lazy(() => import("./pages/ReferAndEarn"));
 const Premium = lazy(() => import("./pages/Premium"));
 const AdminPayments = lazy(() => import("./pages/AdminPayments"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const AdminContacts = lazy(() => import("./pages/AdminContacts"));
 const CategoryPage = lazy(() => import("./pages/CategoryPage"));
 const Roadmap = lazy(() => import("./pages/Roadmap"));
 const Changelog = lazy(() => import("./pages/Changelog"));
@@ -249,6 +250,7 @@ const App = () => (
                 <Route path="/admin/payments" element={<AdminPayments />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                <Route path="/admin/contacts" element={<AdminContacts />} />
                 <Route path="/category/:slug" element={<CategoryPage />} />
                 <Route path="/roadmap" element={<Roadmap />} />
                 <Route path="/changelog" element={<Changelog />} />
