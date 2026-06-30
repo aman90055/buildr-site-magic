@@ -244,6 +244,30 @@ export type Database = {
         }
         Relationships: []
       }
+      tool_icons: {
+        Row: {
+          created_at: string
+          icon_data_url: string
+          tool_slug: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          icon_data_url: string
+          tool_slug: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          icon_data_url?: string
+          tool_slug?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       user_premium_status: {
         Row: {
           activated_at: string
