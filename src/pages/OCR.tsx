@@ -165,6 +165,12 @@ const OCR = () => {
                     )}
                   </div>
 
+                  <div className="flex justify-center">
+                    <CameraCapture onCapture={handleCameraCapture} disabled={isProcessing} />
+                  </div>
+
+
+
                   {/* Actions */}
                   {preview && (
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
