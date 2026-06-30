@@ -14,6 +14,7 @@ import PartnerLogos from "@/components/PartnerLogos";
 import AnimatedStatsSection from "@/components/AnimatedStatsSection";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import PromoCards from "@/components/ads/PromoCards";
+import { AdsterraBanner728, AdsterraNative, AdsterraBanner300 } from "@/components/AdsterraAds";
 
 
 const Index = () => {
