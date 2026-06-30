@@ -71,6 +71,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [payments, setPayments] = useState<PaymentRow[]>([]);
   const [users, setUsers] = useState<AuthUser[]>([]);
+  const [toolUsage, setToolUsage] = useState<{ job_type: string; total: number; completed: number; failed: number }[]>([]);
   const [search, setSearch] = useState("");
 
   // Date range
@@ -110,9 +111,10 @@ const AdminDashboard = () => {
 
   const fetchAll = async () => {
     setLoading(true);
-    const [paymentsRes, usersRes] = await Promise.all([
+    const [paymentsRes, usersRes, jobsRes] = await Promise.all([
       supabase.from("payment_verifications").select("id, amount, plan, status, created_at, email").order("created_at", { ascending: false }),
       supabase.functions.invoke("admin-users-list", { method: "GET" }),
+      supabase.from("pdf_jobs").select("job_type, status").limit(5000).order("created_at", { ascending: false }),
     ]);
 
     if (paymentsRes.error) toast.error("Failed to load payments");
@@ -120,6 +122,24 @@ const AdminDashboard = () => {
 
     if (usersRes.error) toast.error("Failed to load users: " + usersRes.error.message);
     else setUsers((usersRes.data as { users: AuthUser[] })?.users || []);
+
+    if (!jobsRes.error && jobsRes.data) {
+      const agg = new Map<string, { total: number; completed: number; failed: number }>();
+      for (const row of jobsRes.data as { job_type: string; status: string }[]) {
+        const k = row.job_type || "unknown";
+        const a = agg.get(k) ?? { total: 0, completed: 0, failed: 0 };
+        a.total += 1;
+        if (row.status === "completed") a.completed += 1;
+        else if (row.status === "failed") a.failed += 1;
+        agg.set(k, a);
+      }
+      setToolUsage(
+        Array.from(agg.entries())
+          .map(([job_type, v]) => ({ job_type, ...v }))
+          .sort((a, b) => b.total - a.total)
+          .slice(0, 12),
+      );
+    }
 
     setLoading(false);
   };
