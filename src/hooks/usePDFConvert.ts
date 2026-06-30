@@ -88,6 +88,7 @@ export const usePDFConvert = () => {
       canvas.width = viewport.width;
 
       await page.render({
+        canvas,
         canvasContext: context,
         viewport: viewport,
       }).promise;
