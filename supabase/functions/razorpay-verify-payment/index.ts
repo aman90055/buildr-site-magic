@@ -33,7 +33,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, amount } = await req.json();
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = await req.json();
     if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
       return new Response(JSON.stringify({ error: "Missing fields" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
