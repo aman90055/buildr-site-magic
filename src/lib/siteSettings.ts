@@ -34,7 +34,7 @@ export const setNum = (key: string, val: number) => {
 };
 
 export const isAdsEnabled = () => getBool(SETTINGS_KEYS.adsEnabled, true);
-export const isAdsterraEnabled = () => getBool(SETTINGS_KEYS.adsterraEnabled, false);
+export const isAdsterraEnabled = () => getBool(SETTINGS_KEYS.adsterraEnabled, true);
 export const isExitIntentEnabled = () => getBool(SETTINGS_KEYS.exitIntentEnabled, true);
 export const exitIntentCooldownDays = () => getNum(SETTINGS_KEYS.exitIntentCooldownDays, 3);
 
