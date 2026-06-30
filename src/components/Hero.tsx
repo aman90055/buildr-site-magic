@@ -35,14 +35,22 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-6 sm:space-y-8">
-            {/* Launch Badge — hidden per owner request */}
-            <div className="hidden" aria-hidden="true" />
+            {/* Sparkle pill */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-card border border-primary/30 text-xs sm:text-sm animate-fade-in shadow-[0_0_24px_hsl(var(--primary)/0.25)]">
+              <Sparkles className="w-3.5 h-3.5 text-brand-ai animate-pulse" />
+              <span className="font-medium bg-gradient-to-r from-primary via-brand-ai to-accent bg-clip-text text-transparent">
+                The 2026 AI Document Suite
+              </span>
+            </div>
 
             <h1
-              className="text-[2.25rem] leading-[1.05] sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold tracking-tight animate-fade-in bg-gradient-to-br from-foreground via-primary to-brand-ai bg-clip-text text-transparent drop-shadow-[0_2px_12px_hsl(var(--primary)/0.25)]"
+              className="relative text-[2.25rem] leading-[1.05] sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold tracking-tight animate-fade-in"
               style={{ animationDelay: "0.1s" }}
             >
-              One Platform for PDFs, AI, Documents, Images & Productivity
+              <span className="bg-[linear-gradient(120deg,hsl(var(--foreground)),hsl(var(--primary)),hsl(var(--brand-ai)),hsl(var(--accent)),hsl(var(--primary)))] bg-[length:300%_300%] bg-clip-text text-transparent animate-gradient-shift drop-shadow-[0_2px_18px_hsl(var(--primary)/0.35)]">
+                One Platform for PDFs, AI, Documents, Images &amp; Productivity
+              </span>
+              <span aria-hidden className="absolute -bottom-2 left-0 h-1 w-24 sm:w-32 rounded-full bg-gradient-to-r from-primary via-brand-ai to-accent blur-[2px] opacity-80" />
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
