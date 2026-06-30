@@ -76,13 +76,13 @@ export const AdsterraNative = () => {
 /* Iframe banners (highperformanceformat.com)                          */
 /* ------------------------------------------------------------------ */
 interface IframeBannerConfig {
-  key: string;
+  adKey: string;
   width: number;
   height: number;
   placement: string;
 }
 
-const IframeBanner = ({ key: adKey, width, height, placement }: IframeBannerConfig) => {
+const IframeBanner = ({ adKey, width, height, placement }: IframeBannerConfig) => {
   const ref = useRef<HTMLDivElement>(null);
   const loaded = useRef(false);
   useAdTracking(ref, placement);
