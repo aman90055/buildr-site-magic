@@ -130,15 +130,17 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-              <Button size="lg" className="text-base shadow-cta group bg-gradient-ai hover:opacity-90 transition-opacity h-12 sm:h-14 px-6 sm:px-8 rounded-2xl font-display font-semibold w-full sm:w-auto" asChild>
-                <Link to="/auth?next=/merge" onClick={() => trackCTA("Start Free Now", "hero", "/auth")}>
-                  Start Free Now
+              <Button size="lg" className="text-base shadow-cta group bg-gradient-ai hover:shadow-[0_0_40px_-10px_hsl(var(--primary)/0.5)] hover:scale-[1.03] transition-all duration-300 h-12 sm:h-14 px-6 sm:px-8 rounded-2xl font-display font-semibold w-full sm:w-auto cursor-pointer" asChild>
+                <Link to="/auth?next=/merge" onClick={() => trackCTA("Start Free", "hero", "/auth")}>
+                  Start Free
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
-
               </Button>
-              <Button size="lg" variant="outline" className="text-base h-12 sm:h-14 px-6 sm:px-8 rounded-2xl glass border-border hover:bg-muted/50 font-display w-full sm:w-auto" asChild>
-                <a href="#tools" onClick={() => trackCTA("Explore All Tools", "hero", "#tools")}>Explore All Tools</a>
+              <Button size="lg" variant="outline" className="text-base h-12 sm:h-14 px-6 sm:px-8 rounded-2xl glass border-border hover:border-primary/40 hover:bg-primary/5 hover:scale-[1.03] hover:shadow-lg transition-all duration-300 font-display w-full sm:w-auto cursor-pointer group" asChild>
+                <a href="#tools" onClick={() => trackCTA("See Live Demo", "hero", "#tools")}>
+                  <Play className="mr-2 h-5 w-5 fill-primary text-primary transition-transform group-hover:scale-110" />
+                  See Live Demo
+                </a>
               </Button>
             </div>
 
