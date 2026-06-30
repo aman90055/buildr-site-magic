@@ -22,7 +22,7 @@ import {
   Merge, Scissors, FileDown, ImageIcon, FileImage, ScanText, Pencil,
   Lock, RotateCw, Hash, Droplets, Trash2, FileOutput, ExternalLink,
   Star, Bell, Key, Settings as SettingsIcon, Copy, Trash, LogOut,
-  Plus, Heart, History as HistoryIcon, Star,
+  Plus, Heart, History as HistoryIcon,
 } from "lucide-react";
 
 const jobTypeIcons: Record<string, React.ElementType> = {
