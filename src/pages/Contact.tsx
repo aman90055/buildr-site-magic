@@ -66,10 +66,18 @@ const Contact = () => {
         throw new Error(error.message || 'Failed to send message');
       }
 
-      toast({
-        title: data?.queued ? "Message Saved!" : "Message Sent!",
-        description: data?.message || "Thank you for reaching out. Aman will get back to you soon.",
-      });
+      if (data?.queued) {
+        toast({
+          title: "⚠️ Email delivery unavailable",
+          description: data?.message || "Your message was saved, but the email service (RESEND_API_KEY) is missing or invalid. Aman will still see it.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Message Sent!",
+          description: data?.message || "Thank you for reaching out. Aman will get back to you soon.",
+        });
+      }
 
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error: any) {
