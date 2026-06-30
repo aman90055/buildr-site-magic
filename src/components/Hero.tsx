@@ -60,6 +60,64 @@ const Hero = () => {
               a single modern workspace.
             </p>
 
+            {/* Live Activity Spotlight — fills the visual gap with motion + social proof */}
+            <div
+              className="relative group animate-fade-in"
+              style={{ animationDelay: "0.25s" }}
+            >
+              <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-primary/40 via-brand-ai/40 to-accent/40 opacity-60 blur-xl group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative glass-card rounded-2xl px-4 py-3.5 sm:px-5 sm:py-4 border border-white/10 backdrop-blur-2xl overflow-hidden">
+                {/* Shimmer sweep */}
+                <span aria-hidden className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1400ms] ease-out bg-[linear-gradient(110deg,transparent_30%,hsl(var(--primary)/0.15)_50%,transparent_70%)]" />
+
+                <div className="flex items-center gap-3 sm:gap-4">
+                  {/* Pulsing live dot */}
+                  <span className="relative flex h-2.5 w-2.5 shrink-0">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-green opacity-75" />
+                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-brand-green shadow-[0_0_10px_hsl(var(--brand-green))]" />
+                  </span>
+
+                  {/* Rotating headline */}
+                  <div className="flex-1 min-w-0 h-5 sm:h-6 overflow-hidden">
+                    <div className="animate-hero-rotate">
+                      <div className="h-5 sm:h-6 flex items-center text-sm sm:text-[15px] font-medium text-foreground/90">
+                        ⚡ 1,284 documents processed in the last minute
+                      </div>
+                      <div className="h-5 sm:h-6 flex items-center text-sm sm:text-[15px] font-medium text-foreground/90">
+                        🌍 Trusted by 2M+ users across 150+ countries
+                      </div>
+                      <div className="h-5 sm:h-6 flex items-center text-sm sm:text-[15px] font-medium text-foreground/90">
+                        🔒 End‑to‑end encrypted · No file ever leaves your browser
+                      </div>
+                      <div className="h-5 sm:h-6 flex items-center text-sm sm:text-[15px] font-medium text-foreground/90">
+                        ✨ 100+ smart tools · Free forever · No sign‑up required
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Avatar stack */}
+                  <div className="hidden sm:flex -space-x-2">
+                    {[
+                      "from-brand-blue to-brand-purple",
+                      "from-brand-purple to-brand-pink",
+                      "from-brand-cyan to-brand-blue",
+                      "from-brand-green to-brand-cyan",
+                    ].map((g, i) => (
+                      <span
+                        key={i}
+                        className={`h-7 w-7 rounded-full bg-gradient-to-br ${g} ring-2 ring-background shadow-md`}
+                        aria-hidden
+                      />
+                    ))}
+                    <span className="h-7 px-2 rounded-full bg-background/80 ring-2 ring-background text-[11px] font-semibold text-foreground flex items-center justify-center">
+                      +2M
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
             {/* Feature badges */}
             <div className="flex flex-wrap gap-2 sm:gap-3 animate-fade-in" style={{ animationDelay: "0.3s" }}>
               {features.map((feature, i) => (
