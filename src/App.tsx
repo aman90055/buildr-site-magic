@@ -110,6 +110,11 @@ import Refund from "./pages/legal/Refund";
 import Editorial from "./pages/legal/Editorial";
 import AIUsage from "./pages/legal/AIUsage";
 import Accessibility from "./pages/legal/Accessibility";
+import Brand from "./pages/Brand";
+import Press from "./pages/Press";
+import Enterprise from "./pages/Enterprise";
+import ApiDocs from "./pages/ApiDocs";
+import Workspace from "./pages/Workspace";
 
 const queryClient = new QueryClient();
 
@@ -229,6 +234,11 @@ const App = () => (
               <Route path="/changelog" element={<Changelog />} />
               <Route path="/help" element={<HelpCenter />} />
               <Route path="/newsletter" element={<Newsletter />} />
+              <Route path="/brand" element={<Brand />} />
+              <Route path="/press" element={<Press />} />
+              <Route path="/enterprise" element={<Enterprise />} />
+              <Route path="/api-docs" element={<ApiDocs />} />
+              <Route path="/workspace" element={<Workspace />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
