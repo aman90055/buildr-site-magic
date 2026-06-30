@@ -1,8 +1,8 @@
-import { Brain, FileText, Users, Zap } from "lucide-react";
+import { Lightbulb, FileText, Users, Zap } from "lucide-react";
 
 const stats = [
   { value: "2M+", label: "PDFs Processed", icon: FileText, color: "text-brand-blue" },
-  { value: "99.9%", label: "AI Accuracy", icon: Brain, color: "text-brand-ai" },
+  { value: "99.9%", label: "Accuracy", icon: Lightbulb, color: "text-brand-ai" },
   { value: "150+", label: "Countries", icon: Users, color: "text-brand-green" },
   { value: "<1s", label: "Avg. Process Time", icon: Zap, color: "text-brand-orange" }
 ];

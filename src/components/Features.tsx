@@ -1,13 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Brain, Zap, Shield, Sparkles, FileSearch, Bot, Lock, Globe } from "lucide-react";
-import AIBadge from "./AIBadge";
+import { Lightbulb, Zap, Shield, Star, FileSearch, MessageSquare, Lock, Globe } from "lucide-react";
 
 const features = [
   {
-    icon: Brain,
-    title: "AI Document Understanding",
-    description: "Our AI reads and understands your documents, automatically detecting structure, tables, and key information.",
-    badge: "AI",
+    icon: Lightbulb,
+    title: "Smart Document Understanding",
+    description: "Our technology reads and understands your documents, automatically detecting structure, tables, and key information.",
     color: "from-brand-ai to-brand-purple",
   },
   {
@@ -18,10 +16,9 @@ const features = [
     color: "from-brand-cyan to-brand-blue",
   },
   {
-    icon: Bot,
-    title: "AI PDF Assistant",
+    icon: MessageSquare,
+    title: "Smart PDF Assistant",
     description: "Chat with your documents. Ask questions, get summaries, and extract insights instantly.",
-    badge: "AI",
     color: "from-brand-purple to-brand-pink",
   },
   {
@@ -54,15 +51,15 @@ const Features = () => {
       <div className="container relative mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in-up">
           <div className="inline-flex items-center gap-2 mb-4">
-            <Sparkles className="w-5 h-5 text-brand-ai" />
-            <span className="text-brand-ai font-display font-medium text-sm uppercase tracking-wider">2026 AI Features</span>
+            <Star className="w-5 h-5 text-brand-ai" />
+            <span className="text-brand-ai font-display font-medium text-sm uppercase tracking-wider">2026 Features</span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 tracking-tight">
             Supercharged with{" "}
-            <span className="text-gradient-ai">Artificial Intelligence</span>
+            <span className="text-gradient-ai">Smart Technology</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-light">
-            Every tool is enhanced with AI to give you faster, smarter, and more accurate results than ever before.
+            Every tool is enhanced with smart technology to give you faster, smarter, and more accurate results than ever before.
           </p>
         </div>
         
@@ -81,7 +78,7 @@ const Features = () => {
                   <div className={`p-3 rounded-2xl bg-gradient-to-br ${feature.color} shadow-lg`}>
                     <feature.icon className="h-6 w-6 text-white" />
                   </div>
-                  {feature.badge && <AIBadge variant="small" />}
+                  
                 </div>
                 
                 <h3 className="text-xl font-display font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">

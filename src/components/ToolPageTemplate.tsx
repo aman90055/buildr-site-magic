@@ -8,8 +8,7 @@ import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles, Upload, ArrowRight, CheckCircle, Zap, Shield, LucideIcon } from "lucide-react";
-import AIBadge from "@/components/AIBadge";
+import { Star, Upload, ArrowRight, CheckCircle, Zap, Shield, LucideIcon } from "lucide-react";
 
 interface FAQItem { question: string; answer: string; }
 
@@ -92,7 +91,7 @@ const ToolPageTemplate = ({
                 <Badge variant="outline" className="border-primary/30 text-primary">
                   {category}
                 </Badge>
-                {isAI && <AIBadge variant="inline" glow />}
+                
               </div>
 
               <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center mx-auto mb-6`}>
@@ -129,7 +128,6 @@ const ToolPageTemplate = ({
           <section className="py-16 bg-muted/30">
             <div className="container max-w-6xl mx-auto px-4">
               <h2 className="text-3xl font-bold text-center mb-12">
-                {isAI && <Sparkles className="w-6 h-6 text-brand-ai inline mr-2" />}
                 Key Features
               </h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -174,7 +172,7 @@ const ToolPageTemplate = ({
                   <Zap className="w-4 h-4 text-primary" /> Lightning Fast
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Sparkles className="w-4 h-4 text-brand-ai" /> AI-Enhanced
+                  <Star className="w-4 h-4 text-brand-ai" /> Enhanced
                 </div>
               </div>
             </div>

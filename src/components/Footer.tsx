@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Sparkles, Heart, Coffee } from "lucide-react";
+import { Star, Heart, Coffee } from "lucide-react";
 import ToolSEOSection from "@/components/ToolSEOSection";
 
 const Footer = () => {
@@ -16,7 +16,7 @@ const Footer = () => {
           <div className="md:col-span-2">
             <Link to="/" className="inline-flex items-center gap-2 text-2xl font-display font-bold text-foreground mb-4">
               <div className="w-10 h-10 rounded-xl bg-gradient-ai flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
+                <Star className="w-5 h-5 text-white" />
               </div>
               PDF Tools
             </Link>

@@ -22,7 +22,7 @@ import {
   Merge, Scissors, FileDown, ImageIcon, FileImage, ScanText, Pencil,
   Lock, RotateCw, Hash, Droplets, Trash2, FileOutput, ExternalLink,
   Star, Bell, Key, Settings as SettingsIcon, Copy, Trash, LogOut,
-  Plus, Heart, History as HistoryIcon, Sparkles,
+  Plus, Heart, History as HistoryIcon,
 } from "lucide-react";
 
 const jobTypeIcons: Record<string, React.ElementType> = {
@@ -227,7 +227,7 @@ const Dashboard = () => {
                 {/* Quick actions */}
                 <Card className="glass-card border-border/40">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><Sparkles className="w-5 h-5 text-primary" />Quick Tools</CardTitle>
+                    <CardTitle className="flex items-center gap-2"><Star className="w-5 h-5 text-primary" />Quick Tools</CardTitle>
                     <CardDescription>Jump straight into your most-used tools</CardDescription>
                   </CardHeader>
                   <CardContent>

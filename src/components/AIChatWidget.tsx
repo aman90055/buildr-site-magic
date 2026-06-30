@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { MessageCircle, Send, X, Bot, User, Loader2, Sparkles } from "lucide-react";
+import { MessageCircle, Send, X, MessageSquare, User, Loader2, Star } from "lucide-react";
 import { useAIChat } from "@/hooks/useAIChat";
 
 const AIChatWidget = () => {
@@ -44,7 +44,7 @@ const AIChatWidget = () => {
           className="fixed bottom-6 right-6 h-14 w-14 rounded-2xl shadow-ai z-50 bg-gradient-ai hover:opacity-90 transition-opacity pulse-glow"
           size="icon"
         >
-          <Sparkles className="h-6 w-6" />
+          <Star className="h-6 w-6" />
         </Button>
       </SheetTrigger>
       <SheetContent className="w-full sm:max-w-md flex flex-col p-0 glass-card border-l-0 rounded-l-3xl">
@@ -52,7 +52,7 @@ const AIChatWidget = () => {
           <div className="flex items-center justify-between">
             <SheetTitle className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-gradient-ai flex items-center justify-center">
-                <Bot className="h-5 w-5 text-white" />
+                <MessageSquare className="h-5 w-5 text-white" />
               </div>
               <div>
                 <span className="font-display font-semibold">AI Assistant</span>
@@ -72,7 +72,7 @@ const AIChatWidget = () => {
           {messages.length === 0 ? (
             <div className="text-center py-8">
               <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-ai-subtle flex items-center justify-center">
-                <Sparkles className="h-8 w-8 text-brand-ai" />
+                <Star className="h-8 w-8 text-brand-ai" />
               </div>
               <h3 className="font-display font-semibold text-lg text-foreground mb-2">
                 How can I help you?
@@ -107,7 +107,7 @@ const AIChatWidget = () => {
                 >
                   {msg.role === "assistant" && (
                     <div className="h-8 w-8 rounded-xl bg-gradient-ai flex items-center justify-center flex-shrink-0">
-                      <Bot className="h-4 w-4 text-white" />
+                      <MessageSquare className="h-4 w-4 text-white" />
                     </div>
                   )}
                   <div
@@ -129,7 +129,7 @@ const AIChatWidget = () => {
               {isLoading && messages[messages.length - 1]?.role === "user" && (
                 <div className="flex gap-3">
                   <div className="h-8 w-8 rounded-xl bg-gradient-ai flex items-center justify-center flex-shrink-0">
-                    <Bot className="h-4 w-4 text-white" />
+                    <MessageSquare className="h-4 w-4 text-white" />
                   </div>
                   <div className="bg-muted rounded-2xl px-4 py-3 flex items-center gap-2">
                     <Loader2 className="h-4 w-4 animate-spin" />

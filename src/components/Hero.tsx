@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, FileText, Merge, Split, Minimize2, Sparkles, Brain, Zap, Shield, Globe } from "lucide-react";
+import { ArrowRight, FileText, Merge, Split, Minimize2, Star, Lightbulb, Zap, Shield, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import AIBadge from "./AIBadge";
 import { trackCTA, trackToolCard } from "@/lib/analytics";
@@ -12,7 +12,7 @@ const tools = [
 ];
 
 const features = [
-  { icon: Brain, title: "AI-Powered Automation", color: "text-brand-ai" },
+  { icon: Lightbulb, title: "Smart Automation", color: "text-brand-ai" },
   { icon: Zap, title: "Fast Processing", color: "text-brand-cyan" },
   { icon: Shield, title: "Enterprise-Grade Security", color: "text-brand-green" },
   { icon: Globe, title: "Mobile Optimized", color: "text-brand-purple" },
@@ -38,7 +38,7 @@ const Hero = () => {
             {/* Launch Badge */}
             <div className="inline-flex flex-wrap items-center gap-2 sm:gap-3 animate-fade-in">
               <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass border-primary/20 text-primary text-xs sm:text-sm font-medium">
-                <Sparkles className="w-4 h-4" />
+                <Star className="w-4 h-4" />
                 <span className="font-display tracking-wide">🚀 100+ Free AI, PDF & Productivity Tools</span>
               </div>
               
