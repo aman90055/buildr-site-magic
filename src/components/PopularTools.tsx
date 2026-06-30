@@ -7,7 +7,7 @@ import {
   GitCompare, Star, Lightbulb, ArrowDownUp, Layers, Contrast, Info, BookOpen,
   FileCode, Type, Minimize2, Maximize, Eraser, RefreshCw, Languages, SpellCheck,
   Database, Receipt, Award, Mail, FileUser, Search, X, Flame, Clock, Sparkles,
-  Filter,
+  Filter, FileSearch,
 } from "lucide-react";
 import AIBadge from "./AIBadge";
 
