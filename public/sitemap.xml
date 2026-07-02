@@ -15,6 +15,10 @@
   <url><loc>https://docunova-ai.lovable.app/ai-usage-policy</loc><lastmod>2026-06-30</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
   <url><loc>https://docunova-ai.lovable.app/accessibility</loc><lastmod>2026-06-30</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
 
+  <url><loc>https://docunova-ai.lovable.app/ai-email-writer</loc><lastmod>2026-06-30</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docunova-ai.lovable.app/ai-blog-writer</loc><lastmod>2026-06-30</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+
   <!-- Core PDF Tools -->
   <url><loc>https://docunova-ai.lovable.app/merge</loc><lastmod>2026-04-20</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
   <url><loc>https://docunova-ai.lovable.app/split</loc><lastmod>2026-04-20</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
