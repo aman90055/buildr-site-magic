@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { toast } from "@/hooks/use-toast";
-import { Type, Download, Trash2, Plus, Move } from "lucide-react";
+import { Type, Download, Trash2, Plus, Move, Save, FolderOpen } from "lucide-react";
 import SmartFileInput from "@/components/SmartFileInput";
 
 interface TextLayer {
