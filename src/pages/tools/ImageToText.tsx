@@ -33,7 +33,7 @@ const ImageToText = () => {
     setIsProcessing(true);
     try {
       const { data, error } = await supabase.functions.invoke("ai-ocr", {
-        body: { image: preview, fileName: file.name },
+        body: { imageData: preview },
       });
       if (error) throw error;
       setText(data?.text || "No text found in image.");
