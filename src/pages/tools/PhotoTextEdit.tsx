@@ -153,6 +153,53 @@ const PhotoTextEdit = () => {
     );
   };
 
+  const projectFileRef = useRef<HTMLInputElement>(null);
+
+  const handleSaveProject = () => {
+    if (!imgSrc) return;
+    const project = {
+      _type: "docunova.photo-text-edit",
+      version: 1,
+      savedAt: new Date().toISOString(),
+      image: { src: imgSrc, w: imgSize.w, h: imgSize.h },
+      layers,
+    };
+    const blob = new Blob([JSON.stringify(project, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `photo-text-project-${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast({ title: "Project saved", description: "Re-open this .json file anytime to continue editing." });
+  };
+
+  const handleLoadProject = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(reader.result as string);
+        if (data?._type !== "docunova.photo-text-edit" || !data?.image?.src) {
+          throw new Error("Not a valid project file");
+        }
+        const img = new Image();
+        img.onload = () => {
+          imgRef.current = img;
+          setImgSize({ w: data.image.w || img.naturalWidth, h: data.image.h || img.naturalHeight });
+          setImgSrc(data.image.src);
+          setLayers(Array.isArray(data.layers) ? data.layers : []);
+          setSelectedId(null);
+          toast({ title: "Project loaded", description: `${data.layers?.length || 0} text layer(s) restored.` });
+        };
+        img.onerror = () => toast({ title: "Load failed", description: "Image data is corrupt.", variant: "destructive" });
+        img.src = data.image.src;
+      } catch (e) {
+        toast({ title: "Invalid project file", description: "Please choose a valid .json saved from this tool.", variant: "destructive" });
+      }
+    };
+    reader.readAsText(file);
+  };
+
   return (
     <>
       <Helmet>
