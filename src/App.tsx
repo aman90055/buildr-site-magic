@@ -10,6 +10,7 @@ import AIChatWidget from "@/components/AIChatWidget";
 import InstallPrompt from "@/components/InstallPrompt";
 import ScrollToTop from "@/components/ScrollToTop";
 import ExitIntentOffer from "@/components/ExitIntentOffer";
+import CookieConsent from "@/components/CookieConsent";
 
 // Eager: LCP route + 404 (small)
 import Index from "./pages/Index";
@@ -151,6 +152,8 @@ const App = () => (
             <AIChatWidget />
             <InstallPrompt />
             <ExitIntentOffer />
+            <CookieConsent />
+
 
             <Suspense fallback={<RouteFallback />}>
               <Routes>
