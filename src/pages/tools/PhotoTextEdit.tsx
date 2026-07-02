@@ -220,13 +220,28 @@ const PhotoTextEdit = () => {
             </div>
 
             {!imgSrc ? (
-              <div className="max-w-2xl mx-auto">
+              <div className="max-w-2xl mx-auto space-y-4">
                 <SmartFileInput
                   onFilesAdded={handleFiles}
                   accept="image/*"
                   title="Drop photo or use camera"
                   subtitle="JPG, PNG, WEBP supported"
                   formats={["JPG", "PNG", "WEBP"]}
+                />
+                <div className="flex items-center gap-3">
+                  <div className="flex-1 h-px bg-border" />
+                  <span className="text-xs text-muted-foreground">or</span>
+                  <div className="flex-1 h-px bg-border" />
+                </div>
+                <Button variant="outline" className="w-full" onClick={() => projectFileRef.current?.click()}>
+                  <FolderOpen className="w-4 h-4 mr-2" /> Open Saved Project (.json)
+                </Button>
+                <input
+                  ref={projectFileRef}
+                  type="file"
+                  accept="application/json,.json"
+                  className="hidden"
+                  onChange={(e) => { const f = e.target.files?.[0]; if (f) handleLoadProject(f); e.target.value = ""; }}
                 />
               </div>
             ) : (
