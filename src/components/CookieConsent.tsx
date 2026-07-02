@@ -13,10 +13,11 @@ type ConsentState = {
   timestamp: number;
 };
 
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-  }
+// gtag is declared globally by other analytics modules; call defensively.
+type GtagLike = (...args: unknown[]) => void;
+function callGtag(...args: unknown[]) {
+  const g = (window as unknown as { gtag?: GtagLike }).gtag;
+  if (typeof g === "function") g(...args);
 }
 
 function saveConsent(state: Omit<ConsentState, "timestamp">) {
@@ -26,7 +27,7 @@ function saveConsent(state: Omit<ConsentState, "timestamp">) {
   } catch {
     /* ignore */
   }
-  window.gtag?.("consent", "update", state);
+  callGtag("consent", "update", state);
 }
 
 export default function CookieConsent() {
