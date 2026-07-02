@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { toast } from "@/hooks/use-toast";
-import { Type, Download, Trash2, Plus, Move } from "lucide-react";
+import { Type, Download, Trash2, Plus, Move, Save, FolderOpen } from "lucide-react";
 import SmartFileInput from "@/components/SmartFileInput";
 
 interface TextLayer {
@@ -153,6 +153,53 @@ const PhotoTextEdit = () => {
     );
   };
 
+  const projectFileRef = useRef<HTMLInputElement>(null);
+
+  const handleSaveProject = () => {
+    if (!imgSrc) return;
+    const project = {
+      _type: "docunova.photo-text-edit",
+      version: 1,
+      savedAt: new Date().toISOString(),
+      image: { src: imgSrc, w: imgSize.w, h: imgSize.h },
+      layers,
+    };
+    const blob = new Blob([JSON.stringify(project, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `photo-text-project-${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast({ title: "Project saved", description: "Re-open this .json file anytime to continue editing." });
+  };
+
+  const handleLoadProject = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(reader.result as string);
+        if (data?._type !== "docunova.photo-text-edit" || !data?.image?.src) {
+          throw new Error("Not a valid project file");
+        }
+        const img = new Image();
+        img.onload = () => {
+          imgRef.current = img;
+          setImgSize({ w: data.image.w || img.naturalWidth, h: data.image.h || img.naturalHeight });
+          setImgSrc(data.image.src);
+          setLayers(Array.isArray(data.layers) ? data.layers : []);
+          setSelectedId(null);
+          toast({ title: "Project loaded", description: `${data.layers?.length || 0} text layer(s) restored.` });
+        };
+        img.onerror = () => toast({ title: "Load failed", description: "Image data is corrupt.", variant: "destructive" });
+        img.src = data.image.src;
+      } catch (e) {
+        toast({ title: "Invalid project file", description: "Please choose a valid .json saved from this tool.", variant: "destructive" });
+      }
+    };
+    reader.readAsText(file);
+  };
+
   return (
     <>
       <Helmet>
@@ -173,13 +220,28 @@ const PhotoTextEdit = () => {
             </div>
 
             {!imgSrc ? (
-              <div className="max-w-2xl mx-auto">
+              <div className="max-w-2xl mx-auto space-y-4">
                 <SmartFileInput
                   onFilesAdded={handleFiles}
                   accept="image/*"
                   title="Drop photo or use camera"
                   subtitle="JPG, PNG, WEBP supported"
                   formats={["JPG", "PNG", "WEBP"]}
+                />
+                <div className="flex items-center gap-3">
+                  <div className="flex-1 h-px bg-border" />
+                  <span className="text-xs text-muted-foreground">or</span>
+                  <div className="flex-1 h-px bg-border" />
+                </div>
+                <Button variant="outline" className="w-full" onClick={() => projectFileRef.current?.click()}>
+                  <FolderOpen className="w-4 h-4 mr-2" /> Open Saved Project (.json)
+                </Button>
+                <input
+                  ref={projectFileRef}
+                  type="file"
+                  accept="application/json,.json"
+                  className="hidden"
+                  onChange={(e) => { const f = e.target.files?.[0]; if (f) handleLoadProject(f); e.target.value = ""; }}
                 />
               </div>
             ) : (
@@ -207,6 +269,23 @@ const PhotoTextEdit = () => {
                       New Photo
                     </Button>
                   </div>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button variant="secondary" size="sm" onClick={handleSaveProject}>
+                      <Save className="w-4 h-4 mr-1" /> Save Project
+                    </Button>
+                    <Button variant="secondary" size="sm" onClick={() => projectFileRef.current?.click()}>
+                      <FolderOpen className="w-4 h-4 mr-1" /> Open Project
+                    </Button>
+                    <input
+                      ref={projectFileRef}
+                      type="file"
+                      accept="application/json,.json"
+                      className="hidden"
+                      onChange={(e) => { const f = e.target.files?.[0]; if (f) handleLoadProject(f); e.target.value = ""; }}
+                    />
+                  </div>
+
 
                   {layers.length > 0 && (
                     <div className="space-y-1 max-h-40 overflow-y-auto rounded-lg border border-border/50 p-2">
