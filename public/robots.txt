@@ -46,6 +46,6 @@ Disallow: /auth
 Disallow: /dashboard
 Disallow: /reset-password
 
-Sitemap: https://document-edit-in.lovable.app/sitemap.xml
+Sitemap: https://docunova-ai.lovable.app/sitemap.xml
 
-Host: https://document-edit-in.lovable.app
+Host: https://docunova-ai.lovable.app
