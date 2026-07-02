@@ -3,6 +3,24 @@
   <head>
     <meta name="google-site-verification" content="DtIJW2HdgZjPR4KGHScgcks9VNI3qFfMWV9r_tVDcB4" />
     <meta charset="UTF-8" />
+    <!-- Google Consent Mode v2 defaults: deny personalized ads/analytics until user opts in -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500
+      });
+      // Restore prior consent from localStorage if present
+      try {
+        var c = JSON.parse(localStorage.getItem('cookie-consent') || 'null');
+        if (c && c.ad_storage) gtag('consent', 'update', c);
+      } catch(e) {}
+    </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4830449684268109" crossorigin="anonymous"></script>
     <meta name="google-adsense-account" content="ca-pub-4830449684268109" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
