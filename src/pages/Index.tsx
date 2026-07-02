@@ -22,18 +22,18 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Document Edit Pro AI — 100+ Free PDF, AI & Document Tools Online</title>
-        <meta name="description" content="Free online PDF editor with 100+ tools — merge, split, compress, convert PDF to Word/Excel, OCR, e-sign, watermark, AI summarize & translate. No signup, unlimited size, private in-browser." />
+        <title>Free PDF Editor — 100+ PDF, AI & Document Tools</title>
+        <meta name="description" content="Free online PDF editor: merge, split, compress, convert to Word/Excel, OCR, e-sign, watermark & AI summarize. 100+ tools, no signup." />
         <link rel="canonical" href="https://docunova-ai.lovable.app/" />
-        <meta name="keywords" content="free PDF editor online, merge PDF, split PDF, compress PDF, PDF to Word, PDF to Excel, PDF to JPG, OCR online, e-sign PDF, AI PDF summarizer, PDF chat, PDF translator, watermark PDF, unlock PDF, edit PDF free, image to PDF, invoice generator, resume builder, document editor 2026" />
-        <meta property="og:title" content="Document Edit Pro AI — 100+ Free PDF, AI & Productivity Tools" />
-        <meta property="og:description" content="One platform for PDFs, AI, documents, images & productivity. 100+ free tools. Fast, secure, mobile-ready." />
-        <meta property="og:url" content="https://document-edit-in.lovable.app/" />
+        <meta name="keywords" content="free PDF editor online, merge PDF, split PDF, compress PDF, PDF to Word, PDF to Excel, OCR online, e-sign PDF, AI PDF summarizer, watermark PDF, edit PDF free, image to PDF" />
+        <meta property="og:title" content="Free PDF Editor — 100+ PDF, AI & Document Tools" />
+        <meta property="og:description" content="One platform for PDFs, AI, documents & productivity. 100+ free tools. Fast, secure, mobile-ready." />
+        <meta property="og:url" content="https://docunova-ai.lovable.app/" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Document Edit Pro AI" />
+        <meta property="og:site_name" content="Docunova AI" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Document Edit Pro AI — 100+ Free Tools" />
-        <meta name="twitter:description" content="PDFs, AI, documents, images & productivity in one workspace. 100+ free tools." />
+        <meta name="twitter:title" content="Free PDF Editor — 100+ Tools" />
+        <meta name="twitter:description" content="PDFs, AI, documents & productivity in one workspace. 100+ free tools." />
       </Helmet>
       <div className="min-h-screen">
         <Header />

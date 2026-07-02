@@ -235,6 +235,7 @@ const Header = () => {
                 size="icon"
                 className="sm:hidden rounded-xl"
                 onClick={() => setSearchOpen(true)}
+                aria-label="Search tools"
               >
                 <Search className="h-4 w-4" />
               </Button>
