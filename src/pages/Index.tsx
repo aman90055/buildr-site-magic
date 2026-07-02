@@ -14,6 +14,8 @@ import PartnerLogos from "@/components/PartnerLogos";
 import AnimatedStatsSection from "@/components/AnimatedStatsSection";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import PromoCards from "@/components/ads/PromoCards";
+import WorkflowStrip from "@/components/WorkflowStrip";
+import PricingSection from "@/components/PricingSection";
 
 
 const Index = () => {
@@ -37,10 +39,12 @@ const Index = () => {
         <Header />
         <main>
           <Hero />
+          <WorkflowStrip />
           <PartnerLogos />
           <PopularTools />
           <AnimatedStatsSection />
           <Features />
+          <PricingSection />
           <PromoCards className="py-12" location="home_features" />
           <HomeSections />
           <TestimonialsCarousel />
