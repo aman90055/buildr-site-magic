@@ -139,7 +139,7 @@ const FAQ = () => {
     <>
       <Helmet>
         <title>FAQ - Document Editor | Frequently Asked Questions</title>
-        <meta name="description" content="Find answers to common questions about Document Editor's PDF tools, features, pricing, and security. Get help with merging, compressing, converting, and more." />
+        <meta name="description" content="Answers about Docunova AI PDF tools, features, pricing & security — merging, compressing, converting and more." />
         <link rel="canonical" href="https://docunova-ai.lovable.app/faq" />
         <meta property="og:title" content="FAQ - Document Editor | Frequently Asked Questions" />
         <meta property="og:description" content="Answers to common questions about Document Editor's PDF tools, features, pricing, and security." />
