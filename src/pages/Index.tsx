@@ -14,16 +14,18 @@ import PartnerLogos from "@/components/PartnerLogos";
 import AnimatedStatsSection from "@/components/AnimatedStatsSection";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import PromoCards from "@/components/ads/PromoCards";
+import WorkflowStrip from "@/components/WorkflowStrip";
+import PricingSection from "@/components/PricingSection";
 
 
 const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Document Edit Pro AI — 100+ Free PDF, AI & Productivity Tools</title>
-        <meta name="description" content="One platform for PDFs, AI, documents, images & productivity. 100+ free tools — edit, convert, summarize, sign & collaborate. Fast, secure, mobile-ready." />
-        <link rel="canonical" href="https://document-edit-in.lovable.app/" />
-        <meta name="keywords" content="document edit pro AI, free PDF tools, AI PDF chat, document summarizer, PDF converter, image tools, invoice generator, productivity tools" />
+        <title>Document Edit Pro AI — 100+ Free PDF, AI & Document Tools Online</title>
+        <meta name="description" content="Free online PDF editor with 100+ tools — merge, split, compress, convert PDF to Word/Excel, OCR, e-sign, watermark, AI summarize & translate. No signup, unlimited size, private in-browser." />
+        <link rel="canonical" href="https://docunova-ai.lovable.app/" />
+        <meta name="keywords" content="free PDF editor online, merge PDF, split PDF, compress PDF, PDF to Word, PDF to Excel, PDF to JPG, OCR online, e-sign PDF, AI PDF summarizer, PDF chat, PDF translator, watermark PDF, unlock PDF, edit PDF free, image to PDF, invoice generator, resume builder, document editor 2026" />
         <meta property="og:title" content="Document Edit Pro AI — 100+ Free PDF, AI & Productivity Tools" />
         <meta property="og:description" content="One platform for PDFs, AI, documents, images & productivity. 100+ free tools. Fast, secure, mobile-ready." />
         <meta property="og:url" content="https://document-edit-in.lovable.app/" />
@@ -37,10 +39,12 @@ const Index = () => {
         <Header />
         <main>
           <Hero />
+          <WorkflowStrip />
           <PartnerLogos />
           <PopularTools />
           <AnimatedStatsSection />
           <Features />
+          <PricingSection />
           <PromoCards className="py-12" location="home_features" />
           <HomeSections />
           <TestimonialsCarousel />
