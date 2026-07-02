@@ -25,7 +25,7 @@ const Index = () => {
         <title>Document Edit Pro AI — 100+ Free PDF, AI & Document Tools Online</title>
         <meta name="description" content="Free online PDF editor with 100+ tools — merge, split, compress, convert PDF to Word/Excel, OCR, e-sign, watermark, AI summarize & translate. No signup, unlimited size, private in-browser." />
         <link rel="canonical" href="https://docunova-ai.lovable.app/" />
-        <meta name="keywords" content="document edit pro AI, free PDF tools, AI PDF chat, document summarizer, PDF converter, image tools, invoice generator, productivity tools" />
+        <meta name="keywords" content="free PDF editor online, merge PDF, split PDF, compress PDF, PDF to Word, PDF to Excel, PDF to JPG, OCR online, e-sign PDF, AI PDF summarizer, PDF chat, PDF translator, watermark PDF, unlock PDF, edit PDF free, image to PDF, invoice generator, resume builder, document editor 2026" />
         <meta property="og:title" content="Document Edit Pro AI — 100+ Free PDF, AI & Productivity Tools" />
         <meta property="og:description" content="One platform for PDFs, AI, documents, images & productivity. 100+ free tools. Fast, secure, mobile-ready." />
         <meta property="og:url" content="https://document-edit-in.lovable.app/" />
