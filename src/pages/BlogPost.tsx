@@ -1103,7 +1103,7 @@ const BlogPost = () => {
       <Helmet>
         <title>{post.title} - PDF Tools Blog</title>
         <meta name="description" content={post.excerpt} />
-        <link rel="canonical" href={`https://document-edit-in.lovable.app/blog/${slug}`} />
+        <link rel="canonical" href={`https://docunova-ai.lovable.app/blog/${slug}`} />
         <meta property="og:type" content="article" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
