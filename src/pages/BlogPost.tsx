@@ -1094,7 +1094,7 @@ const BlogPost = () => {
     "mainEntityOfPage": `https://document-edit-in.lovable.app/blog/${slug}`
   };
 
-  const shareUrl = `https://document-edit-in.lovable.app/blog/${slug}`;
+  const shareUrl = `https://docunova-ai.lovable.app/blog/${slug}`;
   const encodedUrl = encodeURIComponent(shareUrl);
   const encodedTitle = encodeURIComponent(post.title);
 
