@@ -42,8 +42,8 @@ const About = () => {
   return (
     <>
       <Helmet>
-        <title>About Us - Document Editor | PDF Tools by Aman Vishwakarma</title>
-        <meta name="description" content="Learn about Document Editor, the AI-powered PDF platform created by Aman Vishwakarma. Discover our mission to make document editing simple and accessible." />
+        <title>About — PDF Tools by Aman Vishwakarma | Docunova AI</title>
+        <meta name="description" content="Meet the team behind Docunova AI — an AI-powered PDF platform by Aman Vishwakarma making document workflows simple." />
         <link rel="canonical" href="https://docunova-ai.lovable.app/about" />
         <meta property="og:title" content="About Document Editor — PDF Tools by Aman Vishwakarma" />
         <meta property="og:description" content="The story behind Document Editor — an AI-powered PDF platform built to make document workflows simple and accessible for everyone." />
