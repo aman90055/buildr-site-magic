@@ -78,6 +78,7 @@ const JPGToWebP = lazy(() => import("./pages/tools/JPGToWebP"));
 const ImageRotate = lazy(() => import("./pages/tools/ImageRotate"));
 const RemoveBackground = lazy(() => import("./pages/tools/RemoveBackground"));
 const ImageToText = lazy(() => import("./pages/tools/ImageToText"));
+const PhotoTextEdit = lazy(() => import("./pages/tools/PhotoTextEdit"));
 const AIImageEnhance = lazy(() => import("./pages/tools/AIImageEnhance"));
 const AISummarizer = lazy(() => import("./pages/tools/AISummarizer"));
 const AITranslator = lazy(() => import("./pages/tools/AITranslator"));
@@ -228,6 +229,7 @@ const App = () => (
                 <Route path="/rotate-image" element={<ImageRotate />} />
                 <Route path="/remove-background" element={<RemoveBackground />} />
                 <Route path="/image-to-text" element={<ImageToText />} />
+                <Route path="/photo-text-edit" element={<PhotoTextEdit />} />
                 <Route path="/ai-image-enhance" element={<AIImageEnhance />} />
                 <Route path="/ai-summarizer" element={<AISummarizer />} />
                 <Route path="/ai-translator" element={<AITranslator />} />
