@@ -44,13 +44,19 @@ const Hero = () => {
             </div>
 
             <h1
-              className="relative text-[2.25rem] leading-[1.05] sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold tracking-tight animate-fade-in"
+              className="relative text-[2.5rem] leading-[1.05] sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold tracking-tight animate-fade-in text-foreground"
               style={{ animationDelay: "0.1s" }}
             >
-              <span className="bg-[linear-gradient(120deg,hsl(var(--foreground)),hsl(var(--primary)),hsl(var(--brand-ai)),hsl(var(--accent)),hsl(var(--primary)))] bg-[length:300%_300%] bg-clip-text text-transparent animate-gradient-shift">
-                One Platform for PDFs, AI, Documents, Images &amp; Productivity
+              One Platform for{" "}
+              <span className="relative inline-block">
+                <span className="bg-[linear-gradient(120deg,hsl(var(--primary)),hsl(var(--brand-ai)),hsl(var(--accent)),hsl(var(--primary)))] bg-[length:300%_300%] bg-clip-text text-transparent animate-gradient-shift">
+                  PDFs, AI &amp; Docs
+                </span>
+                <span aria-hidden className="absolute inset-x-0 -bottom-1 h-2 bg-gradient-to-r from-primary/0 via-brand-ai/60 to-accent/0 blur-md" />
               </span>
-              <span aria-hidden className="absolute -bottom-2 left-0 h-1 w-24 sm:w-32 rounded-full bg-gradient-to-r from-primary via-brand-ai to-accent blur-[2px] opacity-80" />
+              <br className="hidden sm:block" />
+              <span className="text-foreground/90"> Images &amp; Productivity</span>
+              <span aria-hidden className="absolute -bottom-3 left-0 h-1 w-28 sm:w-40 rounded-full bg-gradient-to-r from-primary via-brand-ai to-accent opacity-80" />
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
