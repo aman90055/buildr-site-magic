@@ -270,6 +270,23 @@ const PhotoTextEdit = () => {
                     </Button>
                   </div>
 
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button variant="secondary" size="sm" onClick={handleSaveProject}>
+                      <Save className="w-4 h-4 mr-1" /> Save Project
+                    </Button>
+                    <Button variant="secondary" size="sm" onClick={() => projectFileRef.current?.click()}>
+                      <FolderOpen className="w-4 h-4 mr-1" /> Open Project
+                    </Button>
+                    <input
+                      ref={projectFileRef}
+                      type="file"
+                      accept="application/json,.json"
+                      className="hidden"
+                      onChange={(e) => { const f = e.target.files?.[0]; if (f) handleLoadProject(f); e.target.value = ""; }}
+                    />
+                  </div>
+
+
                   {layers.length > 0 && (
                     <div className="space-y-1 max-h-40 overflow-y-auto rounded-lg border border-border/50 p-2">
                       {layers.map((l) => (
