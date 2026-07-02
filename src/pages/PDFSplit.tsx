@@ -48,6 +48,11 @@ const PDFSplit = () => {
           name="description"
           content="Extract specific pages from PDF documents. Split PDFs into separate files. Fast, free, and secure."
         />
+        <link rel="canonical" href="https://docunova-ai.lovable.app/split" />
+        <meta property="og:title" content="Split PDF Files Online - Free PDF Page Extractor" />
+        <meta property="og:description" content="Extract specific pages from PDF documents. Split PDFs into separate files. Fast, free, and secure." />
+        <meta property="og:url" content="https://docunova-ai.lovable.app/split" />
+        <meta property="og:type" content="website" />
       </Helmet>
 
       <div className="min-h-screen flex flex-col">

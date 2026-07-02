@@ -112,6 +112,11 @@ const EditPDF = () => {
           name="description"
           content="Add text to your PDF files online. Free PDF editor with AI-assisted features."
         />
+        <link rel="canonical" href="https://docunova-ai.lovable.app/edit-pdf" />
+        <meta property="og:title" content="Edit PDF - Add Text to PDF Online | Free PDF Editor" />
+        <meta property="og:description" content="Add text to your PDF files online. Free PDF editor with AI-assisted features." />
+        <meta property="og:url" content="https://docunova-ai.lovable.app/edit-pdf" />
+        <meta property="og:type" content="website" />
       </Helmet>
 
       <div className="min-h-screen flex flex-col">

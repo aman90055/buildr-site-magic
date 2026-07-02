@@ -170,7 +170,10 @@ const Hero = () => {
           </div>
 
           {/* Right - Tool Cards */}
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 animate-slide-in-right">
+          <div className="animate-slide-in-right">
+          <h2 className="sr-only">Popular AI-powered tools</h2>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+
             {tools.map((tool, i) => (
               <Link
                 key={tool.to}
@@ -211,6 +214,8 @@ const Hero = () => {
               </Link>
             ))}
           </div>
+          </div>
+
         </div>
       </div>
     </section>
