@@ -9,6 +9,7 @@ import { ThemeProvider } from "next-themes";
 import AIChatWidget from "@/components/AIChatWidget";
 import InstallPrompt from "@/components/InstallPrompt";
 import ScrollToTop from "@/components/ScrollToTop";
+import FloatingBackNav from "@/components/FloatingBackNav";
 import ExitIntentOffer from "@/components/ExitIntentOffer";
 import CookieConsent from "@/components/CookieConsent";
 
@@ -154,7 +155,7 @@ const App = () => (
             <InstallPrompt />
             <ExitIntentOffer />
             <CookieConsent />
-
+            <FloatingBackNav />
 
             <Suspense fallback={<RouteFallback />}>
               <Routes>

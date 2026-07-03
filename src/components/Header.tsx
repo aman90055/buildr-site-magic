@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ArrowLeft, Home } from "lucide-react";
 import logo from "@/assets/logo.png";
 import {
   NavigationMenu,
@@ -50,6 +51,9 @@ const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const { user, loading, signOut } = useAuth();
   const { toast } = useToast();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHome = location.pathname === "/";
 
   // Keyboard shortcut for search
   useEffect(() => {
@@ -85,8 +89,21 @@ const Header = () => {
       <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
         <div className="container mx-auto px-6 py-3">
           <div className="flex items-center justify-between">
-            {/* Logo — links to home */}
-            <Link
+            <div className="flex items-center gap-2">
+              {!isHome && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="hidden sm:inline-flex gap-1.5 rounded-xl text-muted-foreground hover:text-foreground"
+                  onClick={() => navigate(-1)}
+                  aria-label="Go back"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  Back
+                </Button>
+              )}
+              {/* Logo — links to home */}
+              <Link
               to="/"
               aria-label="DocEdit — Go to homepage"
               className="flex items-center gap-2 sm:gap-2.5 text-lg sm:text-xl font-display font-bold text-foreground shrink-0"
@@ -104,6 +121,7 @@ const Header = () => {
                 2026
               </span>
             </Link>
+            </div>
           
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
