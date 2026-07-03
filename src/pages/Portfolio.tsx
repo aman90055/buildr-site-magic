@@ -24,7 +24,7 @@ const projects = [
   {
     title: "AI Document Chat",
     tag: "RAG · LLM",
-    desc: "Ask any PDF a question — extraction, summaries, and citations powered by Lovable AI.",
+    desc: "Ask any PDF a question — extraction, summaries, and citations powered by Docunova-AI.",
     href: "/ai-hub",
     color: "from-brand-green to-brand-cyan",
   },

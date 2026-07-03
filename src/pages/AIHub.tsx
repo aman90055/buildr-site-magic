@@ -27,7 +27,7 @@ const AIHub = () => {
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 bg-clip-text text-transparent">15 AI tools</span> in one workspace
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Chat with documents, generate resumes & proposals, review contracts, write emails, translate anything — powered by Lovable AI.
+              Chat with documents, generate resumes & proposals, review contracts, write emails, translate anything — powered by Docunova-AI.
             </p>
           </div>
 
