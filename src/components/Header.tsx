@@ -121,6 +121,7 @@ const Header = () => {
                 2026
               </span>
             </Link>
+            </div>
           
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
