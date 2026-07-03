@@ -39,7 +39,7 @@ const Hero = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-card border border-primary/30 text-xs sm:text-sm animate-fade-in shadow-[0_0_24px_hsl(var(--primary)/0.25)]">
               <Sparkles className="w-3.5 h-3.5 text-brand-ai animate-pulse" />
               <span className="font-medium bg-gradient-to-r from-primary via-brand-ai to-accent bg-clip-text text-transparent">
-                The 2026 AI Document Suite
+                The Docunova AI Suite
               </span>
             </div>
 
