@@ -26,7 +26,32 @@ const AITranslator = () => {
           <Select value={targetLang} onValueChange={setTargetLang}>
             <SelectTrigger><SelectValue /></SelectTrigger>
             <SelectContent>
-              {["Hindi", "Spanish", "French", "German", "Chinese", "Japanese", "Korean", "Arabic", "Portuguese", "Russian", "Tamil", "Telugu", "Bengali", "Marathi", "Gujarati", "Urdu"].map((l) => (
+              {[
+                "Afrikaans", "Albanian", "Amharic", "Arabic", "Armenian", "Azerbaijani",
+                "Basque", "Bengali", "Belarusian", "Bosnian", "Bulgarian",
+                "Catalan", "Cebuano", "Chinese (Simplified)", "Chinese (Traditional)", "Corsican", "Croatian", "Czech",
+                "Danish", "Dutch",
+                "English", "Esperanto", "Estonian",
+                "Finnish", "French",
+                "Galician", "Georgian", "German", "Greek", "Gujarati",
+                "Haitian Creole", "Hausa", "Hawaiian", "Hebrew", "Hindi", "Hmong", "Hungarian",
+                "Icelandic", "Igbo", "Indonesian", "Irish", "Italian",
+                "Japanese", "Javanese",
+                "Kannada", "Kazakh", "Khmer", "Korean", "Kurdish", "Kyrgyz",
+                "Lao", "Latin", "Latvian", "Lithuanian", "Luxembourgish",
+                "Macedonian", "Malagasy", "Malay", "Malayalam", "Maltese", "Maori", "Marathi", "Mongolian",
+                "Nepali", "Norwegian", "Nyanja",
+                "Pashto", "Persian", "Polish", "Portuguese", "Punjabi",
+                "Romanian", "Russian",
+                "Samoan", "Scots Gaelic", "Serbian", "Sesotho", "Shona", "Sindhi", "Sinhala", "Slovak", "Slovenian", "Somali", "Spanish", "Sundanese", "Swahili", "Swedish",
+                "Tagalog", "Tajik", "Tamil", "Tatar", "Telugu", "Thai", "Turkish",
+                "Ukrainian", "Urdu", "Uzbek",
+                "Vietnamese",
+                "Welsh",
+                "Xhosa",
+                "Yiddish", "Yoruba",
+                "Zulu"
+              ].map((l) => (
                 <SelectItem key={l} value={l}>{l}</SelectItem>
               ))}
             </SelectContent>
