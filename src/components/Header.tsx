@@ -51,6 +51,9 @@ const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const { user, loading, signOut } = useAuth();
   const { toast } = useToast();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHome = location.pathname === "/";
 
   // Keyboard shortcut for search
   useEffect(() => {
