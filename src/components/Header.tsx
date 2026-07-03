@@ -117,9 +117,6 @@ const Header = () => {
                 decoding="async"
               />
               <span className="hidden xs:inline sm:inline">DocEdit</span>
-              <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold bg-brand-ai/10 text-brand-ai rounded-full">
-                2026
-              </span>
             </Link>
             </div>
           
