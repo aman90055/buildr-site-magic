@@ -157,6 +157,7 @@ const App = () => (
             <ExitIntentOffer />
             <CookieConsent />
             <FloatingBackNav />
+            <Breadcrumbs />
 
             <Suspense fallback={<RouteFallback />}>
               <Routes>
