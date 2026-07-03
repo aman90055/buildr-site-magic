@@ -10,6 +10,7 @@ import AIChatWidget from "@/components/AIChatWidget";
 import InstallPrompt from "@/components/InstallPrompt";
 import ScrollToTop from "@/components/ScrollToTop";
 import FloatingBackNav from "@/components/FloatingBackNav";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import ExitIntentOffer from "@/components/ExitIntentOffer";
 import CookieConsent from "@/components/CookieConsent";
 
@@ -156,6 +157,7 @@ const App = () => (
             <ExitIntentOffer />
             <CookieConsent />
             <FloatingBackNav />
+            <Breadcrumbs />
 
             <Suspense fallback={<RouteFallback />}>
               <Routes>
