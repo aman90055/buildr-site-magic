@@ -155,7 +155,7 @@ const App = () => (
             <InstallPrompt />
             <ExitIntentOffer />
             <CookieConsent />
-
+            <FloatingBackNav />
 
             <Suspense fallback={<RouteFallback />}>
               <Routes>
