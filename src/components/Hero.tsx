@@ -35,10 +35,10 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-6 sm:space-y-8">
-            {/* Sparkle pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-card border border-primary/30 text-xs sm:text-sm animate-fade-in shadow-[0_0_24px_hsl(var(--primary)/0.25)]">
-              <Sparkles className="w-3.5 h-3.5 text-brand-ai animate-pulse" />
-              <span className="font-medium bg-gradient-to-r from-primary via-brand-ai to-accent bg-clip-text text-transparent">
+            {/* Brand pill */}
+            <div className="inline-flex max-w-full items-center gap-1.5 sm:gap-2 pl-2.5 pr-3 sm:pl-3 sm:pr-4 py-1 sm:py-1.5 rounded-full glass-card border border-primary/30 text-[11px] sm:text-sm animate-fade-in shadow-[0_0_24px_hsl(var(--primary)/0.25)] backdrop-blur-xl">
+              <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 text-brand-ai animate-pulse" />
+              <span className="font-semibold tracking-tight whitespace-nowrap bg-gradient-to-r from-primary via-brand-ai to-accent bg-clip-text text-transparent">
                 The Docunova AI Suite
               </span>
             </div>
