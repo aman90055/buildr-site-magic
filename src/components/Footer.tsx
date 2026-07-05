@@ -48,7 +48,7 @@ const Footer = () => {
             </div>
             
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} PDF Tools. All rights reserved.
+              © {new Date().getFullYear()} The Docunova AI Suite. All rights reserved.
             </p>
           </div>
           
