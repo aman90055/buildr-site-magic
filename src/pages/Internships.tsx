@@ -17,7 +17,7 @@ const Internships = () => {
   return (
     <div className="min-h-screen">
       <SocialMeta
-        title="Internships — Document Edit Pro AI"
+        title="Internships — The Docunova AI Suite"
         description="Paid, fully-remote internships in engineering, AI, design and growth. Build real products used by millions."
         path="/internships"
       />
@@ -36,7 +36,7 @@ const Internships = () => {
               Top performers get full-time offers.
             </p>
           </div>
-          <ShareButtons title="Internships at Document Edit Pro AI" />
+          <ShareButtons title="Internships at The Docunova AI Suite" />
         </div>
 
         <div className="grid md:grid-cols-2 gap-4 mt-12">

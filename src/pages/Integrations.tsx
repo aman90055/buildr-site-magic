@@ -35,7 +35,7 @@ const Integrations = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Integrations — Connect Document Edit Pro with your stack</title>
-        <meta name="description" content="Google Drive, OneDrive, Dropbox, Gmail, Slack, Notion, Zapier and more — connect Document Edit Pro AI to the tools you already use." />
+        <meta name="description" content="Google Drive, OneDrive, Dropbox, Gmail, Slack, Notion, Zapier and more — connect The Docunova AI Suite to the tools you already use." />
         <link rel="canonical" href="/integrations" />
       </Helmet>
 

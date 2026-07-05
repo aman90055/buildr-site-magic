@@ -4,9 +4,9 @@ const Accessibility = () => (
   <LegalPage
     slug="accessibility"
     title="Accessibility Statement"
-    description="Our commitment to making Document Edit Pro AI usable by everyone, including people with disabilities — standards we follow and how to report issues."
+    description="Our commitment to making The Docunova AI Suite usable by everyone, including people with disabilities — standards we follow and how to report issues."
     updated="2026-06-30"
-    intro="Document Edit Pro AI is committed to digital accessibility. We want every visitor to be able to find, use, and benefit from our tools — including users who rely on assistive technology."
+    intro="The Docunova AI Suite is committed to digital accessibility. We want every visitor to be able to find, use, and benefit from our tools — including users who rely on assistive technology."
     sections={[
       {
         id: "commitment",
@@ -41,7 +41,7 @@ We are actively working to address these gaps.`,
       {
         id: "assistive-tech",
         heading: "4. Compatibility",
-        body: `Document Edit Pro AI is designed to be compatible with:
+        body: `The Docunova AI Suite is designed to be compatible with:
 
 - Recent versions of Chrome, Firefox, Safari, and Edge
 - Common screen readers including NVDA, JAWS, VoiceOver, and TalkBack

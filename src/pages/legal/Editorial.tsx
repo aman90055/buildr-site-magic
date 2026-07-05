@@ -4,7 +4,7 @@ const Editorial = () => (
   <LegalPage
     slug="editorial-policy"
     title="Editorial Policy"
-    description="How Document Edit Pro AI researches, writes, fact-checks, updates, and corrects content across guides, tutorials, blog posts, and tool pages."
+    description="How The Docunova AI Suite researches, writes, fact-checks, updates, and corrects content across guides, tutorials, blog posts, and tool pages."
     updated="2026-06-30"
     intro="Trust is earned. This Editorial Policy explains our standards for accuracy, independence, originality, transparency, and corrections across every piece of content we publish."
     sections={[
@@ -16,7 +16,7 @@ const Editorial = () => (
       {
         id: "who-writes",
         heading: "2. Who Writes Our Content",
-        body: `Content is produced by the Document Edit Pro AI editorial team led by founder Aman Vishwakarma. Contributors are practitioners with hands-on experience in document workflows, AI tooling, and software engineering.
+        body: `Content is produced by the The Docunova AI Suite editorial team led by founder Aman Vishwakarma. Contributors are practitioners with hands-on experience in document workflows, AI tooling, and software engineering.
 
 Every author has a public profile page where you can review their background, links, and recent work. Guest contributors are disclosed at the top of the article.`,
       },

@@ -29,7 +29,7 @@ const steps = [
 
 const WorkflowStrip = () => {
   return (
-    <section className="py-16 sm:py-24 bg-gradient-to-b from-background via-secondary/30 to-background" aria-label="How Document Edit Pro AI works">
+    <section className="py-16 sm:py-24 bg-gradient-to-b from-background via-secondary/30 to-background" aria-label="How The Docunova AI Suite works">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-2xl mx-auto text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-card border border-primary/20 text-xs font-medium text-primary mb-4">

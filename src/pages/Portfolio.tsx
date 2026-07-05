@@ -8,7 +8,7 @@ import { ExternalLink } from "lucide-react";
 
 const projects = [
   {
-    title: "Document Edit Pro AI",
+    title: "The Docunova AI Suite",
     tag: "SaaS · AI · 2026",
     desc: "Flagship platform — 100+ document tools, AI assistants, and team workflows. Millions of documents processed.",
     href: "/",
@@ -56,8 +56,8 @@ const Portfolio = () => {
   return (
     <div className="min-h-screen">
       <SocialMeta
-        title="Portfolio — Document Edit Pro AI"
-        description="Showcase of products and projects built by Document Edit Pro AI and founder Aman Vishwakarma."
+        title="Portfolio — The Docunova AI Suite"
+        description="Showcase of products and projects built by The Docunova AI Suite and founder Aman Vishwakarma."
         path="/portfolio"
       />
       <Header />
@@ -69,10 +69,10 @@ const Portfolio = () => {
               Things we've built
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              A selection of products, side projects and experiments from the Document Edit Pro AI team.
+              A selection of products, side projects and experiments from the The Docunova AI Suite team.
             </p>
           </div>
-          <ShareButtons title="Portfolio — Document Edit Pro AI" />
+          <ShareButtons title="Portfolio — The Docunova AI Suite" />
         </div>
 
         <div className="grid md:grid-cols-2 gap-5 mt-12">

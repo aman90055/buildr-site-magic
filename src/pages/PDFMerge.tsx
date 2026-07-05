@@ -68,7 +68,7 @@ const PDFMerge = () => {
           totalTime: "PT1M",
           estimatedCost: { "@type": "MonetaryAmount", currency: "USD", value: "0" },
           supply: [{ "@type": "HowToSupply", name: "Two or more PDF files" }],
-          tool: [{ "@type": "HowToTool", name: "Document Edit Pro AI - Merge PDF" }],
+          tool: [{ "@type": "HowToTool", name: "The Docunova AI Suite - Merge PDF" }],
           step: [
             { "@type": "HowToStep", position: 1, name: "Upload PDFs", text: "Click 'Select Files' and choose the PDF files you want to combine." },
             { "@type": "HowToStep", position: 2, name: "Reorder pages", text: "Drag-and-drop the files to set the order you want." },

@@ -53,8 +53,8 @@ const tagColor: Record<Release["tags"][number], string> = {
 const Changelog = () => (
   <>
     <Helmet>
-      <title>Changelog — Document Edit Pro AI</title>
-      <meta name="description" content="Every release of Document Edit Pro AI — new tools, fixes, and improvements." />
+      <title>Changelog — The Docunova AI Suite</title>
+      <meta name="description" content="Every release of The Docunova AI Suite — new tools, fixes, and improvements." />
       <link rel="canonical" href="https://document-edit-in.lovable.app/changelog" />
     </Helmet>
     <div className="min-h-screen flex flex-col">

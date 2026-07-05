@@ -4,21 +4,21 @@ const Terms = () => (
   <LegalPage
     slug="terms"
     title="Terms & Conditions"
-    description="The rules that govern your use of Document Edit Pro AI — accounts, acceptable use, payments, liability, and how disputes are handled."
+    description="The rules that govern your use of The Docunova AI Suite — accounts, acceptable use, payments, liability, and how disputes are handled."
     updated="2026-06-30"
-    intro="These Terms set out the agreement between you and Document Edit Pro AI when you use our website, tools, AI features, and paid plans. By using the service you agree to these Terms."
+    intro="These Terms set out the agreement between you and The Docunova AI Suite when you use our website, tools, AI features, and paid plans. By using the service you agree to these Terms."
     sections={[
       {
         id: "acceptance",
         heading: "1. Acceptance of Terms",
-        body: `By accessing or using Document Edit Pro AI ("the Service"), you confirm that you are at least 13 years old (or the minimum digital-consent age in your country) and that you accept these Terms in full. If you are using the Service on behalf of a company, you confirm that you have authority to bind that company.
+        body: `By accessing or using The Docunova AI Suite ("the Service"), you confirm that you are at least 13 years old (or the minimum digital-consent age in your country) and that you accept these Terms in full. If you are using the Service on behalf of a company, you confirm that you have authority to bind that company.
 
 If you do not agree to any part of these Terms, please discontinue use of the Service.`,
       },
       {
         id: "the-service",
         heading: "2. The Service We Provide",
-        body: `Document Edit Pro AI is a web-based platform that offers free PDF, image, document, and AI-powered productivity tools. Core PDF tools (merge, split, compress, convert, edit, sign, OCR and similar) are provided free of charge with no file size cap. Selected AI features may consume credits or require a Premium plan.
+        body: `The Docunova AI Suite is a web-based platform that offers free PDF, image, document, and AI-powered productivity tools. Core PDF tools (merge, split, compress, convert, edit, sign, OCR and similar) are provided free of charge with no file size cap. Selected AI features may consume credits or require a Premium plan.
 
 We strive to keep the Service available 24/7 but do not guarantee uninterrupted access. Maintenance, third-party outages, or events outside our reasonable control may cause temporary downtime.`,
       },
@@ -74,7 +74,7 @@ You are responsible for the prompts you submit and the way you use AI output. Ou
       {
         id: "intellectual-property",
         heading: "8. Intellectual Property",
-        body: `The Document Edit Pro AI name, logo, website design, code, written content, illustrations, and trademarks are owned by us or our licensors and protected by applicable laws. You may not copy, scrape, or republish substantial portions of the Service without prior written permission.
+        body: `The The Docunova AI Suite name, logo, website design, code, written content, illustrations, and trademarks are owned by us or our licensors and protected by applicable laws. You may not copy, scrape, or republish substantial portions of the Service without prior written permission.
 
 Open-source libraries we use are governed by their respective licences, listed in our public dependency manifests.`,
       },
@@ -93,14 +93,14 @@ We do not warrant that the Service will be uninterrupted, secure, error-free, or
       {
         id: "liability",
         heading: "11. Limitation of Liability",
-        body: `To the maximum extent permitted by applicable law, Document Edit Pro AI, its founders, employees, and partners will not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits, revenue, data, or goodwill, arising from your use of the Service.
+        body: `To the maximum extent permitted by applicable law, The Docunova AI Suite, its founders, employees, and partners will not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits, revenue, data, or goodwill, arising from your use of the Service.
 
 Our total aggregate liability for any claim arising out of or relating to the Service is limited to the greater of (a) the amount you paid us in the 12 months preceding the claim, or (b) USD 50.`,
       },
       {
         id: "indemnity",
         heading: "12. Indemnity",
-        body: `You agree to indemnify and hold Document Edit Pro AI harmless from any claim, demand, loss, or expense (including reasonable legal fees) made by a third party arising out of your use of the Service, your content, or your breach of these Terms.`,
+        body: `You agree to indemnify and hold The Docunova AI Suite harmless from any claim, demand, loss, or expense (including reasonable legal fees) made by a third party arising out of your use of the Service, your content, or your breach of these Terms.`,
       },
       {
         id: "termination",

@@ -4,9 +4,9 @@ const Disclaimer = () => (
   <LegalPage
     slug="disclaimer"
     title="Disclaimer"
-    description="Information on Document Edit Pro AI is provided for general purposes. This Disclaimer outlines the limits of our content, AI output, and third-party links."
+    description="Information on The Docunova AI Suite is provided for general purposes. This Disclaimer outlines the limits of our content, AI output, and third-party links."
     updated="2026-06-30"
-    intro="The information, tools, and AI outputs on Document Edit Pro AI are provided in good faith and for general informational and productivity purposes only. This Disclaimer sets out the boundaries of that information."
+    intro="The information, tools, and AI outputs on The Docunova AI Suite are provided in good faith and for general informational and productivity purposes only. This Disclaimer sets out the boundaries of that information."
     sections={[
       {
         id: "general",
@@ -40,7 +40,7 @@ We are not responsible for data loss caused by user error, third-party software,
       {
         id: "no-warranty",
         heading: "6. No Warranty",
-        body: `To the maximum extent permitted by law, Document Edit Pro AI disclaims all warranties — express, implied, or statutory — including warranties of accuracy, merchantability, non-infringement, and fitness for a particular purpose, in relation to any content on this site.
+        body: `To the maximum extent permitted by law, The Docunova AI Suite disclaims all warranties — express, implied, or statutory — including warranties of accuracy, merchantability, non-infringement, and fitness for a particular purpose, in relation to any content on this site.
 
 Use the Service and its content at your own risk.`,
       },

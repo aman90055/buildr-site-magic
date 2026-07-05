@@ -17,22 +17,22 @@ export default function Brand() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Brand Kit — Document Edit Pro AI</title>
-        <meta name="description" content="Official brand guidelines, logos, colors, and typography for Document Edit Pro AI." />
+        <title>Brand Kit — The Docunova AI Suite</title>
+        <meta name="description" content="Official brand guidelines, logos, colors, and typography for The Docunova AI Suite." />
         <link rel="canonical" href="https://docunova-ai.lovable.app/brand" />
       </Helmet>
       <Header />
       <main className="container mx-auto px-4 py-16 max-w-5xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Brand Kit</h1>
         <p className="text-muted-foreground mb-12 text-lg">
-          Everything you need to talk about Document Edit Pro AI — logos, colors, type, and voice.
+          Everything you need to talk about The Docunova AI Suite — logos, colors, type, and voice.
         </p>
 
         <section className="mb-12">
           <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2"><ImageIcon className="w-5 h-5" /> Logo</h2>
           <Card className="p-8 flex flex-col md:flex-row gap-6 items-center justify-between">
             <div className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
-              Document Edit Pro AI
+              The Docunova AI Suite
             </div>
             <Button asChild><a href="/og-image.png" download><Download className="w-4 h-4 mr-2" />Download Logo Pack</a></Button>
           </Card>

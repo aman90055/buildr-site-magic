@@ -4,14 +4,14 @@ const AIUsage = () => (
   <LegalPage
     slug="ai-usage-policy"
     title="AI Usage Policy"
-    description="How Document Edit Pro AI uses artificial intelligence responsibly — what we do, what we do not do, what models we use, and your responsibilities as a user."
+    description="How The Docunova AI Suite uses artificial intelligence responsibly — what we do, what we do not do, what models we use, and your responsibilities as a user."
     updated="2026-06-30"
     intro="We use AI to make documents easier to work with — summarising, translating, extracting, polishing, and answering questions about your files. This policy explains how we use AI responsibly and what you can expect."
     sections={[
       {
         id: "where-we-use-ai",
         heading: "1. Where We Use AI",
-        body: `AI powers the following features on Document Edit Pro AI:
+        body: `AI powers the following features on The Docunova AI Suite:
 
 - PDF and document summarisation
 - Translation across 15+ languages

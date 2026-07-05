@@ -16,7 +16,7 @@ const cases = [
       { k: "₹40L", v: "Saved annually" },
     ],
     quote:
-      "Document Edit Pro AI replaced three tools and a junior reviewer's grunt-work. Our partners now spend time on judgement, not page-flipping.",
+      "The Docunova AI Suite replaced three tools and a junior reviewer's grunt-work. Our partners now spend time on judgement, not page-flipping.",
     author: "Managing Partner, Acme Legal",
   },
   {
@@ -51,8 +51,8 @@ const CaseStudies = () => {
   return (
     <div className="min-h-screen">
       <SocialMeta
-        title="Case Studies — Document Edit Pro AI"
-        description="Real customer stories: legal, education and fintech teams shipping faster with Document Edit Pro AI."
+        title="Case Studies — The Docunova AI Suite"
+        description="Real customer stories: legal, education and fintech teams shipping faster with The Docunova AI Suite."
         path="/case-studies"
       />
       <Header />
@@ -66,11 +66,11 @@ const CaseStudies = () => {
               Outcomes from real customers
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              How legal, education and fintech teams use Document Edit Pro AI to ship faster
+              How legal, education and fintech teams use The Docunova AI Suite to ship faster
               and serve more users.
             </p>
           </div>
-          <ShareButtons title="Case Studies — Document Edit Pro AI" />
+          <ShareButtons title="Case Studies — The Docunova AI Suite" />
         </div>
 
         <div className="space-y-6 mt-12">
@@ -107,7 +107,7 @@ const CaseStudies = () => {
         </div>
 
         <p className="text-xs text-muted-foreground text-center mt-12 max-w-xl mx-auto">
-          Built with Document Edit Pro AI · Aggregated metrics shared with customer permission.
+          Built with The Docunova AI Suite · Aggregated metrics shared with customer permission.
         </p>
       </main>
       <Footer />

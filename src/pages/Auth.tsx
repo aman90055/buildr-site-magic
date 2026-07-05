@@ -258,14 +258,14 @@ const Auth = () => {
   return (
     <>
       <Helmet>
-        <title>{mode === "login" ? "Login" : mode === "signup" ? "Sign Up" : "Reset Password"} | Document Edit Pro AI</title>
+        <title>{mode === "login" ? "Login" : mode === "signup" ? "Sign Up" : "Reset Password"} | The Docunova AI Suite</title>
         <meta name="description" content="Sign in with Google, email OTP, phone OTP, or password to access free PDF, AI & productivity tools." />
       </Helmet>
 
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-secondary/50 to-background p-4">
         <Link to="/" className="flex items-center gap-2 mb-8">
           <FileText className="h-8 w-8 text-primary" />
-          <span className="text-2xl font-bold text-foreground">Document Edit Pro AI</span>
+          <span className="text-2xl font-bold text-foreground">The Docunova AI Suite</span>
         </Link>
 
         <Card className="w-full max-w-md">

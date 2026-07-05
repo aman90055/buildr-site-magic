@@ -27,8 +27,8 @@ const icon = (s: Item["status"]) =>
 const Roadmap = () => (
   <>
     <Helmet>
-      <title>Public Roadmap — Document Edit Pro AI</title>
-      <meta name="description" content="See what's shipped, in progress, and planned for Document Edit Pro AI." />
+      <title>Public Roadmap — The Docunova AI Suite</title>
+      <meta name="description" content="See what's shipped, in progress, and planned for The Docunova AI Suite." />
       <link rel="canonical" href="https://document-edit-in.lovable.app/roadmap" />
     </Helmet>
     <div className="min-h-screen flex flex-col">

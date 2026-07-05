@@ -33,7 +33,7 @@ const SocialKit = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>LinkedIn & Social Optimization Kit — Document Edit Pro AI</title>
+        <title>LinkedIn & Social Optimization Kit — The Docunova AI Suite</title>
         <meta name="description" content="Auto-generated social banners, LinkedIn pages, Open Graph previews, and optimized sharing for 10 social networks." />
         <link rel="canonical" href="/social-kit" />
       </Helmet>

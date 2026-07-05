@@ -130,7 +130,7 @@ export default function Tools() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>All Tools — Search 100+ PDF, AI & Image Tools | Document Edit Pro AI</title>
+        <title>All Tools — Search 100+ PDF, AI & Image Tools | The Docunova AI Suite</title>
         <meta name="description" content="Browse and search every free tool — merge, split, compress, convert, OCR, AI summarize, translate, image edit and more. Instant search by name or category." />
         <link rel="canonical" href="https://docunova-ai.lovable.app/tools" />
         <meta property="og:title" content="All Tools — Search 100+ PDF, AI & Image Tools" />
