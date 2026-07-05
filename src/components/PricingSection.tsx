@@ -85,7 +85,7 @@ const PricingSection = () => {
   const pricingSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: "Document Edit Pro AI",
+    name: "The Docunova AI Suite",
     description: "100+ free PDF, AI, image & document tools. Free forever plan with paid Pro & Business tiers.",
     offers: plans.map((p) => ({
       "@type": "Offer",

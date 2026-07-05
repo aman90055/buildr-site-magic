@@ -4,7 +4,7 @@ const Refund = () => (
   <LegalPage
     slug="refund"
     title="Refund Policy"
-    description="Our transparent refund policy for Premium subscriptions, credit packs, and one-time purchases on Document Edit Pro AI."
+    description="Our transparent refund policy for Premium subscriptions, credit packs, and one-time purchases on The Docunova AI Suite."
     updated="2026-06-30"
     intro="We want every customer to feel confident upgrading. This Refund Policy explains when refunds are available, how to request one, and how we handle disputes."
     sections={[

@@ -19,8 +19,8 @@ export default function Enterprise() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Enterprise — Document Edit Pro AI for Teams</title>
-        <meta name="description" content="SSO, team management, audit logs, and compliance for teams using Document Edit Pro AI." />
+        <title>Enterprise — The Docunova AI Suite for Teams</title>
+        <meta name="description" content="SSO, team management, audit logs, and compliance for teams using The Docunova AI Suite." />
         <link rel="canonical" href="https://docunova-ai.lovable.app/enterprise" />
       </Helmet>
       <Header />

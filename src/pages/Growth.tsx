@@ -4,7 +4,7 @@ import { Users, DollarSign, Award, Sparkles, GraduationCap, BookOpen, Rocket, Bu
 
 const programs = [
   { slug: "/refer", name: "Referral Program", tagline: "Earn credits for every friend", description: "Share your link and earn credits for every new sign-up. Both you and your friend get rewards.", icon: Users, gradient: "from-blue-500 to-indigo-600", benefits: ["Unique referral code", "Credits for each signup", "Bonus on first payment", "Lifetime tracking"], cta: "Open Referral Dashboard" },
-  { slug: "/affiliate", name: "Affiliate Dashboard", tagline: "Up to 30% recurring commission", description: "Promote Document Edit Pro AI to your audience and earn recurring commissions on every paid plan.", icon: DollarSign, gradient: "from-emerald-500 to-green-600", benefits: ["30% recurring revenue", "Real-time analytics", "Custom links + assets", "Monthly payouts"], cta: "Become an Affiliate" },
+  { slug: "/affiliate", name: "Affiliate Dashboard", tagline: "Up to 30% recurring commission", description: "Promote The Docunova AI Suite to your audience and earn recurring commissions on every paid plan.", icon: DollarSign, gradient: "from-emerald-500 to-green-600", benefits: ["30% recurring revenue", "Real-time analytics", "Custom links + assets", "Monthly payouts"], cta: "Become an Affiliate" },
   { slug: "/ambassador", name: "Ambassador Program", tagline: "For top community leaders", description: "Elite tier for power-users and creators who want to shape the product and access exclusive perks.", icon: Award, gradient: "from-purple-500 to-fuchsia-600", benefits: ["Exclusive roadmap access", "Free Pro for life", "Co-marketing", "Direct line to founders"], cta: "Apply Now" },
   { slug: "/creators", name: "Creator Program", tagline: "Tools + revenue for creators", description: "YouTubers, bloggers and educators get free Pro, custom links and revenue share for tutorials.", icon: Sparkles, gradient: "from-pink-500 to-rose-600", benefits: ["Free Pro plan", "Custom UTM links", "Revenue share", "Featured placement"], cta: "Join as Creator" },
   { slug: "/students", name: "Student Program", tagline: "100% free Pro for students", description: "Verified students get full Pro access free of charge. Build your portfolio with premium tools.", icon: GraduationCap, gradient: "from-cyan-500 to-blue-600", benefits: ["Free Pro plan", "Education resources", "Internship matching", "Student showcase"], cta: "Verify Student Status" },
@@ -18,7 +18,7 @@ const Growth = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Business Growth Programs — Affiliates, Students, Startups & more</title>
-        <meta name="description" content="Referral, Affiliate, Ambassador, Creator, Student, Education, Startup and Enterprise programs from Document Edit Pro AI." />
+        <meta name="description" content="Referral, Affiliate, Ambassador, Creator, Student, Education, Startup and Enterprise programs from The Docunova AI Suite." />
         <link rel="canonical" href="/growth" />
       </Helmet>
 

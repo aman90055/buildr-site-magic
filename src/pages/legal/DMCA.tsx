@@ -4,9 +4,9 @@ const DMCA = () => (
   <LegalPage
     slug="dmca"
     title="DMCA & Copyright Policy"
-    description="How to report copyright infringement on Document Edit Pro AI and how we handle takedown notices and counter-notices under the DMCA."
+    description="How to report copyright infringement on The Docunova AI Suite and how we handle takedown notices and counter-notices under the DMCA."
     updated="2026-06-30"
-    intro="Document Edit Pro AI respects intellectual property rights. We respond to clear notices of alleged copyright infringement in accordance with the U.S. Digital Millennium Copyright Act (DMCA) and equivalent laws in other jurisdictions."
+    intro="The Docunova AI Suite respects intellectual property rights. We respond to clear notices of alleged copyright infringement in accordance with the U.S. Digital Millennium Copyright Act (DMCA) and equivalent laws in other jurisdictions."
     sections={[
       {
         id: "policy",

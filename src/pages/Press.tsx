@@ -19,8 +19,8 @@ export default function Press() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Press & Media Kit — Document Edit Pro AI</title>
-        <meta name="description" content="Press resources, fast facts, founder bio, and media assets for Document Edit Pro AI." />
+        <title>Press & Media Kit — The Docunova AI Suite</title>
+        <meta name="description" content="Press resources, fast facts, founder bio, and media assets for The Docunova AI Suite." />
         <link rel="canonical" href="https://docunova-ai.lovable.app/press" />
       </Helmet>
       <Header />
@@ -46,7 +46,7 @@ export default function Press() {
           <h2 className="text-xl font-semibold mb-3">About the founder</h2>
           <p className="text-muted-foreground">
             Aman Vishwakarma is an indie builder focused on accessible, private-by-default productivity tools. He
-            started Document Edit Pro AI to remove paywalls and file-size limits from the everyday document tools
+            started The Docunova AI Suite to remove paywalls and file-size limits from the everyday document tools
             people actually need.
           </p>
         </Card>
@@ -54,7 +54,7 @@ export default function Press() {
         <Card className="p-6 mb-10">
           <h2 className="text-xl font-semibold mb-3 flex items-center gap-2"><Quote className="w-4 h-4" /> Boilerplate</h2>
           <p className="text-muted-foreground italic">
-            "Document Edit Pro AI is a free-forever suite of 60+ PDF, image, and AI tools that runs in your browser —
+            "The Docunova AI Suite is a free-forever suite of 60+ PDF, image, and AI tools that runs in your browser —
             so your files never leave your device. No file size limits. No watermarks. No tracking pixels on your
             documents."
           </p>

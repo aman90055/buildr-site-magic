@@ -163,7 +163,7 @@ const Dashboard = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard | Document Edit Pro AI</title>
+        <title>Dashboard | The Docunova AI Suite</title>
         <meta name="description" content="View your PDF processing history, manage favorites, API keys, notifications, and account settings." />
       </Helmet>
 

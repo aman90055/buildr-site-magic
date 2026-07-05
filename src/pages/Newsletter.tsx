@@ -8,7 +8,7 @@ import { Mail, Sparkles, Zap } from "lucide-react";
 const Newsletter = () => (
   <>
     <Helmet>
-      <title>Newsletter — Document Edit Pro AI</title>
+      <title>Newsletter — The Docunova AI Suite</title>
       <meta name="description" content="Get product updates, new AI tools, and pro tips delivered to your inbox. No spam." />
       <link rel="canonical" href="https://document-edit-in.lovable.app/newsletter" />
     </Helmet>
@@ -19,7 +19,7 @@ const Newsletter = () => (
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 text-primary mb-4">
             <Mail className="w-8 h-8" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-3">The Document Edit Pro AI Newsletter</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-3">The The Docunova AI Suite Newsletter</h1>
           <p className="text-muted-foreground max-w-xl mx-auto">
             New tools, AI features, productivity tips and exclusive offers — delivered twice a month. Unsubscribe anytime.
           </p>

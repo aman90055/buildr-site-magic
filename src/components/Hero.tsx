@@ -60,7 +60,7 @@ const Hero = () => {
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
-              Document Edit Pro AI helps individuals, students, professionals, and
+              The Docunova AI Suite helps individuals, students, professionals, and
               businesses manage documents smarter. Edit, convert, organize,
               summarize, sign, and collaborate using 100+ powerful tools — all from
               a single modern workspace.

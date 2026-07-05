@@ -83,15 +83,15 @@ const HomeSections = () => {
   return (
     <>
       {/* About / Why Choose Us */}
-      <section className="py-16 sm:py-20 bg-gradient-hero" aria-label="About Document Edit Pro AI">
+      <section className="py-16 sm:py-20 bg-gradient-hero" aria-label="About The Docunova AI Suite">
         <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
               <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight mb-5 bg-gradient-to-br from-foreground to-primary bg-clip-text text-transparent">
-                About Document Edit Pro AI
+                About The Docunova AI Suite
               </h2>
               <p className="text-muted-foreground leading-relaxed text-base sm:text-lg">
-                Document Edit Pro AI is an all-in-one productivity platform designed
+                The Docunova AI Suite is an all-in-one productivity platform designed
                 to simplify document management. Whether you need PDF editing,
                 AI-powered document analysis, image optimization, file conversion,
                 cloud storage, or team collaboration, everything is available in one

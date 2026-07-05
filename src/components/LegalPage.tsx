@@ -54,10 +54,10 @@ const LegalPage = ({ slug, title, description, updated, intro, sections, contact
     url,
     dateModified: updated,
     inLanguage: "en",
-    isPartOf: { "@type": "WebSite", name: "Document Edit Pro AI", url: BASE },
+    isPartOf: { "@type": "WebSite", name: "The Docunova AI Suite", url: BASE },
     publisher: {
       "@type": "Organization",
-      name: "Document Edit Pro AI",
+      name: "The Docunova AI Suite",
       url: BASE,
     },
     author: {
@@ -85,10 +85,10 @@ const LegalPage = ({ slug, title, description, updated, intro, sections, contact
   return (
     <>
       <Helmet>
-        <title>{`${title} — Document Edit Pro AI`}</title>
+        <title>{`${title} — The Docunova AI Suite`}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={url} />
-        <meta property="og:title" content={`${title} — Document Edit Pro AI`} />
+        <meta property="og:title" content={`${title} — The Docunova AI Suite`} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={url} />
         <meta property="og:type" content="article" />
@@ -183,7 +183,7 @@ const LegalPage = ({ slug, title, description, updated, intro, sections, contact
                 </Card>
 
                 <p className="text-xs text-muted-foreground border-t border-border pt-6">
-                  This page is maintained by the Document Edit Pro AI editorial team and reflects current product
+                  This page is maintained by the The Docunova AI Suite editorial team and reflects current product
                   behavior. It is informational and is not a substitute for legal advice; please consult a qualified
                   professional for advice specific to your situation.
                 </p>

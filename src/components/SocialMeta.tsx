@@ -42,7 +42,7 @@ const SocialMeta = ({
 
       {/* Open Graph — LinkedIn, Facebook, WhatsApp, Telegram, Discord, Threads */}
       <meta property="og:type" content={type} />
-      <meta property="og:site_name" content="Document Edit Pro AI" />
+      <meta property="og:site_name" content="The Docunova AI Suite" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />

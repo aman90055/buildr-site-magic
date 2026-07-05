@@ -39,7 +39,7 @@ export default function Workspace() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Cloud Workspace — Document Edit Pro AI</title>
+        <title>Cloud Workspace — The Docunova AI Suite</title>
         <meta name="description" content="Your private cloud workspace: recent files, shared folders, version history, and expiring share links." />
         <link rel="canonical" href="https://docunova-ai.lovable.app/workspace" />
       </Helmet>

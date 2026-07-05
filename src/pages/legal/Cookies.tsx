@@ -4,7 +4,7 @@ const Cookies = () => (
   <LegalPage
     slug="cookies"
     title="Cookie Policy"
-    description="How Document Edit Pro AI uses cookies and similar technologies for authentication, preferences, analytics, and advertising — and how you can control them."
+    description="How The Docunova AI Suite uses cookies and similar technologies for authentication, preferences, analytics, and advertising — and how you can control them."
     updated="2026-06-30"
     intro="This Cookie Policy explains what cookies are, which ones we use, why we use them, and the choices available to you. It complements our Privacy Policy."
     sections={[
@@ -57,7 +57,7 @@ Each third party operates under its own privacy and cookie policy, which you can
 - Browser settings — block or delete cookies in Chrome, Firefox, Safari, Edge, or your mobile browser
 - Google Ad Settings — opt out of personalised advertising at https://adssettings.google.com
 - Google Analytics opt-out — install the official browser add-on
-- Site preferences — adjust feature toggles inside your Document Edit Pro AI account
+- Site preferences — adjust feature toggles inside your The Docunova AI Suite account
 
 Blocking strictly necessary cookies may break sign-in, file uploads, and saved preferences.`,
       },
@@ -74,7 +74,7 @@ Blocking strictly necessary cookies may break sign-in, file uploads, and saved p
       {
         id: "contact",
         heading: "8. Contact",
-        body: `If you have questions about cookies on Document Edit Pro AI, please use our contact form. We respond to privacy queries within 48 business hours.`,
+        body: `If you have questions about cookies on The Docunova AI Suite, please use our contact form. We respond to privacy queries within 48 business hours.`,
       },
     ]}
   />

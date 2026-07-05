@@ -26,7 +26,7 @@ const Careers = () => {
   return (
     <div className="min-h-screen">
       <SocialMeta
-        title="Careers — Document Edit Pro AI"
+        title="Careers — The Docunova AI Suite"
         description="Join the team building the world's most loved AI document platform. Remote-first, async, global."
         path="/careers"
       />
@@ -39,11 +39,11 @@ const Careers = () => {
               Build the future of documents
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              Document Edit Pro AI powers millions of document workflows every month. Join a small,
+              The Docunova AI Suite powers millions of document workflows every month. Join a small,
               senior, fully-remote team shipping at high velocity.
             </p>
           </div>
-          <ShareButtons title="Careers at Document Edit Pro AI" />
+          <ShareButtons title="Careers at The Docunova AI Suite" />
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12">

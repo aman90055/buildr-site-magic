@@ -18,7 +18,7 @@ const Footer = () => {
               <div className="w-10 h-10 rounded-xl bg-gradient-ai flex items-center justify-center">
                 <Star className="w-5 h-5 text-white" />
               </div>
-              PDF Tools
+              The Docunova AI Suite
             </Link>
             <p className="text-muted-foreground mb-4 max-w-sm">
               Next-generation AI-powered PDF tools. Merge, split, compress, and convert with unmatched accuracy and speed.
@@ -48,7 +48,7 @@ const Footer = () => {
             </div>
             
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} PDF Tools. All rights reserved.
+              © {new Date().getFullYear()} The Docunova AI Suite. All rights reserved.
             </p>
           </div>
           
