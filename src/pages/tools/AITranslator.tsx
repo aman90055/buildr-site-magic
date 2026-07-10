@@ -199,33 +199,33 @@ Input: "Hello" → Output: "नमस्ते"`;
 
             <div className="space-y-2">
               <Label>To</Label>
-              <Select value={targetLang} onValueChange={setTargetLang}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  {favorites.length > 0 && (
+                <Select value={targetLang} onValueChange={setTargetLang}>
+                  <SelectTrigger><SelectValue>{targetLang}</SelectValue></SelectTrigger>
+                  <SelectContent>
+                    {favorites.length > 0 && (
+                      <SelectGroup>
+                        <SelectLabel className="flex items-center gap-1.5"><Star className="w-3 h-3" /> Favorites</SelectLabel>
+                        {favorites.map((l) => (
+                          <SelectItem key={`fav-${l}`} value={l}>{l}</SelectItem>
+                        ))}
+                      </SelectGroup>
+                    )}
+                    {recents.length > 0 && (
+                      <SelectGroup>
+                        <SelectLabel className="flex items-center gap-1.5"><Clock className="w-3 h-3" /> Recent</SelectLabel>
+                        {recents.map((l) => (
+                          <SelectItem key={`rec-${l}`} value={l}>{l}</SelectItem>
+                        ))}
+                      </SelectGroup>
+                    )}
                     <SelectGroup>
-                      <SelectLabel className="flex items-center gap-1.5"><Star className="w-3 h-3" /> Favorites</SelectLabel>
-                      {favorites.map((l) => (
-                        <SelectItem key={`fav-${l}`} value={l}>{l}</SelectItem>
+                      <SelectLabel>All Languages</SelectLabel>
+                      {ALL_LANGUAGES.filter((l) => !favorites.includes(l) && !recents.includes(l)).map((l) => (
+                        <SelectItem key={`all-${l}`} value={l}>{l}</SelectItem>
                       ))}
                     </SelectGroup>
-                  )}
-                  {recents.length > 0 && (
-                    <SelectGroup>
-                      <SelectLabel className="flex items-center gap-1.5"><Clock className="w-3 h-3" /> Recent</SelectLabel>
-                      {recents.map((l) => (
-                        <SelectItem key={`rec-${l}`} value={l}>{l}</SelectItem>
-                      ))}
-                    </SelectGroup>
-                  )}
-                  <SelectGroup>
-                    <SelectLabel>All Languages</SelectLabel>
-                    {ALL_LANGUAGES.map((l) => (
-                      <SelectItem key={`all-${l}`} value={l}>{l}</SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+                  </SelectContent>
+                </Select>
             </div>
           </div>
 
