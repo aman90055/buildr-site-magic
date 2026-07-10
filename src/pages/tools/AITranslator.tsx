@@ -104,8 +104,37 @@ const AITranslator = () => {
 
   const systemPrompt =
     sourceLang === "Auto Detect"
-      ? `You are a professional translator. Detect the source language automatically and translate the given text to ${targetLang}. Preserve original meaning, tone, and formatting. IMPORTANT: Output ONLY the translated text — no explanations, no language labels, no quotes, no prefixes, no notes. If the input is already in ${targetLang}, still output the same text once (never repeat it).`
-      : `You are a professional translator. Translate the given text from ${sourceLang} to ${targetLang}. Preserve original meaning, tone, and formatting. IMPORTANT: Output ONLY the translated text — no explanations, no language labels, no quotes, no prefixes, no notes. Never repeat the output.`;
+      ? `You are a professional translator. Detect the source language automatically and translate the user's text to ${targetLang}. Preserve original meaning, tone, and formatting.
+RULES:
+- Output ONLY the translated text.
+- NEVER add explanations, language labels, quotes, prefixes, or notes.
+- NEVER repeat the same word or sentence multiple times.
+- If the input is already in ${targetLang}, output it exactly once.
+Examples:
+Input: "Hello" → Output: "नमस्ते"
+Input: "नमस्ते" → Output: "नमस्ते"`
+      : `You are a professional translator. Translate the user's text from ${sourceLang} to ${targetLang}. Preserve original meaning, tone, and formatting.
+RULES:
+- Output ONLY the translated text.
+- NEVER add explanations, language labels, quotes, prefixes, or notes.
+- NEVER repeat the same word or sentence multiple times.
+Examples:
+Input: "Hello" → Output: "नमस्ते"`;
+
+  const getFullPrompt = (text: string) => `Translate the following text to ${targetLang}:\n\n${text}\n\nProvide only the translation.`;
+
+  const cleanOutput = (text: string) => {
+    const trimmed = text.trim();
+    // Remove repeated identical segments joined by common separators like "Hindi-Hindi-Hindi" or "Hindi - Hindi - Hindi"
+    const separators = ["-", "—", "–", ",", ";", "|", "/"];
+    for (const sep of separators) {
+      const parts = trimmed.split(sep).map((s) => s.trim()).filter(Boolean);
+      if (parts.length >= 2 && parts.every((p) => p === parts[0])) {
+        return parts[0];
+      }
+    }
+    return trimmed;
+  };
 
   const LANG_TO_BCP47: Record<string, string> = {
     English: "en-US", Hindi: "hi-IN", Spanish: "es-ES", French: "fr-FR", German: "de-DE",
