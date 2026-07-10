@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
-import { LucideIcon, Loader2 } from "lucide-react";
+import { LucideIcon, Loader2, Volume2, Square } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import AIBadge from "@/components/AIBadge";
 
