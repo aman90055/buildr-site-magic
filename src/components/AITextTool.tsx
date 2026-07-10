@@ -112,6 +112,32 @@ const AITextTool = ({
     toast({ title: "Copied to clipboard!" });
   };
 
+  const handleSpeak = () => {
+    if (!("speechSynthesis" in window)) {
+      toast({ title: "Speech not supported", description: "Your browser does not support text-to-speech.", variant: "destructive" });
+      return;
+    }
+    if (isSpeaking) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+      return;
+    }
+    const u = new SpeechSynthesisUtterance(output);
+    if (speakLang) u.lang = speakLang;
+    const voices = window.speechSynthesis.getVoices();
+    if (speakLang) {
+      const match = voices.find(v => v.lang?.toLowerCase().startsWith(speakLang.toLowerCase()));
+      if (match) u.voice = match;
+    }
+    u.onend = () => setIsSpeaking(false);
+    u.onerror = () => setIsSpeaking(false);
+    utteranceRef.current = u;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(u);
+    setIsSpeaking(true);
+  };
+
+
   return (
     <>
       <Helmet><title>{metaTitle}</title><meta name="description" content={metaDescription} /></Helmet>
