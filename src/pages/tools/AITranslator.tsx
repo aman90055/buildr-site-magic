@@ -133,6 +133,7 @@ const AITranslator = () => {
       inputPlaceholder="Paste the text you want to translate..."
       outputLabel="Translation"
       actionLabel={`Translate to ${targetLang}`}
+      speakLang={speakLang}
       extraInput={
         <div className="space-y-4">
           {/* Source / Target row */}
