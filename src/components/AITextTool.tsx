@@ -94,7 +94,7 @@ const AITextTool = ({
             const delta = json?.choices?.[0]?.delta?.content || json?.choices?.[0]?.message?.content || "";
             if (delta) {
               full += delta;
-              setOutput(full);
+              setOutput(cleanOutput ? cleanOutput(full) : full);
             }
           } catch { /* ignore partial chunks */ }
         }
