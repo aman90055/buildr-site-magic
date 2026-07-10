@@ -162,7 +162,16 @@ const AITextTool = ({
               </Button>
               {output && (
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between"><Label>{outputLabel}</Label><Button variant="ghost" size="sm" onClick={handleCopy}>Copy</Button></div>
+                  <div className="flex items-center justify-between gap-2">
+                    <Label>{outputLabel}</Label>
+                    <div className="flex items-center gap-1">
+                      <Button variant="ghost" size="sm" onClick={handleSpeak} title={isSpeaking ? "Stop" : "Speak"}>
+                        {isSpeaking ? <Square className="w-4 h-4 mr-1" /> : <Volume2 className="w-4 h-4 mr-1" />}
+                        {isSpeaking ? "Stop" : "Speak"}
+                      </Button>
+                      <Button variant="ghost" size="sm" onClick={handleCopy}>Copy</Button>
+                    </div>
+                  </div>
                   <div className="p-4 bg-muted/50 rounded-xl whitespace-pre-wrap text-sm text-foreground">{output}</div>
                 </div>
               )}
