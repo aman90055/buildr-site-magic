@@ -24,13 +24,14 @@ interface AITextToolProps {
   actionLabel: string;
   extraInput?: React.ReactNode;
   getFullPrompt?: (text: string) => string;
+  cleanOutput?: (text: string) => string;
   speakLang?: string;
 }
 
 const AITextTool = ({
   title, description, metaTitle, metaDescription, icon: Icon, gradient,
   systemPrompt, inputLabel, inputPlaceholder, outputLabel, actionLabel,
-  extraInput, getFullPrompt, speakLang,
+  extraInput, getFullPrompt, cleanOutput, speakLang,
 }: AITextToolProps) => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
@@ -93,7 +94,7 @@ const AITextTool = ({
             const delta = json?.choices?.[0]?.delta?.content || json?.choices?.[0]?.message?.content || "";
             if (delta) {
               full += delta;
-              setOutput(full);
+              setOutput(cleanOutput ? cleanOutput(full) : full);
             }
           } catch { /* ignore partial chunks */ }
         }

@@ -83,12 +83,17 @@ serve(async (req) => {
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
-    let systemPrompt = "You are a helpful PDF assistant. Help users with their PDF-related questions, provide guidance on using PDF tools, and assist with document management.";
-    if (type === "analyze") {
-      systemPrompt = "You are a document analysis expert. Analyze the provided text extracted from a PDF and provide a comprehensive summary, key points, and insights. Be concise but thorough.";
-    } else if (type === "ocr") {
-      systemPrompt = "You are an OCR specialist. Extract and format text from images. Preserve the original structure and formatting as much as possible. Clean up any OCR artifacts.";
-    }
+    const defaultPrompts: Record<string, string> = {
+      chat: "You are a helpful PDF assistant. Help users with their PDF-related questions, provide guidance on using PDF tools, and assist with document management.",
+      analyze: "You are a document analysis expert. Analyze the provided text extracted from a PDF and provide a comprehensive summary, key points, and insights. Be concise but thorough.",
+      ocr: "You are an OCR specialist. Extract and format text from images. Preserve the original structure and formatting as much as possible. Clean up any OCR artifacts.",
+    };
+
+    // Respect client-provided system prompts; only inject a default when none is supplied.
+    const hasSystem = messages.length > 0 && messages[0].role === "system";
+    const finalMessages = hasSystem
+      ? messages
+      : [{ role: "system", content: defaultPrompts[type] || defaultPrompts.chat }, ...messages];
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -98,7 +103,7 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         model: "google/gemini-2.5-flash",
-        messages: [{ role: "system", content: systemPrompt }, ...messages],
+        messages: finalMessages,
         stream: true,
       }),
     });

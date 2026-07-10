@@ -104,8 +104,37 @@ const AITranslator = () => {
 
   const systemPrompt =
     sourceLang === "Auto Detect"
-      ? `You are a professional translator. Detect the source language automatically and translate the given text to ${targetLang}. Preserve original meaning, tone, and formatting. IMPORTANT: Output ONLY the translated text — no explanations, no language labels, no quotes, no prefixes, no notes. If the input is already in ${targetLang}, still output the same text once (never repeat it).`
-      : `You are a professional translator. Translate the given text from ${sourceLang} to ${targetLang}. Preserve original meaning, tone, and formatting. IMPORTANT: Output ONLY the translated text — no explanations, no language labels, no quotes, no prefixes, no notes. Never repeat the output.`;
+      ? `You are a professional translator. Detect the source language automatically and translate the user's text to ${targetLang}. Preserve original meaning, tone, and formatting.
+RULES:
+- Output ONLY the translated text.
+- NEVER add explanations, language labels, quotes, prefixes, or notes.
+- NEVER repeat the same word or sentence multiple times.
+- If the input is already in ${targetLang}, output it exactly once.
+Examples:
+Input: "Hello" → Output: "नमस्ते"
+Input: "नमस्ते" → Output: "नमस्ते"`
+      : `You are a professional translator. Translate the user's text from ${sourceLang} to ${targetLang}. Preserve original meaning, tone, and formatting.
+RULES:
+- Output ONLY the translated text.
+- NEVER add explanations, language labels, quotes, prefixes, or notes.
+- NEVER repeat the same word or sentence multiple times.
+Examples:
+Input: "Hello" → Output: "नमस्ते"`;
+
+  const getFullPrompt = (text: string) => `Translate the following text to ${targetLang}:\n\n${text}\n\nProvide only the translation.`;
+
+  const cleanOutput = (text: string) => {
+    const trimmed = text.trim();
+    // Remove repeated identical segments joined by common separators like "Hindi-Hindi-Hindi" or "Hindi - Hindi - Hindi"
+    const separators = ["-", "—", "–", ",", ";", "|", "/"];
+    for (const sep of separators) {
+      const parts = trimmed.split(sep).map((s) => s.trim()).filter(Boolean);
+      if (parts.length >= 2 && parts.every((p) => p === parts[0])) {
+        return parts[0];
+      }
+    }
+    return trimmed;
+  };
 
   const LANG_TO_BCP47: Record<string, string> = {
     English: "en-US", Hindi: "hi-IN", Spanish: "es-ES", French: "fr-FR", German: "de-DE",
@@ -129,6 +158,8 @@ const AITranslator = () => {
       icon={Languages}
       gradient="from-blue-500 to-cyan-600"
       systemPrompt={systemPrompt}
+      getFullPrompt={getFullPrompt}
+      cleanOutput={cleanOutput}
       inputLabel="Text to Translate"
       inputPlaceholder="Paste the text you want to translate..."
       outputLabel="Translation"
@@ -168,33 +199,33 @@ const AITranslator = () => {
 
             <div className="space-y-2">
               <Label>To</Label>
-              <Select value={targetLang} onValueChange={setTargetLang}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  {favorites.length > 0 && (
+                <Select value={targetLang} onValueChange={setTargetLang}>
+                  <SelectTrigger><SelectValue>{targetLang}</SelectValue></SelectTrigger>
+                  <SelectContent>
+                    {favorites.length > 0 && (
+                      <SelectGroup>
+                        <SelectLabel className="flex items-center gap-1.5"><Star className="w-3 h-3" /> Favorites</SelectLabel>
+                        {favorites.map((l) => (
+                          <SelectItem key={`fav-${l}`} value={l}>{l}</SelectItem>
+                        ))}
+                      </SelectGroup>
+                    )}
+                    {recents.length > 0 && (
+                      <SelectGroup>
+                        <SelectLabel className="flex items-center gap-1.5"><Clock className="w-3 h-3" /> Recent</SelectLabel>
+                        {recents.map((l) => (
+                          <SelectItem key={`rec-${l}`} value={l}>{l}</SelectItem>
+                        ))}
+                      </SelectGroup>
+                    )}
                     <SelectGroup>
-                      <SelectLabel className="flex items-center gap-1.5"><Star className="w-3 h-3" /> Favorites</SelectLabel>
-                      {favorites.map((l) => (
-                        <SelectItem key={`fav-${l}`} value={l}>{l}</SelectItem>
+                      <SelectLabel>All Languages</SelectLabel>
+                      {ALL_LANGUAGES.filter((l) => !favorites.includes(l) && !recents.includes(l)).map((l) => (
+                        <SelectItem key={`all-${l}`} value={l}>{l}</SelectItem>
                       ))}
                     </SelectGroup>
-                  )}
-                  {recents.length > 0 && (
-                    <SelectGroup>
-                      <SelectLabel className="flex items-center gap-1.5"><Clock className="w-3 h-3" /> Recent</SelectLabel>
-                      {recents.map((l) => (
-                        <SelectItem key={`rec-${l}`} value={l}>{l}</SelectItem>
-                      ))}
-                    </SelectGroup>
-                  )}
-                  <SelectGroup>
-                    <SelectLabel>All Languages</SelectLabel>
-                    {ALL_LANGUAGES.map((l) => (
-                      <SelectItem key={`all-${l}`} value={l}>{l}</SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+                  </SelectContent>
+                </Select>
             </div>
           </div>
 
