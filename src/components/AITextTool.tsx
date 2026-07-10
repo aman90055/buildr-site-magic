@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
-import { LucideIcon, Loader2 } from "lucide-react";
+import { LucideIcon, Loader2, Volume2, Square } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import AIBadge from "@/components/AIBadge";
 
@@ -24,16 +24,21 @@ interface AITextToolProps {
   actionLabel: string;
   extraInput?: React.ReactNode;
   getFullPrompt?: (text: string) => string;
+  speakLang?: string;
 }
 
 const AITextTool = ({
   title, description, metaTitle, metaDescription, icon: Icon, gradient,
   systemPrompt, inputLabel, inputPlaceholder, outputLabel, actionLabel,
-  extraInput, getFullPrompt,
+  extraInput, getFullPrompt, speakLang,
 }: AITextToolProps) => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+
+  useEffect(() => () => { try { window.speechSynthesis?.cancel(); } catch {} }, []);
 
   const handleProcess = async () => {
     if (!input.trim()) { toast({ title: "Error", description: "Please enter some text.", variant: "destructive" }); return; }
@@ -107,6 +112,32 @@ const AITextTool = ({
     toast({ title: "Copied to clipboard!" });
   };
 
+  const handleSpeak = () => {
+    if (!("speechSynthesis" in window)) {
+      toast({ title: "Speech not supported", description: "Your browser does not support text-to-speech.", variant: "destructive" });
+      return;
+    }
+    if (isSpeaking) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+      return;
+    }
+    const u = new SpeechSynthesisUtterance(output);
+    if (speakLang) u.lang = speakLang;
+    const voices = window.speechSynthesis.getVoices();
+    if (speakLang) {
+      const match = voices.find(v => v.lang?.toLowerCase().startsWith(speakLang.toLowerCase()));
+      if (match) u.voice = match;
+    }
+    u.onend = () => setIsSpeaking(false);
+    u.onerror = () => setIsSpeaking(false);
+    utteranceRef.current = u;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(u);
+    setIsSpeaking(true);
+  };
+
+
   return (
     <>
       <Helmet><title>{metaTitle}</title><meta name="description" content={metaDescription} /></Helmet>
@@ -131,7 +162,16 @@ const AITextTool = ({
               </Button>
               {output && (
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between"><Label>{outputLabel}</Label><Button variant="ghost" size="sm" onClick={handleCopy}>Copy</Button></div>
+                  <div className="flex items-center justify-between gap-2">
+                    <Label>{outputLabel}</Label>
+                    <div className="flex items-center gap-1">
+                      <Button variant="ghost" size="sm" onClick={handleSpeak} title={isSpeaking ? "Stop" : "Speak"}>
+                        {isSpeaking ? <Square className="w-4 h-4 mr-1" /> : <Volume2 className="w-4 h-4 mr-1" />}
+                        {isSpeaking ? "Stop" : "Speak"}
+                      </Button>
+                      <Button variant="ghost" size="sm" onClick={handleCopy}>Copy</Button>
+                    </div>
+                  </div>
                   <div className="p-4 bg-muted/50 rounded-xl whitespace-pre-wrap text-sm text-foreground">{output}</div>
                 </div>
               )}

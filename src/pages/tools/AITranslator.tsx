@@ -104,8 +104,21 @@ const AITranslator = () => {
 
   const systemPrompt =
     sourceLang === "Auto Detect"
-      ? `You are a professional translator. Detect the source language automatically and translate the given text to ${targetLang}. Preserve the original meaning, tone, and formatting. Only output the translated text.`
-      : `You are a professional translator. Translate the given text from ${sourceLang} to ${targetLang}. Preserve the original meaning, tone, and formatting. Only output the translated text.`;
+      ? `You are a professional translator. Detect the source language automatically and translate the given text to ${targetLang}. Preserve original meaning, tone, and formatting. IMPORTANT: Output ONLY the translated text — no explanations, no language labels, no quotes, no prefixes, no notes. If the input is already in ${targetLang}, still output the same text once (never repeat it).`
+      : `You are a professional translator. Translate the given text from ${sourceLang} to ${targetLang}. Preserve original meaning, tone, and formatting. IMPORTANT: Output ONLY the translated text — no explanations, no language labels, no quotes, no prefixes, no notes. Never repeat the output.`;
+
+  const LANG_TO_BCP47: Record<string, string> = {
+    English: "en-US", Hindi: "hi-IN", Spanish: "es-ES", French: "fr-FR", German: "de-DE",
+    "Chinese (Simplified)": "zh-CN", "Chinese (Traditional)": "zh-TW", Arabic: "ar-SA",
+    Portuguese: "pt-PT", Russian: "ru-RU", Japanese: "ja-JP", Korean: "ko-KR", Italian: "it-IT",
+    Dutch: "nl-NL", Turkish: "tr-TR", Polish: "pl-PL", Swedish: "sv-SE", Danish: "da-DK",
+    Norwegian: "nb-NO", Finnish: "fi-FI", Greek: "el-GR", Hebrew: "he-IL", Thai: "th-TH",
+    Vietnamese: "vi-VN", Indonesian: "id-ID", Malay: "ms-MY", Tamil: "ta-IN", Telugu: "te-IN",
+    Bengali: "bn-IN", Marathi: "mr-IN", Gujarati: "gu-IN", Urdu: "ur-PK", Punjabi: "pa-IN",
+    Kannada: "kn-IN", Malayalam: "ml-IN", Ukrainian: "uk-UA", Czech: "cs-CZ", Romanian: "ro-RO",
+    Hungarian: "hu-HU", Filipino: "fil-PH", Tagalog: "fil-PH",
+  };
+  const speakLang = LANG_TO_BCP47[targetLang];
 
   return (
     <AITextTool
@@ -120,6 +133,7 @@ const AITranslator = () => {
       inputPlaceholder="Paste the text you want to translate..."
       outputLabel="Translation"
       actionLabel={`Translate to ${targetLang}`}
+      speakLang={speakLang}
       extraInput={
         <div className="space-y-4">
           {/* Source / Target row */}
