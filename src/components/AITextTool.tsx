@@ -24,13 +24,14 @@ interface AITextToolProps {
   actionLabel: string;
   extraInput?: React.ReactNode;
   getFullPrompt?: (text: string) => string;
+  cleanOutput?: (text: string) => string;
   speakLang?: string;
 }
 
 const AITextTool = ({
   title, description, metaTitle, metaDescription, icon: Icon, gradient,
   systemPrompt, inputLabel, inputPlaceholder, outputLabel, actionLabel,
-  extraInput, getFullPrompt, speakLang,
+  extraInput, getFullPrompt, cleanOutput, speakLang,
 }: AITextToolProps) => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
