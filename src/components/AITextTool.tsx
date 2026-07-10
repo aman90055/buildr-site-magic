@@ -24,6 +24,7 @@ interface AITextToolProps {
   actionLabel: string;
   extraInput?: React.ReactNode;
   getFullPrompt?: (text: string) => string;
+  speakLang?: string;
 }
 
 const AITextTool = ({
