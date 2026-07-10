@@ -158,6 +158,8 @@ Input: "Hello" → Output: "नमस्ते"`;
       icon={Languages}
       gradient="from-blue-500 to-cyan-600"
       systemPrompt={systemPrompt}
+      getFullPrompt={getFullPrompt}
+      cleanOutput={cleanOutput}
       inputLabel="Text to Translate"
       inputPlaceholder="Paste the text you want to translate..."
       outputLabel="Translation"
