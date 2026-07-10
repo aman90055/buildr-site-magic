@@ -30,11 +30,15 @@ interface AITextToolProps {
 const AITextTool = ({
   title, description, metaTitle, metaDescription, icon: Icon, gradient,
   systemPrompt, inputLabel, inputPlaceholder, outputLabel, actionLabel,
-  extraInput, getFullPrompt,
+  extraInput, getFullPrompt, speakLang,
 }: AITextToolProps) => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+
+  useEffect(() => () => { try { window.speechSynthesis?.cancel(); } catch {} }, []);
 
   const handleProcess = async () => {
     if (!input.trim()) { toast({ title: "Error", description: "Please enter some text.", variant: "destructive" }); return; }
