@@ -45,6 +45,8 @@ const ToolSEOSection = () => {
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
 
+      <RichToolContentSection slug={meta.slug} />
+
       <section className="border-t border-border bg-background" aria-labelledby="tool-guide-heading">
         <div className="container mx-auto max-w-4xl px-6 py-12">
           {/* Breadcrumb / contextual links */}
