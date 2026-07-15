@@ -108,6 +108,7 @@ const Premium = lazy(() => import("./pages/Premium"));
 const AdminPayments = lazy(() => import("./pages/AdminPayments"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const AdminContacts = lazy(() => import("./pages/AdminContacts"));
+const AdminPremium = lazy(() => import("./pages/AdminPremium"));
 const CategoryPage = lazy(() => import("./pages/CategoryPage"));
 const Roadmap = lazy(() => import("./pages/Roadmap"));
 const Changelog = lazy(() => import("./pages/Changelog"));
