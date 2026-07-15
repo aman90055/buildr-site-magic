@@ -125,7 +125,7 @@ const CameraCapture = ({ onCapture, disabled }: CameraCaptureProps) => {
           ) : capturedImage ? (
             <img 
               src={capturedImage} 
-              alt="Captured" 
+              alt="Live camera capture preview of document" 
               className="w-full h-full object-contain"
             />
           ) : (

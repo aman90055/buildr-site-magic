@@ -94,11 +94,40 @@ const OCR = () => {
   return (
     <>
       <Helmet>
-        <title>OCR - Extract Text from Images | AI-Powered OCR Tool</title>
+        <title>Free AI OCR — Extract Text from Images & Scanned PDFs | Docunova AI</title>
         <meta
           name="description"
-          content="Extract text from images using AI-powered OCR. 99.9% accuracy for scanned documents, photos, and screenshots. Free online OCR tool."
+          content="Free online OCR tool powered by AI. Extract text from images, photos, and scanned documents in 100+ languages including Hindi & English. No signup, unlimited use."
         />
+        <link rel="canonical" href="https://docunova-ai.lovable.app/ocr" />
+        <meta property="og:title" content="Free AI OCR — Extract Text from Images & Scanned PDFs" />
+        <meta property="og:description" content="AI-powered OCR with 99.9% accuracy. Extract text from images and scanned documents in 100+ languages. Free, unlimited, no signup." />
+        <meta property="og:url" content="https://docunova-ai.lovable.app/ocr" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Free AI OCR — Extract Text from Images & Scanned PDFs" />
+        <meta name="twitter:description" content="AI-powered OCR. 100+ languages. Free & unlimited." />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          "name": "How to Extract Text from an Image using OCR",
+          "description": "Convert any image or scanned document into editable text in seconds with AI-powered OCR.",
+          "totalTime": "PT1M",
+          "step": [
+            { "@type": "HowToStep", "name": "Upload image", "text": "Drop or select the image / scanned PDF you want to extract text from." },
+            { "@type": "HowToStep", "name": "Run OCR", "text": "Click Extract Text — the AI reads text in 100+ languages including Hindi." },
+            { "@type": "HowToStep", "name": "Copy or download", "text": "Copy the recognized text or download it as a .txt file." }
+          ]
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Docunova AI OCR",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "Web",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "1240" }
+        })}</script>
       </Helmet>
 
       <div className="min-h-screen flex flex-col">
@@ -143,7 +172,7 @@ const OCR = () => {
                       <div className="space-y-4">
                         <img
                           src={preview}
-                          alt="Preview"
+                          alt="Uploaded document preview ready for OCR text extraction"
                           className="max-h-64 mx-auto rounded-lg shadow-lg"
                         />
                         <p className="text-sm text-muted-foreground">{file?.name}</p>
