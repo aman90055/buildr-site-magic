@@ -34,7 +34,7 @@ interface AITextToolProps {
 const AITextTool = ({
   title, description, metaTitle, metaDescription, icon: Icon, gradient,
   systemPrompt, inputLabel, inputPlaceholder, outputLabel, actionLabel,
-  extraInput, getFullPrompt, cleanOutput, speakLang,
+  extraInput, getFullPrompt, cleanOutput, speakLang, sttLang,
 }: AITextToolProps) => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
