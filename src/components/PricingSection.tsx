@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Check, X, Sparkles, Crown, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Helmet } from "react-helmet-async";
+
 
 const plans = [
   {
