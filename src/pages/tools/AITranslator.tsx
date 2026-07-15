@@ -167,6 +167,7 @@ Input: "Hello" → Output: "नमस्ते"`;
       outputLabel="Translation"
       actionLabel={`Translate to ${targetLang}`}
       speakLang={speakLang}
+      sttLang={sttLang}
       extraInput={
         <div className="space-y-4">
           {/* Source / Target row */}
