@@ -9,6 +9,7 @@ import { toast } from "@/hooks/use-toast";
 import { LucideIcon, Loader2, Volume2, Square } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import AIBadge from "@/components/AIBadge";
+import VoiceInput from "@/components/VoiceInput";
 
 interface AITextToolProps {
   title: string;
@@ -26,12 +27,14 @@ interface AITextToolProps {
   getFullPrompt?: (text: string) => string;
   cleanOutput?: (text: string) => string;
   speakLang?: string;
+  /** ISO-639-1 hint for speech-to-text (e.g. "en", "hi"). Omit for auto-detect. */
+  sttLang?: string;
 }
 
 const AITextTool = ({
   title, description, metaTitle, metaDescription, icon: Icon, gradient,
   systemPrompt, inputLabel, inputPlaceholder, outputLabel, actionLabel,
-  extraInput, getFullPrompt, cleanOutput, speakLang,
+  extraInput, getFullPrompt, cleanOutput, speakLang, sttLang,
 }: AITextToolProps) => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
@@ -155,7 +158,13 @@ const AITextTool = ({
             <div className="space-y-6">
               {extraInput}
               <div className="space-y-2">
-                <Label>{inputLabel}</Label>
+                <div className="flex items-center justify-between gap-2">
+                  <Label>{inputLabel}</Label>
+                  <VoiceInput
+                    language={sttLang}
+                    onTranscript={(t) => setInput((prev) => (prev ? prev.trimEnd() + " " + t : t))}
+                  />
+                </div>
                 <Textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder={inputPlaceholder} rows={8} />
               </div>
               <Button onClick={handleProcess} disabled={isProcessing || !input.trim()} className="w-full" size="lg">
