@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Check, X, Sparkles, Crown, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Helmet } from "react-helmet-async";
+
 
 const plans = [
   {
@@ -82,26 +82,12 @@ const Cell = ({ value }: { value: string | boolean }) => {
 };
 
 const PricingSection = () => {
-  const pricingSchema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: "The Docunova AI Suite",
-    description: "100+ free PDF, AI, image & document tools. Free forever plan with paid Pro & Business tiers.",
-    offers: plans.map((p) => ({
-      "@type": "Offer",
-      name: p.name,
-      price: p.price.replace(/[^\d]/g, "") || "0",
-      priceCurrency: "INR",
-      availability: "https://schema.org/InStock",
-      description: p.tagline,
-    })),
-  };
+  // Note: Product/Offer schema removed from homepage to avoid Google Merchant
+  // listing errors (missing image/shippingDetails/hasMerchantReturnPolicy).
+  // SoftwareApplication schema in index.html covers pricing via a single Offer.
 
   return (
     <section id="pricing" className="py-20 sm:py-28 relative overflow-hidden" aria-labelledby="pricing-heading">
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify(pricingSchema)}</script>
-      </Helmet>
 
       {/* Background glow */}
       <div aria-hidden className="absolute inset-0 pointer-events-none">
