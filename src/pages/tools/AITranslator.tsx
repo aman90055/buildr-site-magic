@@ -148,6 +148,8 @@ Input: "Hello" → Output: "नमस्ते"`;
     Hungarian: "hu-HU", Filipino: "fil-PH", Tagalog: "fil-PH",
   };
   const speakLang = LANG_TO_BCP47[targetLang];
+  // ISO-639-1 hint for STT (input microphone). Auto Detect → omit.
+  const sttLang = sourceLang === "Auto Detect" ? undefined : (LANG_TO_BCP47[sourceLang] || "").split("-")[0] || undefined;
 
   return (
     <AITextTool
