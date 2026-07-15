@@ -191,6 +191,45 @@ export type Database = {
         }
         Relationships: []
       }
+      premium_audit_log: {
+        Row: {
+          action: string
+          actor_id: string | null
+          created_at: string
+          email: string | null
+          id: string
+          notes: string | null
+          plan: string | null
+          previous_plan: string | null
+          rule: string
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          notes?: string | null
+          plan?: string | null
+          previous_plan?: string | null
+          rule: string
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          notes?: string | null
+          plan?: string | null
+          previous_plan?: string | null
+          rule?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       rate_limits: {
         Row: {
           created_at: string
@@ -425,6 +464,26 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_grant_premium_by_email: {
+        Args: { _email: string; _notes?: string; _plan?: string }
+        Returns: Json
+      }
+      admin_list_premium: {
+        Args: never
+        Returns: {
+          activated_at: string
+          email: string
+          expires_at: string
+          is_active: boolean
+          plan: string
+          updated_at: string
+          user_id: string
+        }[]
+      }
+      admin_revoke_premium_by_email: {
+        Args: { _email: string; _notes?: string }
+        Returns: Json
+      }
       claim_daily_checkin: { Args: never; Returns: Json }
       has_role: {
         Args: {
@@ -433,6 +492,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      premium_plan_rank: { Args: { _plan: string }; Returns: number }
     }
     Enums: {
       app_role: "admin" | "user"
