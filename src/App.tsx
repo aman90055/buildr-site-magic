@@ -262,6 +262,7 @@ const App = () => (
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
                 <Route path="/admin/contacts" element={<AdminContacts />} />
+                <Route path="/admin/premium" element={<AdminPremium />} />
                 <Route path="/category/:slug" element={<CategoryPage />} />
                 <Route path="/roadmap" element={<Roadmap />} />
                 <Route path="/changelog" element={<Changelog />} />
