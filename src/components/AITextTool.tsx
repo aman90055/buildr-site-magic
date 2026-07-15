@@ -27,6 +27,8 @@ interface AITextToolProps {
   getFullPrompt?: (text: string) => string;
   cleanOutput?: (text: string) => string;
   speakLang?: string;
+  /** ISO-639-1 hint for speech-to-text (e.g. "en", "hi"). Omit for auto-detect. */
+  sttLang?: string;
 }
 
 const AITextTool = ({
