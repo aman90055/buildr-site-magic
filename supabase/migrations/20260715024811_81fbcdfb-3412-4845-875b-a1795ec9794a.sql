@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.grant_premium_for_owner_emails() FROM PUBLIC, anon, authenticated;
