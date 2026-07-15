@@ -4,6 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Home, ArrowRight } from "lucide-react";
 import { getToolMeta, CATEGORY_META } from "@/lib/toolRegistry";
 import RelatedTools from "@/components/RelatedTools";
+import RichToolContentSection from "@/components/RichToolContentSection";
 
 /**
  * Auto-mounted on every tool page (via Footer).
