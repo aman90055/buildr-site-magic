@@ -104,7 +104,7 @@ const ImageConverterTool = ({
             {!downloadUrl ? (
               <div className="space-y-6">
                 {preview && (
-                  <div className="flex justify-center"><img src={preview} alt="Preview" className="max-h-48 rounded-xl border border-border" /></div>
+                  <div className="flex justify-center"><img src={preview} alt="Uploaded image preview before conversion" className="max-h-48 rounded-xl border border-border" /></div>
                 )}
                 <SmartFileInput
                   onFilesAdded={handleFiles}

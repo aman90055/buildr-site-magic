@@ -98,6 +98,8 @@ const AIYouTubeTitles = lazy(() => import("./pages/tools/AIYouTubeTitles"));
 const AITweetGenerator = lazy(() => import("./pages/tools/AITweetGenerator"));
 const AIResumeAnalyzer = lazy(() => import("./pages/tools/AIResumeAnalyzer"));
 const ResumeBuilder = lazy(() => import("./pages/tools/ResumeBuilder"));
+const GuideEditPDFFree = lazy(() => import("./pages/GuideEditPDFFree"));
+const Launch = lazy(() => import("./pages/Launch"));
 const InvoiceGenerator = lazy(() => import("./pages/tools/InvoiceGenerator"));
 const CertificateMaker = lazy(() => import("./pages/tools/CertificateMaker"));
 const LetterWriter = lazy(() => import("./pages/tools/LetterWriter"));
@@ -278,6 +280,8 @@ const App = () => (
                 <Route path="/internships" element={<Internships />} />
                 <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/case-studies" element={<CaseStudies />} />
+                <Route path="/guides/how-to-edit-pdf-free" element={<GuideEditPDFFree />} />
+                <Route path="/launch" element={<Launch />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

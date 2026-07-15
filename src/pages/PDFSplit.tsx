@@ -53,6 +53,18 @@ const PDFSplit = () => {
         <meta property="og:description" content="Extract specific pages from PDF documents. Split PDFs into separate files. Fast, free, and secure." />
         <meta property="og:url" content="https://docunova-ai.lovable.app/split" />
         <meta property="og:type" content="website" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          "name": "How to Split a PDF File Online",
+          "description": "Extract or split pages from a PDF into new files in three steps.",
+          "totalTime": "PT30S",
+          "step": [
+            { "@type": "HowToStep", "name": "Upload PDF", "text": "Upload the PDF you want to split." },
+            { "@type": "HowToStep", "name": "Select pages", "text": "Choose the pages or ranges you want in the new file." },
+            { "@type": "HowToStep", "name": "Download", "text": "Download the extracted pages as a new PDF." }
+          ]
+        })}</script>
       </Helmet>
 
       <div className="min-h-screen flex flex-col">

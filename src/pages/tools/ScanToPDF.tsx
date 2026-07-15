@@ -188,6 +188,7 @@ const ScanToPDF = () => {
                           />
                           <button
                             onClick={() => handleRemoveFile(index)}
+                            aria-label={`Remove scan ${index + 1}`}
                             className="absolute top-1 right-1 w-6 h-6 bg-destructive text-destructive-foreground rounded-full text-xs opacity-0 group-hover:opacity-100 transition-opacity"
                           >
                             ×

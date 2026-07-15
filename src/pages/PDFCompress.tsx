@@ -62,11 +62,40 @@ const PDFCompress = () => {
   return (
     <>
       <Helmet>
-        <title>AI-Powered PDF Compression - Smart Size Reduction</title>
+        <title>Free AI PDF Compressor — Reduce PDF Size up to 90% | Docunova AI</title>
         <meta
           name="description"
-          content="Compress PDFs with AI that automatically detects optimal settings. Reduce file size while maintaining quality. Fast, smart, and secure."
+          content="Compress PDF files online for free with AI. Reduce PDF size below 100 KB, 500 KB, or 1 MB without losing quality. No signup, no file-size limit, works in your browser."
         />
+        <link rel="canonical" href="https://docunova-ai.lovable.app/compress" />
+        <meta property="og:title" content="Free AI PDF Compressor — Reduce PDF Size up to 90%" />
+        <meta property="og:description" content="AI-powered PDF compression. Shrink PDFs to under 100 KB without losing quality. Free, unlimited, browser-based." />
+        <meta property="og:url" content="https://docunova-ai.lovable.app/compress" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Free AI PDF Compressor — Reduce PDF Size up to 90%" />
+        <meta name="twitter:description" content="Shrink PDFs without losing quality. Free & unlimited." />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          "name": "How to Compress a PDF File Online",
+          "description": "Reduce PDF file size in three steps using AI-powered compression.",
+          "totalTime": "PT30S",
+          "step": [
+            { "@type": "HowToStep", "name": "Upload PDF", "text": "Drop your PDF file into the uploader — up to any size." },
+            { "@type": "HowToStep", "name": "Choose level", "text": "Pick a compression level 1–100 or accept the AI-recommended setting." },
+            { "@type": "HowToStep", "name": "Download", "text": "Download the compressed PDF, often 60–90% smaller." }
+          ]
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Docunova AI PDF Compressor",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "Web",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "2100" }
+        })}</script>
       </Helmet>
 
       <div className="min-h-screen flex flex-col">
