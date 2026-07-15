@@ -158,7 +158,13 @@ const AITextTool = ({
             <div className="space-y-6">
               {extraInput}
               <div className="space-y-2">
-                <Label>{inputLabel}</Label>
+                <div className="flex items-center justify-between gap-2">
+                  <Label>{inputLabel}</Label>
+                  <VoiceInput
+                    language={sttLang}
+                    onTranscript={(t) => setInput((prev) => (prev ? prev.trimEnd() + " " + t : t))}
+                  />
+                </div>
                 <Textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder={inputPlaceholder} rows={8} />
               </div>
               <Button onClick={handleProcess} disabled={isProcessing || !input.trim()} className="w-full" size="lg">
