@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,9 +10,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { ArrowLeft, Crown, RefreshCw, ShieldCheck, ShieldX } from "lucide-react";
+import { ArrowLeft, Crown, Download, RefreshCw, ShieldCheck, ShieldX } from "lucide-react";
 import { format } from "date-fns";
 
 interface PremiumRow {
@@ -37,11 +38,27 @@ interface AuditRow {
   created_at: string;
 }
 
+interface OwnerStatusRow {
+  email: string;
+  user_id: string | null;
+  plan: string | null;
+  is_active: boolean | null;
+  updated_at: string | null;
+  last_action: string | null;
+  last_action_at: string | null;
+  last_notes: string | null;
+}
+
 const actionVariant = (a: string) =>
   a === "granted" || a === "plan_changed" ? "default"
     : a === "revoked" ? "destructive"
     : a === "skipped_conflict" ? "secondary"
     : "outline";
+
+const csvEscape = (v: unknown) => {
+  const s = v === null || v === undefined ? "" : String(v);
+  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+};
 
 const AdminPremium = () => {
   const navigate = useNavigate();
@@ -49,12 +66,18 @@ const AdminPremium = () => {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [rows, setRows] = useState<PremiumRow[]>([]);
   const [audit, setAudit] = useState<AuditRow[]>([]);
+  const [owners, setOwners] = useState<OwnerStatusRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState("");
   const [plan, setPlan] = useState("lifetime");
   const [notes, setNotes] = useState("");
   const [busy, setBusy] = useState(false);
   const [filter, setFilter] = useState("");
+
+  // Export controls
+  const [exportEmail, setExportEmail] = useState("");
+  const [exportFrom, setExportFrom] = useState("");
+  const [exportTo, setExportTo] = useState("");
 
   useEffect(() => {
     if (authLoading) return;
@@ -68,12 +91,14 @@ const AdminPremium = () => {
 
   const load = async () => {
     setLoading(true);
-    const [{ data: list, error: e1 }, { data: log, error: e2 }] = await Promise.all([
+    const [{ data: list, error: e1 }, { data: log, error: e2 }, { data: own, error: e3 }] = await Promise.all([
       supabase.rpc("admin_list_premium"),
       supabase.from("premium_audit_log").select("*").order("created_at", { ascending: false }).limit(200),
+      supabase.rpc("admin_owner_status"),
     ]);
     if (e1) toast.error(e1.message); else setRows((list as any) || []);
     if (e2) toast.error(e2.message); else setAudit((log as any) || []);
+    if (e3) toast.error(e3.message); else setOwners((own as any) || []);
     setLoading(false);
   };
 
@@ -104,6 +129,36 @@ const AdminPremium = () => {
   };
 
   const filtered = rows.filter(r => !filter || r.email?.toLowerCase().includes(filter.toLowerCase()));
+
+  const exportCsv = async () => {
+    let q = supabase.from("premium_audit_log").select("*").order("created_at", { ascending: false }).limit(5000);
+    if (exportEmail.trim()) q = q.ilike("email", `%${exportEmail.trim()}%`);
+    if (exportFrom) q = q.gte("created_at", new Date(exportFrom).toISOString());
+    if (exportTo) {
+      const end = new Date(exportTo);
+      end.setHours(23, 59, 59, 999);
+      q = q.lte("created_at", end.toISOString());
+    }
+    const { data, error } = await q;
+    if (error) return toast.error(error.message);
+    const list = (data as AuditRow[]) || [];
+    if (list.length === 0) { toast.info("No events match those filters"); return; }
+    const headers = ["created_at","email","action","rule","plan","previous_plan","user_id","notes"];
+    const csv = [
+      headers.join(","),
+      ...list.map(r => headers.map(h => csvEscape((r as any)[h])).join(",")),
+    ].join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `premium_audit_${format(new Date(), "yyyyMMdd_HHmm")}.csv`;
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+    toast.success(`Exported ${list.length} events`);
+  };
+
+  const ownerRows = useMemo(() => owners, [owners]);
 
   if (authLoading || isAdmin === null) {
     return <div className="min-h-screen flex items-center justify-center">Loading…</div>;
@@ -138,6 +193,39 @@ const AdminPremium = () => {
           </div>
           <Button variant="outline" onClick={load} disabled={loading}><RefreshCw className={`h-4 w-4 mr-1 ${loading ? "animate-spin" : ""}`} />Refresh</Button>
         </div>
+
+        {/* Owner status panel */}
+        <Card>
+          <CardHeader><CardTitle>Owner Premium Status</CardTitle></CardHeader>
+          <CardContent className="grid gap-3 md:grid-cols-3">
+            {ownerRows.map(o => (
+              <Card key={o.email} className="border-yellow-500/30">
+                <CardContent className="p-4 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-sm truncate" title={o.email}>{o.email}</span>
+                    {o.is_active ? <Badge>Active</Badge> : o.user_id ? <Badge variant="secondary">Inactive</Badge> : <Badge variant="outline">Pending signup</Badge>}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    Plan: <span className="text-foreground font-medium">{o.plan || "—"}</span>
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    Updated: {o.updated_at ? format(new Date(o.updated_at), "yyyy-MM-dd HH:mm") : "—"}
+                  </div>
+                  <div className="text-xs pt-2 border-t">
+                    <div className="flex items-center gap-2">
+                      <span className="text-muted-foreground">Last event:</span>
+                      {o.last_action ? <Badge variant={actionVariant(o.last_action) as any}>{o.last_action}</Badge> : <span>—</span>}
+                    </div>
+                    {o.last_action_at && (
+                      <div className="text-muted-foreground mt-1">{format(new Date(o.last_action_at), "yyyy-MM-dd HH:mm")}</div>
+                    )}
+                    {o.last_notes && <div className="text-muted-foreground mt-1 truncate" title={o.last_notes}>{o.last_notes}</div>}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </CardContent>
+        </Card>
 
         <Card>
           <CardHeader><CardTitle>Grant Premium</CardTitle></CardHeader>
@@ -189,6 +277,26 @@ const AdminPremium = () => {
                 </TableBody>
               </Table>
             </div>
+          </CardContent>
+        </Card>
+
+        {/* Export audit log */}
+        <Card>
+          <CardHeader><CardTitle>Export Audit Log</CardTitle></CardHeader>
+          <CardContent className="grid gap-3 md:grid-cols-[1fr,180px,180px,auto] items-end">
+            <div>
+              <Label className="text-xs">Email contains</Label>
+              <Input placeholder="e.g. gmail.com" value={exportEmail} onChange={e => setExportEmail(e.target.value)} />
+            </div>
+            <div>
+              <Label className="text-xs">From</Label>
+              <Input type="date" value={exportFrom} onChange={e => setExportFrom(e.target.value)} />
+            </div>
+            <div>
+              <Label className="text-xs">To</Label>
+              <Input type="date" value={exportTo} onChange={e => setExportTo(e.target.value)} />
+            </div>
+            <Button onClick={exportCsv}><Download className="h-4 w-4 mr-1" />Export CSV</Button>
           </CardContent>
         </Card>
 
