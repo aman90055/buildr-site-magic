@@ -13,6 +13,7 @@ import FloatingBackNav from "@/components/FloatingBackNav";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ExitIntentOffer from "@/components/ExitIntentOffer";
 import CookieConsent from "@/components/CookieConsent";
+import AuthRedirect from "@/components/AuthRedirect";
 
 // Eager: LCP route + 404 (small)
 import Index from "./pages/Index";
@@ -137,6 +138,7 @@ const Internships = lazy(() => import("./pages/Internships"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const CaseStudies = lazy(() => import("./pages/CaseStudies"));
 const Tools = lazy(() => import("./pages/Tools"));
+const OAuthConsent = lazy(() => import("./pages/OAuthConsent"));
 
 const queryClient = new QueryClient();
 
@@ -155,6 +157,7 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <ScrollToTop />
+            <AuthRedirect />
             <AIChatWidget />
             <InstallPrompt />
             <ExitIntentOffer />
@@ -284,6 +287,7 @@ const App = () => (
                 <Route path="/case-studies" element={<CaseStudies />} />
                 <Route path="/guides/how-to-edit-pdf-free" element={<GuideEditPDFFree />} />
                 <Route path="/launch" element={<Launch />} />
+                <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
