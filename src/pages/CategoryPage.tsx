@@ -18,7 +18,7 @@ const CategoryPage = () => {
   const meta = CATEGORY_META[category];
   const tools = getToolsByCategory(category);
 
-  const url = `https://document-edit-in.lovable.app/category/${category}`;
+  const url = `https://docunova-ai.lovable.app/category/${category}`;
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -27,7 +27,7 @@ const CategoryPage = () => {
       "@type": "ListItem",
       position: i + 1,
       name: t.name,
-      url: `https://document-edit-in.lovable.app${t.slug}`,
+      url: `https://docunova-ai.lovable.app${t.slug}`,
     })),
   };
 

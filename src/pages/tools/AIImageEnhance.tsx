@@ -90,7 +90,7 @@ const AIImageEnhance = () => {
             {!downloadUrl ? (
               <div className="space-y-6">
                 <label className="flex flex-col items-center gap-4 p-12 border-2 border-dashed border-border rounded-xl cursor-pointer hover:border-primary/50">
-                  {preview ? <img src={preview} alt="Preview" className="max-h-48 rounded-lg" /> : <Upload className="w-10 h-10 text-muted-foreground" />}
+                  {preview ? <img src={preview} alt="Preview of the uploaded image" className="max-h-48 rounded-lg" /> : <Upload className="w-10 h-10 text-muted-foreground" />}
                   <span className="text-muted-foreground">{file ? file.name : "Select an image"}</span>
                   <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
                 </label>

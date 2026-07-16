@@ -122,7 +122,7 @@ const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Contact Us - Document Editor | Get in Touch with Aman Vishwakarma</title>
+        <title>Contact Docunova AI — Support & Feedback</title>
         <meta name="description" content="Have questions or feedback? Contact Aman Vishwakarma, the creator of Document Editor. We'd love to hear from you." />
       </Helmet>
       

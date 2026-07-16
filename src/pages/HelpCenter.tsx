@@ -64,7 +64,7 @@ const HelpCenter = () => {
       <Helmet>
         <title>Help Center — The Docunova AI Suite</title>
         <meta name="description" content="Tutorials, guides and answers to common questions about The Docunova AI Suite tools." />
-        <link rel="canonical" href="https://document-edit-in.lovable.app/help" />
+        <link rel="canonical" href="https://docunova-ai.lovable.app/help" />
       </Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />

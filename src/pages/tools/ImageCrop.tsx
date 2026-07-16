@@ -88,7 +88,7 @@ const ImageCrop = () => {
                   formats={["JPG", "PNG", "WEBP", "GIF"]}
                   title="Drop image or use camera"
                 />
-                {preview && <img src={preview} alt="Preview" className="max-h-48 mx-auto rounded-lg border border-border/50" />}
+                {preview && <img src={preview} alt="Preview of the uploaded image" className="max-h-48 mx-auto rounded-lg border border-border/50" />}
                 {file && <p className="text-xs text-muted-foreground text-center">{file.name} ({origW}×{origH})</p>}
                 {file && (
                   <div className="grid grid-cols-2 gap-4">

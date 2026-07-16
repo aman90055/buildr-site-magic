@@ -55,7 +55,7 @@ const Changelog = () => (
     <Helmet>
       <title>Changelog — The Docunova AI Suite</title>
       <meta name="description" content="Every release of The Docunova AI Suite — new tools, fixes, and improvements." />
-      <link rel="canonical" href="https://document-edit-in.lovable.app/changelog" />
+      <link rel="canonical" href="https://docunova-ai.lovable.app/changelog" />
     </Helmet>
     <div className="min-h-screen flex flex-col">
       <Header />

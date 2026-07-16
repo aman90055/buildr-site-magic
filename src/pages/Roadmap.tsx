@@ -29,7 +29,7 @@ const Roadmap = () => (
     <Helmet>
       <title>Public Roadmap — The Docunova AI Suite</title>
       <meta name="description" content="See what's shipped, in progress, and planned for The Docunova AI Suite." />
-      <link rel="canonical" href="https://document-edit-in.lovable.app/roadmap" />
+      <link rel="canonical" href="https://docunova-ai.lovable.app/roadmap" />
     </Helmet>
     <div className="min-h-screen flex flex-col">
       <Header />

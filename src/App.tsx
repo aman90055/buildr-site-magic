@@ -100,6 +100,7 @@ const AITweetGenerator = lazy(() => import("./pages/tools/AITweetGenerator"));
 const AIResumeAnalyzer = lazy(() => import("./pages/tools/AIResumeAnalyzer"));
 const ResumeBuilder = lazy(() => import("./pages/tools/ResumeBuilder"));
 const GuideEditPDFFree = lazy(() => import("./pages/GuideEditPDFFree"));
+const GuideEditPdfOnMacFree = lazy(() => import("./pages/GuideEditPdfOnMacFree"));
 const Launch = lazy(() => import("./pages/Launch"));
 const InvoiceGenerator = lazy(() => import("./pages/tools/InvoiceGenerator"));
 const CertificateMaker = lazy(() => import("./pages/tools/CertificateMaker"));
@@ -286,6 +287,7 @@ const App = () => (
                 <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/case-studies" element={<CaseStudies />} />
                 <Route path="/guides/how-to-edit-pdf-free" element={<GuideEditPDFFree />} />
+                <Route path="/guides/how-to-edit-pdf-on-mac-free" element={<GuideEditPdfOnMacFree />} />
                 <Route path="/launch" element={<Launch />} />
                 <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
