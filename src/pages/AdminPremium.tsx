@@ -282,7 +282,7 @@ const AdminPremium = () => {
               </SelectContent>
             </Select>
             <Input placeholder="Notes (optional)" value={notes} onChange={e => setNotes(e.target.value)} />
-            <Button onClick={grant} disabled={busy}><ShieldCheck className="h-4 w-4 mr-1" />Grant</Button>
+            <Button onClick={openGrantConfirm} disabled={busy}><ShieldCheck className="h-4 w-4 mr-1" />Grant</Button>
           </CardContent>
         </Card>
 
