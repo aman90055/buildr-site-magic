@@ -3,7 +3,7 @@
 // supabase function: mcp
 // Bundled from src/lib/mcp/index.ts by @lovable.dev/mcp-js.
 // src/lib/mcp/index.ts
-import { defineMcp } from "npm:@lovable.dev/mcp-js@0.22.2";
+import { auth, defineMcp } from "npm:@lovable.dev/mcp-js@0.22.2";
 
 // src/lib/mcp/tools/list-tools.ts
 import { defineTool } from "npm:@lovable.dev/mcp-js@0.22.2";
@@ -154,11 +154,16 @@ var site_info_default = defineTool3({
 });
 
 // src/lib/mcp/index.ts
+var projectRef = "nqqnwepqyogrixjdbxev";
 var mcp_default = defineMcp({
   name: "docunova-ai-mcp",
   title: "Docunova AI Suite MCP",
-  version: "0.1.0",
-  instructions: "Public tools for exploring the Docunova AI Suite \u2014 a free platform of 100+ PDF, document, image, and AI text tools. Use `list_tools` to browse available tools (optionally filtered by category or query), `get_tool_info` to look up a single tool by slug, and `site_info` for high-level facts about the site. All data returned is public.",
+  version: "0.2.0",
+  instructions: "Tools for exploring the Docunova AI Suite \u2014 a free platform of 100+ PDF, document, image, and AI text tools. Callers sign in as a Docunova AI user; only public catalog data is returned. Use `list_tools` to browse (optionally filtered by category/query), `get_tool_info` to look up a single tool by slug, and `site_info` for high-level site facts.",
+  auth: auth.oauth.issuer({
+    issuer: `https://${projectRef}.supabase.co/auth/v1`,
+    acceptedAudiences: "authenticated"
+  }),
   tools: [list_tools_default, get_tool_info_default, site_info_default]
 });
 
