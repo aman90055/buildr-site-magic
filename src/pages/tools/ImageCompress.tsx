@@ -84,7 +84,7 @@ const ImageCompress = () => {
                   title="Drop image or use camera"
                   subtitle="Click to browse, drop here, or capture live"
                 />
-                {preview && <img src={preview} alt="Preview" className="max-h-48 mx-auto rounded-lg border border-border/50" />}
+                {preview && <img src={preview} alt="Preview of the uploaded image" className="max-h-48 mx-auto rounded-lg border border-border/50" />}
                 {file && <p className="text-xs text-muted-foreground text-center">{file.name} ({fmt(file.size)})</p>}
                 {file && <div className="space-y-2"><Label>Quality: {quality}%</Label><Slider value={[quality]} onValueChange={(v) => setQuality(v[0])} min={10} max={100} step={5} /></div>}
                 <Button onClick={handleCompress} disabled={!file || isProcessing} className="w-full" size="lg">{isProcessing ? "Compressing..." : "Compress Image"}</Button>

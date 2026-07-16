@@ -84,7 +84,7 @@ const RemoveBackground = () => {
             {!downloadUrl ? (
               <div className="space-y-6">
                 {preview && (
-                  <div className="flex justify-center"><img src={preview} alt="Preview" className="max-h-48 rounded-xl border border-border" /></div>
+                  <div className="flex justify-center"><img src={preview} alt="Preview of the uploaded image" className="max-h-48 rounded-xl border border-border" /></div>
                 )}
                 <SmartFileInput
                   onFilesAdded={handleFiles}
