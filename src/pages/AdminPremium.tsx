@@ -15,6 +15,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import { ArrowLeft, Crown, Download, RefreshCw, ShieldCheck, ShieldX } from "lucide-react";
 import { format } from "date-fns";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Textarea } from "@/components/ui/textarea";
 
 interface PremiumRow {
   user_id: string;
@@ -79,6 +84,13 @@ const AdminPremium = () => {
   const [exportFrom, setExportFrom] = useState("");
   const [exportTo, setExportTo] = useState("");
 
+  // Confirmation modal state
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [confirmMode, setConfirmMode] = useState<"grant" | "revoke">("grant");
+  const [confirmEmail, setConfirmEmail] = useState("");
+  const [confirmPlan, setConfirmPlan] = useState("lifetime");
+  const [confirmReason, setConfirmReason] = useState("");
+
   useEffect(() => {
     if (authLoading) return;
     if (!user) { navigate("/auth"); return; }
@@ -104,29 +116,57 @@ const AdminPremium = () => {
 
   useEffect(() => { if (isAdmin) load(); }, [isAdmin]);
 
-  const grant = async () => {
+  const openGrantConfirm = () => {
     if (!email.trim()) { toast.error("Enter an email"); return; }
-    setBusy(true);
-    const { data, error } = await supabase.rpc("admin_grant_premium_by_email", {
-      _email: email.trim(), _plan: plan, _notes: notes || null,
-    });
-    setBusy(false);
-    if (error) return toast.error(error.message);
-    const res = data as any;
-    if (res?.success) { toast.success(`Granted ${plan} to ${email}`); setEmail(""); setNotes(""); load(); }
-    else toast.error(res?.error || "Failed");
+    setConfirmMode("grant");
+    setConfirmEmail(email.trim());
+    setConfirmPlan(plan);
+    setConfirmReason(notes || "");
+    setConfirmOpen(true);
   };
 
-  const revoke = async (targetEmail: string) => {
-    if (!confirm(`Revoke premium for ${targetEmail}?`)) return;
-    const { data, error } = await supabase.rpc("admin_revoke_premium_by_email", {
-      _email: targetEmail, _notes: "Revoked from admin panel",
-    });
-    if (error) return toast.error(error.message);
-    const res = data as any;
-    if (res?.success) { toast.success(`Revoked ${targetEmail}`); load(); }
-    else toast.error(res?.error || "Failed");
+  const openRevokeConfirm = (targetEmail: string) => {
+    setConfirmMode("revoke");
+    setConfirmEmail(targetEmail);
+    setConfirmReason("");
+    setConfirmOpen(true);
   };
+
+  const executeConfirm = async () => {
+    const reason = confirmReason.trim();
+    const notesPayload = reason
+      ? `${reason} · by admin ${user?.email || user?.id}`
+      : `No reason provided · by admin ${user?.email || user?.id}`;
+    setBusy(true);
+    try {
+      if (confirmMode === "grant") {
+        const { data, error } = await supabase.rpc("admin_grant_premium_by_email", {
+          _email: confirmEmail, _plan: confirmPlan, _notes: notesPayload,
+        });
+        if (error) throw error;
+        const res = data as any;
+        if (res?.success) {
+          toast.success(`Granted ${confirmPlan} to ${confirmEmail}`);
+          setEmail(""); setNotes("");
+        } else toast.error(res?.error || "Failed");
+      } else {
+        const { data, error } = await supabase.rpc("admin_revoke_premium_by_email", {
+          _email: confirmEmail, _notes: notesPayload,
+        });
+        if (error) throw error;
+        const res = data as any;
+        if (res?.success) toast.success(`Revoked ${confirmEmail}`);
+        else toast.error(res?.error || "Failed");
+      }
+      setConfirmOpen(false);
+      load();
+    } catch (e: any) {
+      toast.error(e.message || "Action failed");
+    } finally {
+      setBusy(false);
+    }
+  };
+
 
   const filtered = rows.filter(r => !filter || r.email?.toLowerCase().includes(filter.toLowerCase()));
 
@@ -242,7 +282,7 @@ const AdminPremium = () => {
               </SelectContent>
             </Select>
             <Input placeholder="Notes (optional)" value={notes} onChange={e => setNotes(e.target.value)} />
-            <Button onClick={grant} disabled={busy}><ShieldCheck className="h-4 w-4 mr-1" />Grant</Button>
+            <Button onClick={openGrantConfirm} disabled={busy}><ShieldCheck className="h-4 w-4 mr-1" />Grant</Button>
           </CardContent>
         </Card>
 
@@ -268,7 +308,7 @@ const AdminPremium = () => {
                       <TableCell className="text-sm">{r.expires_at ? format(new Date(r.expires_at), "yyyy-MM-dd") : "Never"}</TableCell>
                       <TableCell>
                         {r.is_active && r.email && (
-                          <Button size="sm" variant="destructive" onClick={() => revoke(r.email!)}>Revoke</Button>
+                          <Button size="sm" variant="destructive" onClick={() => openRevokeConfirm(r.email!)}>Revoke</Button>
                         )}
                       </TableCell>
                     </TableRow>
@@ -328,6 +368,42 @@ const AdminPremium = () => {
           </CardContent>
         </Card>
       </main>
+
+      <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {confirmMode === "grant" ? `Grant ${confirmPlan} premium?` : "Revoke premium?"}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              This action will be recorded in the audit log for <span className="font-mono">{confirmEmail}</span>.
+              Provide a reason for traceability (optional but recommended).
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="space-y-2">
+            <Label htmlFor="confirm-reason" className="text-xs">Reason</Label>
+            <Textarea
+              id="confirm-reason"
+              placeholder="e.g. Compensation for outage, refund, VIP onboarding…"
+              value={confirmReason}
+              onChange={(e) => setConfirmReason(e.target.value)}
+              rows={3}
+            />
+          </div>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={busy}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={(e) => { e.preventDefault(); executeConfirm(); }}
+              disabled={busy}
+              className={confirmMode === "revoke" ? "bg-destructive text-destructive-foreground hover:bg-destructive/90" : ""}
+            >
+              {busy ? "Working…" : confirmMode === "grant" ? "Confirm grant" : "Confirm revoke"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+
       <Footer />
     </div>
   );
