@@ -84,6 +84,13 @@ const AdminPremium = () => {
   const [exportFrom, setExportFrom] = useState("");
   const [exportTo, setExportTo] = useState("");
 
+  // Confirmation modal state
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [confirmMode, setConfirmMode] = useState<"grant" | "revoke">("grant");
+  const [confirmEmail, setConfirmEmail] = useState("");
+  const [confirmPlan, setConfirmPlan] = useState("lifetime");
+  const [confirmReason, setConfirmReason] = useState("");
+
   useEffect(() => {
     if (authLoading) return;
     if (!user) { navigate("/auth"); return; }
