@@ -480,6 +480,19 @@ export type Database = {
           user_id: string
         }[]
       }
+      admin_owner_status: {
+        Args: never
+        Returns: {
+          email: string
+          is_active: boolean
+          last_action: string
+          last_action_at: string
+          last_notes: string
+          plan: string
+          updated_at: string
+          user_id: string
+        }[]
+      }
       admin_revoke_premium_by_email: {
         Args: { _email: string; _notes?: string }
         Returns: Json
