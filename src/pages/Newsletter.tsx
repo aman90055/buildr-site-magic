@@ -10,7 +10,7 @@ const Newsletter = () => (
     <Helmet>
       <title>Newsletter — The Docunova AI Suite</title>
       <meta name="description" content="Get product updates, new AI tools, and pro tips delivered to your inbox. No spam." />
-      <link rel="canonical" href="https://document-edit-in.lovable.app/newsletter" />
+      <link rel="canonical" href="https://docunova-ai.lovable.app/newsletter" />
     </Helmet>
     <div className="min-h-screen flex flex-col">
       <Header />

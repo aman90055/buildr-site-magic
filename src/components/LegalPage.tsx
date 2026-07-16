@@ -23,7 +23,7 @@ interface Props {
   contactNote?: string;
 }
 
-const BASE = "https://document-edit-in.lovable.app";
+const BASE = "https://docunova-ai.lovable.app";
 
 function renderBlock(text: string, idx: number) {
   const trimmed = text.trim();
