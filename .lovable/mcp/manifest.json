@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "sdk_version": "0.22.2",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "docunova-ai-mcp",
+      "version": "0.1.0",
+      "title": "Docunova AI Suite MCP"
+    },
+    "tools": [
+      {
+        "name": "list_tools",
+        "title": "List Docunova AI tools",
+        "description": "List the free document, PDF, image, and AI tools available on Docunova AI. Optionally filter by category or search query.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "category": {
+              "description": "Filter by category.",
+              "type": "string",
+              "enum": [
+                "organize",
+                "convert",
+                "edit",
+                "ai",
+                "image",
+                "security",
+                "documents"
+              ]
+            },
+            "query": {
+              "description": "Case-insensitive substring match against tool name or slug.",
+              "type": "string"
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_tool_info",
+        "title": "Get tool info",
+        "description": "Get details about a single Docunova AI tool by its slug (e.g. \"/merge\", \"/ai-translator\").",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Tool slug starting with '/', e.g. '/merge'."
+            }
+          },
+          "required": [
+            "slug"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "site_info",
+        "title": "Docunova AI site info",
+        "description": "Get high-level public information about Docunova AI: what it is, main URL, contact, and top categories.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
