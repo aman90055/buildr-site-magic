@@ -308,7 +308,7 @@ const AdminPremium = () => {
                       <TableCell className="text-sm">{r.expires_at ? format(new Date(r.expires_at), "yyyy-MM-dd") : "Never"}</TableCell>
                       <TableCell>
                         {r.is_active && r.email && (
-                          <Button size="sm" variant="destructive" onClick={() => revoke(r.email!)}>Revoke</Button>
+                          <Button size="sm" variant="destructive" onClick={() => openRevokeConfirm(r.email!)}>Revoke</Button>
                         )}
                       </TableCell>
                     </TableRow>
