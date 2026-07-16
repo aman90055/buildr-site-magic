@@ -368,6 +368,42 @@ const AdminPremium = () => {
           </CardContent>
         </Card>
       </main>
+
+      <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {confirmMode === "grant" ? `Grant ${confirmPlan} premium?` : "Revoke premium?"}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              This action will be recorded in the audit log for <span className="font-mono">{confirmEmail}</span>.
+              Provide a reason for traceability (optional but recommended).
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="space-y-2">
+            <Label htmlFor="confirm-reason" className="text-xs">Reason</Label>
+            <Textarea
+              id="confirm-reason"
+              placeholder="e.g. Compensation for outage, refund, VIP onboarding…"
+              value={confirmReason}
+              onChange={(e) => setConfirmReason(e.target.value)}
+              rows={3}
+            />
+          </div>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={busy}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={(e) => { e.preventDefault(); executeConfirm(); }}
+              disabled={busy}
+              className={confirmMode === "revoke" ? "bg-destructive text-destructive-foreground hover:bg-destructive/90" : ""}
+            >
+              {busy ? "Working…" : confirmMode === "grant" ? "Confirm grant" : "Confirm revoke"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+
       <Footer />
     </div>
   );
