@@ -75,7 +75,7 @@ const GuideEditPdfOnMacFree = () => {
 
       <Header />
       <main className="flex-1 container mx-auto px-4 py-8 max-w-4xl">
-        <Breadcrumbs items={[{ label: "Guides", href: "/guides" }, { label: "Edit PDF on Mac (Free)" }]} />
+        <Breadcrumbs />
 
         <article className="prose prose-neutral dark:prose-invert max-w-none">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mt-4">
