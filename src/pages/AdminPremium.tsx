@@ -116,29 +116,57 @@ const AdminPremium = () => {
 
   useEffect(() => { if (isAdmin) load(); }, [isAdmin]);
 
-  const grant = async () => {
+  const openGrantConfirm = () => {
     if (!email.trim()) { toast.error("Enter an email"); return; }
-    setBusy(true);
-    const { data, error } = await supabase.rpc("admin_grant_premium_by_email", {
-      _email: email.trim(), _plan: plan, _notes: notes || null,
-    });
-    setBusy(false);
-    if (error) return toast.error(error.message);
-    const res = data as any;
-    if (res?.success) { toast.success(`Granted ${plan} to ${email}`); setEmail(""); setNotes(""); load(); }
-    else toast.error(res?.error || "Failed");
+    setConfirmMode("grant");
+    setConfirmEmail(email.trim());
+    setConfirmPlan(plan);
+    setConfirmReason(notes || "");
+    setConfirmOpen(true);
   };
 
-  const revoke = async (targetEmail: string) => {
-    if (!confirm(`Revoke premium for ${targetEmail}?`)) return;
-    const { data, error } = await supabase.rpc("admin_revoke_premium_by_email", {
-      _email: targetEmail, _notes: "Revoked from admin panel",
-    });
-    if (error) return toast.error(error.message);
-    const res = data as any;
-    if (res?.success) { toast.success(`Revoked ${targetEmail}`); load(); }
-    else toast.error(res?.error || "Failed");
+  const openRevokeConfirm = (targetEmail: string) => {
+    setConfirmMode("revoke");
+    setConfirmEmail(targetEmail);
+    setConfirmReason("");
+    setConfirmOpen(true);
   };
+
+  const executeConfirm = async () => {
+    const reason = confirmReason.trim();
+    const notesPayload = reason
+      ? `${reason} · by admin ${user?.email || user?.id}`
+      : `No reason provided · by admin ${user?.email || user?.id}`;
+    setBusy(true);
+    try {
+      if (confirmMode === "grant") {
+        const { data, error } = await supabase.rpc("admin_grant_premium_by_email", {
+          _email: confirmEmail, _plan: confirmPlan, _notes: notesPayload,
+        });
+        if (error) throw error;
+        const res = data as any;
+        if (res?.success) {
+          toast.success(`Granted ${confirmPlan} to ${confirmEmail}`);
+          setEmail(""); setNotes("");
+        } else toast.error(res?.error || "Failed");
+      } else {
+        const { data, error } = await supabase.rpc("admin_revoke_premium_by_email", {
+          _email: confirmEmail, _notes: notesPayload,
+        });
+        if (error) throw error;
+        const res = data as any;
+        if (res?.success) toast.success(`Revoked ${confirmEmail}`);
+        else toast.error(res?.error || "Failed");
+      }
+      setConfirmOpen(false);
+      load();
+    } catch (e: any) {
+      toast.error(e.message || "Action failed");
+    } finally {
+      setBusy(false);
+    }
+  };
+
 
   const filtered = rows.filter(r => !filter || r.email?.toLowerCase().includes(filter.toLowerCase()));
 
