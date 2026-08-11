@@ -92,23 +92,17 @@ const AdSlot = ({
       io.disconnect();
       el.removeEventListener("click", onClick, true);
     };
-  }, [slot]);
+  }, [slot, allowedHere]);
 
   // Global kill-switch: while AdSense review is pending, render no ad UI at all.
   if (!ADS_ENABLED) return null;
   // Owner-tunable runtime switch (Admin Dashboard → Settings).
   if (!isAdsEnabled()) return null;
 
-  // Policy: only render ads on homepage and long-form content routes.
-  // This prevents "Site Behavior: Navigation" violations where ads on tool/upload
-  // pages can be confused with action buttons / navigation.
-  if (typeof window !== "undefined") {
-    const path = window.location.pathname;
-    const allowed = ["/", "/blog", "/about", "/faq", "/privacy", "/contact"];
-    if (!allowed.some((p) => path === p || path.startsWith(p + "/"))) {
-      return null;
-    }
-  }
+  // Policy: ads only on content-rich, allow-listed routes (single source of truth
+  // in src/lib/adsRoutes.ts). Prevents ads on screens without publisher content.
+  if (!allowedHere) return null;
+
 
   const isPlaceholder =
     !slot ||
