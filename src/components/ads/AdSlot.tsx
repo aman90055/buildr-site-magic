@@ -37,6 +37,8 @@ const AdSlot = ({
 }: AdSlotProps) => {
   const adRef = useRef<HTMLModElement>(null);
   const pushed = useRef(false);
+  const { pathname } = useLocation();
+  const allowedHere = isAdRoute(pathname);
 
   const slot = config?.slot ?? adSlot ?? "";
   const format: AdFormat = config?.format ?? adFormat ?? "auto";
@@ -45,8 +47,10 @@ const AdSlot = ({
   const minH = config?.minHeight;
 
   useEffect(() => {
-    if (!ADS_ENABLED) return;
+    if (!ADS_ENABLED || !allowedHere) return;
     if (pushed.current || !slot) return;
+    // Load the AdSense script on demand — only from an allow-listed content route.
+    ensureAdsenseLoaded();
     const tryPush = (attempt = 0) => {
       try {
         if (typeof window !== "undefined" && (window as any).adsbygoogle) {
@@ -60,6 +64,7 @@ const AdSlot = ({
       }
     };
     tryPush();
+
 
     // Impression tracking — fire when slot first scrolls into view.
     const el = adRef.current;
