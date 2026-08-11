@@ -21,8 +21,11 @@
         if (c && c.ad_storage) gtag('consent', 'update', c);
       } catch(e) {}
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4830449684268109" crossorigin="anonymous"></script>
+    <!-- AdSense script is NOT loaded globally: it is injected at runtime only on
+         content-rich routes (see src/lib/adsRoutes.ts) so ads never appear on
+         screens without publisher content. -->
     <meta name="google-adsense-account" content="ca-pub-4830449684268109" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="format-detection" content="telephone=no" />

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { X } from "lucide-react";
 import AdSlot from "./AdSlot";
 import { AD_SLOTS } from "@/lib/adSlots";
+import { isAdRoute } from "@/lib/adsRoutes";
 
 /**
  * Mobile sticky bottom ad — high-revenue placement.
@@ -10,6 +12,7 @@ import { AD_SLOTS } from "@/lib/adSlots";
 const StickyAd = () => {
   const [visible, setVisible] = useState(false);
   const [closed, setClosed] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const dismissed = sessionStorage.getItem("sticky-ad-closed");
@@ -18,12 +21,9 @@ const StickyAd = () => {
     return () => clearTimeout(t);
   }, []);
 
-  // Hide on upload/tool pages where it could be confused with action buttons.
-  // Only show on long-form/content routes.
-  const path = typeof window !== "undefined" ? window.location.pathname : "/";
-  const allowedPrefixes = ["/blog", "/about", "/faq", "/privacy", "/contact"];
-  const onAllowed = path === "/" || allowedPrefixes.some((p) => path.startsWith(p));
-  if (!onAllowed) return null;
+  // Only show on long-form/content routes (shared policy with AdSlot).
+  if (!isAdRoute(pathname)) return null;
+
 
   if (!visible || closed || !AD_SLOTS.sticky?.slot) return null;
 

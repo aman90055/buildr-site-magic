@@ -1,7 +1,10 @@
 import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { ADSENSE_CLIENT, ADS_ENABLED, type AdSlotConfig, type AdFormat } from "@/lib/adSlots";
+import { isAdRoute, ensureAdsenseLoaded } from "@/lib/adsRoutes";
 import { isAdsEnabled } from "@/lib/siteSettings";
 import { trackAdEvent } from "@/lib/adAnalytics";
+
 
 interface AdSlotProps {
   /** Either pass a full config object (preferred) or just a slot id + format */
@@ -34,6 +37,8 @@ const AdSlot = ({
 }: AdSlotProps) => {
   const adRef = useRef<HTMLModElement>(null);
   const pushed = useRef(false);
+  const { pathname } = useLocation();
+  const allowedHere = isAdRoute(pathname);
 
   const slot = config?.slot ?? adSlot ?? "";
   const format: AdFormat = config?.format ?? adFormat ?? "auto";
@@ -42,8 +47,10 @@ const AdSlot = ({
   const minH = config?.minHeight;
 
   useEffect(() => {
-    if (!ADS_ENABLED) return;
+    if (!ADS_ENABLED || !allowedHere) return;
     if (pushed.current || !slot) return;
+    // Load the AdSense script on demand — only from an allow-listed content route.
+    ensureAdsenseLoaded();
     const tryPush = (attempt = 0) => {
       try {
         if (typeof window !== "undefined" && (window as any).adsbygoogle) {
@@ -57,6 +64,7 @@ const AdSlot = ({
       }
     };
     tryPush();
+
 
     // Impression tracking — fire when slot first scrolls into view.
     const el = adRef.current;
@@ -84,23 +92,17 @@ const AdSlot = ({
       io.disconnect();
       el.removeEventListener("click", onClick, true);
     };
-  }, [slot]);
+  }, [slot, allowedHere]);
 
   // Global kill-switch: while AdSense review is pending, render no ad UI at all.
   if (!ADS_ENABLED) return null;
   // Owner-tunable runtime switch (Admin Dashboard → Settings).
   if (!isAdsEnabled()) return null;
 
-  // Policy: only render ads on homepage and long-form content routes.
-  // This prevents "Site Behavior: Navigation" violations where ads on tool/upload
-  // pages can be confused with action buttons / navigation.
-  if (typeof window !== "undefined") {
-    const path = window.location.pathname;
-    const allowed = ["/", "/blog", "/about", "/faq", "/privacy", "/contact"];
-    if (!allowed.some((p) => path === p || path.startsWith(p + "/"))) {
-      return null;
-    }
-  }
+  // Policy: ads only on content-rich, allow-listed routes (single source of truth
+  // in src/lib/adsRoutes.ts). Prevents ads on screens without publisher content.
+  if (!allowedHere) return null;
+
 
   const isPlaceholder =
     !slot ||
