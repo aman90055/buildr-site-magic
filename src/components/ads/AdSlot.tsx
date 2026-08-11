@@ -1,7 +1,10 @@
 import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { ADSENSE_CLIENT, ADS_ENABLED, type AdSlotConfig, type AdFormat } from "@/lib/adSlots";
+import { isAdRoute, ensureAdsenseLoaded } from "@/lib/adsRoutes";
 import { isAdsEnabled } from "@/lib/siteSettings";
 import { trackAdEvent } from "@/lib/adAnalytics";
+
 
 interface AdSlotProps {
   /** Either pass a full config object (preferred) or just a slot id + format */
