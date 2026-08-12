@@ -49,8 +49,10 @@ const Index = () => {
           <HomeSections />
           <TestimonialsCarousel />
           <HomeContent />
+          <AdSlot config={AD_SLOTS.midContent} className="max-w-5xl mx-auto px-4 py-6" />
           <Stats />
           <AdSlot config={AD_SLOTS.footer} className="max-w-5xl mx-auto px-4 py-6" />
+
           <CTA />
         </main>
         <Footer />

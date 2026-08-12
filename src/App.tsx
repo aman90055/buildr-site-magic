@@ -13,6 +13,8 @@ import FloatingBackNav from "@/components/FloatingBackNav";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ExitIntentOffer from "@/components/ExitIntentOffer";
 import CookieConsent from "@/components/CookieConsent";
+import AdDebugPanel from "@/components/ads/AdDebugPanel";
+
 import AuthRedirect from "@/components/AuthRedirect";
 
 // Eager: LCP route + 404 (small)
@@ -163,6 +165,8 @@ const App = () => (
             <InstallPrompt />
             <ExitIntentOffer />
             <CookieConsent />
+            <AdDebugPanel />
+
             <FloatingBackNav />
             <Breadcrumbs />
 

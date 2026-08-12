@@ -2,16 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Cookie, X } from "lucide-react";
+import { CONSENT_STORAGE_KEY, notifyConsentChange, type StoredConsent } from "@/lib/adConsent";
 
-const STORAGE_KEY = "cookie-consent";
+const STORAGE_KEY = CONSENT_STORAGE_KEY;
 
-type ConsentState = {
-  ad_storage: "granted" | "denied";
-  ad_user_data: "granted" | "denied";
-  ad_personalization: "granted" | "denied";
-  analytics_storage: "granted" | "denied";
-  timestamp: number;
-};
+type ConsentState = StoredConsent;
 
 // gtag is declared globally by other analytics modules; call defensively.
 type GtagLike = (...args: unknown[]) => void;
@@ -28,7 +23,10 @@ function saveConsent(state: Omit<ConsentState, "timestamp">) {
     /* ignore */
   }
   callGtag("consent", "update", state);
+  // Let the ad gate (AdSlot / StickyAd / script loader) react immediately.
+  notifyConsentChange();
 }
+
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);

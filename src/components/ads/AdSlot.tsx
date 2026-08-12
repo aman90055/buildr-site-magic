@@ -1,9 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ADSENSE_CLIENT, ADS_ENABLED, type AdSlotConfig, type AdFormat } from "@/lib/adSlots";
 import { isAdRoute, ensureAdsenseLoaded } from "@/lib/adsRoutes";
 import { isAdsEnabled } from "@/lib/siteSettings";
 import { trackAdEvent } from "@/lib/adAnalytics";
+import { hasMarketingConsent, onConsentChange } from "@/lib/adConsent";
+import { logAdPolicy } from "@/lib/adPolicyLog";
+
 
 
 interface AdSlotProps {
@@ -39,6 +42,7 @@ const AdSlot = ({
   const pushed = useRef(false);
   const { pathname } = useLocation();
   const allowedHere = isAdRoute(pathname);
+  const [consented, setConsented] = useState<boolean>(() => hasMarketingConsent());
 
   const slot = config?.slot ?? adSlot ?? "";
   const format: AdFormat = config?.format ?? adFormat ?? "auto";
@@ -46,11 +50,26 @@ const AdSlot = ({
   const fwr = config?.fullWidthResponsive ?? fullWidthResponsive;
   const minH = config?.minHeight;
 
+  // React to consent granted/revoked without a reload.
+  useEffect(() => onConsentChange(() => setConsented(hasMarketingConsent())), []);
+
   useEffect(() => {
-    if (!ADS_ENABLED || !allowedHere) return;
+    if (!ADS_ENABLED) {
+      logAdPolicy("skipped_ads_disabled", { route: pathname, slot, reason: "ADS_ENABLED=false" });
+      return;
+    }
+    if (!allowedHere) {
+      logAdPolicy("unit_suppressed", { route: pathname, slot, reason: "route not allow-listed" });
+      return;
+    }
+    if (!consented) {
+      logAdPolicy("unit_suppressed", { route: pathname, slot, reason: "no marketing consent" });
+      return;
+    }
     if (pushed.current || !slot) return;
-    // Load the AdSense script on demand — only from an allow-listed content route.
-    ensureAdsenseLoaded();
+    // Load the AdSense script on demand — allow-listed route + consent only.
+    if (!ensureAdsenseLoaded(pathname)) return;
+    logAdPolicy("unit_rendered", { route: pathname, slot });
     const tryPush = (attempt = 0) => {
       try {
         if (typeof window !== "undefined" && (window as any).adsbygoogle) {
@@ -92,7 +111,7 @@ const AdSlot = ({
       io.disconnect();
       el.removeEventListener("click", onClick, true);
     };
-  }, [slot, allowedHere]);
+  }, [slot, allowedHere, consented, pathname]);
 
   // Global kill-switch: while AdSense review is pending, render no ad UI at all.
   if (!ADS_ENABLED) return null;
@@ -102,6 +121,10 @@ const AdSlot = ({
   // Policy: ads only on content-rich, allow-listed routes (single source of truth
   // in src/lib/adsRoutes.ts). Prevents ads on screens without publisher content.
   if (!allowedHere) return null;
+
+  // Consent gate: nothing ad-related renders until marketing consent is granted.
+  if (!consented) return null;
+
 
 
   const isPlaceholder =
