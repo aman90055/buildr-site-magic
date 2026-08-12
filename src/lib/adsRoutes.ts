@@ -11,6 +11,8 @@
  */
 
 import { ADSENSE_CLIENT } from "./adSlots";
+import { hasMarketingConsent } from "./adConsent";
+import { logAdPolicy } from "./adPolicyLog";
 
 /** Routes with substantial, original publisher content. */
 export const AD_ALLOWED_ROUTES = [
@@ -44,14 +46,38 @@ export const isAdRoute = (pathname: string): boolean => {
 
 const SCRIPT_ID = "adsbygoogle-js";
 
-/** Injects the AdSense script once, only when called from an allow-listed route. */
-export const ensureAdsenseLoaded = (): void => {
-  if (typeof document === "undefined") return;
-  if (document.getElementById(SCRIPT_ID)) return;
+export const isAdsenseScriptLoaded = (): boolean =>
+  typeof document !== "undefined" && !!document.getElementById(SCRIPT_ID);
+
+/**
+ * Injects the AdSense script once — only from an allow-listed route AND only
+ * after the visitor granted marketing consent. Returns true when the script
+ * is present after the call.
+ */
+export const ensureAdsenseLoaded = (pathname?: string): boolean => {
+  if (typeof document === "undefined") return false;
+  const route = pathname ?? window.location.pathname;
+
+  if (!isAdRoute(route)) {
+    logAdPolicy("skipped_route_blocked", { route, reason: "route not allow-listed" });
+    return false;
+  }
+  if (!hasMarketingConsent()) {
+    logAdPolicy("skipped_no_consent", { route, reason: "marketing consent not granted" });
+    return false;
+  }
+  if (isAdsenseScriptLoaded()) {
+    logAdPolicy("script_already_loaded", { route });
+    return true;
+  }
+
   const s = document.createElement("script");
   s.id = SCRIPT_ID;
   s.async = true;
   s.crossOrigin = "anonymous";
   s.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`;
   document.head.appendChild(s);
+  logAdPolicy("script_injected", { route });
+  return true;
 };
+
