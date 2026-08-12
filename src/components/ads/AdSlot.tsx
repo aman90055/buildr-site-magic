@@ -1,9 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ADSENSE_CLIENT, ADS_ENABLED, type AdSlotConfig, type AdFormat } from "@/lib/adSlots";
 import { isAdRoute, ensureAdsenseLoaded } from "@/lib/adsRoutes";
 import { isAdsEnabled } from "@/lib/siteSettings";
 import { trackAdEvent } from "@/lib/adAnalytics";
+import { hasMarketingConsent, onConsentChange } from "@/lib/adConsent";
+import { logAdPolicy } from "@/lib/adPolicyLog";
+
 
 
 interface AdSlotProps {
