@@ -4,15 +4,20 @@ import { X } from "lucide-react";
 import AdSlot from "./AdSlot";
 import { AD_SLOTS } from "@/lib/adSlots";
 import { isAdRoute } from "@/lib/adsRoutes";
+import { hasMarketingConsent, onConsentChange } from "@/lib/adConsent";
 
 /**
  * Mobile sticky bottom ad — high-revenue placement.
- * Closeable, hides on tool result/upload screens, hides on desktop.
+ * Closeable, hides on tool result/upload screens, hides on desktop,
+ * and stays hidden until marketing consent is granted.
  */
 const StickyAd = () => {
   const [visible, setVisible] = useState(false);
   const [closed, setClosed] = useState(false);
+  const [consented, setConsented] = useState<boolean>(() => hasMarketingConsent());
   const { pathname } = useLocation();
+
+  useEffect(() => onConsentChange(() => setConsented(hasMarketingConsent())), []);
 
   useEffect(() => {
     const dismissed = sessionStorage.getItem("sticky-ad-closed");
@@ -24,8 +29,10 @@ const StickyAd = () => {
   // Only show on long-form/content routes (shared policy with AdSlot).
   if (!isAdRoute(pathname)) return null;
 
+  if (!consented) return null;
 
   if (!visible || closed || !AD_SLOTS.sticky?.slot) return null;
+
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-background/95 backdrop-blur border-t border-border shadow-lg">
