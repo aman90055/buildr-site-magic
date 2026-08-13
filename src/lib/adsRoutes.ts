@@ -13,6 +13,10 @@
 import { ADSENSE_CLIENT } from "./adSlots";
 import { hasMarketingConsent } from "./adConsent";
 import { logAdPolicy } from "./adPolicyLog";
+import { getRichContent } from "./richToolContent";
+
+const hasRichContent = (pathname: string): boolean => !!getRichContent(pathname);
+
 
 /** Routes with substantial, original publisher content. */
 export const AD_ALLOWED_ROUTES = [
@@ -41,8 +45,11 @@ export const isAdRoute = (pathname: string): boolean => {
   if (AD_BLOCKED_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/"))) {
     return false;
   }
+  // Tool pages that ship a full long-form guide count as content-rich.
+  if (hasRichContent(pathname)) return true;
   return AD_ALLOWED_ROUTES.some((p) => pathname === p || pathname.startsWith(p === "/" ? "//" : p + "/"));
 };
+
 
 const SCRIPT_ID = "adsbygoogle-js";
 
