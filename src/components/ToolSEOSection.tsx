@@ -2,9 +2,11 @@ import { useLocation, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Home, ArrowRight } from "lucide-react";
-import { getToolMeta, CATEGORY_META } from "@/lib/toolRegistry";
+import { getToolMeta, CATEGORY_META, type ToolMeta } from "@/lib/toolRegistry";
+import { getRichContent } from "@/lib/richToolContent";
 import RelatedTools from "@/components/RelatedTools";
 import RichToolContentSection from "@/components/RichToolContentSection";
+
 
 /**
  * Auto-mounted on every tool page (via Footer).
