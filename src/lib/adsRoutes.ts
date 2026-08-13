@@ -47,7 +47,9 @@ export const isAdRoute = (pathname: string): boolean => {
 const SCRIPT_ID = "adsbygoogle-js";
 
 export const isAdsenseScriptLoaded = (): boolean =>
-  typeof document !== "undefined" && !!document.getElementById(SCRIPT_ID);
+  typeof document !== "undefined" &&
+  (!!document.getElementById(SCRIPT_ID) ||
+    !!document.querySelector('script[src*="adsbygoogle.js"]'));
 
 /**
  * Injects the AdSense script once — only from an allow-listed route AND only
