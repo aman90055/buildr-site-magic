@@ -14,8 +14,26 @@ import RichToolContentSection from "@/components/RichToolContentSection";
  */
 const ToolSEOSection = () => {
   const { pathname } = useLocation();
-  const meta = getToolMeta(pathname);
+  const registryMeta = getToolMeta(pathname);
+  const rich = getRichContent(pathname);
+
+  // Fall back to the long-form content library for tools that are not in the
+  // hand-written registry, so every tool page ships substantial publisher content.
+  const meta: ToolMeta | null =
+    registryMeta ??
+    (rich
+      ? {
+          slug: pathname,
+          name: rich.name,
+          category: (rich.category as ToolMeta["category"]) ?? "documents",
+          short: rich.whatIsIt?.split(". ")[0] ?? rich.name,
+          guide: [rich.whatIsIt, rich.whyUse].filter(Boolean).join("\n\n"),
+          faqs: (rich.faqs ?? []).slice(0, 6),
+        }
+      : null);
+
   if (!meta) return null;
+
 
   const category = CATEGORY_META[meta.category];
   const categoryPath = `/category/${meta.category}`;
