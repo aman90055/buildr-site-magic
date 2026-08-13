@@ -13,6 +13,10 @@
 import { ADSENSE_CLIENT } from "./adSlots";
 import { hasMarketingConsent } from "./adConsent";
 import { logAdPolicy } from "./adPolicyLog";
+import { getRichContent } from "./richToolContent";
+
+const hasRichContent = (pathname: string): boolean => !!getRichContent(pathname);
+
 
 /** Routes with substantial, original publisher content. */
 export const AD_ALLOWED_ROUTES = [
