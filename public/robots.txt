@@ -46,6 +46,6 @@ Disallow: /auth
 Disallow: /dashboard
 Disallow: /reset-password
 
-Sitemap: https://docunova-ai.lovable.app/sitemap.xml
+Sitemap: https://docunova.online/sitemap.xml
 
-Host: https://docunova-ai.lovable.app
+Host: https://docunova.online
