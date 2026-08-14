@@ -89,10 +89,10 @@ const MobileNav = () => {
               <div className="w-8 h-8 rounded-xl bg-gradient-ai flex items-center justify-center">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
-              <span>PDF Tools</span>
+              <span>Docunova</span>
             </Link>
             <SheetClose asChild>
-              <Button variant="ghost" size="icon" className="rounded-xl">
+              <Button variant="ghost" size="icon" className="rounded-xl" aria-label="Close menu">
                 <X className="h-5 w-5" />
               </Button>
             </SheetClose>
