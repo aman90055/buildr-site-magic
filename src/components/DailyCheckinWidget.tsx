@@ -38,7 +38,10 @@ const DailyCheckinWidget = () => {
             <div className="flex justify-between gap-1">
               {days.map(d => (
                 <div key={d.iso} className="flex flex-col items-center gap-1 flex-1">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition ${
+                  <div
+                    role="img"
+                    aria-label={`${new Date(d.iso).toLocaleDateString(undefined, { weekday: "long", month: "short", day: "numeric" })}${d.isToday ? " (today)" : ""}: ${d.done ? "checked in" : "not checked in"}`}
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition ${
                     d.done
                       ? "bg-gradient-to-br from-orange-500 to-pink-500 text-white"
                       : d.isToday

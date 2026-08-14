@@ -13,7 +13,7 @@ interface SocialMetaProps {
   jsonLd?: Record<string, unknown>;
 }
 
-const SITE = "https://docunova-ai.lovable.app";
+const SITE = "https://docunova.online";
 const DEFAULT_IMAGE =
   "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/4c64cb5b-c214-4257-8942-2a2d3a959348";
 

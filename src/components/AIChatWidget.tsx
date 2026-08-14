@@ -43,6 +43,7 @@ const AIChatWidget = () => {
         <Button
           className="fixed bottom-6 right-6 h-14 w-14 rounded-2xl shadow-ai z-50 bg-gradient-ai hover:opacity-90 transition-opacity pulse-glow"
           size="icon"
+          aria-label="Open AI Assistant"
         >
           <Star className="h-6 w-6" />
         </Button>

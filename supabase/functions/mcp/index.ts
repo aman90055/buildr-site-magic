@@ -8,7 +8,7 @@ import { auth, defineMcp } from "npm:@lovable.dev/mcp-js@0.22.2";
 // src/lib/mcp/tools/list-tools.ts
 import { defineTool } from "npm:@lovable.dev/mcp-js@0.22.2";
 import { z } from "npm:zod@^4.4.3";
-var SITE = "https://docunova-ai.lovable.app";
+var SITE = "https://docunova.online";
 var CATEGORIES = ["organize", "convert", "edit", "ai", "image", "security", "documents"];
 var TOOLS = [
   { slug: "/merge", name: "Merge PDF", category: "organize" },

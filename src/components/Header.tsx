@@ -105,18 +105,18 @@ const Header = () => {
               {/* Logo — links to home */}
               <Link
               to="/"
-              aria-label="DocEdit — Go to homepage"
+              aria-label="Docunova — Go to homepage"
               className="flex items-center gap-2 sm:gap-2.5 text-lg sm:text-xl font-display font-bold text-foreground shrink-0"
             >
               <img
                 src={logo}
-                alt="DocEdit logo — free online PDF and document editing platform"
+                alt="Docunova logo — free online PDF and document editing platform"
                 width={36}
                 height={36}
                 className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl object-contain"
                 decoding="async"
               />
-              <span className="hidden xs:inline sm:inline">DocEdit</span>
+              <span className="hidden xs:inline sm:inline">Docunova</span>
             </Link>
             </div>
           

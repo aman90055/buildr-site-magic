@@ -56,10 +56,10 @@ const PDFMerge = () => {
           name="description"
           content="Combine multiple PDF files into one document. Fast, free, and secure PDF merger tool. No registration required."
         />
-        <link rel="canonical" href="https://docunova-ai.lovable.app/merge" />
+        <link rel="canonical" href="https://docunova.online/merge" />
         <meta property="og:title" content="Merge PDF Files Online - Free PDF Merger Tool" />
         <meta property="og:description" content="Combine multiple PDF files into one document. Fast, free, and secure PDF merger tool." />
-        <meta property="og:url" content="https://docunova-ai.lovable.app/merge" />
+        <meta property="og:url" content="https://docunova.online/merge" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "HowTo",
