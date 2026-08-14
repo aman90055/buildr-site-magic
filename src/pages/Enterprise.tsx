@@ -21,7 +21,7 @@ export default function Enterprise() {
       <Helmet>
         <title>Enterprise — The Docunova AI Suite for Teams</title>
         <meta name="description" content="SSO, team management, audit logs, and compliance for teams using The Docunova AI Suite." />
-        <link rel="canonical" href="https://docunova-ai.lovable.app/enterprise" />
+        <link rel="canonical" href="https://docunova.online/enterprise" />
       </Helmet>
       <Header />
       <main className="container mx-auto px-4 py-16 max-w-6xl">

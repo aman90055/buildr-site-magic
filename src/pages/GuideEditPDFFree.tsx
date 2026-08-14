@@ -27,7 +27,7 @@ import {
  * Long-form (~2000 words), HowTo + FAQ + BreadcrumbList schema.
  */
 
-const url = "https://docunova-ai.lovable.app/guides/how-to-edit-pdf-free";
+const url = "https://docunova.online/guides/how-to-edit-pdf-free";
 
 const faqs = [
   {
@@ -105,8 +105,8 @@ const GuideEditPDFFree = () => {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://docunova-ai.lovable.app/" },
-            { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://docunova-ai.lovable.app/guides" },
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://docunova.online/" },
+            { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://docunova.online/guides" },
             { "@type": "ListItem", "position": 3, "name": "Edit PDF for Free", "item": url }
           ]
         })}</script>

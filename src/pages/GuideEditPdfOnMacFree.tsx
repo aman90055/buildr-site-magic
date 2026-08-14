@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 
-const CANONICAL = "https://docunova-ai.lovable.app/guides/how-to-edit-pdf-on-mac-free";
+const CANONICAL = "https://docunova.online/guides/how-to-edit-pdf-on-mac-free";
 
 const GuideEditPdfOnMacFree = () => {
   const jsonLd = {

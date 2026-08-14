@@ -1088,13 +1088,13 @@ const BlogPost = () => {
     "publisher": {
       "@type": "Organization",
       "name": "PDF Tools",
-      "url": "https://docunova-ai.lovable.app"
+      "url": "https://docunova.online"
     },
     "datePublished": post.date,
-    "mainEntityOfPage": `https://docunova-ai.lovable.app/blog/${slug}`
+    "mainEntityOfPage": `https://docunova.online/blog/${slug}`
   };
 
-  const shareUrl = `https://docunova-ai.lovable.app/blog/${slug}`;
+  const shareUrl = `https://docunova.online/blog/${slug}`;
   const encodedUrl = encodeURIComponent(shareUrl);
   const encodedTitle = encodeURIComponent(post.title);
 
@@ -1103,7 +1103,7 @@ const BlogPost = () => {
       <Helmet>
         <title>{`${post.title.slice(0, 44)}${post.title.length > 44 ? "…" : ""} · Docunova AI`}</title>
         <meta name="description" content={post.excerpt} />
-        <link rel="canonical" href={`https://docunova-ai.lovable.app/blog/${slug}`} />
+        <link rel="canonical" href={`https://docunova.online/blog/${slug}`} />
         <meta property="og:type" content="article" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />

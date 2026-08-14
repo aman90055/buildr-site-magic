@@ -52,9 +52,9 @@ const ToolSEOSection = () => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://docunova-ai.lovable.app/" },
-      { "@type": "ListItem", position: 2, name: category.title, item: `https://docunova-ai.lovable.app${categoryPath}` },
-      { "@type": "ListItem", position: 3, name: meta.name, item: `https://docunova-ai.lovable.app${meta.slug}` },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://docunova.online/" },
+      { "@type": "ListItem", position: 2, name: category.title, item: `https://docunova.online${categoryPath}` },
+      { "@type": "ListItem", position: 3, name: meta.name, item: `https://docunova.online${meta.slug}` },
     ],
   };
 
