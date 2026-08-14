@@ -211,7 +211,7 @@ const Launch = () => {
                 </Button>
                 <Button asChild variant="outline">
                   <a
-                    href="https://www.reddit.com/submit?url=https%3A%2F%2Fdocunova-ai.lovable.app&title=Docunova%20AI%20%E2%80%94%20100%2B%20free%20AI%20document%20tools%2C%20no%20signup"
+                    href="https://www.reddit.com/submit?url=https%3A%2F%2Fdocunova.online&title=Docunova%20AI%20%E2%80%94%20100%2B%20free%20AI%20document%20tools%2C%20no%20signup"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
