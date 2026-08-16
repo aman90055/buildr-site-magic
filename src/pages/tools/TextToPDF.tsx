@@ -70,7 +70,26 @@ const TextToPDF = () => {
 
   return (
     <>
-      <Helmet><title>Text to PDF Converter | PDF Tools</title><meta name="description" content="Convert plain text to formatted PDF documents." /></Helmet>
+      <Helmet><title>Text to PDF Converter | PDF Tools</title><meta name="description" content="Convert plain text to formatted PDF documents." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Text to PDF Converter | PDF Tools" />
+        <meta property="og:description" content="Convert plain text to formatted PDF documents." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Text to PDF Converter | PDF Tools" />
+        <meta name="twitter:description" content="Convert plain text to formatted PDF documents." />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org", "@type": "HowTo",
+          name: "Text to PDF Converter | PDF Tools", description: "Convert plain text to formatted PDF documents.",
+          totalTime: "PT1M",
+          step: [
+            { "@type": "HowToStep", position: 1, name: "Add your file", text: "Select or drag your file into the tool. Everything is processed in your browser, so nothing is uploaded." },
+            { "@type": "HowToStep", position: 2, name: "Choose your options", text: "Adjust the available settings for your output, then start the conversion." },
+            { "@type": "HowToStep", position: 3, name: "Download the result", text: "Save the finished file to your device. It is free with no file size limit." },
+          ],
+        })}</script></Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1 pt-24 pb-16">

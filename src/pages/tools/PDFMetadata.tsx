@@ -54,7 +54,16 @@ const PDFMetadata = () => {
 
   return (
     <>
-      <Helmet><title>Edit PDF Metadata | PDF Tools</title><meta name="description" content="View and edit PDF metadata." /></Helmet>
+      <Helmet><title>Edit PDF Metadata | PDF Tools</title><meta name="description" content="View and edit PDF metadata." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Edit PDF Metadata | PDF Tools" />
+        <meta property="og:description" content="View and edit PDF metadata." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Edit PDF Metadata | PDF Tools" />
+        <meta name="twitter:description" content="View and edit PDF metadata." /></Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1 pt-24 pb-16">

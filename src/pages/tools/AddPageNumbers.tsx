@@ -46,6 +46,15 @@ const AddPageNumbers = () => {
       <Helmet>
         <title>Add Page Numbers to PDF - Number PDF Pages Online</title>
         <meta name="description" content="Add page numbers to your PDF documents online. Free PDF page numbering tool." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Add Page Numbers to PDF - Number PDF Pages Online" />
+        <meta property="og:description" content="Add page numbers to your PDF documents online. Free PDF page numbering tool." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Add Page Numbers to PDF - Number PDF Pages Online" />
+        <meta name="twitter:description" content="Add page numbers to your PDF documents online. Free PDF page numbering tool." />
       </Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />

@@ -51,7 +51,16 @@ const FlattenPDF = () => {
 
   return (
     <>
-      <Helmet><title>Flatten PDF | PDF Tools</title><meta name="description" content="Flatten PDF to remove interactive form fields." /></Helmet>
+      <Helmet><title>Flatten PDF | PDF Tools</title><meta name="description" content="Flatten PDF to remove interactive form fields." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Flatten PDF | PDF Tools" />
+        <meta property="og:description" content="Flatten PDF to remove interactive form fields." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Flatten PDF | PDF Tools" />
+        <meta name="twitter:description" content="Flatten PDF to remove interactive form fields." /></Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1 pt-24 pb-16">

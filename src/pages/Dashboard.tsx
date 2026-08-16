@@ -165,6 +165,15 @@ const Dashboard = () => {
       <Helmet>
         <title>Dashboard | The Docunova AI Suite</title>
         <meta name="description" content="View your PDF processing history, manage favorites, API keys, notifications, and account settings." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Dashboard | The Docunova AI Suite" />
+        <meta property="og:description" content="View your PDF processing history, manage favorites, API keys, notifications, and account settings." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Dashboard | The Docunova AI Suite" />
+        <meta name="twitter:description" content="View your PDF processing history, manage favorites, API keys, notifications, and account settings." />
       </Helmet>
 
       <div className="min-h-screen flex flex-col bg-background">

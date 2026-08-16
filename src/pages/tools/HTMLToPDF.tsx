@@ -126,6 +126,25 @@ const HTMLToPDF = () => {
       <Helmet>
         <title>HTML to PDF - Convert Web Pages to PDF Online</title>
         <meta name="description" content="Convert HTML content to professional PDF documents. Free online HTML to PDF." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="My Page" />
+        <meta property="og:description" content="Convert HTML content to professional PDF documents. Free online HTML to PDF." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="My Page" />
+        <meta name="twitter:description" content="Convert HTML content to professional PDF documents. Free online HTML to PDF." />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org", "@type": "HowTo",
+          name: "My Page", description: "Convert HTML content to professional PDF documents. Free online HTML to PDF.",
+          totalTime: "PT1M",
+          step: [
+            { "@type": "HowToStep", position: 1, name: "Add your file", text: "Select or drag your file into the tool. Everything is processed in your browser, so nothing is uploaded." },
+            { "@type": "HowToStep", position: 2, name: "Choose your options", text: "Adjust the available settings for your output, then start the conversion." },
+            { "@type": "HowToStep", position: 3, name: "Download the result", text: "Save the finished file to your device. It is free with no file size limit." },
+          ],
+        })}</script>
       </Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />

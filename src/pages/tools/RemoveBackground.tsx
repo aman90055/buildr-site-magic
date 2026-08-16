@@ -71,7 +71,16 @@ const RemoveBackground = () => {
 
   return (
     <>
-      <Helmet><title>Remove Image Background | PDF Tools</title><meta name="description" content="Remove background from images instantly." /></Helmet>
+      <Helmet><title>Remove Image Background | PDF Tools</title><meta name="description" content="Remove background from images instantly." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Remove Image Background | PDF Tools" />
+        <meta property="og:description" content="Remove background from images instantly." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Remove Image Background | PDF Tools" />
+        <meta name="twitter:description" content="Remove background from images instantly." /></Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1 pt-24 pb-16">

@@ -65,7 +65,16 @@ const ImageRotate = () => {
 
   return (
     <>
-      <Helmet><title>Rotate Image Online | PDF Tools</title><meta name="description" content="Rotate images by 90, 180, or 270 degrees." /></Helmet>
+      <Helmet><title>Rotate Image Online | PDF Tools</title><meta name="description" content="Rotate images by 90, 180, or 270 degrees." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Rotate Image Online | PDF Tools" />
+        <meta property="og:description" content="Rotate images by 90, 180, or 270 degrees." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Rotate Image Online | PDF Tools" />
+        <meta name="twitter:description" content="Rotate images by 90, 180, or 270 degrees." /></Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1 pt-24 pb-16">
