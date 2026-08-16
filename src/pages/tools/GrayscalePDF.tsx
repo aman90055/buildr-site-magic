@@ -77,7 +77,16 @@ const GrayscalePDF = () => {
 
   return (
     <>
-      <Helmet><title>Convert PDF to Grayscale | PDF Tools</title><meta name="description" content="Convert color PDF to grayscale." /></Helmet>
+      <Helmet><title>Convert PDF to Grayscale | PDF Tools</title><meta name="description" content="Convert color PDF to grayscale." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Convert PDF to Grayscale | PDF Tools" />
+        <meta property="og:description" content="Convert color PDF to grayscale." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Convert PDF to Grayscale | PDF Tools" />
+        <meta name="twitter:description" content="Convert color PDF to grayscale." /></Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1 pt-24 pb-16">

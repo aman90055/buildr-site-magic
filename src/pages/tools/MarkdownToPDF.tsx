@@ -112,6 +112,25 @@ Thank you for using our tool!`);
       <Helmet>
         <title>Markdown to PDF - Convert MD to PDF Online</title>
         <meta name="description" content="Convert Markdown documents to professionally formatted PDFs. Free online converter." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Markdown to PDF - Convert MD to PDF Online" />
+        <meta property="og:description" content="Convert Markdown documents to professionally formatted PDFs. Free online converter." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Markdown to PDF - Convert MD to PDF Online" />
+        <meta name="twitter:description" content="Convert Markdown documents to professionally formatted PDFs. Free online converter." />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org", "@type": "HowTo",
+          name: "Markdown to PDF - Convert MD to PDF Online", description: "Convert Markdown documents to professionally formatted PDFs. Free online converter.",
+          totalTime: "PT1M",
+          step: [
+            { "@type": "HowToStep", position: 1, name: "Add your file", text: "Select or drag your file into the tool. Everything is processed in your browser, so nothing is uploaded." },
+            { "@type": "HowToStep", position: 2, name: "Choose your options", text: "Adjust the available settings for your output, then start the conversion." },
+            { "@type": "HowToStep", position: 3, name: "Download the result", text: "Save the finished file to your device. It is free with no file size limit." },
+          ],
+        })}</script>
       </Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />

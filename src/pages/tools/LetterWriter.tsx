@@ -104,7 +104,16 @@ const LetterWriter = () => {
 
   return (
     <>
-      <Helmet><title>Letter Writer - Create PDF Letters | PDF Tools</title><meta name="description" content="Write and generate professional letters in PDF." /></Helmet>
+      <Helmet><title>Letter Writer - Create PDF Letters | PDF Tools</title><meta name="description" content="Write and generate professional letters in PDF." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Letter Writer - Create PDF Letters | PDF Tools" />
+        <meta property="og:description" content="Write and generate professional letters in PDF." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Letter Writer - Create PDF Letters | PDF Tools" />
+        <meta name="twitter:description" content="Write and generate professional letters in PDF." /></Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1 pt-24 pb-16">

@@ -95,6 +95,15 @@ const CropPDF = () => {
       <Helmet>
         <title>Crop PDF - Trim PDF Pages Online Free</title>
         <meta name="description" content="Crop and trim PDF pages online. Remove margins and adjust page size. Free PDF cropping tool." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Crop PDF - Trim PDF Pages Online Free" />
+        <meta property="og:description" content="Crop and trim PDF pages online. Remove margins and adjust page size. Free PDF cropping tool." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Crop PDF - Trim PDF Pages Online Free" />
+        <meta name="twitter:description" content="Crop and trim PDF pages online. Remove margins and adjust page size. Free PDF cropping tool." />
       </Helmet>
 
       <div className="min-h-screen flex flex-col">

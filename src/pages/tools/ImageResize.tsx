@@ -81,7 +81,16 @@ const ImageResize = () => {
 
   return (
     <>
-      <Helmet><title>Resize Image Online | PDF Tools</title><meta name="description" content="Resize images to exact dimensions." /></Helmet>
+      <Helmet><title>Resize Image Online | PDF Tools</title><meta name="description" content="Resize images to exact dimensions." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Resize Image Online | PDF Tools" />
+        <meta property="og:description" content="Resize images to exact dimensions." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Resize Image Online | PDF Tools" />
+        <meta name="twitter:description" content="Resize images to exact dimensions." /></Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1 pt-24 pb-16">

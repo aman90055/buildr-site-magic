@@ -74,6 +74,15 @@ const PDFToPDFA = () => {
       <Helmet>
         <title>PDF to PDF/A - Archive-Ready PDF Converter</title>
         <meta name="description" content="Convert PDF to PDF/A archival format for long-term preservation." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="PDF to PDF/A - Archive-Ready PDF Converter" />
+        <meta property="og:description" content="Convert PDF to PDF/A archival format for long-term preservation." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="PDF to PDF/A - Archive-Ready PDF Converter" />
+        <meta name="twitter:description" content="Convert PDF to PDF/A archival format for long-term preservation." />
       </Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />

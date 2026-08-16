@@ -106,6 +106,15 @@ const RepairPDF = () => {
       <Helmet>
         <title>Repair PDF - Fix Corrupted PDF Files | AI-Powered Tool</title>
         <meta name="description" content="Repair corrupted or damaged PDF files. AI-powered PDF repair tool. Free online PDF fixer." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Repair PDF - Fix Corrupted PDF Files | AI-Powered Tool" />
+        <meta property="og:description" content="Repair corrupted or damaged PDF files. AI-powered PDF repair tool. Free online PDF fixer." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Repair PDF - Fix Corrupted PDF Files | AI-Powered Tool" />
+        <meta name="twitter:description" content="Repair corrupted or damaged PDF files. AI-powered PDF repair tool. Free online PDF fixer." />
       </Helmet>
 
       <div className="min-h-screen flex flex-col">

@@ -43,6 +43,15 @@ const RotatePDF = () => {
       <Helmet>
         <title>Rotate PDF - Rotate PDF Pages Online Free</title>
         <meta name="description" content="Rotate PDF pages online. Turn pages 90, 180, or 270 degrees. Free PDF rotation tool." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Rotate PDF - Rotate PDF Pages Online Free" />
+        <meta property="og:description" content="Rotate PDF pages online. Turn pages 90, 180, or 270 degrees. Free PDF rotation tool." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Rotate PDF - Rotate PDF Pages Online Free" />
+        <meta name="twitter:description" content="Rotate PDF pages online. Turn pages 90, 180, or 270 degrees. Free PDF rotation tool." />
       </Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />

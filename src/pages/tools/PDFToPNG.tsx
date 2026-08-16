@@ -79,6 +79,25 @@ const PDFToPNG = () => {
       <Helmet>
         <title>PDF to PNG - Convert PDF to High-Quality Images</title>
         <meta name="description" content="Convert PDF pages to high-resolution PNG images. Free online converter." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="PDF to PNG - Convert PDF to High-Quality Images" />
+        <meta property="og:description" content="Convert PDF pages to high-resolution PNG images. Free online converter." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="PDF to PNG - Convert PDF to High-Quality Images" />
+        <meta name="twitter:description" content="Convert PDF pages to high-resolution PNG images. Free online converter." />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org", "@type": "HowTo",
+          name: "PDF to PNG - Convert PDF to High-Quality Images", description: "Convert PDF pages to high-resolution PNG images. Free online converter.",
+          totalTime: "PT1M",
+          step: [
+            { "@type": "HowToStep", position: 1, name: "Add your file", text: "Select or drag your file into the tool. Everything is processed in your browser, so nothing is uploaded." },
+            { "@type": "HowToStep", position: 2, name: "Choose your options", text: "Adjust the available settings for your output, then start the conversion." },
+            { "@type": "HowToStep", position: 3, name: "Download the result", text: "Save the finished file to your device. It is free with no file size limit." },
+          ],
+        })}</script>
       </Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />

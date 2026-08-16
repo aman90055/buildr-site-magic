@@ -53,7 +53,16 @@ const ReversePDF = () => {
 
   return (
     <>
-      <Helmet><title>Reverse PDF Page Order | PDF Tools</title><meta name="description" content="Reverse the page order of your PDF document." /></Helmet>
+      <Helmet><title>Reverse PDF Page Order | PDF Tools</title><meta name="description" content="Reverse the page order of your PDF document." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Reverse PDF Page Order | PDF Tools" />
+        <meta property="og:description" content="Reverse the page order of your PDF document." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Reverse PDF Page Order | PDF Tools" />
+        <meta name="twitter:description" content="Reverse the page order of your PDF document." /></Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1 pt-24 pb-16">

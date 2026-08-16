@@ -67,6 +67,15 @@ const RemovePages = () => {
       <Helmet>
         <title>Remove PDF Pages - Delete Pages from PDF Online</title>
         <meta name="description" content="Remove unwanted pages from your PDF documents. Free online PDF page remover tool." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Remove PDF Pages - Delete Pages from PDF Online" />
+        <meta property="og:description" content="Remove unwanted pages from your PDF documents. Free online PDF page remover tool." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Remove PDF Pages - Delete Pages from PDF Online" />
+        <meta name="twitter:description" content="Remove unwanted pages from your PDF documents. Free online PDF page remover tool." />
       </Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />

@@ -102,6 +102,25 @@ const PDFToExcel = () => {
       <Helmet>
         <title>PDF to Excel/CSV - Extract Tables from PDF</title>
         <meta name="description" content="Extract tables and data from PDF to CSV/Excel format. Free online tool." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="PDF to Excel/CSV - Extract Tables from PDF" />
+        <meta property="og:description" content="Extract tables and data from PDF to CSV/Excel format. Free online tool." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="PDF to Excel/CSV - Extract Tables from PDF" />
+        <meta name="twitter:description" content="Extract tables and data from PDF to CSV/Excel format. Free online tool." />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org", "@type": "HowTo",
+          name: "PDF to Excel/CSV - Extract Tables from PDF", description: "Extract tables and data from PDF to CSV/Excel format. Free online tool.",
+          totalTime: "PT1M",
+          step: [
+            { "@type": "HowToStep", position: 1, name: "Add your file", text: "Select or drag your file into the tool. Everything is processed in your browser, so nothing is uploaded." },
+            { "@type": "HowToStep", position: 2, name: "Choose your options", text: "Adjust the available settings for your output, then start the conversion." },
+            { "@type": "HowToStep", position: 3, name: "Download the result", text: "Save the finished file to your device. It is free with no file size limit." },
+          ],
+        })}</script>
       </Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />

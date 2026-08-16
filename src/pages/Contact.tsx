@@ -124,6 +124,15 @@ const Contact = () => {
       <Helmet>
         <title>Contact Docunova AI — Support & Feedback</title>
         <meta name="description" content="Have questions or feedback? Contact Aman Vishwakarma, the creator of Document Editor. We'd love to hear from you." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Contact Docunova AI — Support & Feedback" />
+        <meta property="og:description" content="Have questions or feedback? Contact Aman Vishwakarma, the creator of Document Editor. We'd love to hear from you." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact Docunova AI — Support & Feedback" />
+        <meta name="twitter:description" content="Have questions or feedback? Contact Aman Vishwakarma, the creator of Document Editor. We'd love to hear from you." />
       </Helmet>
       
       <div className="min-h-screen flex flex-col bg-background">

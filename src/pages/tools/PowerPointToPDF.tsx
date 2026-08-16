@@ -94,6 +94,25 @@ const PowerPointToPDF = () => {
       <Helmet>
         <title>Presentation to PDF - Create Slide PDFs Online</title>
         <meta name="description" content="Create presentation slides and convert to PDF. Free slide to PDF tool." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Presentation to PDF - Create Slide PDFs Online" />
+        <meta property="og:description" content="Create presentation slides and convert to PDF. Free slide to PDF tool." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Presentation to PDF - Create Slide PDFs Online" />
+        <meta name="twitter:description" content="Create presentation slides and convert to PDF. Free slide to PDF tool." />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org", "@type": "HowTo",
+          name: "Presentation to PDF - Create Slide PDFs Online", description: "Create presentation slides and convert to PDF. Free slide to PDF tool.",
+          totalTime: "PT1M",
+          step: [
+            { "@type": "HowToStep", position: 1, name: "Add your file", text: "Select or drag your file into the tool. Everything is processed in your browser, so nothing is uploaded." },
+            { "@type": "HowToStep", position: 2, name: "Choose your options", text: "Adjust the available settings for your output, then start the conversion." },
+            { "@type": "HowToStep", position: 3, name: "Download the result", text: "Save the finished file to your device. It is free with no file size limit." },
+          ],
+        })}</script>
       </Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />

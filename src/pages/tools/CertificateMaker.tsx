@@ -154,6 +154,15 @@ const CertificateMaker = () => {
       <Helmet>
         <title>Certificate Maker - Create PDF Certificates | PDF Tools</title>
         <meta name="description" content="Create professional certificates with customizable templates. Generate beautiful achievement, completion, appreciation, and participation certificates in PDF format." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Certificate Maker - Create PDF Certificates | PDF Tools" />
+        <meta property="og:description" content="Create professional certificates with customizable templates. Generate beautiful achievement, completion, appreciation, and participation certificates in PDF format." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Certificate Maker - Create PDF Certificates | PDF Tools" />
+        <meta name="twitter:description" content="Create professional certificates with customizable templates. Generate beautiful achievement, completion, appreciation, and participation certificates in PDF format." />
       </Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />

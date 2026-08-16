@@ -68,6 +68,15 @@ const OrganizePDF = () => {
       <Helmet>
         <title>Organize PDF - Rearrange PDF Pages Online | Free Tool</title>
         <meta name="description" content="Drag and drop to reorder pages in your PDF. AI-powered page arrangement. Free online PDF organizer." />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="The Docunova AI Suite" />
+        <meta property="og:title" content="Organize PDF - Rearrange PDF Pages Online | Free Tool" />
+        <meta property="og:description" content="Drag and drop to reorder pages in your PDF. AI-powered page arrangement. Free online PDF organizer." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Organize PDF - Rearrange PDF Pages Online | Free Tool" />
+        <meta name="twitter:description" content="Drag and drop to reorder pages in your PDF. AI-powered page arrangement. Free online PDF organizer." />
       </Helmet>
       
       <div className="min-h-screen flex flex-col">
