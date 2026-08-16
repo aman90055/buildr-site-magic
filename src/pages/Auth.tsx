@@ -264,10 +264,10 @@ const Auth = () => {
         <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
-        <meta property="og:title" content={mode === "login" ? "Login" : mode === "signup" ? "Sign Up" : "Reset Password"} | The Docunova AI Suite />
+        <meta property="og:title" content={`${mode === "login" ? "Login" : mode === "signup" ? "Sign Up" : "Reset Password"} | The Docunova AI Suite`} />
         <meta property="og:description" content="Sign in with Google, email OTP, phone OTP, or password to access free PDF, AI & productivity tools." />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={mode === "login" ? "Login" : mode === "signup" ? "Sign Up" : "Reset Password"} | The Docunova AI Suite />
+        <meta name="twitter:title" content={`${mode === "login" ? "Login" : mode === "signup" ? "Sign Up" : "Reset Password"} | The Docunova AI Suite`} />
         <meta name="twitter:description" content="Sign in with Google, email OTP, phone OTP, or password to access free PDF, AI & productivity tools." />
       </Helmet>
 
