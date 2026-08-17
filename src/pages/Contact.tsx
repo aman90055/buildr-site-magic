@@ -68,9 +68,8 @@ const Contact = () => {
 
       if (data?.queued) {
         toast({
-          title: "⚠️ Email delivery unavailable",
-          description: data?.message || "Your message was saved, but the email service (RESEND_API_KEY) is missing or invalid. Aman will still see it.",
-          variant: "destructive",
+          title: "Message saved",
+          description: data?.message || "Your message was saved and Aman will see it, but email delivery is temporarily unavailable.",
         });
       } else {
         toast({
