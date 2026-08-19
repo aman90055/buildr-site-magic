@@ -19,7 +19,7 @@ export default function Brand() {
       <Helmet>
         <title>Brand Kit — The Docunova AI Suite</title>
         <meta name="description" content="Official brand guidelines, logos, colors, and typography for The Docunova AI Suite." />
-        <link rel="canonical" href="https://avwebservices.online/brand" />
+        <link rel="canonical" href="https://docunova.online/brand" />
       </Helmet>
       <Header />
       <main className="container mx-auto px-4 py-16 max-w-5xl">

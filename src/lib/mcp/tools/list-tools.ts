@@ -1,7 +1,7 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 import { z } from "zod";
 
-const SITE = "https://avwebservices.online";
+const SITE = "https://docunova.online";
 
 const CATEGORIES = ["organize", "convert", "edit", "ai", "image", "security", "documents"] as const;
 

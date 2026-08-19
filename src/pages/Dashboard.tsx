@@ -165,8 +165,8 @@ const Dashboard = () => {
       <Helmet>
         <title>Dashboard | The Docunova AI Suite</title>
         <meta name="description" content="View your PDF processing history, manage favorites, API keys, notifications, and account settings." />
-        <link rel="canonical" href={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="Dashboard | The Docunova AI Suite" />

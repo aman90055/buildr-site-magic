@@ -99,10 +99,10 @@ const OCR = () => {
           name="description"
           content="Free online OCR tool powered by AI. Extract text from images, photos, and scanned documents in 100+ languages including Hindi & English. No signup, unlimited use."
         />
-        <link rel="canonical" href="https://avwebservices.online/ocr" />
+        <link rel="canonical" href="https://docunova.online/ocr" />
         <meta property="og:title" content="Free AI OCR — Extract Text from Images & Scanned PDFs" />
         <meta property="og:description" content="AI-powered OCR with 99.9% accuracy. Extract text from images and scanned documents in 100+ languages. Free, unlimited, no signup." />
-        <meta property="og:url" content="https://avwebservices.online/ocr" />
+        <meta property="og:url" content="https://docunova.online/ocr" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free AI OCR — Extract Text from Images & Scanned PDFs" />

@@ -44,10 +44,10 @@ const About = () => {
       <Helmet>
         <title>About — PDF Tools by Aman Vishwakarma | Docunova AI</title>
         <meta name="description" content="Meet the team behind Docunova AI — an AI-powered PDF platform by Aman Vishwakarma making document workflows simple." />
-        <link rel="canonical" href="https://avwebservices.online/about" />
+        <link rel="canonical" href="https://docunova.online/about" />
         <meta property="og:title" content="About Document Editor — PDF Tools by Aman Vishwakarma" />
         <meta property="og:description" content="The story behind Document Editor — an AI-powered PDF platform built to make document workflows simple and accessible for everyone." />
-        <meta property="og:url" content="https://avwebservices.online/about" />
+        <meta property="og:url" content="https://docunova.online/about" />
       </Helmet>
       
       <div className="min-h-screen flex flex-col bg-background">

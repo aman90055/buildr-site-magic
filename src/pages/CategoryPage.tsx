@@ -18,7 +18,7 @@ const CategoryPage = () => {
   const meta = CATEGORY_META[category];
   const tools = getToolsByCategory(category);
 
-  const url = `https://avwebservices.online/category/${category}`;
+  const url = `https://docunova.online/category/${category}`;
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -27,7 +27,7 @@ const CategoryPage = () => {
       "@type": "ListItem",
       position: i + 1,
       name: t.name,
-      url: `https://avwebservices.online${t.slug}`,
+      url: `https://docunova.online${t.slug}`,
     })),
   };
 

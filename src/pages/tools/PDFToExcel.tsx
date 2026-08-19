@@ -102,8 +102,8 @@ const PDFToExcel = () => {
       <Helmet>
         <title>PDF to Excel/CSV - Extract Tables from PDF</title>
         <meta name="description" content="Extract tables and data from PDF to CSV/Excel format. Free online tool." />
-        <link rel="canonical" href={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="PDF to Excel/CSV - Extract Tables from PDF" />

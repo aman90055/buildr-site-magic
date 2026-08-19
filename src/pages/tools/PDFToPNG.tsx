@@ -79,8 +79,8 @@ const PDFToPNG = () => {
       <Helmet>
         <title>PDF to PNG - Convert PDF to High-Quality Images</title>
         <meta name="description" content="Convert PDF pages to high-resolution PNG images. Free online converter." />
-        <link rel="canonical" href={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="PDF to PNG - Convert PDF to High-Quality Images" />

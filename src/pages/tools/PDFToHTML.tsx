@@ -107,8 +107,8 @@ const PDFToHTML = () => {
       <Helmet>
         <title>PDF to HTML - Convert PDF to Web Pages Online</title>
         <meta name="description" content="Convert PDF documents to clean HTML pages. Free PDF to HTML converter." />
-        <link rel="canonical" href={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="${file.name}" />

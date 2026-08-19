@@ -41,8 +41,8 @@ const AddWatermark = () => {
       <Helmet>
         <title>Add Watermark to PDF - Watermark PDF Online Free</title>
         <meta name="description" content="Add text watermarks to your PDF documents online. Free PDF watermarking tool." />
-        <link rel="canonical" href={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="Add Watermark to PDF - Watermark PDF Online Free" />

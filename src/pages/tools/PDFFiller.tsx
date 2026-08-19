@@ -206,7 +206,7 @@ const PDFFiller = () => {
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  const canonical = `https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/pdf-filler"}`;
+  const canonical = `https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/pdf-filler"}`;
 
   const howToSchema = {
     "@context": "https://schema.org",

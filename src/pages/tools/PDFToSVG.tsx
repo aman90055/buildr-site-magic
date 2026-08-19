@@ -90,8 +90,8 @@ const PDFToSVG = () => {
       <Helmet>
         <title>PDF to SVG - Convert PDF to Vector Graphics</title>
         <meta name="description" content="Convert PDF pages to SVG vector format for infinite scalability." />
-        <link rel="canonical" href={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="PDF to SVG - Convert PDF to Vector Graphics" />

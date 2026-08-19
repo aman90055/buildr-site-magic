@@ -46,6 +46,6 @@ Disallow: /auth
 Disallow: /dashboard
 Disallow: /reset-password
 
-Sitemap: https://avwebservices.online/sitemap.xml
+Sitemap: https://docunova.online/sitemap.xml
 
-Host: https://avwebservices.online
+Host: https://docunova.online

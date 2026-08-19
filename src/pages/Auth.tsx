@@ -260,8 +260,8 @@ const Auth = () => {
       <Helmet>
         <title>{mode === "login" ? "Login" : mode === "signup" ? "Sign Up" : "Reset Password"} | The Docunova AI Suite</title>
         <meta name="description" content="Sign in with Google, email OTP, phone OTP, or password to access free PDF, AI & productivity tools." />
-        <link rel="canonical" href={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content={`${mode === "login" ? "Login" : mode === "signup" ? "Sign Up" : "Reset Password"} | The Docunova AI Suite`} />
