@@ -71,6 +71,7 @@ const GrayscalePDF = lazy(() => import("./pages/tools/GrayscalePDF"));
 const PDFMetadata = lazy(() => import("./pages/tools/PDFMetadata"));
 const UnlockPDF = lazy(() => import("./pages/tools/UnlockPDF"));
 const SignPDF = lazy(() => import("./pages/tools/SignPDF"));
+const PDFFiller = lazy(() => import("./pages/tools/PDFFiller"));
 const RedactPDF = lazy(() => import("./pages/tools/RedactPDF"));
 const ComparePDF = lazy(() => import("./pages/tools/ComparePDF"));
 const ImageCompress = lazy(() => import("./pages/tools/ImageCompress"));
@@ -231,6 +232,7 @@ const App = () => (
                 <Route path="/pdf-metadata" element={<PDFMetadata />} />
                 <Route path="/unlock-pdf" element={<UnlockPDF />} />
                 <Route path="/sign-pdf" element={<SignPDF />} />
+                <Route path="/pdf-filler" element={<PDFFiller />} />
                 <Route path="/redact-pdf" element={<RedactPDF />} />
                 <Route path="/compare-pdf" element={<ComparePDF />} />
                 <Route path="/compress-image" element={<ImageCompress />} />
