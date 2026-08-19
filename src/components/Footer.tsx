@@ -132,6 +132,7 @@ const Footer = () => {
               { to: "/resume-builder", label: "Resume Builder" },
               { to: "/remove-background", label: "Remove Background" },
               { to: "/sign-pdf", label: "Sign PDF" },
+              { to: "/pdf-filler", label: "PDF Filler" },
             ].map(link => (
               <Link key={link.to} to={link.to} className="px-2 py-1 rounded bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
                 {link.label}

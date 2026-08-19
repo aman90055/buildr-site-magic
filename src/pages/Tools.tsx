@@ -49,7 +49,7 @@ function getAllTools(): ToolMeta[] {
     "/markdown-to-pdf","/text-to-pdf","/pdf-to-powerpoint","/pdf-to-excel",
     "/pdf-to-pdfa","/pdf-to-text","/pdf-to-html","/pdf-to-png","/pdf-to-svg",
     "/pdf-to-epub","/rotate-pdf","/add-page-numbers","/add-watermark","/crop-pdf",
-    "/flatten-pdf","/grayscale-pdf","/pdf-metadata","/unlock-pdf","/sign-pdf",
+    "/flatten-pdf","/grayscale-pdf","/pdf-metadata","/unlock-pdf","/sign-pdf","/pdf-filler",
     "/redact-pdf","/compare-pdf","/compress-image","/resize-image","/crop-image",
     "/png-to-jpg","/jpg-to-png","/webp-to-jpg","/jpg-to-webp","/rotate-image",
     "/remove-background","/image-to-text","/ai-image-enhance","/ai-grammar-check",
