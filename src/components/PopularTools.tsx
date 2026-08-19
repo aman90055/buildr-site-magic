@@ -107,6 +107,7 @@ const toolCategories = [
       { title: "Unlock PDF", description: "Remove restrictions", href: "/unlock-pdf", icon: Unlock },
       { title: "Protect PDF", description: "Bank-grade encryption", href: "/protect-pdf", icon: Lock, popular: true },
       { title: "Sign PDF", description: "Digital signatures", href: "/sign-pdf", icon: PenTool, popular: true },
+      { title: "PDF Filler", description: "Fill out PDF forms free", href: "/pdf-filler", icon: FileSearch, popular: true },
       { title: "Redact PDF", description: "AI-powered redaction", href: "/redact-pdf", icon: EyeOff, ai: true },
       { title: "Compare PDF", description: "AI difference detection", href: "/compare-pdf", icon: GitCompare, ai: true },
     ],
