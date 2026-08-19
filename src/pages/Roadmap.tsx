@@ -29,7 +29,7 @@ const Roadmap = () => (
     <Helmet>
       <title>Public Roadmap — The Docunova AI Suite</title>
       <meta name="description" content="See what's shipped, in progress, and planned for The Docunova AI Suite." />
-      <link rel="canonical" href="https://docunova.online/roadmap" />
+      <link rel="canonical" href="https://avwebservices.online/roadmap" />
     </Helmet>
     <div className="min-h-screen flex flex-col">
       <Header />

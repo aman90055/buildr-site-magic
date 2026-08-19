@@ -48,10 +48,10 @@ const PDFSplit = () => {
           name="description"
           content="Extract specific pages from PDF documents. Split PDFs into separate files. Fast, free, and secure."
         />
-        <link rel="canonical" href="https://docunova.online/split" />
+        <link rel="canonical" href="https://avwebservices.online/split" />
         <meta property="og:title" content="Split PDF Files Online - Free PDF Page Extractor" />
         <meta property="og:description" content="Extract specific pages from PDF documents. Split PDFs into separate files. Fast, free, and secure." />
-        <meta property="og:url" content="https://docunova.online/split" />
+        <meta property="og:url" content="https://avwebservices.online/split" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",

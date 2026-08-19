@@ -67,10 +67,10 @@ const PDFCompress = () => {
           name="description"
           content="Compress PDF files online for free with AI. Reduce PDF size below 100 KB, 500 KB, or 1 MB without losing quality. No signup, no file-size limit, works in your browser."
         />
-        <link rel="canonical" href="https://docunova.online/compress" />
+        <link rel="canonical" href="https://avwebservices.online/compress" />
         <meta property="og:title" content="Free AI PDF Compressor — Reduce PDF Size up to 90%" />
         <meta property="og:description" content="AI-powered PDF compression. Shrink PDFs to under 100 KB without losing quality. Free, unlimited, browser-based." />
-        <meta property="og:url" content="https://docunova.online/compress" />
+        <meta property="og:url" content="https://avwebservices.online/compress" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free AI PDF Compressor — Reduce PDF Size up to 90%" />

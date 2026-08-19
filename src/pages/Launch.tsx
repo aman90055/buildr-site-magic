@@ -25,7 +25,7 @@ import {
  * Reddit visitors into first-time users.
  */
 
-const url = "https://docunova.online/launch";
+const url = "https://avwebservices.online/launch";
 
 const highlights = [
   { icon: Sparkles, title: "100+ AI-powered tools", body: "PDF, image, document, and AI utilities in one suite." },
@@ -201,7 +201,7 @@ const Launch = () => {
                 <Button asChild variant="outline">
                   <a
                     href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                      "Just tried @DocunovaAI — 100+ free AI document tools, no signup, no file-size limit. Solid. https://docunova.online"
+                      "Just tried @DocunovaAI — 100+ free AI document tools, no signup, no file-size limit. Solid. https://avwebservices.online"
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -211,7 +211,7 @@ const Launch = () => {
                 </Button>
                 <Button asChild variant="outline">
                   <a
-                    href="https://www.reddit.com/submit?url=https%3A%2F%2Fdocunova.online&title=Docunova%20AI%20%E2%80%94%20100%2B%20free%20AI%20document%20tools%2C%20no%20signup"
+                    href="https://www.reddit.com/submit?url=https%3A%2F%2Favwebservices.online&title=Docunova%20AI%20%E2%80%94%20100%2B%20free%20AI%20document%20tools%2C%20no%20signup"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

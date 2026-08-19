@@ -96,8 +96,8 @@ const SVGToPDF = () => {
       <Helmet>
         <title>SVG to PDF - Convert Vector Graphics to PDF</title>
         <meta name="description" content="Convert SVG vector files to high-quality PDF documents. Free online converter." />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <link rel="canonical" href={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="SVG to PDF - Convert Vector Graphics to PDF" />

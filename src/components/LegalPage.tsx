@@ -23,7 +23,7 @@ interface Props {
   contactNote?: string;
 }
 
-const BASE = "https://docunova.online";
+const BASE = "https://avwebservices.online";
 
 function renderBlock(text: string, idx: number) {
   const trimmed = text.trim();

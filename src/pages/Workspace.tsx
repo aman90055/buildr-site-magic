@@ -41,7 +41,7 @@ export default function Workspace() {
       <Helmet>
         <title>Cloud Workspace — The Docunova AI Suite</title>
         <meta name="description" content="Your private cloud workspace: recent files, shared folders, version history, and expiring share links." />
-        <link rel="canonical" href="https://docunova.online/workspace" />
+        <link rel="canonical" href="https://avwebservices.online/workspace" />
       </Helmet>
       <Header />
       <main className="container mx-auto px-4 py-12 max-w-6xl">

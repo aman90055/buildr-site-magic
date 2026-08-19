@@ -27,7 +27,7 @@ import {
  * Long-form (~2000 words), HowTo + FAQ + BreadcrumbList schema.
  */
 
-const url = "https://docunova.online/guides/how-to-edit-pdf-free";
+const url = "https://avwebservices.online/guides/how-to-edit-pdf-free";
 
 const faqs = [
   {
@@ -44,7 +44,7 @@ const faqs = [
   },
   {
     q: "How do I edit a PDF on my phone?",
-    a: "Open docunova.online in Chrome or Safari on Android/iOS, tap Edit PDF, and use the same editor as on desktop. The interface is fully responsive and touch-friendly.",
+    a: "Open avwebservices.online in Chrome or Safari on Android/iOS, tap Edit PDF, and use the same editor as on desktop. The interface is fully responsive and touch-friendly.",
   },
   {
     q: "Is there a file size limit?",
@@ -86,7 +86,7 @@ const GuideEditPDFFree = () => {
           "description": "Edit any PDF file in a web browser — add text, images, and signatures without installing software.",
           "totalTime": "PT2M",
           "step": [
-            { "@type": "HowToStep", "name": "Open the free PDF editor", "text": "Go to docunova.online/edit-pdf in Chrome, Safari, Edge, or Firefox on any device." },
+            { "@type": "HowToStep", "name": "Open the free PDF editor", "text": "Go to avwebservices.online/edit-pdf in Chrome, Safari, Edge, or Firefox on any device." },
             { "@type": "HowToStep", "name": "Upload your PDF", "text": "Drag and drop the PDF or click Upload. There is no file-size limit." },
             { "@type": "HowToStep", "name": "Edit text, images, and pages", "text": "Use the toolbar to add text boxes, images, shapes, signatures, or annotations. Rearrange or delete pages from the side panel." },
             { "@type": "HowToStep", "name": "Download the edited PDF", "text": "Click Download to save the edited PDF to your device. No watermark, no signup." }
@@ -105,8 +105,8 @@ const GuideEditPDFFree = () => {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://docunova.online/" },
-            { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://docunova.online/guides" },
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://avwebservices.online/" },
+            { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://avwebservices.online/guides" },
             { "@type": "ListItem", "position": 3, "name": "Edit PDF for Free", "item": url }
           ]
         })}</script>
@@ -190,7 +190,7 @@ const GuideEditPDFFree = () => {
               <h2 className="text-3xl font-bold mb-6">Step-by-step: edit a PDF for free</h2>
               <div className="space-y-6">
                 {[
-                  { n: 1, title: "Open the free PDF editor", body: <>Go to <Link to="/edit-pdf" className="text-primary underline">docunova.online/edit-pdf</Link> in any browser. No account, no download.</> },
+                  { n: 1, title: "Open the free PDF editor", body: <>Go to <Link to="/edit-pdf" className="text-primary underline">avwebservices.online/edit-pdf</Link> in any browser. No account, no download.</> },
                   { n: 2, title: "Drop your PDF into the uploader", body: "Drag the file from your desktop or tap Upload on mobile. Files never leave your browser — processing is fully client-side. There is no file-size limit." },
                   { n: 3, title: "Edit text, images, pages, and signatures", body: "Use the toolbar to add text boxes, place images, draw shapes, insert your signature, or annotate. From the side panel you can rotate, reorder, extract, or delete pages." },
                   { n: 4, title: "Preview and download", body: "Zoom in to review your edits, then click Download to save the edited PDF. No watermark, no email required." },
@@ -251,7 +251,7 @@ const GuideEditPDFFree = () => {
               <div className="flex items-center gap-3 p-4 rounded-lg bg-primary/10">
                 <MonitorSmartphone className="w-6 h-6 text-primary flex-shrink-0" />
                 <p className="text-sm m-0">
-                  <strong>Tip:</strong> Add docunova.online to your home screen
+                  <strong>Tip:</strong> Add avwebservices.online to your home screen
                   from Chrome/Safari for a native-app feel.
                 </p>
               </div>

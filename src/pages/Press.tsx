@@ -21,7 +21,7 @@ export default function Press() {
       <Helmet>
         <title>Press & Media Kit — The Docunova AI Suite</title>
         <meta name="description" content="Press resources, fast facts, founder bio, and media assets for The Docunova AI Suite." />
-        <link rel="canonical" href="https://docunova.online/press" />
+        <link rel="canonical" href="https://avwebservices.online/press" />
       </Helmet>
       <Header />
       <main className="container mx-auto px-4 py-16 max-w-5xl">

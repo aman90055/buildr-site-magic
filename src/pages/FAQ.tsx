@@ -140,10 +140,10 @@ const FAQ = () => {
       <Helmet>
         <title>FAQ - Document Editor | Frequently Asked Questions</title>
         <meta name="description" content="Answers about Docunova AI PDF tools, features, pricing & security — merging, compressing, converting and more." />
-        <link rel="canonical" href="https://docunova.online/faq" />
+        <link rel="canonical" href="https://avwebservices.online/faq" />
         <meta property="og:title" content="FAQ - Document Editor | Frequently Asked Questions" />
         <meta property="og:description" content="Answers to common questions about Document Editor's PDF tools, features, pricing, and security." />
-        <meta property="og:url" content="https://docunova.online/faq" />
+        <meta property="og:url" content="https://avwebservices.online/faq" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
