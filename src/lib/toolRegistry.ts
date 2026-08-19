@@ -220,6 +220,23 @@ export const TOOL_REGISTRY: Record<string, ToolMeta> = {
       { q: "Is my text saved?", a: "No. Text is sent to the AI endpoint for translation only and not stored." },
     ],
   },
+  "/pdf-filler": {
+    slug: "/pdf-filler", name: "PDF Filler", category: "edit",
+    short: "Fill out PDF forms online — interactive fields or flat scans",
+    guide:
+      "A PDF filler solves the everyday problem of a form that arrives as a PDF: a W-9, an I-9, a rental application, an insurance claim, a school admission form or a government affidavit. Instead of printing, writing by hand and scanning back, our PDF Filler opens the document in your browser, finds every interactive field it contains, and gives you a clean form to type into. Click Fill PDF and the completed document downloads instantly.\n\n" +
+      "Two kinds of PDF forms exist, and this tool handles both. The first kind carries an AcroForm layer — real text boxes, checkboxes, dropdowns and radio groups embedded in the file. The filler lists these by name and writes your answers straight into the field, so the result stays a valid, machine-readable form that the receiving organisation can process. The second kind is a flat form: a scan, an export from a design tool, or a printed sheet photographed with a phone. Those have no fields at all, so the filler switches to text placement — add a text box, pick the page and the X/Y position in points (72 points = 1 inch, measured from the bottom-left corner), and the text is drawn onto the page exactly where you need it.\n\n" +
+      "To fill out a PDF form: upload the file, review the detected fields, type or select your answers, add extra text boxes for anything the form layer misses, then click Fill PDF and download. Nothing is uploaded — the whole operation runs locally with pdf-lib, which matters for forms that carry a tax ID, salary figure, medical detail or bank account number. There is no signup, no watermark and no file-size cap.\n\n" +
+      "PDF Filler pairs naturally with two other tools. Use Sign PDF afterwards to add a typed or drawn signature to the completed form, and Flatten PDF if you want the filled values baked into the page so nobody can edit them before submission. If your form is a photo or scan and you would rather have the text recognised first, run it through the OCR tool, and use Repair PDF or Unlock PDF when a file refuses to open because it is damaged or password-protected.",
+    faqs: [
+      { q: "Is this PDF filler really free?", a: "Yes — completely free with no signup, no watermark on the output and no daily limit. Forms of any size are supported." },
+      { q: "Can I fill a scanned PDF form that has no fields?", a: "Yes. When no interactive fields are detected the tool switches to text placement, letting you position text anywhere on any page." },
+      { q: "Are my filled forms uploaded to a server?", a: "No. Everything runs in your browser via pdf-lib, so sensitive data like tax IDs, medical details and bank information never leaves your device." },
+      { q: "Will the filled PDF still be a valid form?", a: "Yes. For PDFs with an AcroForm layer, values are written into the real fields and the appearances are refreshed, so the result opens correctly in Acrobat, Preview and browser viewers." },
+      { q: "How do I sign the form after filling it?", a: "Download the filled PDF, then open the Sign PDF tool to add a typed or hand-drawn signature. Use Flatten PDF if you want the values locked in." },
+      { q: "Why can't I edit the values after downloading?", a: "You can — unless you flattened the file. Re-upload the filled PDF to change any field again." },
+    ],
+  },
 };
 
 // ---------- Fallback generator for tools not in the registry ----------
