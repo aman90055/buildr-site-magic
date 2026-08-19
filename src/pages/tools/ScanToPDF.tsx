@@ -129,8 +129,8 @@ const ScanToPDF = () => {
       <Helmet>
         <title>Scan to PDF - Convert Scanned Images to PDF | Free Tool</title>
         <meta name="description" content="Convert scanned documents and images to PDF. Free online scan to PDF converter." />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <link rel="canonical" href={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="Scan to PDF - Convert Scanned Images to PDF | Free Tool" />

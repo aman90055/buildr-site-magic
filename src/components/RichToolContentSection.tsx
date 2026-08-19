@@ -28,7 +28,7 @@ const RichToolContentSection = ({ slug }: Props) => {
     publisher: { "@type": "Organization", name: "The Docunova AI Suite" },
     datePublished: LAST_UPDATED,
     dateModified: LAST_UPDATED,
-    mainEntityOfPage: `https://docunova.online${slug}`,
+    mainEntityOfPage: `https://avwebservices.online${slug}`,
   };
   const faqSchema = c.faqs && c.faqs.length ? {
     "@context": "https://schema.org", "@type": "FAQPage",

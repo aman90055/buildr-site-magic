@@ -140,8 +140,8 @@ const Premium = () => {
       <Helmet>
         <title>Premium Plans - PDF Tools | Unlock All Features</title>
         <meta name="description" content="Upgrade to PDF Tools Premium. Get unlimited AI features, batch processing, priority support. Plans start at ₹99/month. Pay via UPI." />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <link rel="canonical" href={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="Premium Plans - PDF Tools | Unlock All Features" />

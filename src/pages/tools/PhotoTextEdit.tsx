@@ -205,7 +205,7 @@ const PhotoTextEdit = () => {
       <Helmet>
         <title>Photo Text Editor - Add & Edit Text on Images | Free</title>
         <meta name="description" content="Add, move and edit text on any photo. Free online photo text editor with fonts, colors, and instant download." />
-        <link rel="canonical" href="https://docunova.online/photo-text-edit" />
+        <link rel="canonical" href="https://avwebservices.online/photo-text-edit" />
       </Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />

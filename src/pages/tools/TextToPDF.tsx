@@ -71,8 +71,8 @@ const TextToPDF = () => {
   return (
     <>
       <Helmet><title>Text to PDF Converter | PDF Tools</title><meta name="description" content="Convert plain text to formatted PDF documents." />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <link rel="canonical" href={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="Text to PDF Converter | PDF Tools" />

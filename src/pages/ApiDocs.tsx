@@ -26,7 +26,7 @@ export default function ApiDocs() {
       <Helmet>
         <title>Developer API — The Docunova AI Suite</title>
         <meta name="description" content="REST API for PDF, image, and AI document tools. API keys, endpoints, rate limits, and SDKs." />
-        <link rel="canonical" href="https://docunova.online/api-docs" />
+        <link rel="canonical" href="https://avwebservices.online/api-docs" />
       </Helmet>
       <Header />
       <main className="container mx-auto px-4 py-16 max-w-5xl">

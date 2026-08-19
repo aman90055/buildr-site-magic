@@ -69,7 +69,7 @@ const CTA = () => {
             <ShareButtons 
               title="Free PDF Tools Online - 50+ AI-Powered Tools" 
               description="Check out these amazing free AI-powered PDF tools! Merge, split, compress & convert PDFs instantly."
-              url="https://docunova.online"
+              url="https://avwebservices.online"
             />
           </div>
         </div>

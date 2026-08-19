@@ -112,8 +112,8 @@ Thank you for using our tool!`);
       <Helmet>
         <title>Markdown to PDF - Convert MD to PDF Online</title>
         <meta name="description" content="Convert Markdown documents to professionally formatted PDFs. Free online converter." />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <link rel="canonical" href={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="Markdown to PDF - Convert MD to PDF Online" />

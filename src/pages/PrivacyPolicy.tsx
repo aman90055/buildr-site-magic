@@ -73,8 +73,8 @@ const PrivacyPolicy = () => {
       <Helmet>
         <title>Privacy Policy - Document Editor | Data Protection & Terms</title>
         <meta name="description" content="Learn how Document Editor protects your privacy and handles your data. Read our comprehensive privacy policy and terms of service." />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <link rel="canonical" href={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
+        <meta property="og:url" content={`https://avwebservices.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="Privacy Policy - Document Editor | Data Protection & Terms" />
