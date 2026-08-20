@@ -46,7 +46,7 @@ const projects = [
     title: "Set AV Profile",
     tag: "Personal · Side Project",
     desc: "A polished portfolio template by the founder, built with the same design system.",
-    href: "https://set-av-profile.vercel.app/",
+    href: "https://avwebservices.online/",
     color: "from-accent to-primary",
     external: true,
   },

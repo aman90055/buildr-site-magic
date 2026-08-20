@@ -20,7 +20,7 @@ const defaultCards: PromoCard[] = [
     title: "Set AV Profile",
     description:
       "Create a stunning developer profile in seconds — beautiful, shareable, and 100% free. Showcase skills, projects, and socials with one link.",
-    url: "https://set-av-profile.vercel.app/",
+    url: "https://avwebservices.online/",
     cta: "Visit Site",
     icon: Sparkles,
     accent: "from-cyan-400 to-blue-600 shadow-cyan-500/30",
