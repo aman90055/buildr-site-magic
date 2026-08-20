@@ -114,8 +114,8 @@ const Contact = () => {
 
   const socialLinks = [
     { icon: Twitter, label: "Twitter", href: "https://twitter.com/AmanVishwakarma" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/aman-vishwakarma-ai/" },
-    { icon: Github, label: "GitHub", href: "https://github.com/aman90055" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/aman-vishwakarma-ai/", target: "_top" },
+    { icon: Github, label: "GitHub", href: "https://github.com/aman9005573" },
   ];
 
   return (
@@ -282,7 +282,7 @@ const Contact = () => {
                           <a
                             key={index}
                             href={social.href}
-                            target="_blank"
+                            target={social.target ?? "_blank"}
                             rel="noopener noreferrer"
                             className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors group"
                             aria-label={social.label}

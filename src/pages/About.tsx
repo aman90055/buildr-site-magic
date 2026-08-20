@@ -117,8 +117,8 @@ const About = () => {
                   </div>
                   <a
                     href="https://www.linkedin.com/in/aman-vishwakarma-ai/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target="_top"
+                    rel="noreferrer"
                   >
                     <Button className="gap-2 rounded-xl bg-[hsl(210,80%,40%)] hover:bg-[hsl(210,80%,35%)] text-white">
                       <Linkedin className="w-4 h-4" />
@@ -134,13 +134,13 @@ const About = () => {
                         <h3 className="text-xl font-semibold">Aman Vishwakarma</h3>
                         <p className="text-sm text-muted-foreground mb-3">Founder & Lead Developer</p>
                         <div className="flex items-center gap-3">
-                          <a href="https://www.linkedin.com/in/aman-vishwakarma-ai/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-[hsl(210,80%,40%)]/10 hover:bg-[hsl(210,80%,40%)]/20 flex items-center justify-center transition-colors">
+                          <a href="https://www.linkedin.com/in/aman-vishwakarma-ai/" target="_top" rel="noreferrer" aria-label="Aman Vishwakarma on LinkedIn" className="w-9 h-9 rounded-lg bg-[hsl(210,80%,40%)]/10 hover:bg-[hsl(210,80%,40%)]/20 flex items-center justify-center transition-colors">
                             <Linkedin className="w-4 h-4 text-[hsl(210,80%,40%)]" />
                           </a>
                           <a href="https://x.com/AmanVishwa15356" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors">
                             <Twitter className="w-4 h-4 text-primary" />
                           </a>
-                          <a href="https://github.com/aman90055" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-muted hover:bg-muted/80 flex items-center justify-center transition-colors">
+                          <a href="https://github.com/aman9005573" target="_blank" rel="noopener noreferrer" aria-label="Aman Vishwakarma on GitHub" className="w-9 h-9 rounded-lg bg-muted hover:bg-muted/80 flex items-center justify-center transition-colors">
                             <Github className="w-4 h-4 text-foreground" />
                           </a>
                         </div>
