@@ -105,6 +105,9 @@ const ResumeBuilder = lazy(() => import("./pages/tools/ResumeBuilder"));
 const GuideEditPDFFree = lazy(() => import("./pages/GuideEditPDFFree"));
 const GuideEditPdfOnMacFree = lazy(() => import("./pages/GuideEditPdfOnMacFree"));
 const Launch = lazy(() => import("./pages/Launch"));
+const IlovepdfAlternative = lazy(() => import("./pages/IlovepdfAlternative"));
+const ElevenzonAlternative = lazy(() => import("./pages/ElevenzonAlternative"));
+const WebPToPNG = lazy(() => import("./pages/tools/WebPToPNG"));
 const InvoiceGenerator = lazy(() => import("./pages/tools/InvoiceGenerator"));
 const CertificateMaker = lazy(() => import("./pages/tools/CertificateMaker"));
 const LetterWriter = lazy(() => import("./pages/tools/LetterWriter"));
@@ -241,6 +244,7 @@ const App = () => (
                 <Route path="/png-to-jpg" element={<PNGToJPG />} />
                 <Route path="/jpg-to-png" element={<JPGToPNG />} />
                 <Route path="/webp-to-jpg" element={<WebPToJPG />} />
+                <Route path="/webp-to-png" element={<WebPToPNG />} />
                 <Route path="/jpg-to-webp" element={<JPGToWebP />} />
                 <Route path="/rotate-image" element={<ImageRotate />} />
                 <Route path="/remove-background" element={<RemoveBackground />} />
@@ -295,6 +299,8 @@ const App = () => (
                 <Route path="/guides/how-to-edit-pdf-free" element={<GuideEditPDFFree />} />
                 <Route path="/guides/how-to-edit-pdf-on-mac-free" element={<GuideEditPdfOnMacFree />} />
                 <Route path="/launch" element={<Launch />} />
+                <Route path="/ilovepdf-alternative" element={<IlovepdfAlternative />} />
+                <Route path="/11zon-alternative" element={<ElevenzonAlternative />} />
                 <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />

@@ -27,6 +27,8 @@ export const AD_ALLOWED_ROUTES = [
   "/privacy",
   "/contact",
   "/guides",
+  "/ilovepdf-alternative",
+  "/11zon-alternative",
 ] as const;
 
 /** Screens that must never serve ads (thin/utility/transactional). */
