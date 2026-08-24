@@ -73,6 +73,9 @@ const Footer = () => {
               <li><Link to="/protect-pdf" className="text-muted-foreground hover:text-foreground transition-colors">Protect PDF</Link></li>
               <li><Link to="/pdf-to-image" className="text-muted-foreground hover:text-foreground transition-colors">PDF to Image</Link></li>
               <li><Link to="/image-to-pdf" className="text-muted-foreground hover:text-foreground transition-colors">Image to PDF</Link></li>
+              <li><Link to="/webp-to-png" className="text-muted-foreground hover:text-foreground transition-colors">WebP to PNG</Link></li>
+              <li><Link to="/ilovepdf-alternative" className="text-muted-foreground hover:text-foreground transition-colors">iLovePDF Alternative</Link></li>
+              <li><Link to="/11zon-alternative" className="text-muted-foreground hover:text-foreground transition-colors">11zon Alternative</Link></li>
             </ul>
           </div>
           
