@@ -68,7 +68,9 @@
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://docunova.online/" />
+    <!-- og:url is set per-route via react-helmet-async (SocialMeta / page Helmets)
+         so it always self-references the current page. A static homepage og:url
+         here would conflict with the per-route tag on every non-home route. -->
     <meta property="og:site_name" content="The Docunova AI Suite" />
     <meta property="og:title" content="Docunova AI — 100+ Free PDF & AI Document Tools" />
     <meta property="og:description" content="The Docunova AI Suite: PDFs, AI, documents, images and productivity in one workspace. 100+ free tools, no signup." />
