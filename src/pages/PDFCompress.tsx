@@ -11,6 +11,7 @@ import { usePDFCompress } from "@/hooks/usePDFCompress";
 import { useAICompressionAnalysis } from "@/hooks/useAICompressionAnalysis";
 import RelatedTools from "@/components/RelatedTools";
 import { Sparkles } from "lucide-react";
+import { PRESETS, type CompressPresetId } from "@/lib/pdfCompressEngine";
 
 export type CompressionLevel = number; // 1-100
 
@@ -216,6 +217,13 @@ const PDFCompress = () => {
                     </h2>
                     <p className="text-muted-foreground mb-4">
                       Reduced file size by <span className="text-accent font-semibold">{compressionPercentage}%</span>
+                      {method && (
+                        <span className="block text-xs mt-1">
+                          {method === "lossless"
+                            ? "Lossless optimization — text stays selectable"
+                            : "Deep image optimization applied"}
+                        </span>
+                      )}
                     </p>
                     
                     <div className="flex items-center justify-center gap-8 text-sm">
