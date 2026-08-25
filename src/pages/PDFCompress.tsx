@@ -16,9 +16,12 @@ export type CompressionLevel = number; // 1-100
 
 const PDFCompress = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [compressionLevel, setCompressionLevel] = useState<CompressionLevel>(50);
-  
-  const { compressFile, isProcessing, progress, downloadUrl, originalSize, compressedSize, reset } = usePDFCompress();
+  const [compressionLevel, setCompressionLevel] = useState<CompressionLevel>(55);
+  const [preset, setPreset] = useState<CompressPresetId>("recommended");
+  const [targetKB, setTargetKB] = useState(500);
+  const [grayscale, setGrayscale] = useState(false);
+
+  const { compressFile, isProcessing, progress, statusLabel, downloadUrl, originalSize, compressedSize, method, reset } = usePDFCompress();
   const { analyzeFile, isAnalyzing, analysis, reset: resetAnalysis } = useAICompressionAnalysis();
 
   const handleFileAdded = async (newFile: File) => {
@@ -32,9 +35,23 @@ const PDFCompress = () => {
     resetAnalysis();
   };
 
+  const handlePresetChange = (id: CompressPresetId) => {
+    setPreset(id);
+    if (id === "less" || id === "recommended" || id === "extreme") {
+      setCompressionLevel(PRESETS[id].level);
+      if (id === "less") setGrayscale(false);
+    }
+  };
+
   const handleCompress = async () => {
     if (!file) return;
-    await compressFile(file, compressionLevel);
+    await compressFile(file, {
+      level: compressionLevel,
+      targetKB: preset === "target" ? targetKB : undefined,
+      losslessOnly: preset === "less",
+      grayscale: preset === "less" ? false : grayscale,
+      codec: "jpeg",
+    });
   };
 
   const handleReset = () => {
@@ -44,8 +61,10 @@ const PDFCompress = () => {
   };
 
   const handleApplyRecommendation = (level: number) => {
+    setPreset("custom");
     setCompressionLevel(level);
   };
+
 
   const formatFileSize = (bytes: number) => {
     if (bytes === 0) return "0 Bytes";
