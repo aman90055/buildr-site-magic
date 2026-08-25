@@ -182,17 +182,25 @@ const PDFCompress = () => {
                       />
 
                       <CompressionOptions
+                        preset={preset}
+                        onPresetChange={handlePresetChange}
                         compressionLevel={compressionLevel}
-                        onLevelChange={setCompressionLevel}
+                        onLevelChange={(l) => { setPreset("custom"); setCompressionLevel(l); }}
+                        targetKB={targetKB}
+                        onTargetKBChange={setTargetKB}
+                        grayscale={grayscale}
+                        onGrayscaleChange={setGrayscale}
                         disabled={isProcessing || isAnalyzing}
                       />
 
                       <CompressActions
                         isProcessing={isProcessing}
                         progress={progress}
+                        statusLabel={statusLabel}
                         onCompress={handleCompress}
                         onReset={handleReset}
                       />
+
                     </>
                   )}
                 </div>
