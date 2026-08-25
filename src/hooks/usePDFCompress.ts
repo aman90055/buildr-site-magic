@@ -1,76 +1,50 @@
 import { useState } from "react";
-import { PDFDocument } from "pdf-lib";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
-import type { CompressionLevel } from "@/pages/PDFCompress";
+import { compressPDF, type CompressSettings } from "@/lib/pdfCompressEngine";
 
 export const usePDFCompress = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [statusLabel, setStatusLabel] = useState<string>("");
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [originalSize, setOriginalSize] = useState<number | null>(null);
   const [compressedSize, setCompressedSize] = useState<number | null>(null);
+  const [method, setMethod] = useState<"lossless" | "rasterized" | null>(null);
 
-  const compressFile = async (file: File, level: CompressionLevel) => {
+  const compressFile = async (file: File, settings: CompressSettings) => {
     setIsProcessing(true);
     setProgress(0);
+    setStatusLabel("Preparing document");
     setOriginalSize(file.size);
 
     try {
-      // Load the source PDF
-      const arrayBuffer = await file.arrayBuffer();
-      setProgress(20);
-
-      const sourcePdf = await PDFDocument.load(arrayBuffer, {
-        ignoreEncryption: true,
+      const result = await compressPDF(file, settings, (p, label) => {
+        setProgress(p);
+        if (label) setStatusLabel(label);
       });
-      setProgress(40);
 
-      // Create a new optimized PDF by copying pages
-      const compressedPdf = await PDFDocument.create();
-      const pages = sourcePdf.getPages();
-      
-      // Copy all pages to a new document (this removes unused objects)
-      const copiedPages = await compressedPdf.copyPages(
-        sourcePdf,
-        pages.map((_, i) => i)
-      );
-      
-      copiedPages.forEach((page) => compressedPdf.addPage(page));
-      setProgress(60);
+      // Never hand back something bigger than the original.
+      const finalBytes =
+        result.bytes.byteLength < file.size
+          ? result.bytes
+          : new Uint8Array(await file.arrayBuffer());
+      const usedOriginal = finalBytes.byteLength >= file.size;
 
-      // Get compression options based on level
-      const compressionOptions = getCompressionOptions(level);
-
-      // Save with compression options
-      const compressedBytes = await compressedPdf.save({
-        useObjectStreams: compressionOptions.useObjectStreams,
-        addDefaultPage: false,
-      });
-      setProgress(80);
-
-      // Create a blob and download URL
-      const blob = new Blob([new Uint8Array(compressedBytes)], { type: "application/pdf" });
+      const blob = new Blob([new Uint8Array(finalBytes)], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
-      
+
       setDownloadUrl(url);
       setCompressedSize(blob.size);
-      setProgress(90);
+      setMethod(usedOriginal ? "lossless" : result.method);
+      setStatusLabel("Done");
 
-      // Only log to database if user is authenticated
       const { data: { user } } = await supabase.auth.getUser();
-      
       if (user) {
-        const fileName = `compressed_${Date.now()}.pdf`;
-        const filePath = `${user.id}/compress/${fileName}`;
-
+        const filePath = `${user.id}/compress/compressed_${Date.now()}.pdf`;
         await supabase.storage
           .from("pdfs")
-          .upload(filePath, blob, {
-            contentType: "application/pdf",
-            upsert: false,
-          });
-
+          .upload(filePath, blob, { contentType: "application/pdf", upsert: false });
         await supabase.from("pdf_jobs").insert({
           user_id: user.id,
           job_type: "compress",
@@ -81,21 +55,24 @@ export const usePDFCompress = () => {
       }
 
       setProgress(100);
-
-      const reduction = Math.round((1 - blob.size / file.size) * 100);
+      const reduction = Math.max(0, Math.round((1 - blob.size / file.size) * 100));
       toast({
-        title: "Success!",
-        description: `PDF compressed successfully. Size reduced by ${reduction}%.`,
+        title: usedOriginal ? "Already optimized" : "Compressed!",
+        description: usedOriginal
+          ? "This PDF is already as small as it can get without quality loss."
+          : `Size reduced by ${reduction}%${
+              settings.targetKB ? ` (target ${settings.targetKB} KB)` : ""
+            }.`,
       });
     } catch (error) {
       console.error("Error compressing PDF:", error);
       toast({
-        title: "Error",
-        description: "Failed to compress PDF file. Please try again.",
+        title: "Compression failed",
+        description:
+          error instanceof Error ? error.message : "Could not compress this PDF. Please try again.",
         variant: "destructive",
       });
 
-      // Log failed job only if authenticated
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         await supabase.from("pdf_jobs").insert({
@@ -111,30 +88,25 @@ export const usePDFCompress = () => {
     }
   };
 
-  const getCompressionOptions = (level: CompressionLevel) => {
-    // Level 1-100: higher = more compression
-    return {
-      useObjectStreams: level > 30,
-    };
-  };
-
   const reset = () => {
-    if (downloadUrl) {
-      URL.revokeObjectURL(downloadUrl);
-    }
+    if (downloadUrl) URL.revokeObjectURL(downloadUrl);
     setDownloadUrl(null);
     setProgress(0);
+    setStatusLabel("");
     setOriginalSize(null);
     setCompressedSize(null);
+    setMethod(null);
   };
 
   return {
     compressFile,
     isProcessing,
     progress,
+    statusLabel,
     downloadUrl,
     originalSize,
     compressedSize,
+    method,
     reset,
   };
 };

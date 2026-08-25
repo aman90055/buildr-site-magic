@@ -137,7 +137,7 @@ const rasterize = async (
     onProgress?.(Math.round((i / total) * 100), `Optimizing page ${i} of ${total}`);
   }
 
-  await doc.destroy();
+  await doc.cleanup?.();
   const bytes = await out.save({ useObjectStreams: true, addDefaultPage: false });
   return { bytes, pages: total };
 };

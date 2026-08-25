@@ -11,14 +11,18 @@ import { usePDFCompress } from "@/hooks/usePDFCompress";
 import { useAICompressionAnalysis } from "@/hooks/useAICompressionAnalysis";
 import RelatedTools from "@/components/RelatedTools";
 import { Sparkles } from "lucide-react";
+import { PRESETS, type CompressPresetId } from "@/lib/pdfCompressEngine";
 
 export type CompressionLevel = number; // 1-100
 
 const PDFCompress = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [compressionLevel, setCompressionLevel] = useState<CompressionLevel>(50);
-  
-  const { compressFile, isProcessing, progress, downloadUrl, originalSize, compressedSize, reset } = usePDFCompress();
+  const [compressionLevel, setCompressionLevel] = useState<CompressionLevel>(55);
+  const [preset, setPreset] = useState<CompressPresetId>("recommended");
+  const [targetKB, setTargetKB] = useState(500);
+  const [grayscale, setGrayscale] = useState(false);
+
+  const { compressFile, isProcessing, progress, statusLabel, downloadUrl, originalSize, compressedSize, method, reset } = usePDFCompress();
   const { analyzeFile, isAnalyzing, analysis, reset: resetAnalysis } = useAICompressionAnalysis();
 
   const handleFileAdded = async (newFile: File) => {
@@ -32,9 +36,23 @@ const PDFCompress = () => {
     resetAnalysis();
   };
 
+  const handlePresetChange = (id: CompressPresetId) => {
+    setPreset(id);
+    if (id === "less" || id === "recommended" || id === "extreme") {
+      setCompressionLevel(PRESETS[id].level);
+      if (id === "less") setGrayscale(false);
+    }
+  };
+
   const handleCompress = async () => {
     if (!file) return;
-    await compressFile(file, compressionLevel);
+    await compressFile(file, {
+      level: compressionLevel,
+      targetKB: preset === "target" ? targetKB : undefined,
+      losslessOnly: preset === "less",
+      grayscale: preset === "less" ? false : grayscale,
+      codec: "jpeg",
+    });
   };
 
   const handleReset = () => {
@@ -44,8 +62,10 @@ const PDFCompress = () => {
   };
 
   const handleApplyRecommendation = (level: number) => {
+    setPreset("custom");
     setCompressionLevel(level);
   };
+
 
   const formatFileSize = (bytes: number) => {
     if (bytes === 0) return "0 Bytes";
@@ -163,17 +183,25 @@ const PDFCompress = () => {
                       />
 
                       <CompressionOptions
+                        preset={preset}
+                        onPresetChange={handlePresetChange}
                         compressionLevel={compressionLevel}
-                        onLevelChange={setCompressionLevel}
+                        onLevelChange={(l) => { setPreset("custom"); setCompressionLevel(l); }}
+                        targetKB={targetKB}
+                        onTargetKBChange={setTargetKB}
+                        grayscale={grayscale}
+                        onGrayscaleChange={setGrayscale}
                         disabled={isProcessing || isAnalyzing}
                       />
 
                       <CompressActions
                         isProcessing={isProcessing}
                         progress={progress}
+                        statusLabel={statusLabel}
                         onCompress={handleCompress}
                         onReset={handleReset}
                       />
+
                     </>
                   )}
                 </div>
@@ -189,6 +217,13 @@ const PDFCompress = () => {
                     </h2>
                     <p className="text-muted-foreground mb-4">
                       Reduced file size by <span className="text-accent font-semibold">{compressionPercentage}%</span>
+                      {method && (
+                        <span className="block text-xs mt-1">
+                          {method === "lossless"
+                            ? "Lossless optimization — text stays selectable"
+                            : "Deep image optimization applied"}
+                        </span>
+                      )}
                     </p>
                     
                     <div className="flex items-center justify-center gap-8 text-sm">

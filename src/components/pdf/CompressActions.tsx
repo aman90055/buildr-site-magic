@@ -5,17 +5,18 @@ import { Minimize2, RotateCcw } from "lucide-react";
 interface CompressActionsProps {
   isProcessing: boolean;
   progress: number;
+  statusLabel?: string;
   onCompress: () => void;
   onReset: () => void;
 }
 
-const CompressActions = ({ isProcessing, progress, onCompress, onReset }: CompressActionsProps) => {
+const CompressActions = ({ isProcessing, progress, statusLabel, onCompress, onReset }: CompressActionsProps) => {
   return (
     <div className="space-y-4">
       {isProcessing && (
         <div className="space-y-2">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">Compressing PDF...</span>
+            <span className="text-muted-foreground">{statusLabel || "Compressing PDF..."}</span>
             <span className="text-foreground font-medium">{progress}%</span>
           </div>
           <Progress value={progress} className="h-2" />
