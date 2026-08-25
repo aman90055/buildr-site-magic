@@ -31,7 +31,7 @@ export const usePDFCompress = () => {
           : new Uint8Array(await file.arrayBuffer());
       const usedOriginal = finalBytes.byteLength >= file.size;
 
-      const blob = new Blob([finalBytes], { type: "application/pdf" });
+      const blob = new Blob([new Uint8Array(finalBytes)], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
 
       setDownloadUrl(url);
