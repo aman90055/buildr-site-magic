@@ -88,8 +88,8 @@ const Header = () => {
       <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
       <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
         <div className="container mx-auto px-6 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between gap-3 min-w-0">
+            <div className="flex items-center gap-2 min-w-0">
               {!isHome && (
                 <Button
                   variant="ghost"
@@ -116,35 +116,35 @@ const Header = () => {
                 className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl object-contain"
                 decoding="async"
               />
-              <span className="hidden xs:inline sm:inline">Docunova</span>
+              <span className="hidden xs:inline sm:inline truncate">Docunova</span>
             </Link>
             </div>
           
-          <NavigationMenu className="hidden md:flex">
+          <NavigationMenu className="hidden md:flex shrink-0">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Link to="/tools" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
+                <Link to="/tools" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium whitespace-nowrap">
                   All Tools
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/merge" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
+                <Link to="/merge" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium whitespace-nowrap">
                   Merge
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/split" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
+                <Link to="/split" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium whitespace-nowrap">
                   Split
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/compress" className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
+                <Link to="/compress" className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium whitespace-nowrap">
                   <Brain className="w-3.5 h-3.5 text-brand-ai" />
                   Compress
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/ocr" className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
+                <Link to="/ocr" className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium whitespace-nowrap">
                   <Brain className="w-3.5 h-3.5 text-brand-ai" />
                   AI OCR
                 </Link>
@@ -222,7 +222,7 @@ const Header = () => {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/premium" className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium">
+                <Link to="/premium" className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium whitespace-nowrap">
                   <Crown className="w-3.5 h-3.5 text-amber-500" />
                   Premium
                 </Link>
