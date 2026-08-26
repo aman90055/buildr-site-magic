@@ -120,7 +120,7 @@ const Header = () => {
             </Link>
             </div>
           
-          <NavigationMenu className="hidden md:flex shrink-0">
+          <NavigationMenu className="hidden lg:flex shrink-0">
             <NavigationMenuList>
               <NavigationMenuItem>
                 <Link to="/tools" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium whitespace-nowrap">
