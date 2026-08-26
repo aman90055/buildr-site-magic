@@ -17,6 +17,20 @@ export const loadPDFLib = () => {
 export const loadPDFJS = () => {
   if (!pdfjsPromise) {
     pdfjsPromise = (async () => {
+      // Polyfill for older browsers: pdf.js relies on Map.getOrInsertComputed.
+      const MapProto = Map.prototype as unknown as Record<string, unknown>;
+      if (typeof MapProto.getOrInsertComputed !== "function") {
+        MapProto.getOrInsertComputed = function <K, V>(this: Map<K, V>, key: K, fn: (k: K) => V): V {
+          if (!this.has(key)) this.set(key, fn(key));
+          return this.get(key) as V;
+        };
+      }
+      if (typeof MapProto.getOrInsert !== "function") {
+        MapProto.getOrInsert = function <K, V>(this: Map<K, V>, key: K, value: V): V {
+          if (!this.has(key)) this.set(key, value);
+          return this.get(key) as V;
+        };
+      }
       const pdfjs = await import("pdfjs-dist");
       // Configure worker (same-origin, ESM)
       const workerSrc = (await import("pdfjs-dist/build/pdf.worker.min.mjs?url")).default;
