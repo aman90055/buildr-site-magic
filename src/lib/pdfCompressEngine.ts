@@ -220,17 +220,37 @@ export const compressPDF = async (
     return best;
   }
 
-  const { scale, quality } = levelToParams(settings.level);
-  const r = await attempt(scale, quality, 12, 98);
+  // A single render can be larger than an already image-heavy source PDF.
+  // Escalate gradually until we get a meaningful reduction, then keep the
+  // smallest valid result. This prevents a misleading 0% "success" result.
+  const levels = Array.from(
+    new Set([
+      Math.min(100, Math.max(1, settings.level)),
+      Math.min(100, Math.max(settings.level + 18, 68)),
+      Math.min(100, Math.max(settings.level + 35, 88)),
+      100,
+    ])
+  );
+  const meaningfulTarget = file.size * 0.98;
+
+  for (let i = 0; i < levels.length; i++) {
+    const { scale, quality } = levelToParams(levels[i]);
+    const from = 12 + (i * 86) / levels.length;
+    const to = 12 + ((i + 1) * 86) / levels.length;
+    const r = await attempt(scale, quality, from, to);
+    const raster: CompressResult = {
+      bytes: r.bytes,
+      method: "rasterized",
+      scaleUsed: scale,
+      qualityUsed: quality,
+      pages: r.pages,
+    };
+    if (raster.bytes.byteLength < best.bytes.byteLength) best = raster;
+    if (best.bytes.byteLength <= meaningfulTarget) break;
+  }
+
   onProgress?.(100, "Done");
-  const raster: CompressResult = {
-    bytes: r.bytes,
-    method: "rasterized",
-    scaleUsed: scale,
-    qualityUsed: quality,
-    pages: r.pages,
-  };
-  return raster.bytes.byteLength < best.bytes.byteLength ? raster : best;
+  return best;
 };
 
 export const PRESETS: Record<
@@ -239,9 +259,8 @@ export const PRESETS: Record<
 > = {
   less: {
     label: "Less compression",
-    description: "High quality, text stays selectable",
-    level: 20,
-    losslessOnly: true,
+    description: "High visual quality, gentle size reduction",
+    level: 28,
   },
   recommended: {
     label: "Recommended",

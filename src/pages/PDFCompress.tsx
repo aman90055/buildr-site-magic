@@ -49,7 +49,7 @@ const PDFCompress = () => {
     await compressFile(file, {
       level: compressionLevel,
       targetKB: preset === "target" ? targetKB : undefined,
-      losslessOnly: preset === "less",
+      losslessOnly: false,
       grayscale: preset === "less" ? false : grayscale,
       codec: "jpeg",
     });
@@ -213,10 +213,14 @@ const PDFCompress = () => {
                   
                   <div>
                     <h2 className="text-2xl font-semibold text-foreground mb-2">
-                      PDF Compressed Successfully!
+                      {compressionPercentage > 0 ? "PDF Compressed Successfully!" : "PDF Already Optimized"}
                     </h2>
                     <p className="text-muted-foreground mb-4">
-                      Reduced file size by <span className="text-accent font-semibold">{compressionPercentage}%</span>
+                      {compressionPercentage > 0 ? (
+                        <>Reduced file size by <span className="text-accent font-semibold">{compressionPercentage}%</span></>
+                      ) : (
+                        <>No safe size reduction was possible for this file.</>
+                      )}
                       {method && (
                         <span className="block text-xs mt-1">
                           {method === "lossless"
