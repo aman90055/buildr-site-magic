@@ -13,8 +13,8 @@ import {
 } from "lucide-react";
 import {
   CATEGORY_META,
-  TOOL_REGISTRY,
-  getToolMeta,
+  getAllTools,
+
   getAllTools,
   type ToolMeta,
   type ToolCategory,
