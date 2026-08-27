@@ -13,52 +13,11 @@ import {
 } from "lucide-react";
 import {
   CATEGORY_META,
-  TOOL_REGISTRY,
-  getToolMeta,
+  getAllTools,
   type ToolMeta,
   type ToolCategory,
 } from "@/lib/toolRegistry";
 
-// Extra AI/document tools that exist as routes but aren't in toolRegistry's NAME_MAP yet
-const EXTRA_TOOLS: ToolMeta[] = [
-  { slug: "/ai-cover-letter", name: "AI Cover Letter Writer", category: "ai", short: "Generate tailored cover letters in seconds", guide: "", faqs: [] },
-  { slug: "/ai-email-writer", name: "AI Email Writer", category: "ai", short: "Draft professional emails instantly", guide: "", faqs: [] },
-  { slug: "/ai-blog-writer", name: "AI Blog Writer", category: "ai", short: "Generate full blog articles with AI", guide: "", faqs: [] },
-  { slug: "/ai-code-explainer", name: "AI Code Explainer", category: "ai", short: "Understand any code snippet line-by-line", guide: "", faqs: [] },
-  { slug: "/ai-math-solver", name: "AI Math Solver", category: "ai", short: "Step-by-step solutions to math problems", guide: "", faqs: [] },
-  { slug: "/ai-idea-generator", name: "AI Idea Generator", category: "ai", short: "Brainstorm ideas for any topic", guide: "", faqs: [] },
-  { slug: "/ai-hashtag-generator", name: "AI Hashtag Generator", category: "ai", short: "Trending hashtags for Instagram, TikTok, X", guide: "", faqs: [] },
-  { slug: "/ai-youtube-titles", name: "AI YouTube Title Generator", category: "ai", short: "Click-worthy YouTube titles", guide: "", faqs: [] },
-  { slug: "/ai-tweet-generator", name: "AI Tweet Generator", category: "ai", short: "Punchy tweets in your tone", guide: "", faqs: [] },
-  { slug: "/ai-resume-analyzer", name: "AI Resume Analyzer", category: "ai", short: "Free ATS scan and feedback", guide: "", faqs: [] },
-];
-
-function getAllTools(): ToolMeta[] {
-  const slugs = new Set<string>();
-  const out: ToolMeta[] = [];
-  const push = (t: ToolMeta | null) => {
-    if (!t || slugs.has(t.slug)) return;
-    slugs.add(t.slug);
-    out.push(t);
-  };
-  Object.values(TOOL_REGISTRY).forEach(push);
-  [
-    "/edit-pdf","/protect-pdf","/image-to-pdf","/pdf-to-image","/remove-pages",
-    "/extract-pages","/organize-pdf","/scan-to-pdf","/reverse-pdf","/repair-pdf",
-    "/powerpoint-to-pdf","/excel-to-pdf","/html-to-pdf","/svg-to-pdf",
-    "/markdown-to-pdf","/text-to-pdf","/pdf-to-powerpoint","/pdf-to-excel",
-    "/pdf-to-pdfa","/pdf-to-text","/pdf-to-html","/pdf-to-png","/pdf-to-svg",
-    "/pdf-to-epub","/rotate-pdf","/add-page-numbers","/add-watermark","/crop-pdf",
-    "/flatten-pdf","/grayscale-pdf","/pdf-metadata","/unlock-pdf","/sign-pdf","/pdf-filler",
-    "/redact-pdf","/compare-pdf","/compress-image","/resize-image","/crop-image",
-    "/png-to-jpg","/jpg-to-png","/webp-to-jpg","/jpg-to-webp","/rotate-image",
-    "/remove-background","/image-to-text","/ai-image-enhance","/ai-grammar-check",
-    "/ai-rewriter","/ai-data-extractor","/resume-builder","/invoice-generator",
-    "/certificate-maker","/letter-writer",
-  ].forEach(s => push(getToolMeta(s)));
-  EXTRA_TOOLS.forEach(push);
-  return out;
-}
 
 const CATEGORY_ICONS: Record<ToolCategory, typeof FolderOpen> = {
   organize: FolderOpen,
@@ -144,7 +103,7 @@ export default function Tools() {
           <div className="text-center mb-5">
             <Badge variant="secondary" className="mb-2 gap-1.5 text-xs">
               <LayoutGrid className="h-3 w-3" />
-              {allTools.length}+ tools
+              {allTools.length} tools
             </Badge>
             <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-1">
               Find the right tool, fast
