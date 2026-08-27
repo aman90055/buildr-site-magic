@@ -14,11 +14,10 @@ import {
 import {
   CATEGORY_META,
   getAllTools,
-
-  getAllTools,
   type ToolMeta,
   type ToolCategory,
 } from "@/lib/toolRegistry";
+
 
 const CATEGORY_ICONS: Record<ToolCategory, typeof FolderOpen> = {
   organize: FolderOpen,
