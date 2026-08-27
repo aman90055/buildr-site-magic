@@ -327,3 +327,60 @@ export function getToolsByCategory(category: ToolCategory): ToolMeta[] {
   ];
   return all.filter(t => t.category === category);
 }
+
+
+// ---------- Single source of truth for the tool catalogue ----------
+
+/** AI/document tools that exist as routes but have no registry/NAME_MAP entry. */
+const EXTRA_TOOL_DEFS: { slug: string; name: string; category: ToolCategory; short: string }[] = [
+  { slug: "/ai-cover-letter", name: "AI Cover Letter Writer", category: "ai", short: "Generate tailored cover letters in seconds" },
+  { slug: "/ai-email-writer", name: "AI Email Writer", category: "ai", short: "Draft professional emails instantly" },
+  { slug: "/ai-blog-writer", name: "AI Blog Writer", category: "ai", short: "Generate full blog articles with AI" },
+  { slug: "/ai-code-explainer", name: "AI Code Explainer", category: "ai", short: "Understand any code snippet line-by-line" },
+  { slug: "/ai-math-solver", name: "AI Math Solver", category: "ai", short: "Step-by-step solutions to math problems" },
+  { slug: "/ai-idea-generator", name: "AI Idea Generator", category: "ai", short: "Brainstorm ideas for any topic" },
+  { slug: "/ai-hashtag-generator", name: "AI Hashtag Generator", category: "ai", short: "Trending hashtags for Instagram, TikTok, X" },
+  { slug: "/ai-youtube-titles", name: "AI YouTube Title Generator", category: "ai", short: "Click-worthy YouTube titles" },
+  { slug: "/ai-tweet-generator", name: "AI Tweet Generator", category: "ai", short: "Punchy tweets in your tone" },
+  { slug: "/ai-resume-analyzer", name: "AI Resume Analyzer", category: "ai", short: "Free ATS scan and feedback" },
+];
+
+const FALLBACK_SLUGS = [
+  "/edit-pdf","/protect-pdf","/image-to-pdf","/pdf-to-image","/remove-pages",
+  "/extract-pages","/organize-pdf","/scan-to-pdf","/reverse-pdf","/repair-pdf",
+  "/powerpoint-to-pdf","/excel-to-pdf","/html-to-pdf","/svg-to-pdf",
+  "/markdown-to-pdf","/text-to-pdf","/pdf-to-powerpoint","/pdf-to-excel",
+  "/pdf-to-pdfa","/pdf-to-text","/pdf-to-html","/pdf-to-png","/pdf-to-svg",
+  "/pdf-to-epub","/rotate-pdf","/add-page-numbers","/add-watermark","/crop-pdf",
+  "/flatten-pdf","/grayscale-pdf","/pdf-metadata","/unlock-pdf","/sign-pdf","/pdf-filler",
+  "/redact-pdf","/compare-pdf","/compress-image","/resize-image","/crop-image",
+  "/png-to-jpg","/jpg-to-png","/webp-to-jpg","/jpg-to-webp","/webp-to-png","/rotate-image",
+  "/remove-background","/image-to-text","/ai-image-enhance","/ai-grammar-check",
+  "/ai-rewriter","/ai-data-extractor","/resume-builder","/invoice-generator",
+  "/certificate-maker","/letter-writer",
+];
+
+let _all: ToolMeta[] | null = null;
+
+/** Every tool the site advertises, de-duplicated. The only place the catalogue is defined. */
+export function getAllTools(): ToolMeta[] {
+  if (_all) return _all;
+  const seen = new Set<string>();
+  const out: ToolMeta[] = [];
+  const push = (t: ToolMeta | null) => {
+    if (!t || seen.has(t.slug)) return;
+    seen.add(t.slug);
+    out.push(t);
+  };
+  Object.values(TOOL_REGISTRY).forEach(push);
+  FALLBACK_SLUGS.forEach((s) => push(getToolMeta(s)));
+  EXTRA_TOOL_DEFS.forEach((t) => push({ ...t, guide: "", faqs: [] }));
+  _all = out;
+  return out;
+}
+
+/** Authoritative tool count — derived, never hardcoded. */
+export const TOOL_COUNT = getAllTools().length;
+
+/** Rounded-down marketing label, e.g. "60+". Always <= TOOL_COUNT. */
+export const TOOL_COUNT_LABEL = `${Math.floor(TOOL_COUNT / 10) * 10}+`;
