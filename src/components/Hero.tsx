@@ -3,6 +3,7 @@ import { ArrowRight, Play, FileText, Merge, Split, Minimize2, Sparkles, Lightbul
 import { Link } from "react-router-dom";
 import AIBadge from "./AIBadge";
 import { trackCTA, trackToolCard } from "@/lib/analytics";
+import { TOOL_COUNT } from "@/lib/toolRegistry";
 
 const tools = [
   { to: "/merge", icon: Merge, label: "Merge PDF", desc: "AI-optimized combining", color: "bg-brand-blue", glow: "hsl(var(--brand-blue))", ai: true },
