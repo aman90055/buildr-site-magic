@@ -150,21 +150,21 @@ const Hero = () => {
               </Button>
             </div>
 
-            {/* Trust Stats */}
+            {/* Product facts — verifiable, no traffic or accuracy claims */}
             <div className="flex flex-wrap items-center gap-4 sm:gap-8 pt-2 sm:pt-4 animate-fade-in" style={{ animationDelay: "0.5s" }}>
               <div className="text-center">
-                <div className="text-xl sm:text-2xl font-display font-bold text-foreground">2M+</div>
-                <div className="text-[11px] sm:text-xs text-muted-foreground">PDFs Processed</div>
+                <div className="text-xl sm:text-2xl font-display font-bold text-foreground">{TOOL_COUNT}</div>
+                <div className="text-[11px] sm:text-xs text-muted-foreground">Tools available</div>
               </div>
               <div className="w-px h-8 sm:h-10 bg-border" />
               <div className="text-center">
-                <div className="text-xl sm:text-2xl font-display font-bold text-foreground">99.9%</div>
-                <div className="text-[11px] sm:text-xs text-muted-foreground">Accuracy Rate</div>
+                <div className="text-xl sm:text-2xl font-display font-bold text-foreground">₹0</div>
+                <div className="text-[11px] sm:text-xs text-muted-foreground">Cost to use</div>
               </div>
               <div className="w-px h-8 sm:h-10 bg-border" />
               <div className="text-center">
-                <div className="text-xl sm:text-2xl font-display font-bold text-foreground">150+</div>
-                <div className="text-[11px] sm:text-xs text-muted-foreground">Countries</div>
+                <div className="text-xl sm:text-2xl font-display font-bold text-foreground">100+</div>
+                <div className="text-[11px] sm:text-xs text-muted-foreground">OCR languages</div>
               </div>
             </div>
           </div>
