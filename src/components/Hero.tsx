@@ -14,7 +14,7 @@ const tools = [
 const features = [
   { icon: Lightbulb, title: "Smart Automation", color: "text-brand-ai" },
   { icon: Zap, title: "Fast Processing", color: "text-brand-cyan" },
-  { icon: Shield, title: "Enterprise-Grade Security", color: "text-brand-green" },
+  { icon: Shield, title: "Files Stay On Your Device", color: "text-brand-green" },
   { icon: Globe, title: "Mobile Optimized", color: "text-brand-purple" },
 ];
 
@@ -87,16 +87,16 @@ const Hero = () => {
                   <div className="flex-1 min-w-0 h-5 sm:h-6 overflow-hidden">
                     <div className="animate-hero-rotate">
                       <div className="h-5 sm:h-6 flex items-center text-sm sm:text-[15px] font-medium text-foreground/90">
-                        ⚡ 1,284 documents processed in the last minute
+                        ⚡ Merge, split, compress & convert — right in your browser
                       </div>
                       <div className="h-5 sm:h-6 flex items-center text-sm sm:text-[15px] font-medium text-foreground/90">
-                        🌍 Trusted by 2M+ users across 150+ countries
+                        🌍 Works in any modern browser, on phone, tablet or desktop
                       </div>
                       <div className="h-5 sm:h-6 flex items-center text-sm sm:text-[15px] font-medium text-foreground/90">
-                        🔒 End‑to‑end encrypted · No file ever leaves your browser
+                        🔒 PDF & image tools run locally — files stay on your device
                       </div>
                       <div className="h-5 sm:h-6 flex items-center text-sm sm:text-[15px] font-medium text-foreground/90">
-                        ✨ 100+ smart tools · Free forever · No sign‑up required
+                        ✨ Free to use · No sign‑up required for PDF tools
                       </div>
                     </div>
                   </div>

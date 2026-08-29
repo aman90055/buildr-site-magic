@@ -30,7 +30,7 @@ const HomeContent = () => {
           </p>
           <p className="text-muted-foreground leading-relaxed text-lg mt-4">
             We started in 2024 as a side project to merge invoices for a small
-            accounting firm in Pune. Three years and millions of processed files
+            accounting firm in Pune. Several years of building document workflows
             later, we maintain more than 50 individual tools spanning conversion,
             compression, editing, OCR, security, and AI-assisted analysis. Each
             tool is documented below with a plain-language explanation of what it

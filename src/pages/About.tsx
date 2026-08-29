@@ -12,7 +12,7 @@ const About = () => {
   const stats = [
     { label: "PDF Tools", value: "25+", icon: Zap },
     { label: "Users Served", value: "10K+", icon: Users },
-    { label: "Files Processed", value: "100K+", icon: Target },
+    { label: "Tool Categories", value: "7", icon: Target },
     { label: "AI Features", value: "10+", icon: Sparkles },
   ];
 

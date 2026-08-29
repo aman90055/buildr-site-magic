@@ -281,7 +281,7 @@ const Premium = () => {
           {/* Trust Signals */}
           <section className="py-16 bg-muted/30">
             <div className="container max-w-4xl mx-auto px-4 text-center">
-              <h2 className="text-2xl font-bold mb-8">Trusted by 10,000+ Users</h2>
+              <h2 className="text-2xl font-bold mb-8">What Premium includes</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div>
                   <FileText className="w-8 h-8 text-primary mx-auto mb-2" />

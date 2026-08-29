@@ -42,7 +42,7 @@ const toolCategories = [
     title: "Smart Tools",
     icon: Lightbulb,
     tools: [
-      { title: "Smart OCR", description: "99.9% accuracy AI OCR", href: "/ocr", icon: ScanText, ai: true, popular: true },
+      { title: "Smart OCR", description: "AI OCR in 100+ languages", href: "/ocr", icon: ScanText, ai: true, popular: true },
       { title: "Smart Analysis", description: "Summarize & extract", href: "/ocr", icon: Lightbulb, ai: true },
       { title: "Compress PDF", description: "AI compression engine", href: "/compress", icon: FileDown, ai: true, popular: true },
       { title: "Repair PDF", description: "Smart PDF repair", href: "/repair-pdf", icon: Wrench, ai: true },
@@ -105,7 +105,7 @@ const toolCategories = [
     icon: Lock,
     tools: [
       { title: "Unlock PDF", description: "Remove restrictions", href: "/unlock-pdf", icon: Unlock },
-      { title: "Protect PDF", description: "Bank-grade encryption", href: "/protect-pdf", icon: Lock, popular: true },
+      { title: "Protect PDF", description: "Password-protect with AES encryption", href: "/protect-pdf", icon: Lock, popular: true },
       { title: "Sign PDF", description: "Digital signatures", href: "/sign-pdf", icon: PenTool, popular: true },
       { title: "PDF Filler", description: "Fill out PDF forms free", href: "/pdf-filler", icon: FileSearch, popular: true },
       { title: "Redact PDF", description: "AI-powered redaction", href: "/redact-pdf", icon: EyeOff, ai: true },

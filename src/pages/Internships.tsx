@@ -18,7 +18,7 @@ const Internships = () => {
     <div className="min-h-screen">
       <SocialMeta
         title="Internships — The Docunova AI Suite"
-        description="Paid, fully-remote internships in engineering, AI, design and growth. Build real products used by millions."
+        description="Paid, fully-remote internships in engineering, AI, design and growth. Build real, shipping products."
         path="/internships"
       />
       <Header />

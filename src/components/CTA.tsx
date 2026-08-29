@@ -23,7 +23,7 @@ const CTA = () => {
           </h2>
           
           <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto font-light animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            Join millions of users who are already using our AI-powered tools to work smarter, not harder.
+            Every tool is free to use, with no sign-up for PDF and image work. Pick a tool and get started in seconds.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: "0.3s" }}>
@@ -60,7 +60,7 @@ const CTA = () => {
               <svg className="w-4 h-4 text-brand-green" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-              Bank-grade security
+              Files stay in your browser
             </span>
           </div>
 

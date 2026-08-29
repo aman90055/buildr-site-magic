@@ -64,7 +64,7 @@ const whyUs = [
 // Testimonials moved to TestimonialsCarousel component
 
 const awards = [
-  "Trusted by thousands of users worldwide",
+  "Free document tools, built in the open",
   "Growing AI Productivity Platform",
   "Secure Cloud-Based Document Solution",
   "Modern SaaS Experience with 100+ Tools",
