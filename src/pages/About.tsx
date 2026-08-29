@@ -105,7 +105,7 @@ const About = () => {
                   </p>
                   <p className="text-muted-foreground mb-6 leading-relaxed">
                     What started as a personal project has grown into a comprehensive suite of 25+ tools 
-                    that help thousands of users daily. I believe in building products that are not just 
+                    that solve real document problems. I believe in building products that are not just 
                     functional but delightful to use.
                   </p>
                   <div className="flex flex-wrap gap-2 mb-6">
