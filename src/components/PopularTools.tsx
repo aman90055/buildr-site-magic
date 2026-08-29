@@ -1,3 +1,4 @@
+import { TOOL_COUNT_LABEL } from "@/lib/toolRegistry";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -42,7 +43,7 @@ const toolCategories = [
     title: "Smart Tools",
     icon: Lightbulb,
     tools: [
-      { title: "Smart OCR", description: "99.9% accuracy AI OCR", href: "/ocr", icon: ScanText, ai: true, popular: true },
+      { title: "Smart OCR", description: "AI OCR in 100+ languages", href: "/ocr", icon: ScanText, ai: true, popular: true },
       { title: "Smart Analysis", description: "Summarize & extract", href: "/ocr", icon: Lightbulb, ai: true },
       { title: "Compress PDF", description: "AI compression engine", href: "/compress", icon: FileDown, ai: true, popular: true },
       { title: "Repair PDF", description: "Smart PDF repair", href: "/repair-pdf", icon: Wrench, ai: true },
@@ -105,7 +106,7 @@ const toolCategories = [
     icon: Lock,
     tools: [
       { title: "Unlock PDF", description: "Remove restrictions", href: "/unlock-pdf", icon: Unlock },
-      { title: "Protect PDF", description: "Bank-grade encryption", href: "/protect-pdf", icon: Lock, popular: true },
+      { title: "Protect PDF", description: "Password-protect with AES encryption", href: "/protect-pdf", icon: Lock, popular: true },
       { title: "Sign PDF", description: "Digital signatures", href: "/sign-pdf", icon: PenTool, popular: true },
       { title: "PDF Filler", description: "Fill out PDF forms free", href: "/pdf-filler", icon: FileSearch, popular: true },
       { title: "Redact PDF", description: "AI-powered redaction", href: "/redact-pdf", icon: EyeOff, ai: true },
@@ -421,7 +422,7 @@ const PopularTools = () => {
           </span>
         </div>
         <h2 className="font-display font-bold text-4xl md:text-5xl text-foreground mb-4 tracking-tight">
-          All 100+ Tools You Need
+          All {TOOL_COUNT_LABEL} Tools You Need
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           Search, filter and pin favorites across PDF, Image, Document & Smart categories.
@@ -438,7 +439,7 @@ const PopularTools = () => {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search 100+ tools — try 'compress', 'word', 'ocr'…"
+              placeholder="Search tools — try 'compress', 'word', 'ocr'…"
               aria-label="Search tools"
               className="flex-1 bg-transparent px-3 py-3.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
             />

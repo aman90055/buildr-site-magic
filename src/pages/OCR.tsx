@@ -101,7 +101,7 @@ const OCR = () => {
         />
         <link rel="canonical" href="https://docunova.online/ocr" />
         <meta property="og:title" content="Free AI OCR — Extract Text from Images & Scanned PDFs" />
-        <meta property="og:description" content="AI-powered OCR with 99.9% accuracy. Extract text from images and scanned documents in 100+ languages. Free, unlimited, no signup." />
+        <meta property="og:description" content="AI-powered OCR that extracts text from images and scanned documents in 100+ languages. Free, no signup." />
         <meta property="og:url" content="https://docunova.online/ocr" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -146,7 +146,7 @@ const OCR = () => {
                 Smart OCR
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Extract text from images with 99.9% accuracy using AI-powered recognition.
+                Extract text from images and scans in 100+ languages using AI-powered recognition.
               </p>
             </div>
 

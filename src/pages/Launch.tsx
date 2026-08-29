@@ -1,3 +1,4 @@
+import { TOOL_COUNT_LABEL } from "@/lib/toolRegistry";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -78,7 +79,7 @@ const Launch = () => {
               <div className="flex flex-wrap gap-3 justify-center mb-10">
                 <Button asChild size="lg" className="text-base">
                   <Link to="/tools">
-                    Try all 100+ tools <ArrowRight className="w-4 h-4 ml-2" />
+                    Try all {TOOL_COUNT_LABEL} tools <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="text-base">
@@ -121,7 +122,7 @@ const Launch = () => {
                     should cost anything.
                   </p>
                   <p className="text-muted-foreground mb-3">
-                    So I built <strong>Docunova AI</strong> — 100+ tools that run
+                    So I built <strong>Docunova AI</strong> — {TOOL_COUNT_LABEL} tools that run
                     client-side wherever possible, plus AI features (OCR, translate,
                     summarize) powered by a shared AI gateway. No signup. No file-size
                     limit. No dark patterns.
@@ -231,7 +232,7 @@ const Launch = () => {
               <h2 className="text-3xl md:text-4xl font-bold mb-3">Open a tool. See for yourself.</h2>
               <p className="text-muted-foreground mb-6">No signup. No card. Nothing between you and the download button.</p>
               <Button asChild size="lg" className="text-base">
-                <Link to="/tools">Browse all 100+ tools <ArrowRight className="w-4 h-4 ml-2" /></Link>
+                <Link to="/tools">Browse all {TOOL_COUNT_LABEL} tools <ArrowRight className="w-4 h-4 ml-2" /></Link>
               </Button>
             </section>
           </div>

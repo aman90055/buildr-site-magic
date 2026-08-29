@@ -235,7 +235,7 @@ const GuideEditPDFFree = () => {
                 A scanned PDF isn't actually text — it's a photo of a page. To edit
                 one, run it through <Link to="/ocr" className="text-primary underline">Docunova AI OCR</Link> first.
                 Our OCR reads 100+ languages including Hindi, Marathi, Tamil, Arabic,
-                and Chinese, and returns real editable text with 99.9% accuracy on clean
+                and Chinese, and returns real editable text that stays reliable on clean
                 scans. Then open the OCR'd file in the editor and edit like any other PDF.
               </p>
             </section>

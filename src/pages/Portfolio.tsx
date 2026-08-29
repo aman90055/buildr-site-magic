@@ -10,7 +10,7 @@ const projects = [
   {
     title: "The Docunova AI Suite",
     tag: "SaaS · AI · 2026",
-    desc: "Flagship platform — 100+ document tools, AI assistants, and team workflows. Millions of documents processed.",
+    desc: "Flagship platform — 100+ document tools, AI assistants, and team workflows. Built and maintained solo.",
     href: "/",
     color: "from-primary to-brand-ai",
   },

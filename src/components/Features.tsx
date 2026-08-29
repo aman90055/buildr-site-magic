@@ -11,7 +11,7 @@ const features = [
   {
     icon: FileSearch,
     title: "Smart OCR Technology",
-    description: "Extract text from any scanned document or image with 99.9% accuracy using advanced neural networks.",
+    description: "Extract text from scanned documents and images in over 100 languages. Accuracy depends on scan quality — you can review and edit the result before downloading.",
     badge: "AI",
     color: "from-brand-cyan to-brand-blue",
   },
@@ -24,13 +24,13 @@ const features = [
   {
     icon: Zap,
     title: "Lightning Processing",
-    description: "Process documents in milliseconds with our optimized cloud infrastructure. No waiting, instant results.",
+    description: "Processing runs on your own device in a background worker, so the interface stays responsive even on large files.",
     color: "from-brand-orange to-brand-pink",
   },
   {
     icon: Shield,
-    title: "Bank-Grade Security",
-    description: "256-bit SSL encryption, automatic file deletion after processing. Your documents never leave secure servers.",
+    title: "Private By Design",
+    description: "PDF and image tools process files locally in your browser, so those documents are never uploaded. AI tools send only the text or image you submit to our AI provider.",
     color: "from-brand-green to-brand-cyan",
   },
   {

@@ -72,7 +72,7 @@ const comparisonRows: { label: string; free: string | boolean; pro: string | boo
   { label: "API access", free: false, pro: false, business: true },
   { label: "White-label", free: false, pro: false, business: true },
   { label: "Priority support", free: false, pro: true, business: true },
-  { label: "SLA 99.9%", free: false, pro: false, business: true },
+  { label: "Priority email support", free: false, pro: false, business: true },
 ];
 
 const Cell = ({ value }: { value: string | boolean }) => {

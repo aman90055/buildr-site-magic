@@ -11,7 +11,7 @@ const facts = [
   { label: "Founder", value: "Aman Vishwakarma" },
   { label: "HQ", value: "India · Remote" },
   { label: "Tools", value: "60+" },
-  { label: "Users served", value: "100k+" },
+  { label: "OCR languages", value: "100+" },
   { label: "Pricing", value: "Free forever" },
 ];
 
@@ -27,7 +27,7 @@ export default function Press() {
       <main className="container mx-auto px-4 py-16 max-w-5xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Press & Media</h1>
         <p className="text-muted-foreground mb-12 text-lg">
-          A privacy-first, free-forever document toolkit. Built in the open. Trusted by creators worldwide.
+          A privacy-first, free-forever document toolkit. Built in the open, from India.
         </p>
 
         <Card className="p-6 mb-10">

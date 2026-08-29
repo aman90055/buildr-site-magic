@@ -39,7 +39,7 @@ const Careers = () => {
               Build the future of documents
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              The Docunova AI Suite powers millions of document workflows every month. Join a small,
+              The Docunova AI Suite is a free, privacy-first document toolkit. Join a small,
               senior, fully-remote team shipping at high velocity.
             </p>
           </div>

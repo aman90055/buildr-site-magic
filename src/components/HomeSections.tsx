@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import {
   FileText, FileType2, Brain, Image as ImageIcon, FileSignature,
-  Wrench, Trophy, BookOpen, Mail, Globe, ArrowRight,
+  Wrench, BookOpen, Mail, Globe, ArrowRight,
 } from "lucide-react";
 
 const services = [
@@ -61,14 +61,7 @@ const whyUs = [
   "Fast, Secure & Scalable Infrastructure",
 ];
 
-// Testimonials moved to TestimonialsCarousel component
 
-const awards = [
-  "Trusted by thousands of users worldwide",
-  "Growing AI Productivity Platform",
-  "Secure Cloud-Based Document Solution",
-  "Modern SaaS Experience with 100+ Tools",
-];
 
 const blogPosts = [
   { title: "How to Merge PDFs Online", href: "/merge" },
@@ -147,28 +140,6 @@ const HomeSections = () => {
         </div>
       </section>
 
-      {/* Testimonials handled by TestimonialsCarousel in Index */}
-
-      {/* Awards & Recognition */}
-      <section className="py-16 sm:py-20" aria-label="Awards and recognition">
-        <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight mb-3">
-              Awards & Recognition
-            </h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {awards.map((a) => (
-              <Card key={a} className="glass-card border-border/40 text-center">
-                <CardContent className="p-6">
-                  <Trophy className="w-8 h-8 text-brand-orange mx-auto mb-3" />
-                  <p className="text-sm font-medium text-foreground/90">{a}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Blog */}
       <section className="py-16 sm:py-20 bg-muted/30" aria-label="Latest resources">

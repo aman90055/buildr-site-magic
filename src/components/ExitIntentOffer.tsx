@@ -99,7 +99,7 @@ const ExitIntentOffer = () => {
           </div>
 
           <p className="text-xs text-muted-foreground pt-2">
-            ❤️ Made in India · Trusted by millions
+            ❤️ Made in India · Free to use
           </p>
         </div>
       </div>

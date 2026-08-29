@@ -1,3 +1,4 @@
+import { TOOL_COUNT_LABEL } from "@/lib/toolRegistry";
 import { useLocation, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -99,7 +100,7 @@ const ToolSEOSection = () => {
               <Link to="/" className="text-primary hover:underline font-medium">
                 homepage
               </Link>{" "}
-              to see all 80+ free tools.
+              to see all {TOOL_COUNT_LABEL} free tools.
             </p>
           </article>
 
