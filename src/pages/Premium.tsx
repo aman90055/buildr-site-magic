@@ -1,3 +1,4 @@
+import { TOOL_COUNT } from "@/lib/toolRegistry";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import Header from "@/components/Header";
@@ -285,23 +286,23 @@ const Premium = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div>
                   <FileText className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <div className="text-2xl font-bold">50+</div>
-                  <div className="text-sm text-muted-foreground">PDF Tools</div>
+                  <div className="text-2xl font-bold">{TOOL_COUNT}</div>
+                  <div className="text-sm text-muted-foreground">Tools included</div>
                 </div>
                 <div>
                   <Users className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <div className="text-2xl font-bold">10K+</div>
-                  <div className="text-sm text-muted-foreground">Active Users</div>
+                  <div className="text-2xl font-bold">No ads</div>
+                  <div className="text-sm text-muted-foreground">On premium plans</div>
                 </div>
                 <div>
                   <Sparkles className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <div className="text-2xl font-bold">99.9%</div>
-                  <div className="text-sm text-muted-foreground">Uptime</div>
+                  <div className="text-2xl font-bold">Priority</div>
+                  <div className="text-sm text-muted-foreground">Email support</div>
                 </div>
                 <div>
                   <Shield className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <div className="text-2xl font-bold">100%</div>
-                  <div className="text-sm text-muted-foreground">Secure</div>
+                  <div className="text-2xl font-bold">Local</div>
+                  <div className="text-sm text-muted-foreground">PDF processing</div>
                 </div>
               </div>
             </div>

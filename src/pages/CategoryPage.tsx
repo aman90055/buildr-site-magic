@@ -1,3 +1,4 @@
+import { TOOL_COUNT_LABEL } from "@/lib/toolRegistry";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
@@ -99,7 +100,7 @@ const CategoryPage = () => {
             <div className="container max-w-3xl mx-auto px-6 text-center">
               <h2 className="text-xl font-semibold mb-3">Looking for something else?</h2>
               <p className="text-muted-foreground mb-6">
-                See all 80+ free PDF, image, AI and document tools on the homepage.
+                See all {TOOL_COUNT_LABEL} free PDF, image, AI and document tools on the homepage.
               </p>
               <Button asChild variant="outline" size="lg">
                 <Link to="/">Browse all tools</Link>

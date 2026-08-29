@@ -1,3 +1,4 @@
+import { TOOL_COUNT_LABEL } from "@/lib/toolRegistry";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -421,7 +422,7 @@ const PopularTools = () => {
           </span>
         </div>
         <h2 className="font-display font-bold text-4xl md:text-5xl text-foreground mb-4 tracking-tight">
-          All 100+ Tools You Need
+          All {TOOL_COUNT_LABEL} Tools You Need
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           Search, filter and pin favorites across PDF, Image, Document & Smart categories.
@@ -438,7 +439,7 @@ const PopularTools = () => {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search 100+ tools — try 'compress', 'word', 'ocr'…"
+              placeholder="Search tools — try 'compress', 'word', 'ocr'…"
               aria-label="Search tools"
               className="flex-1 bg-transparent px-3 py-3.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
             />

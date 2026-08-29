@@ -1,3 +1,4 @@
+import { TOOL_COUNT_LABEL } from "@/lib/toolRegistry";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import {
@@ -67,7 +68,7 @@ const awards = [
   "Free document tools, built in the open",
   "Growing AI Productivity Platform",
   "Secure Cloud-Based Document Solution",
-  "Modern SaaS Experience with 100+ Tools",
+  `Modern SaaS Experience with ${TOOL_COUNT_LABEL} Tools`,
 ];
 
 const blogPosts = [

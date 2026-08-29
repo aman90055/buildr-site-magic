@@ -23,7 +23,7 @@ const Index = () => {
     <>
       <Helmet>
         <title>The Docunova AI Suite — 100+ PDF, AI & Document Tools</title>
-        <meta name="description" content="The Docunova AI Suite: free online PDF editor with 100+ tools — merge, split, compress, convert to Word/Excel, OCR, e-sign, watermark & AI summarize. No signup." />
+        <meta name="description" content="The Docunova AI Suite: free online PDF editor with 70+ tools — merge, split, compress, convert to Word/Excel, OCR, e-sign, watermark & AI summarize. No signup." />
         <link rel="canonical" href="https://docunova.online/" />
         <meta name="keywords" content="Docunova AI Suite, free PDF editor online, merge PDF, split PDF, compress PDF, PDF to Word, PDF to Excel, OCR online, e-sign PDF, AI PDF summarizer, watermark PDF, edit PDF free, image to PDF" />
         <meta property="og:title" content="The Docunova AI Suite — 100+ PDF, AI & Document Tools" />
@@ -32,7 +32,7 @@ const Index = () => {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="The Docunova AI Suite — 100+ Tools" />
+        <meta name="twitter:title" content="The Docunova AI Suite — 70+ Tools" />
         <meta name="twitter:description" content="PDFs, AI, documents & productivity in one workspace. 100+ free tools." />
       </Helmet>
       <div className="min-h-screen">

@@ -4,7 +4,7 @@ import { Linkedin, Facebook, Twitter, Instagram, MessageCircle, Send, Hash, Came
 const linkedinFeatures = [
   { name: "Company Page", icon: Briefcase, desc: "Optimized company presence with logo, banner, story" },
   { name: "Careers Page", icon: Users, desc: "Open roles, culture, perks — built-in ATS-ready" },
-  { name: "Product Showcase", icon: Globe, desc: "Showcase all 100+ tools as LinkedIn Product Pages" },
+  { name: "Product Showcase", icon: Globe, desc: "Showcase the full tool suite as LinkedIn Product Pages" },
   { name: "Founder Profile", icon: Users, desc: "Founder thought-leadership content templates" },
   { name: "Employee Profiles", icon: Users, desc: "Team highlight pages with auto-banners" },
   { name: "Open Graph Preview", icon: ImageIcon, desc: "Perfect link preview for every page" },
