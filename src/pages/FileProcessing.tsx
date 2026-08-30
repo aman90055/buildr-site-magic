@@ -1,7 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SocialMeta from "@/components/SocialMeta";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Laptop, Cloud, Database, Trash2, Mail } from "lucide-react";
@@ -20,7 +19,6 @@ const FileProcessing = () => {
       />
       <Header />
       <main className="container mx-auto px-4 py-12 max-w-3xl">
-        <Breadcrumbs items={[{ label: "Privacy & File Processing" }]} />
         <h1 className="text-3xl md:text-4xl font-display font-bold tracking-tight mt-4">
           Privacy &amp; file processing
         </h1>

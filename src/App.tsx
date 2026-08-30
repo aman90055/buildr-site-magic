@@ -144,6 +144,7 @@ const Careers = lazy(() => import("./pages/Careers"));
 const Internships = lazy(() => import("./pages/Internships"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const CaseStudies = lazy(() => import("./pages/CaseStudies"));
+const FileProcessing = lazy(() => import("./pages/FileProcessing"));
 const Tools = lazy(() => import("./pages/Tools"));
 const OAuthConsent = lazy(() => import("./pages/OAuthConsent"));
 
@@ -195,6 +196,7 @@ const App = () => (
                 <Route path="/editorial-policy" element={<Editorial />} />
                 <Route path="/ai-usage-policy" element={<AIUsage />} />
                 <Route path="/accessibility" element={<Accessibility />} />
+                <Route path="/file-processing" element={<FileProcessing />} />
                 <Route path="/merge" element={<PDFMerge />} />
                 <Route path="/split" element={<PDFSplit />} />
                 <Route path="/compress" element={<PDFCompress />} />
