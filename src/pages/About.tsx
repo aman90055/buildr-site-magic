@@ -1,3 +1,4 @@
+import { TOOL_COUNT } from "@/lib/toolRegistry";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,8 +11,8 @@ const amanPhoto = amanPhotoAsset.url;
 
 const About = () => {
   const stats = [
-    { label: "PDF Tools", value: "25+", icon: Zap },
-    { label: "Users Served", value: "10K+", icon: Users },
+    { label: "Tools Available", value: String(TOOL_COUNT), icon: Zap },
+    { label: "Cost To Use", value: "₹0", icon: Users },
     { label: "Tool Categories", value: "7", icon: Target },
     { label: "AI Features", value: "10+", icon: Sparkles },
   ];
