@@ -9,6 +9,16 @@ import { ArrowLeft, Calendar, Clock, Share2, Bookmark, Twitter, Linkedin, Facebo
 import AdSlot from "@/components/ads/AdSlot";
 import AffiliateBanner from "@/components/ads/AffiliateBanner";
 import { Fragment } from "react";
+import longformPart1 from "@/data/blogLongform.part1.json";
+import longformPart2 from "@/data/blogLongform.part2.json";
+import longformPart3 from "@/data/blogLongform.part3.json";
+
+const LONGFORM: Record<string, string[]> = {
+  ...(longformPart1 as Record<string, string[]>),
+  ...(longformPart2 as Record<string, string[]>),
+  ...(longformPart3 as Record<string, string[]>),
+};
+
 
 const blogPostsData: Record<string, {
   title: string;
