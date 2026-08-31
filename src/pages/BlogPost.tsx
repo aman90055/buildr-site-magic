@@ -14,9 +14,9 @@ import longformPart2 from "@/data/blogLongform.part2.json";
 import longformPart3 from "@/data/blogLongform.part3.json";
 
 const LONGFORM: Record<string, string[]> = {
-  ...(longformPart1 as Record<string, string[]>),
-  ...(longformPart2 as Record<string, string[]>),
-  ...(longformPart3 as Record<string, string[]>),
+  ...(longformPart1 as unknown as Record<string, string[]>),
+  ...(longformPart2 as unknown as Record<string, string[]>),
+  ...(longformPart3 as unknown as Record<string, string[]>),
 };
 
 
@@ -1023,7 +1023,14 @@ const BlogPost = () => {
   const longform = slug ? LONGFORM[slug] : undefined;
   const post = base
     ? longform && longform.length > base.content.length
-      ? { ...base, content: longform }
+      ? {
+          ...base,
+          content: longform,
+          readTime: `${Math.max(
+            1,
+            Math.round(longform.join(" ").split(/\s+/).length / 220),
+          )} min read`,
+        }
       : base
     : null;
 
