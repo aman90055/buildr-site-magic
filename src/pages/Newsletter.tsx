@@ -8,6 +8,7 @@ import { Mail, Sparkles, Zap } from "lucide-react";
 const Newsletter = () => (
   <>
     <Helmet>
+        <meta name="robots" content="noindex, follow" />
       <title>Newsletter — The Docunova AI Suite</title>
       <meta name="description" content="Get product updates, new AI tools, and pro tips delivered to your inbox. No spam." />
       <link rel="canonical" href="https://docunova.online/newsletter" />

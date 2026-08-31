@@ -17,6 +17,7 @@ export default function Brand() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
+        <meta name="robots" content="noindex, follow" />
         <title>Brand Kit — The Docunova AI Suite</title>
         <meta name="description" content="Official brand guidelines, logos, colors, and typography for The Docunova AI Suite." />
         <link rel="canonical" href="https://docunova.online/brand" />

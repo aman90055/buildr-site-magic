@@ -46,6 +46,7 @@ const ReferAndEarn = () => {
   return (
     <>
       <Helmet>
+        <meta name="robots" content="noindex, follow" />
         <title>Refer & Earn | PDF Tools</title>
         <meta name="description" content="Invite friends and earn credits, discounts, and points for every successful referral." />
         <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />

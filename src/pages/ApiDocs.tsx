@@ -24,6 +24,7 @@ export default function ApiDocs() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
+        <meta name="robots" content="noindex, follow" />
         <title>Developer API — The Docunova AI Suite</title>
         <meta name="description" content="REST API for PDF, image, and AI document tools. API keys, endpoints, rate limits, and SDKs." />
         <link rel="canonical" href="https://docunova.online/api-docs" />

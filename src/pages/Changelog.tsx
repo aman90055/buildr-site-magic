@@ -53,6 +53,7 @@ const tagColor: Record<Release["tags"][number], string> = {
 const Changelog = () => (
   <>
     <Helmet>
+        <meta name="robots" content="noindex, follow" />
       <title>Changelog — The Docunova AI Suite</title>
       <meta name="description" content="Every release of The Docunova AI Suite — new tools, fixes, and improvements." />
       <link rel="canonical" href="https://docunova.online/changelog" />
