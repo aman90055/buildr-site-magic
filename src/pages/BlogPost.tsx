@@ -9,6 +9,16 @@ import { ArrowLeft, Calendar, Clock, Share2, Bookmark, Twitter, Linkedin, Facebo
 import AdSlot from "@/components/ads/AdSlot";
 import AffiliateBanner from "@/components/ads/AffiliateBanner";
 import { Fragment } from "react";
+import longformPart1 from "@/data/blogLongform.part1.json";
+import longformPart2 from "@/data/blogLongform.part2.json";
+import longformPart3 from "@/data/blogLongform.part3.json";
+
+const LONGFORM: Record<string, string[]> = {
+  ...(longformPart1 as unknown as Record<string, string[]>),
+  ...(longformPart2 as unknown as Record<string, string[]>),
+  ...(longformPart3 as unknown as Record<string, string[]>),
+};
+
 
 const blogPostsData: Record<string, {
   title: string;
@@ -1007,7 +1017,23 @@ const blogPostsData: Record<string, {
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = slug ? blogPostsData[slug] : null;
+  const base = slug ? blogPostsData[slug] : null;
+  // Long-form article bodies live in separate data files so each post ships
+  // substantial, original content instead of a short summary.
+  const longform = slug ? LONGFORM[slug] : undefined;
+  const post = base
+    ? longform && longform.length > base.content.length
+      ? {
+          ...base,
+          content: longform,
+          readTime: `${Math.max(
+            1,
+            Math.round(longform.join(" ").split(/\s+/).length / 220),
+          )} min read`,
+        }
+      : base
+    : null;
+
 
   if (!post) {
     return (

@@ -59,6 +59,7 @@ const Portfolio = () => {
         title="Portfolio — The Docunova AI Suite"
         description="Showcase of products and projects built by The Docunova AI Suite and founder Aman Vishwakarma."
         path="/portfolio"
+        noindex
       />
       <Header />
       <main className="container mx-auto px-4 py-16 max-w-6xl">

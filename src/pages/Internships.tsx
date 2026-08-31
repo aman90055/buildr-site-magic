@@ -20,6 +20,7 @@ const Internships = () => {
         title="Internships — The Docunova AI Suite"
         description="Paid, fully-remote internships in engineering, AI, design and growth. Build real, shipping products."
         path="/internships"
+        noindex
       />
       <Header />
       <main className="container mx-auto px-4 py-16 max-w-6xl">

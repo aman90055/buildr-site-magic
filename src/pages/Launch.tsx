@@ -47,6 +47,7 @@ const Launch = () => {
   return (
     <>
       <Helmet>
+        <meta name="robots" content="noindex, follow" />
         <title>Docunova AI — Launch Day 🚀 100+ Free AI Document Tools, No Signup</title>
         <meta
           name="description"

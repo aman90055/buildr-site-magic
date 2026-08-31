@@ -19,6 +19,7 @@ export default function Press() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
+        <meta name="robots" content="noindex, follow" />
         <title>Press & Media Kit — The Docunova AI Suite</title>
         <meta name="description" content="Press resources, fast facts, founder bio, and media assets for The Docunova AI Suite." />
         <link rel="canonical" href="https://docunova.online/press" />

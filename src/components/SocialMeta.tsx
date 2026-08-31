@@ -11,7 +11,10 @@ interface SocialMetaProps {
   publishedTime?: string;
   /** Optional JSON-LD object */
   jsonLd?: Record<string, unknown>;
+  /** Keep the page out of search results (thin/utility pages) */
+  noindex?: boolean;
 }
+
 
 const SITE = "https://docunova.online";
 const DEFAULT_IMAGE =
@@ -31,12 +34,14 @@ const SocialMeta = ({
   author = "Aman Vishwakarma",
   publishedTime,
   jsonLd,
+  noindex = false,
 }: SocialMetaProps) => {
   const url = path.startsWith("http") ? path : `${SITE}${path}`;
 
   return (
     <Helmet>
       <title>{title}</title>
+      {noindex && <meta name="robots" content="noindex, follow" />}
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
 
