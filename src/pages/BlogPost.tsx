@@ -1007,7 +1007,16 @@ const blogPostsData: Record<string, {
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = slug ? blogPostsData[slug] : null;
+  const base = slug ? blogPostsData[slug] : null;
+  // Long-form article bodies live in separate data files so each post ships
+  // substantial, original content instead of a short summary.
+  const longform = slug ? LONGFORM[slug] : undefined;
+  const post = base
+    ? longform && longform.length > base.content.length
+      ? { ...base, content: longform }
+      : base
+    : null;
+
 
   if (!post) {
     return (
