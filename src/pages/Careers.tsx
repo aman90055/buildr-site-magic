@@ -29,6 +29,7 @@ const Careers = () => {
         title="Careers — The Docunova AI Suite"
         description="Join the team building the world's most loved AI document platform. Remote-first, async, global."
         path="/careers"
+        noindex
       />
       <Header />
       <main className="container mx-auto px-4 py-16 max-w-6xl">
