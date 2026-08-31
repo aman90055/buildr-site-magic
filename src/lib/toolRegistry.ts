@@ -288,14 +288,23 @@ const CATEGORY_OF: Record<string, ToolCategory> = {
 
 function genericGuide(name: string, category: ToolCategory): string {
   const c = CATEGORY_META[category];
+  const isAI = category === "ai";
+  const privacy = isAI
+    ? `Because this is an AI feature, the text extracted from your document is sent to our AI provider to generate the result. The file itself is not uploaded or stored, and nothing is kept after the request completes — see our Privacy & File Processing page for the exact details.`
+    : `It runs entirely in your browser — the file is read locally and never uploaded to a server.`;
   return (
-    `${name} is part of our free ${c.title.toLowerCase()} suite. It runs entirely in your browser — your files never leave your device — and there are no signups, watermarks, or daily limits.\n\n` +
+    `${name} is part of our free ${c.title.toLowerCase()} suite. ${privacy} There are no signups, watermarks, or daily limits.\n\n` +
     `${c.intro}\n\n` +
-    `To use ${name}: drop your file into the upload area, adjust any options (these vary by tool — quality slider, page range, target format, etc.), and click the action button. Most operations finish in under 10 seconds, even for large documents. The result downloads directly to your computer as a fresh file; the original is untouched.\n\n` +
-    `${name} pairs well with other tools in our ${c.title.toLowerCase()} category and with the converters in the main toolkit — you can chain operations (for example, OCR a scan → convert to Word → edit → re-export as PDF) without ever leaving the browser. Because everything runs client-side, the tool works offline once the page is loaded and respects the privacy of confidential legal, medical and financial documents.\n\n` +
+    `To use ${name}: drop your file into the upload area, adjust any options (these vary by tool — quality slider, page range, target format, etc.), and click the action button. Processing time depends on your file size and device; a short document is usually near-instant, while a large scanned PDF can take longer. The result downloads directly to your computer as a fresh file; the original is untouched.\n\n` +
+    `${name} pairs well with other tools in our ${c.title.toLowerCase()} category and with the converters in the main toolkit — you can chain operations (for example, OCR a scan → convert to Word → edit → re-export as PDF) without juggling desktop software. ${
+      isAI
+        ? `Once the AI returns its result you can copy it, download it, or feed it into one of the local document builders.`
+        : `Because the work happens client-side, the tool keeps confidential legal, medical and financial documents on your own machine.`
+    }\n\n` +
     `Built on battle-tested open-source engines (pdf-lib, pdfjs-dist, mammoth, sheetjs, browser-native canvas APIs), ${name} is designed to behave predictably: same input, same output, every time. If anything goes wrong, the tool surfaces a clear error message — most issues come from corrupted source files or files protected with a password, both of which can be fixed using the Repair PDF or Unlock PDF tool first.`
   );
 }
+
 
 function genericFAQs(name: string): ToolFAQ[] {
   return [
