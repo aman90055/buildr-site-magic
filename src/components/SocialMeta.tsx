@@ -11,7 +11,10 @@ interface SocialMetaProps {
   publishedTime?: string;
   /** Optional JSON-LD object */
   jsonLd?: Record<string, unknown>;
+  /** Keep the page out of search results (thin/utility pages) */
+  noindex?: boolean;
 }
+
 
 const SITE = "https://docunova.online";
 const DEFAULT_IMAGE =
