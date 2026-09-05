@@ -498,6 +498,27 @@ export type Database = {
         Returns: Json
       }
       claim_daily_checkin: { Args: never; Returns: Json }
+      ensure_referral_stats: {
+        Args: never
+        Returns: {
+          created_at: string
+          discount_percent: number
+          id: string
+          referral_code: string
+          successful_referrals: number
+          total_credits: number
+          total_points: number
+          total_referrals: number
+          updated_at: string
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "user_referral_stats"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

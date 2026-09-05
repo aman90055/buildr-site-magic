@@ -221,15 +221,13 @@ export const compressPDF = async (
   }
 
   // A single render can be larger than an already image-heavy source PDF.
-  // Escalate gradually until we get a meaningful reduction, then keep the
-  // smallest valid result. This prevents a misleading 0% "success" result.
+  // Escalate gently until we get a meaningful reduction, but never push far
+  // beyond the level the user actually chose — an aggressive fallback would
+  // silently return a blurry file (and cost several extra full renders).
+  const baseLevel = Math.min(100, Math.max(1, settings.level));
+  const cap = Math.min(100, baseLevel + 20);
   const levels = Array.from(
-    new Set([
-      Math.min(100, Math.max(1, settings.level)),
-      Math.min(100, Math.max(settings.level + 18, 68)),
-      Math.min(100, Math.max(settings.level + 35, 88)),
-      100,
-    ])
+    new Set([baseLevel, Math.min(cap, baseLevel + 10), cap])
   );
   const meaningfulTarget = file.size * 0.98;
 
@@ -259,8 +257,9 @@ export const PRESETS: Record<
 > = {
   less: {
     label: "Less compression",
-    description: "High visual quality, gentle size reduction",
+    description: "Keeps text selectable and searchable, gentle size reduction",
     level: 28,
+    losslessOnly: true,
   },
   recommended: {
     label: "Recommended",
