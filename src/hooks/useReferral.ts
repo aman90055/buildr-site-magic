@@ -48,7 +48,9 @@ export function useReferral() {
     if (!user) { setLoading(false); return; }
     setLoading(true);
     try {
-      // Get or create stats
+      // The stats row is created server-side: writes to user_referral_stats are
+      // reserved for SECURITY DEFINER functions, so a client insert would be
+      // rejected by row-level security.
       let { data: statsData } = await supabase
         .from("user_referral_stats")
         .select("*")
@@ -56,15 +58,11 @@ export function useReferral() {
         .maybeSingle();
 
       if (!statsData) {
-        const code = generateCode();
-        const { data: newStats, error } = await supabase
-          .from("user_referral_stats")
-          .insert({ user_id: user.id, referral_code: code })
-          .select()
-          .single();
+        const { data: created, error } = await supabase.rpc("ensure_referral_stats");
         if (error) throw error;
-        statsData = newStats;
+        statsData = created as typeof statsData;
       }
+
       setStats(statsData as ReferralStats);
 
       // Fetch referrals
