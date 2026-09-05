@@ -49,7 +49,9 @@ const PDFCompress = () => {
     await compressFile(file, {
       level: compressionLevel,
       targetKB: preset === "target" ? targetKB : undefined,
-      losslessOnly: false,
+      // "Less compression" must keep text selectable/searchable, so it only
+      // uses lossless stream optimisation and never rasterizes pages.
+      losslessOnly: preset === "less",
       grayscale: preset === "less" ? false : grayscale,
       codec: "jpeg",
     });
