@@ -83,7 +83,7 @@ export function useReferral() {
     } finally {
       setLoading(false);
     }
-  }, [user, generateCode]);
+  }, [user]);
 
   useEffect(() => { fetchData(); }, [fetchData]);
 
