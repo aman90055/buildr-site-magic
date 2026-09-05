@@ -37,12 +37,8 @@ export function useReferral() {
   const [rewards, setRewards] = useState<Reward[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const generateCode = useCallback(() => {
-    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-    let code = "REF-";
-    for (let i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
-    return code;
-  }, []);
+
+
 
   const fetchData = useCallback(async () => {
     if (!user) { setLoading(false); return; }
