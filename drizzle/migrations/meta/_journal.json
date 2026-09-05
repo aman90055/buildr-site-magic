@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1788581609050,
+      "tag": "0000_ensure_referral_stats_rpc",
+      "breakpoints": true
+    }
+  ]
+}
