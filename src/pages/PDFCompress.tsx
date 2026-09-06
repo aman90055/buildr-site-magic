@@ -280,6 +280,23 @@ const PDFCompress = () => {
                     >
                       Compress Another PDF
                     </button>
+                    {compressionPercentage <= 0 && preset === "less" && file && (
+                      <button
+                        onClick={async () => {
+                          handlePresetChange("recommended");
+                          await compressFile(file, {
+                            level: PRESETS.recommended.level,
+                            losslessOnly: false,
+                            grayscale: false,
+                            codec: "jpeg",
+                          });
+                        }}
+                        className="inline-flex items-center justify-center gap-2 bg-secondary text-secondary-foreground px-6 py-3 rounded-xl font-medium hover:bg-secondary/80 transition-colors"
+                      >
+                        Try Recommended compression
+                      </button>
+                    )}
+
                   </div>
                 </div>
               )}
