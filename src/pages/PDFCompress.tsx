@@ -215,11 +215,18 @@ const PDFCompress = () => {
                   
                   <div>
                     <h2 className="text-2xl font-semibold text-foreground mb-2">
-                      {compressionPercentage > 0 ? "PDF Compressed Successfully!" : "PDF Already Optimized"}
+                      {compressionPercentage > 0 ? "PDF Compressed Successfully!" : "Already As Small As It Can Safely Get"}
                     </h2>
                     <p className="text-muted-foreground mb-4">
                       {compressionPercentage > 0 ? (
                         <>Reduced file size by <span className="text-accent font-semibold">{compressionPercentage}%</span></>
+                      ) : preset === "less" ? (
+                        <>
+                          "Less compression" only tidies the file structure so your text stays
+                          selectable and searchable. This PDF is mostly scans or photos, so there
+                          was nothing safe left to remove — try "Recommended" for a much smaller
+                          file (pages become images).
+                        </>
                       ) : (
                         <>No safe size reduction was possible for this file.</>
                       )}
@@ -231,6 +238,7 @@ const PDFCompress = () => {
                         </span>
                       )}
                     </p>
+
                     
                     <div className="flex items-center justify-center gap-8 text-sm">
                       <div>
@@ -272,6 +280,23 @@ const PDFCompress = () => {
                     >
                       Compress Another PDF
                     </button>
+                    {compressionPercentage <= 0 && preset === "less" && file && (
+                      <button
+                        onClick={async () => {
+                          handlePresetChange("recommended");
+                          await compressFile(file, {
+                            level: PRESETS.recommended.level,
+                            losslessOnly: false,
+                            grayscale: false,
+                            codec: "jpeg",
+                          });
+                        }}
+                        className="inline-flex items-center justify-center gap-2 bg-secondary text-secondary-foreground px-6 py-3 rounded-xl font-medium hover:bg-secondary/80 transition-colors"
+                      >
+                        Try Recommended compression
+                      </button>
+                    )}
+
                   </div>
                 </div>
               )}
