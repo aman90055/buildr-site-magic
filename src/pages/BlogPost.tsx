@@ -1073,6 +1073,18 @@ const BlogPost = () => {
 
   const CategoryIcon = getCategoryIcon(post.category);
 
+  // Renders inline **bold** segments inside a paragraph or list item.
+  const renderInline = (text: string) =>
+    text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+      part.startsWith("**") && part.endsWith("**") && part.length > 4 ? (
+        <strong key={i} className="font-semibold text-foreground">
+          {part.slice(2, -2)}
+        </strong>
+      ) : (
+        part
+      ),
+    );
+
   const renderContent = (content: string[]) => {
     return content.map((paragraph, index) => {
       if (paragraph.startsWith("## ")) {
@@ -1082,7 +1094,14 @@ const BlogPost = () => {
           </h2>
         );
       }
-      if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
+      if (paragraph.startsWith("### ")) {
+        return (
+          <h3 key={index} className="text-xl font-bold mt-6 mb-3">
+            {paragraph.replace("### ", "")}
+          </h3>
+        );
+      }
+      if (/^\*\*[^*]+\*\*$/.test(paragraph.trim())) {
         return (
           <p key={index} className="font-semibold mt-4 mb-2">
             {paragraph.replace(/\*\*/g, "")}
@@ -1092,17 +1111,18 @@ const BlogPost = () => {
       if (paragraph.startsWith("- ")) {
         return (
           <li key={index} className="ml-6 mb-2 text-muted-foreground">
-            {paragraph.replace("- ", "")}
+            {renderInline(paragraph.replace("- ", ""))}
           </li>
         );
       }
       return (
         <p key={index} className="text-muted-foreground leading-relaxed mb-4">
-          {paragraph}
+          {renderInline(paragraph)}
         </p>
       );
     });
   };
+
 
   const articleJsonLd = {
     "@context": "https://schema.org",
