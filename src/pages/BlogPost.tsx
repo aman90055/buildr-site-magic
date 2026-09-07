@@ -12,12 +12,15 @@ import { Fragment } from "react";
 import longformPart1 from "@/data/blogLongform.part1.json";
 import longformPart2 from "@/data/blogLongform.part2.json";
 import longformPart3 from "@/data/blogLongform.part3.json";
+import longformPart4 from "@/data/blogLongform.part4.json";
 
 const LONGFORM: Record<string, string[]> = {
   ...(longformPart1 as unknown as Record<string, string[]>),
   ...(longformPart2 as unknown as Record<string, string[]>),
   ...(longformPart3 as unknown as Record<string, string[]>),
+  ...(longformPart4 as unknown as Record<string, string[]>),
 };
+
 
 
 const blogPostsData: Record<string, {
