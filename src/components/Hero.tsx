@@ -116,9 +116,6 @@ const Hero = () => {
                         aria-hidden
                       />
                     ))}
-                    <span className="h-7 px-2 rounded-full bg-background/80 ring-2 ring-background text-[11px] font-semibold text-foreground flex items-center justify-center">
-                      +2M
-                    </span>
                   </div>
                 </div>
               </div>
