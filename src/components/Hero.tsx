@@ -87,16 +87,16 @@ const Hero = () => {
                   {/* Rotating headline */}
                   <div className="flex-1 min-w-0 h-5 sm:h-6 overflow-hidden">
                     <div className="animate-hero-rotate">
-                      <div className="h-5 sm:h-6 flex items-center text-sm sm:text-[15px] font-medium text-foreground/90">
-                        ⚡ Merge, split, compress & convert — right in your browser
+                      <div className="h-5 sm:h-6 flex items-center text-xs sm:text-[15px] font-medium text-foreground/90 whitespace-nowrap overflow-hidden text-ellipsis">
+                        ⚡ Merge, split, compress & convert in-browser
                       </div>
-                      <div className="h-5 sm:h-6 flex items-center text-sm sm:text-[15px] font-medium text-foreground/90">
-                        🌍 Works in any modern browser, on phone, tablet or desktop
+                      <div className="h-5 sm:h-6 flex items-center text-xs sm:text-[15px] font-medium text-foreground/90 whitespace-nowrap overflow-hidden text-ellipsis">
+                        🌍 Works on phone, tablet & desktop browsers
                       </div>
-                      <div className="h-5 sm:h-6 flex items-center text-sm sm:text-[15px] font-medium text-foreground/90">
-                        🔒 PDF & image tools run locally — files stay on your device
+                      <div className="h-5 sm:h-6 flex items-center text-xs sm:text-[15px] font-medium text-foreground/90 whitespace-nowrap overflow-hidden text-ellipsis">
+                        🔒 PDF & image tools run locally on your device
                       </div>
-                      <div className="h-5 sm:h-6 flex items-center text-sm sm:text-[15px] font-medium text-foreground/90">
+                      <div className="h-5 sm:h-6 flex items-center text-xs sm:text-[15px] font-medium text-foreground/90 whitespace-nowrap overflow-hidden text-ellipsis">
                         ✨ Free to use · No sign‑up required for PDF tools
                       </div>
                     </div>
