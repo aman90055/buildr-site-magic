@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolSEOSection from "@/components/ToolSEOSection";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Search, BookOpen, Lock, Wand2, CreditCard, Users } from "lucide-react";
@@ -113,6 +114,7 @@ const HelpCenter = () => {
             </p>
           )}
         </main>
+        <ToolSEOSection />
         <Footer />
       </div>
     </>

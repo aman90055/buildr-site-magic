@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolSEOSection from "@/components/ToolSEOSection";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -237,6 +238,8 @@ const FAQ = () => {
             </div>
           </section>
         </main>
+
+        <ToolSEOSection />
 
         <Footer />
       </div>

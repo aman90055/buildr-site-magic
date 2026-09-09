@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolSEOSection from "@/components/ToolSEOSection";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
@@ -472,6 +473,8 @@ const Dashboard = () => {
             </Tabs>
           </div>
         </main>
+
+        <ToolSEOSection />
 
         <Footer />
       </div>

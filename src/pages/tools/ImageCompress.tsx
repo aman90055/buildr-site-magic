@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolSEOSection from "@/components/ToolSEOSection";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
@@ -110,6 +111,7 @@ const ImageCompress = () => {
             )}
           </div>
         </main>
+        <ToolSEOSection />
         <Footer />
       </div>
     </>

@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolSEOSection from "@/components/ToolSEOSection";
 import NewsletterForm from "@/components/NewsletterForm";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Sparkles, Zap } from "lucide-react";
@@ -48,6 +49,7 @@ const Newsletter = () => (
           ))}
         </div>
       </main>
+      <ToolSEOSection />
       <Footer />
     </div>
   </>

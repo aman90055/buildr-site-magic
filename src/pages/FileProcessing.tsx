@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolSEOSection from "@/components/ToolSEOSection";
 import SocialMeta from "@/components/SocialMeta";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -117,6 +118,7 @@ const FileProcessing = () => {
           <Link className="text-primary hover:underline" to="/ai-usage-policy">AI Usage Policy</Link>.
         </p>
       </main>
+      <ToolSEOSection />
       <Footer />
     </div>
   );

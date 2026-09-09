@@ -3,6 +3,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolSEOSection from "@/components/ToolSEOSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Home } from "lucide-react";
@@ -108,6 +109,8 @@ const CategoryPage = () => {
             </div>
           </section>
         </main>
+
+        <ToolSEOSection />
 
         <Footer />
       </div>
