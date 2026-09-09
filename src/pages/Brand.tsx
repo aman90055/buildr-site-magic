@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolSEOSection from "@/components/ToolSEOSection";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Download, Palette, Type, Image as ImageIcon } from "lucide-react";
@@ -74,6 +75,7 @@ export default function Brand() {
           Media inquiries? <Link to="/press" className="text-primary underline">Visit our Press page</Link> or <Link to="/contact" className="text-primary underline">contact us</Link>.
         </div>
       </main>
+      <ToolSEOSection />
       <Footer />
     </div>
   );

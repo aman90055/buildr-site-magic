@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolSEOSection from "@/components/ToolSEOSection";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Shield, Users, KeyRound, FileBarChart, Building2, CheckCircle2 } from "lucide-react";
@@ -57,6 +58,7 @@ export default function Enterprise() {
           <Button asChild><a href="mailto:documentai999@gmail.com?subject=Enterprise%20quote">Request a quote</a></Button>
         </Card>
       </main>
+      <ToolSEOSection />
       <Footer />
     </div>
   );

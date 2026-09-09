@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolSEOSection from "@/components/ToolSEOSection";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { PenTool, Upload, Download, RotateCcw } from "lucide-react";
@@ -161,6 +162,7 @@ const PDFToSVG = () => {
             </div>
           </div>
         </main>
+        <ToolSEOSection />
         <Footer />
       </div>
     </>

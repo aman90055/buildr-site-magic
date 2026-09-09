@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolSEOSection from "@/components/ToolSEOSection";
 import SocialMeta from "@/components/SocialMeta";
 import ShareButtons from "@/components/ShareButtons";
 import { Button } from "@/components/ui/button";
@@ -94,6 +95,7 @@ const Careers = () => {
           </Button>
         </section>
       </main>
+      <ToolSEOSection />
       <Footer />
     </div>
   );

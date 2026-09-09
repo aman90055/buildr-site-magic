@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolSEOSection from "@/components/ToolSEOSection";
 import { Badge } from "@/components/ui/badge";
 import { Shield, FileText, Lock, Eye, Database, Mail, Clock, Globe } from "lucide-react";
 
@@ -224,6 +225,8 @@ const PrivacyPolicy = () => {
             </div>
           </section>
         </main>
+
+        <ToolSEOSection />
 
         <Footer />
       </div>
