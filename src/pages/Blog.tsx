@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ToolSEOSection from "@/components/ToolSEOSection";
 import NewsletterForm from "@/components/NewsletterForm";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
@@ -501,8 +500,6 @@ const Blog = () => {
             </div>
           </section>
         </main>
-
-        <ToolSEOSection />
 
         <Footer />
       </div>

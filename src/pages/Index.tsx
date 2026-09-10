@@ -6,7 +6,6 @@ import Features from "@/components/Features";
 import Stats from "@/components/Stats";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
-import ToolSEOSection from "@/components/ToolSEOSection";
 import HomeSections from "@/components/HomeSections";
 import HomeContent from "@/components/HomeContent";
 import AdSlot from "@/components/ads/AdSlot";
@@ -52,7 +51,6 @@ const Index = () => {
 
           <CTA />
         </main>
-        <ToolSEOSection />
         <Footer />
       </div>
     </>

@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ToolSEOSection from "@/components/ToolSEOSection";
 import SocialMeta from "@/components/SocialMeta";
 import ShareButtons from "@/components/ShareButtons";
 import { Card } from "@/components/ui/card";
@@ -148,7 +147,6 @@ const CaseStudies = () => {
           </Link>
         </div>
       </main>
-      <ToolSEOSection />
       <Footer />
     </div>
   );

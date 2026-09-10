@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ToolSEOSection from "@/components/ToolSEOSection";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Unlock, Upload, Download, RotateCcw, KeyRound } from "lucide-react";
@@ -226,8 +225,6 @@ const UnlockPDF = () => {
             </div>
           </div>
         </main>
-
-        <ToolSEOSection />
 
         <Footer />
       </div>

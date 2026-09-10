@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ToolSEOSection from "@/components/ToolSEOSection";
 import PDFConvertDropzone from "@/components/pdf/PDFConvertDropzone";
 import ConversionOptions from "@/components/pdf/ConversionOptions";
 import ConvertActions from "@/components/pdf/ConvertActions";
@@ -144,8 +143,6 @@ const PDFConvert = () => {
             <RelatedTools currentSlug="/convert" category="Convert" limit={6} />
           </div>
         </main>
-
-        <ToolSEOSection />
 
         <Footer />
       </div>
