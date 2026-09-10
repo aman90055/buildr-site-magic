@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ToolSEOSection from "@/components/ToolSEOSection";
 import PDFDropzone from "@/components/pdf/PDFDropzone";
 import PDFFileList from "@/components/pdf/PDFFileList";
 import MergeActions from "@/components/pdf/MergeActions";
@@ -182,8 +181,6 @@ const PDFMerge = () => {
             <RelatedTools currentSlug="/merge" category="Organize" limit={6} />
           </div>
         </main>
-
-        <ToolSEOSection />
 
         <Footer />
       </div>

@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ToolSEOSection from "@/components/ToolSEOSection";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Mail, Download, Quote } from "lucide-react";
@@ -75,7 +74,6 @@ export default function Press() {
           </Card>
         </div>
       </main>
-      <ToolSEOSection />
       <Footer />
     </div>
   );

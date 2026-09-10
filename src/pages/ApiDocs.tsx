@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ToolSEOSection from "@/components/ToolSEOSection";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Code2, Key, Zap, BookOpen } from "lucide-react";
@@ -76,7 +75,6 @@ export default function ApiDocs() {
           <Button asChild><a href="mailto:documentai999@gmail.com?subject=API%20early%20access">Request API key</a></Button>
         </Card>
       </main>
-      <ToolSEOSection />
       <Footer />
     </div>
   );

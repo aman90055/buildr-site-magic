@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ToolSEOSection from "@/components/ToolSEOSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -264,7 +263,6 @@ const CertificateMaker = () => {
             </div>
           </div>
         </main>
-        <ToolSEOSection />
         <Footer />
       </div>
     </>

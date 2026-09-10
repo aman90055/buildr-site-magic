@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ToolSEOSection from "@/components/ToolSEOSection";
 import { useAuth } from "@/hooks/useAuth";
 import DailyCheckinWidget from "@/components/DailyCheckinWidget";
 import { useReferral } from "@/hooks/useReferral";
@@ -258,7 +257,6 @@ const ReferAndEarn = () => {
             </Card>
           </div>
         </main>
-        <ToolSEOSection />
         <Footer />
       </div>
     </>

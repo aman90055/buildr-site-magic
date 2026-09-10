@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ToolSEOSection from "@/components/ToolSEOSection";
 import PDFCompressDropzone from "@/components/pdf/PDFCompressDropzone";
 import CompressionOptions from "@/components/pdf/CompressionOptions";
 import CompressActions from "@/components/pdf/CompressActions";
@@ -307,8 +306,6 @@ const PDFCompress = () => {
             <RelatedTools currentSlug="/compress" category="Optimize" limit={6} />
           </div>
         </main>
-
-        <ToolSEOSection />
 
         <Footer />
       </div>

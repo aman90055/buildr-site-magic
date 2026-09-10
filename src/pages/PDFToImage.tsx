@@ -2,7 +2,6 @@ import { useState, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ToolSEOSection from "@/components/ToolSEOSection";
 import { Button } from "@/components/ui/button";
 import { useDropzone } from "react-dropzone";
 import { FileImage, Upload, Download, RotateCcw } from "lucide-react";
@@ -180,8 +179,6 @@ const PDFToImage = () => {
             </div>
           </div>
         </main>
-
-        <ToolSEOSection />
 
         <Footer />
       </div>

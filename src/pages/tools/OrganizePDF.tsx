@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ToolSEOSection from "@/components/ToolSEOSection";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { LayoutGrid, Upload, Download, RotateCcw, GripVertical, Sparkles } from "lucide-react";
@@ -213,8 +212,6 @@ const OrganizePDF = () => {
             </div>
           </div>
         </main>
-
-        <ToolSEOSection />
 
         <Footer />
       </div>
