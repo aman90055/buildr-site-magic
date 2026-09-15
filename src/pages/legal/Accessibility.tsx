@@ -5,7 +5,7 @@ const Accessibility = () => (
     slug="accessibility"
     title="Accessibility Statement"
     description="Our commitment to making The Docunova AI Suite usable by everyone, including people with disabilities — standards we follow and how to report issues."
-    updated="2026-06-30"
+    updated="2026-09-15"
     intro="The Docunova AI Suite is committed to digital accessibility. We want every visitor to be able to find, use, and benefit from our tools — including users who rely on assistive technology."
     sections={[
       {

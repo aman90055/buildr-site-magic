@@ -5,7 +5,7 @@ const Disclaimer = () => (
     slug="disclaimer"
     title="Disclaimer"
     description="Information on The Docunova AI Suite is provided for general purposes. This Disclaimer outlines the limits of our content, AI output, and third-party links."
-    updated="2026-06-30"
+    updated="2026-09-15"
     intro="The information, tools, and AI outputs on The Docunova AI Suite are provided in good faith and for general informational and productivity purposes only. This Disclaimer sets out the boundaries of that information."
     sections={[
       {
