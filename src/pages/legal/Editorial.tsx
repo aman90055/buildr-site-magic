@@ -5,7 +5,7 @@ const Editorial = () => (
     slug="editorial-policy"
     title="Editorial Policy"
     description="How The Docunova AI Suite researches, writes, fact-checks, updates, and corrects content across guides, tutorials, blog posts, and tool pages."
-    updated="2026-06-30"
+    updated="2026-09-15"
     intro="Trust is earned. This Editorial Policy explains our standards for accuracy, independence, originality, transparency, and corrections across every piece of content we publish."
     sections={[
       {

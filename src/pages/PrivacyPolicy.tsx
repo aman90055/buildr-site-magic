@@ -104,7 +104,7 @@ const PrivacyPolicy = () => {
                 </p>
                 <div className="flex items-center justify-center gap-2 mt-4 text-sm text-muted-foreground">
                   <Clock className="w-4 h-4" />
-                  <span>Last updated: January 24, 2026</span>
+                  <span>Last updated: September 15, 2026</span>
                 </div>
               </div>
             </div>

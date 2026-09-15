@@ -5,7 +5,7 @@ const AIUsage = () => (
     slug="ai-usage-policy"
     title="AI Usage Policy"
     description="How The Docunova AI Suite uses artificial intelligence responsibly — what we do, what we do not do, what models we use, and your responsibilities as a user."
-    updated="2026-06-30"
+    updated="2026-09-15"
     intro="We use AI to make documents easier to work with — summarising, translating, extracting, polishing, and answering questions about your files. This policy explains how we use AI responsibly and what you can expect."
     sections={[
       {

@@ -5,7 +5,7 @@ const Terms = () => (
     slug="terms"
     title="Terms & Conditions"
     description="The rules that govern your use of The Docunova AI Suite — accounts, acceptable use, payments, liability, and how disputes are handled."
-    updated="2026-06-30"
+    updated="2026-09-15"
     intro="These Terms set out the agreement between you and The Docunova AI Suite when you use our website, tools, AI features, and paid plans. By using the service you agree to these Terms."
     sections={[
       {

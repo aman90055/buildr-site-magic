@@ -25,7 +25,7 @@ export const AUTHOR = {
   url: "https://github.com/aman90055",
 };
 
-export const LAST_UPDATED = "2026-07-15";
+export const LAST_UPDATED = "2026-09-15";
 
 export function readingMinutes(text: string): number {
   const words = text.trim().split(/\s+/).length;

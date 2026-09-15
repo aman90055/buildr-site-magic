@@ -5,7 +5,7 @@ const Cookies = () => (
     slug="cookies"
     title="Cookie Policy"
     description="How The Docunova AI Suite uses cookies and similar technologies for authentication, preferences, analytics, and advertising — and how you can control them."
-    updated="2026-06-30"
+    updated="2026-09-15"
     intro="This Cookie Policy explains what cookies are, which ones we use, why we use them, and the choices available to you. It complements our Privacy Policy."
     sections={[
       {
