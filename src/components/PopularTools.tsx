@@ -11,6 +11,7 @@ import {
   Filter, FileSearch,
 } from "lucide-react";
 import AIBadge from "./AIBadge";
+import ToolFilterBar, { sortTools, type SortKey } from "./ToolFilterBar";
 
 type Tool = {
   title: string;
@@ -314,41 +315,11 @@ const ToolCard = ({
   );
 };
 
-const FilterChip = ({
-  active,
-  onClick,
-  icon: Icon,
-  label,
-  count,
-}: {
-  active: boolean;
-  onClick: () => void;
-  icon?: any;
-  label: string;
-  count?: number;
-}) => (
-  <button
-    type="button"
-    onClick={onClick}
-    className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold border transition-all duration-300 backdrop-blur whitespace-nowrap ${
-      active
-        ? "bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-white border-transparent shadow-lg shadow-indigo-500/30"
-        : "bg-white/60 dark:bg-slate-900/50 text-foreground border-white/40 dark:border-white/10 hover:border-primary/40 hover:bg-white/80 dark:hover:bg-slate-800/60"
-    }`}
-  >
-    {Icon && <Icon className="w-3.5 h-3.5" />}
-    {label}
-    {typeof count === "number" && (
-      <span className={`ml-0.5 px-1.5 py-0.5 rounded-full text-[10px] ${active ? "bg-white/20" : "bg-muted/70"}`}>
-        {count}
-      </span>
-    )}
-  </button>
-);
 
 const PopularTools = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<FilterKey>("all");
+  const [sort, setSort] = useState<SortKey>("default");
   const [favorites, setFavorites] = useState<string[]>([]);
   const [recent, setRecent] = useState<string[]>([]);
 
@@ -407,10 +378,11 @@ const PopularTools = () => {
       );
     }
 
-    return list;
-  }, [filter, normalizedQuery, favorites, recent]);
+    return sortTools(list, sort, (t) => t.title);
+  }, [filter, normalizedQuery, favorites, recent, sort]);
 
-  const isFlatView = filter !== "all" || normalizedQuery.length > 0;
+  const isFlatView = filter !== "all" || normalizedQuery.length > 0 || sort !== "default";
+
 
   return (
     <section id="tools" className="py-20 px-6 max-w-7xl mx-auto">
@@ -458,24 +430,32 @@ const PopularTools = () => {
       </div>
 
       {/* Filter chips */}
-      <div className="mb-10 flex flex-wrap items-center justify-center gap-2">
-        <FilterChip active={filter === "all"} onClick={() => setFilter("all")} icon={Filter} label="All" count={totalTools} />
-        <FilterChip active={filter === "ai"} onClick={() => setFilter("ai")} icon={Sparkles} label="AI" count={aiCount} />
-        <FilterChip active={filter === "popular"} onClick={() => setFilter("popular")} icon={Flame} label="Popular" count={popularCount} />
-        <FilterChip active={filter === "recent"} onClick={() => setFilter("recent")} icon={Clock} label="Recent" count={recent.length} />
-        <FilterChip active={filter === "favorites"} onClick={() => setFilter("favorites")} icon={Star} label="Favorites" count={favorites.length} />
-        <div className="w-full sm:w-auto sm:ml-2 h-px sm:h-6 sm:border-l border-border/60 my-1 sm:my-0" />
-        {toolCategories.map((cat) => (
-          <FilterChip
-            key={cat.title}
-            active={filter === cat.title}
-            onClick={() => setFilter(cat.title)}
-            icon={cat.icon}
-            label={cat.title}
-            count={cat.tools.length}
-          />
-        ))}
-      </div>
+      <ToolFilterBar
+        quick={[
+          { key: "all", label: "All", icon: Filter, count: totalTools },
+          { key: "ai", label: "AI", icon: Sparkles, count: aiCount },
+          { key: "popular", label: "Popular", icon: Flame, count: popularCount },
+          { key: "recent", label: "Recent", icon: Clock, count: recent.length },
+          { key: "favorites", label: "Favorites", icon: Star, count: favorites.length },
+        ]}
+        categories={toolCategories.map((cat) => ({
+          key: cat.title,
+          label: cat.title,
+          icon: cat.icon,
+          count: cat.tools.length,
+        }))}
+        active={filter}
+        onChange={setFilter}
+        sort={sort}
+        onSortChange={setSort}
+        canClear={filter !== "all" || sort !== "default" || search.length > 0}
+        onClear={() => {
+          setFilter("all");
+          setSort("default");
+          setSearch("");
+        }}
+      />
+
 
       {/* Flat results view */}
       {isFlatView ? (

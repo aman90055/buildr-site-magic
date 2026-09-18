@@ -8,16 +8,23 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
-  Search, X, ArrowRight, FolderOpen, FileType2, PenLine, Sparkles,
+  Search, X, FolderOpen, FileType2, PenLine, Sparkles,
   Image as ImageIcon, ShieldCheck, FileText, LayoutGrid, List, ArrowUpRight,
+  Filter, Flame, Clock, Star,
 } from "lucide-react";
+import ToolFilterBar, { sortTools, type SortKey } from "@/components/ToolFilterBar";
+import {
+  POPULAR_SLUGS,
+  FAV_STORAGE_KEY,
+  RECENT_STORAGE_KEY,
+  readStoredSlugs,
+  writeStoredSlugs,
+} from "@/lib/toolHighlights";
 import {
   CATEGORY_META,
   getAllTools,
-  type ToolMeta,
   type ToolCategory,
 } from "@/lib/toolRegistry";
-
 
 const CATEGORY_ICONS: Record<ToolCategory, typeof FolderOpen> = {
   organize: FolderOpen,
@@ -29,31 +36,45 @@ const CATEGORY_ICONS: Record<ToolCategory, typeof FolderOpen> = {
   documents: FileText,
 };
 
-const RECENT_KEY = "tools-page-recent";
-const MAX_RECENT = 8;
-
-function getRecent(): string[] {
-  try { return JSON.parse(localStorage.getItem(RECENT_KEY) || "[]"); } catch { return []; }
-}
-function pushRecent(slug: string) {
-  try {
-    const next = [slug, ...getRecent().filter(s => s !== slug)].slice(0, MAX_RECENT);
-    localStorage.setItem(RECENT_KEY, JSON.stringify(next));
-  } catch { /* ignore */ }
-}
+const MAX_RECENT = 12;
+type FilterKey = ToolCategory | "all" | "recent" | "ai" | "popular" | "favorites";
 
 export default function Tools() {
   const allTools = useMemo(getAllTools, []);
   const [query, setQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState<ToolCategory | "all" | "recent">("all");
-  const [recent, setRecent] = useState<string[]>(() => getRecent());
+  const [activeCategory, setActiveCategory] = useState<FilterKey>("all");
+  const [recent, setRecent] = useState<string[]>([]);
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [sort, setSort] = useState<SortKey>("default");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   useEffect(() => {
-    const onStorage = () => setRecent(getRecent());
+    setRecent(readStoredSlugs(RECENT_STORAGE_KEY));
+    setFavorites(readStoredSlugs(FAV_STORAGE_KEY));
+    const onStorage = () => {
+      setRecent(readStoredSlugs(RECENT_STORAGE_KEY));
+      setFavorites(readStoredSlugs(FAV_STORAGE_KEY));
+    };
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);
   }, []);
+
+  const pushRecent = (slug: string) => {
+    const next = [slug, ...readStoredSlugs(RECENT_STORAGE_KEY).filter(s => s !== slug)].slice(0, MAX_RECENT);
+    writeStoredSlugs(RECENT_STORAGE_KEY, next);
+    setRecent(next);
+  };
+
+  const toggleFavorite = (slug: string) => {
+    const current = readStoredSlugs(FAV_STORAGE_KEY);
+    const next = current.includes(slug) ? current.filter(s => s !== slug) : [slug, ...current];
+    writeStoredSlugs(FAV_STORAGE_KEY, next);
+    setFavorites(next);
+  };
+
+  const popularSet = useMemo(() => new Set(POPULAR_SLUGS), []);
+  const aiCount = allTools.filter(t => t.category === "ai" || t.slug.startsWith("/ai")).length;
+  const popularCount = allTools.filter(t => popularSet.has(t.slug)).length;
 
   const q = query.trim().toLowerCase();
   const filtered = useMemo(() => {
@@ -62,6 +83,12 @@ export default function Tools() {
       const order = new Map(recent.map((s, i) => [s, i]));
       list = allTools.filter(t => order.has(t.slug))
         .sort((a, b) => (order.get(a.slug)! - order.get(b.slug)!));
+    } else if (activeCategory === "favorites") {
+      list = list.filter(t => favorites.includes(t.slug));
+    } else if (activeCategory === "ai") {
+      list = list.filter(t => t.category === "ai" || t.slug.startsWith("/ai"));
+    } else if (activeCategory === "popular") {
+      list = list.filter(t => popularSet.has(t.slug));
     } else if (activeCategory !== "all") {
       list = list.filter(t => t.category === activeCategory);
     }
@@ -73,18 +100,26 @@ export default function Tools() {
         t.category.includes(q)
       );
     }
-    return list;
-  }, [allTools, activeCategory, q, recent]);
+    return sortTools(list, sort, t => t.name);
+  }, [allTools, activeCategory, q, recent, favorites, popularSet, sort]);
 
-  const categories: { key: ToolCategory | "all" | "recent"; label: string; count: number }[] = [
-    { key: "all", label: "All tools", count: allTools.length },
-    ...(recent.length ? [{ key: "recent" as const, label: "Recent", count: recent.length }] : []),
-    ...(Object.keys(CATEGORY_META) as ToolCategory[]).map(c => ({
-      key: c,
-      label: CATEGORY_META[c].title.replace(" Tools", "").replace(" PDF", ""),
-      count: allTools.filter(t => t.category === c).length,
-    })),
+  const quickChips = [
+    { key: "all", label: "All", icon: Filter, count: allTools.length },
+    { key: "ai", label: "AI", icon: Sparkles, count: aiCount },
+    { key: "popular", label: "Popular", icon: Flame, count: popularCount },
+    { key: "recent", label: "Recent", icon: Clock, count: recent.length },
+    { key: "favorites", label: "Favorites", icon: Star, count: favorites.length },
   ];
+
+  const categoryChips = (Object.keys(CATEGORY_META) as ToolCategory[]).map(c => ({
+    key: c,
+    label: CATEGORY_META[c].title.replace(" Tools", "").replace(" PDF", ""),
+    icon: CATEGORY_ICONS[c],
+    count: allTools.filter(t => t.category === c).length,
+  }));
+
+  const isCategory = (key: FilterKey): key is ToolCategory =>
+    key !== "all" && key !== "recent" && key !== "ai" && key !== "popular" && key !== "favorites";
 
   return (
     <div className="min-h-screen bg-background">
@@ -109,7 +144,7 @@ export default function Tools() {
               Find the right tool, fast
             </h1>
             <p className="text-muted-foreground text-sm max-w-xl mx-auto">
-              Search by name or filter by category. All free, in-browser.
+              Search by name, filter by category, or pin the tools you use most.
             </p>
           </div>
 
@@ -134,33 +169,21 @@ export default function Tools() {
             )}
           </div>
 
-          <div className="flex flex-wrap justify-center gap-1.5 mb-5">
-            {categories.map(c => {
-              const active = activeCategory === c.key;
-              return (
-                <button
-                  key={c.key}
-                  onClick={() => setActiveCategory(c.key)}
-                  className={[
-                    "px-2.5 py-1 rounded-full text-xs font-medium border transition-all",
-                    active
-                      ? "bg-primary text-primary-foreground border-primary"
-                      : "bg-card/40 backdrop-blur border-border/60 text-muted-foreground hover:text-foreground hover:border-border",
-                  ].join(" ")}
-                >
-                  {c.label}
-                  <span className={`ml-1 text-[10px] ${active ? "opacity-80" : "opacity-60"}`}>
-                    {c.count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+          <ToolFilterBar
+            quick={quickChips}
+            categories={categoryChips}
+            active={activeCategory}
+            onChange={(key) => setActiveCategory(key as FilterKey)}
+            sort={sort}
+            onSortChange={setSort}
+            canClear={activeCategory !== "all" || sort !== "default" || query.length > 0}
+            onClear={() => { setActiveCategory("all"); setSort("default"); setQuery(""); }}
+          />
 
           <div className="flex items-center justify-between mb-3">
             <p className="text-xs text-muted-foreground">
               <span className="font-semibold text-foreground">{filtered.length}</span> tool{filtered.length === 1 ? "" : "s"}
-              {activeCategory !== "all" && activeCategory !== "recent" && (
+              {isCategory(activeCategory) && (
                 <> · {CATEGORY_META[activeCategory].title}</>
               )}
             </p>
@@ -191,11 +214,15 @@ export default function Tools() {
           {filtered.length === 0 ? (
             <div className="text-center py-12">
               <Search className="h-8 w-8 mx-auto text-muted-foreground/50 mb-2" />
-              <p className="text-sm font-medium mb-1">No tools match "{query}"</p>
+              <p className="text-sm font-medium mb-1">
+                {activeCategory === "favorites" && !q
+                  ? "No favorites yet — tap the star on any tool"
+                  : `No tools match "${query}"`}
+              </p>
               <p className="text-xs text-muted-foreground mb-4">
                 Try "pdf", "image", or "ai".
               </p>
-              <Button size="sm" variant="outline" onClick={() => { setQuery(""); setActiveCategory("all"); }}>
+              <Button size="sm" variant="outline" onClick={() => { setQuery(""); setActiveCategory("all"); setSort("default"); }}>
                 Reset filters
               </Button>
             </div>
@@ -203,6 +230,7 @@ export default function Tools() {
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5">
               {filtered.map(tool => {
                 const Icon = CATEGORY_ICONS[tool.category];
+                const isFav = favorites.includes(tool.slug);
                 return (
                   <Link
                     key={tool.slug}
@@ -211,7 +239,15 @@ export default function Tools() {
                     className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
                     title={tool.short}
                   >
-                    <Card className="h-full p-3 bg-card/50 backdrop-blur-xl border-border/60 hover:border-primary/40 hover:shadow-md hover:shadow-primary/5 transition-all duration-200 hover:-translate-y-0.5">
+                    <Card className="relative h-full p-3 bg-card/50 backdrop-blur-xl border-border/60 hover:border-primary/40 hover:shadow-md hover:shadow-primary/5 transition-all duration-200 hover:-translate-y-0.5">
+                      <button
+                        type="button"
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(tool.slug); }}
+                        aria-label={isFav ? `Remove ${tool.name} from favorites` : `Add ${tool.name} to favorites`}
+                        className="absolute top-2 right-2 p-1 rounded-full hover:bg-muted/70 transition"
+                      >
+                        <Star className={`h-3 w-3 ${isFav ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/60"}`} />
+                      </button>
                       <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                         <Icon className="h-4 w-4 text-primary" />
                       </div>
@@ -226,6 +262,7 @@ export default function Tools() {
             <div className="flex flex-col gap-2">
               {filtered.map(tool => {
                 const Icon = CATEGORY_ICONS[tool.category];
+                const isFav = favorites.includes(tool.slug);
                 return (
                   <Link
                     key={tool.slug}
@@ -241,8 +278,16 @@ export default function Tools() {
                       <h3 className="font-semibold text-sm leading-tight">{tool.name}</h3>
                       <p className="text-xs text-muted-foreground truncate">{tool.short}</p>
                     </div>
-                    <div className="hidden sm:flex items-center gap-1.5 shrink-0">
-                      <Badge variant="secondary" className="text-[10px] px-1.5 py-0.5">
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <button
+                        type="button"
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(tool.slug); }}
+                        aria-label={isFav ? `Remove ${tool.name} from favorites` : `Add ${tool.name} to favorites`}
+                        className="p-1 rounded-full hover:bg-muted/70 transition"
+                      >
+                        <Star className={`h-3.5 w-3.5 ${isFav ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/60"}`} />
+                      </button>
+                      <Badge variant="secondary" className="hidden sm:inline-flex text-[10px] px-1.5 py-0.5">
                         {tool.category}
                       </Badge>
                       <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition" />
