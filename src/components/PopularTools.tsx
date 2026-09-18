@@ -459,24 +459,32 @@ const PopularTools = () => {
       </div>
 
       {/* Filter chips */}
-      <div className="mb-10 flex flex-wrap items-center justify-center gap-2">
-        <FilterChip active={filter === "all"} onClick={() => setFilter("all")} icon={Filter} label="All" count={totalTools} />
-        <FilterChip active={filter === "ai"} onClick={() => setFilter("ai")} icon={Sparkles} label="AI" count={aiCount} />
-        <FilterChip active={filter === "popular"} onClick={() => setFilter("popular")} icon={Flame} label="Popular" count={popularCount} />
-        <FilterChip active={filter === "recent"} onClick={() => setFilter("recent")} icon={Clock} label="Recent" count={recent.length} />
-        <FilterChip active={filter === "favorites"} onClick={() => setFilter("favorites")} icon={Star} label="Favorites" count={favorites.length} />
-        <div className="w-full sm:w-auto sm:ml-2 h-px sm:h-6 sm:border-l border-border/60 my-1 sm:my-0" />
-        {toolCategories.map((cat) => (
-          <FilterChip
-            key={cat.title}
-            active={filter === cat.title}
-            onClick={() => setFilter(cat.title)}
-            icon={cat.icon}
-            label={cat.title}
-            count={cat.tools.length}
-          />
-        ))}
-      </div>
+      <ToolFilterBar
+        quick={[
+          { key: "all", label: "All", icon: Filter, count: totalTools },
+          { key: "ai", label: "AI", icon: Sparkles, count: aiCount },
+          { key: "popular", label: "Popular", icon: Flame, count: popularCount },
+          { key: "recent", label: "Recent", icon: Clock, count: recent.length },
+          { key: "favorites", label: "Favorites", icon: Star, count: favorites.length },
+        ]}
+        categories={toolCategories.map((cat) => ({
+          key: cat.title,
+          label: cat.title,
+          icon: cat.icon,
+          count: cat.tools.length,
+        }))}
+        active={filter}
+        onChange={setFilter}
+        sort={sort}
+        onSortChange={setSort}
+        canClear={filter !== "all" || sort !== "default" || search.length > 0}
+        onClear={() => {
+          setFilter("all");
+          setSort("default");
+          setSearch("");
+        }}
+      />
+
 
       {/* Flat results view */}
       {isFlatView ? (
