@@ -407,10 +407,11 @@ const PopularTools = () => {
       );
     }
 
-    return list;
-  }, [filter, normalizedQuery, favorites, recent]);
+    return sortTools(list, sort, (t) => t.title);
+  }, [filter, normalizedQuery, favorites, recent, sort]);
 
-  const isFlatView = filter !== "all" || normalizedQuery.length > 0;
+  const isFlatView = filter !== "all" || normalizedQuery.length > 0 || sort !== "default";
+
 
   return (
     <section id="tools" className="py-20 px-6 max-w-7xl mx-auto">
