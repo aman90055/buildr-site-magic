@@ -10,9 +10,8 @@ import { Card } from "@/components/ui/card";
 import {
   Search, X, FolderOpen, FileType2, PenLine, Sparkles,
   Image as ImageIcon, ShieldCheck, FileText, LayoutGrid, List, ArrowUpRight,
-  Filter, Flame, Clock, Star,
+  Star,
 } from "lucide-react";
-import ToolFilterBar, { sortTools, type SortKey } from "@/components/ToolFilterBar";
 import {
   POPULAR_SLUGS,
   FAV_STORAGE_KEY,
@@ -42,19 +41,12 @@ type FilterKey = ToolCategory | "all" | "recent" | "ai" | "popular" | "favorites
 export default function Tools() {
   const allTools = useMemo(getAllTools, []);
   const [query, setQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState<FilterKey>("all");
-  const [recent, setRecent] = useState<string[]>([]);
   const [favorites, setFavorites] = useState<string[]>([]);
-  const [sort, setSort] = useState<SortKey>("default");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   useEffect(() => {
-    setRecent(readStoredSlugs(RECENT_STORAGE_KEY));
     setFavorites(readStoredSlugs(FAV_STORAGE_KEY));
-    const onStorage = () => {
-      setRecent(readStoredSlugs(RECENT_STORAGE_KEY));
-      setFavorites(readStoredSlugs(FAV_STORAGE_KEY));
-    };
+    const onStorage = () => setFavorites(readStoredSlugs(FAV_STORAGE_KEY));
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);
   }, []);
