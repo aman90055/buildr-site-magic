@@ -10,9 +10,8 @@ import { Card } from "@/components/ui/card";
 import {
   Search, X, FolderOpen, FileType2, PenLine, Sparkles,
   Image as ImageIcon, ShieldCheck, FileText, LayoutGrid, List, ArrowUpRight,
-  Filter, Flame, Clock, Star,
+  Star,
 } from "lucide-react";
-import ToolFilterBar, { sortTools, type SortKey } from "@/components/ToolFilterBar";
 import {
   POPULAR_SLUGS,
   FAV_STORAGE_KEY,
