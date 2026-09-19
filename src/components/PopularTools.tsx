@@ -239,7 +239,6 @@ function readSet(key: string): string[] {
   }
 }
 
-type FilterKey = "all" | "ai" | "popular" | "recent" | "favorites" | string;
 
 const ToolCard = ({
   tool,
@@ -345,10 +344,6 @@ const PopularTools = () => {
     });
   };
 
-  const totalTools = allTools.length;
-  const aiCount = allTools.filter((t) => t.ai).length;
-  const popularCount = allTools.filter((t) => t.popular).length;
-
   const normalizedQuery = search.trim().toLowerCase();
 
   const filtered = useMemo(() => {
@@ -424,10 +419,7 @@ const PopularTools = () => {
             </p>
             <button
               type="button"
-              onClick={() => {
-                setSearch("");
-                setFilter("all");
-              }}
+              onClick={() => setSearch("")}
               className="text-sm font-semibold text-primary hover:underline"
             >
               Reset filters
