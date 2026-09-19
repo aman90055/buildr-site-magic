@@ -11,7 +11,6 @@ import {
   Filter, FileSearch,
 } from "lucide-react";
 import AIBadge from "./AIBadge";
-import ToolFilterBar, { sortTools, type SortKey } from "./ToolFilterBar";
 
 type Tool = {
   title: string;
@@ -318,8 +317,6 @@ const ToolCard = ({
 
 const PopularTools = () => {
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState<FilterKey>("all");
-  const [sort, setSort] = useState<SortKey>("default");
   const [favorites, setFavorites] = useState<string[]>([]);
   const [recent, setRecent] = useState<string[]>([]);
 
