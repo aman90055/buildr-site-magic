@@ -352,33 +352,16 @@ const PopularTools = () => {
   const normalizedQuery = search.trim().toLowerCase();
 
   const filtered = useMemo(() => {
-    let list = allTools;
+    if (!normalizedQuery) return allTools;
+    return allTools.filter(
+      (t) =>
+        t.title.toLowerCase().includes(normalizedQuery) ||
+        t.description.toLowerCase().includes(normalizedQuery) ||
+        t.category.toLowerCase().includes(normalizedQuery)
+    );
+  }, [normalizedQuery]);
 
-    if (filter === "ai") list = list.filter((t) => t.ai);
-    else if (filter === "popular") list = list.filter((t) => t.popular);
-    else if (filter === "favorites") list = list.filter((t) => favorites.includes(t.href));
-    else if (filter === "recent") {
-      const order = new Map(recent.map((h, i) => [h, i]));
-      list = list
-        .filter((t) => order.has(t.href))
-        .sort((a, b) => (order.get(a.href)! - order.get(b.href)!));
-    } else if (filter !== "all") {
-      list = list.filter((t) => t.category === filter);
-    }
-
-    if (normalizedQuery) {
-      list = list.filter(
-        (t) =>
-          t.title.toLowerCase().includes(normalizedQuery) ||
-          t.description.toLowerCase().includes(normalizedQuery) ||
-          t.category.toLowerCase().includes(normalizedQuery)
-      );
-    }
-
-    return sortTools(list, sort, (t) => t.title);
-  }, [filter, normalizedQuery, favorites, recent, sort]);
-
-  const isFlatView = filter !== "all" || normalizedQuery.length > 0 || sort !== "default";
+  const isFlatView = normalizedQuery.length > 0;
 
 
   return (
@@ -426,32 +409,6 @@ const PopularTools = () => {
         </div>
       </div>
 
-      {/* Filter chips */}
-      <ToolFilterBar
-        quick={[
-          { key: "all", label: "All", icon: Filter, count: totalTools },
-          { key: "ai", label: "AI", icon: Sparkles, count: aiCount },
-          { key: "popular", label: "Popular", icon: Flame, count: popularCount },
-          { key: "recent", label: "Recent", icon: Clock, count: recent.length },
-          { key: "favorites", label: "Favorites", icon: Star, count: favorites.length },
-        ]}
-        categories={toolCategories.map((cat) => ({
-          key: cat.title,
-          label: cat.title,
-          icon: cat.icon,
-          count: cat.tools.length,
-        }))}
-        active={filter}
-        onChange={setFilter}
-        sort={sort}
-        onSortChange={setSort}
-        canClear={filter !== "all" || sort !== "default" || search.length > 0}
-        onClear={() => {
-          setFilter("all");
-          setSort("default");
-          setSearch("");
-        }}
-      />
 
 
       {/* Flat results view */}
