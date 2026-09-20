@@ -13,7 +13,6 @@ import {
   Star,
 } from "lucide-react";
 import {
-  POPULAR_SLUGS,
   FAV_STORAGE_KEY,
   RECENT_STORAGE_KEY,
   readStoredSlugs,
@@ -36,7 +35,6 @@ const CATEGORY_ICONS: Record<ToolCategory, typeof FolderOpen> = {
 };
 
 const MAX_RECENT = 12;
-type FilterKey = ToolCategory | "all" | "recent" | "ai" | "popular" | "favorites";
 
 export default function Tools() {
   const allTools = useMemo(getAllTools, []);
@@ -154,14 +152,12 @@ export default function Tools() {
             <div className="text-center py-12">
               <Search className="h-8 w-8 mx-auto text-muted-foreground/50 mb-2" />
               <p className="text-sm font-medium mb-1">
-                {activeCategory === "favorites" && !q
-                  ? "No favorites yet — tap the star on any tool"
-                  : `No tools match "${query}"`}
+                No tools match "{query}"
               </p>
               <p className="text-xs text-muted-foreground mb-4">
                 Try "pdf", "image", or "ai".
               </p>
-              <Button size="sm" variant="outline" onClick={() => { setQuery(""); setActiveCategory("all"); setSort("default"); }}>
+              <Button size="sm" variant="outline" onClick={() => setQuery("")}>
                 Reset filters
               </Button>
             </div>
