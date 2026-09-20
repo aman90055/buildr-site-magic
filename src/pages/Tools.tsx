@@ -54,7 +54,6 @@ export default function Tools() {
   const pushRecent = (slug: string) => {
     const next = [slug, ...readStoredSlugs(RECENT_STORAGE_KEY).filter(s => s !== slug)].slice(0, MAX_RECENT);
     writeStoredSlugs(RECENT_STORAGE_KEY, next);
-    setRecent(next);
   };
 
   const toggleFavorite = (slug: string) => {
@@ -64,54 +63,16 @@ export default function Tools() {
     setFavorites(next);
   };
 
-  const popularSet = useMemo(() => new Set(POPULAR_SLUGS), []);
-  const aiCount = allTools.filter(t => t.category === "ai" || t.slug.startsWith("/ai")).length;
-  const popularCount = allTools.filter(t => popularSet.has(t.slug)).length;
-
   const q = query.trim().toLowerCase();
   const filtered = useMemo(() => {
-    let list = allTools;
-    if (activeCategory === "recent") {
-      const order = new Map(recent.map((s, i) => [s, i]));
-      list = allTools.filter(t => order.has(t.slug))
-        .sort((a, b) => (order.get(a.slug)! - order.get(b.slug)!));
-    } else if (activeCategory === "favorites") {
-      list = list.filter(t => favorites.includes(t.slug));
-    } else if (activeCategory === "ai") {
-      list = list.filter(t => t.category === "ai" || t.slug.startsWith("/ai"));
-    } else if (activeCategory === "popular") {
-      list = list.filter(t => popularSet.has(t.slug));
-    } else if (activeCategory !== "all") {
-      list = list.filter(t => t.category === activeCategory);
-    }
-    if (q) {
-      list = list.filter(t =>
-        t.name.toLowerCase().includes(q) ||
-        t.short.toLowerCase().includes(q) ||
-        t.slug.toLowerCase().includes(q) ||
-        t.category.includes(q)
-      );
-    }
-    return sortTools(list, sort, t => t.name);
-  }, [allTools, activeCategory, q, recent, favorites, popularSet, sort]);
-
-  const quickChips = [
-    { key: "all", label: "All", icon: Filter, count: allTools.length },
-    { key: "ai", label: "AI", icon: Sparkles, count: aiCount },
-    { key: "popular", label: "Popular", icon: Flame, count: popularCount },
-    { key: "recent", label: "Recent", icon: Clock, count: recent.length },
-    { key: "favorites", label: "Favorites", icon: Star, count: favorites.length },
-  ];
-
-  const categoryChips = (Object.keys(CATEGORY_META) as ToolCategory[]).map(c => ({
-    key: c,
-    label: CATEGORY_META[c].title.replace(" Tools", "").replace(" PDF", ""),
-    icon: CATEGORY_ICONS[c],
-    count: allTools.filter(t => t.category === c).length,
-  }));
-
-  const isCategory = (key: FilterKey): key is ToolCategory =>
-    key !== "all" && key !== "recent" && key !== "ai" && key !== "popular" && key !== "favorites";
+    if (!q) return allTools;
+    return allTools.filter(t =>
+      t.name.toLowerCase().includes(q) ||
+      t.short.toLowerCase().includes(q) ||
+      t.slug.toLowerCase().includes(q) ||
+      t.category.includes(q)
+    );
+  }, [allTools, q]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -161,23 +122,9 @@ export default function Tools() {
             )}
           </div>
 
-          <ToolFilterBar
-            quick={quickChips}
-            categories={categoryChips}
-            active={activeCategory}
-            onChange={(key) => setActiveCategory(key as FilterKey)}
-            sort={sort}
-            onSortChange={setSort}
-            canClear={activeCategory !== "all" || sort !== "default" || query.length > 0}
-            onClear={() => { setActiveCategory("all"); setSort("default"); setQuery(""); }}
-          />
-
           <div className="flex items-center justify-between mb-3">
             <p className="text-xs text-muted-foreground">
               <span className="font-semibold text-foreground">{filtered.length}</span> tool{filtered.length === 1 ? "" : "s"}
-              {isCategory(activeCategory) && (
-                <> · {CATEGORY_META[activeCategory].title}</>
-              )}
             </p>
             <div className="flex items-center rounded-lg border border-border/60 bg-card/40 backdrop-blur overflow-hidden">
               <button
