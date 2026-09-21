@@ -114,8 +114,6 @@ const InvoiceGenerator = () => {
   return (
     <>
       <Helmet><title>Invoice Generator - Create PDF Invoices | PDF Tools</title><meta name="description" content="Create professional invoices in PDF format." />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="Invoice Generator - Create PDF Invoices | PDF Tools" />

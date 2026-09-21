@@ -49,8 +49,6 @@ const ReferAndEarn = () => {
         <meta name="robots" content="noindex, follow" />
         <title>Refer & Earn | PDF Tools</title>
         <meta name="description" content="Invite friends and earn credits, discounts, and points for every successful referral." />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="Refer & Earn | PDF Tools" />

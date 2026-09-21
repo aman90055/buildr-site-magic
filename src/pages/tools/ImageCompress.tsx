@@ -66,8 +66,6 @@ const ImageCompress = () => {
   return (
     <>
       <Helmet><title>Compress Image Online | PDF Tools</title><meta name="description" content="Reduce image file size while maintaining quality." />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="Compress Image Online | PDF Tools" />

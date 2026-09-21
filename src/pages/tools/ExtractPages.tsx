@@ -67,8 +67,6 @@ const ExtractPages = () => {
       <Helmet>
         <title>Extract PDF Pages - Extract Pages from PDF Online</title>
         <meta name="description" content="Extract specific pages from your PDF documents. Free online PDF page extractor." />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="Extract PDF Pages - Extract Pages from PDF Online" />

@@ -64,8 +64,6 @@ const ResetPassword = () => {
       <Helmet>
         <title>Reset Password | PDF Tools</title>
         <meta name="description" content="Set a new password for your PDF Tools account." />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="Reset Password | PDF Tools" />

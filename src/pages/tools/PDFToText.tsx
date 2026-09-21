@@ -81,8 +81,6 @@ const PDFToText = () => {
       <Helmet>
         <title>PDF to Text - Extract Text from PDF Online Free</title>
         <meta name="description" content="Extract plain text from any PDF document instantly. Free PDF to text converter." />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="PDF to Text - Extract Text from PDF Online Free" />
