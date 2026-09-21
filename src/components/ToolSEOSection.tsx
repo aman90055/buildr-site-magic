@@ -91,9 +91,20 @@ const ToolSEOSection = () => {
             <h2 id="tool-guide-heading" className="text-2xl md:text-3xl font-bold mb-4">
               About {meta.name}
             </h2>
+            {/* Page-specific facts first, so no two guides open with the same text */}
+            {seo?.facts.map((fact, i) => (
+              <p key={`fact-${i}`} className="text-muted-foreground leading-relaxed mb-4">{fact}</p>
+            ))}
             {meta.guide.split("\n\n").map((p, i) => (
               <p key={i} className="text-muted-foreground leading-relaxed mb-4">{p}</p>
             ))}
+            <p className="text-sm text-muted-foreground mb-2">
+              This guide belongs to{" "}
+              <Link to={meta.slug} className="text-primary hover:underline font-medium">
+                {seo?.h1 ?? meta.name}
+              </Link>{" "}
+              at <span className="font-mono text-xs">{selfUrl}</span>.
+            </p>
             <p className="text-sm">
               Browse more in{" "}
               <Link to={categoryPath} className="text-primary hover:underline font-medium">
