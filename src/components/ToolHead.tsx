@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
 import { canonicalFor, getToolSeo } from "@/lib/toolSeo";
@@ -24,6 +25,15 @@ const ToolHead = ({ metaTitle, metaDescription, jsonLd = [] }: ToolHeadProps) =>
   const title = seo?.title ?? metaTitle;
   const description = seo?.description ?? metaDescription;
   const url = canonicalFor(pathname);
+
+  // index.html ships a sitewide <meta name="description">. Once this route has
+  // its own description, drop the static one so crawlers see exactly one.
+  useEffect(() => {
+    if (!description) return;
+    document
+      .querySelectorAll('meta[name="description"]:not([data-rh])')
+      .forEach((el) => el.remove());
+  }, [description]);
 
   return (
     <Helmet>
