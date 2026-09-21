@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
+import { getToolSeo } from "@/lib/toolSeo";
 import AffiliateBanner from "@/components/ads/AffiliateBanner";
 import AdSlot from "@/components/ads/AdSlot";
 import { AD_SLOTS } from "@/lib/adSlots";
@@ -105,7 +107,7 @@ const ToolPageTemplate = ({
                 <Icon className="w-10 h-10 text-white" />
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">{title}</h1>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">{pageH1}</h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
                 {description}
               </p>

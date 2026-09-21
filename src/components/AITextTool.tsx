@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
+import { getToolSeo } from "@/lib/toolSeo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -159,7 +161,7 @@ const AITextTool = ({
             <div className="text-center mb-12">
               <AIBadge variant="default" glow />
               <div className={`w-16 h-16 mx-auto my-4 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center`}><Icon className="w-8 h-8 text-white" /></div>
-              <h1 className="text-4xl font-bold text-foreground mb-3">{title}</h1>
+              <h1 className="text-4xl font-bold text-foreground mb-3">{pageH1}</h1>
               <p className="text-muted-foreground">{description}</p>
             </div>
             <div className="space-y-6">
