@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
+import { getToolSeo } from "@/lib/toolSeo";
 import AffiliateBanner from "@/components/ads/AffiliateBanner";
 import AdSlot from "@/components/ads/AdSlot";
 import { AD_SLOTS } from "@/lib/adSlots";
@@ -45,6 +47,9 @@ const ToolPageTemplate = ({
   faqs,
   longFormContent,
 }: ToolPageTemplateProps) => {
+  const { pathname } = useLocation();
+  const pageH1 = getToolSeo(pathname)?.h1 ?? title;
+
   // Programmatic SEO: auto-emit HowTo + FAQPage JSON-LD for every tool page
   const howToSchema = {
     "@context": "https://schema.org",
@@ -74,8 +79,6 @@ const ToolPageTemplate = ({
       <Helmet>
         <title>{metaTitle}</title>
         <meta name="description" content={metaDescription} />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content={metaTitle} />
@@ -107,7 +110,7 @@ const ToolPageTemplate = ({
                 <Icon className="w-10 h-10 text-white" />
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">{title}</h1>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">{pageH1}</h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
                 {description}
               </p>

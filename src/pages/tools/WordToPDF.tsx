@@ -109,8 +109,6 @@ const WordToPDF = () => {
       <Helmet>
         <title>Word to PDF - Convert Text to PDF Online Free</title>
         <meta name="description" content="Convert Word documents and text to PDF online. Free text to PDF converter." />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="Word to PDF - Convert Text to PDF Online Free" />

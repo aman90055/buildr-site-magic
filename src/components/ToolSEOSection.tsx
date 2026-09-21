@@ -5,6 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Home, ArrowRight } from "lucide-react";
 import { getToolMeta, CATEGORY_META, type ToolMeta } from "@/lib/toolRegistry";
 import { getRichContent } from "@/lib/richToolContent";
+import { getToolSeo, canonicalFor } from "@/lib/toolSeo";
 import RelatedTools from "@/components/RelatedTools";
 import RichToolContentSection from "@/components/RichToolContentSection";
 
@@ -19,6 +20,8 @@ const ToolSEOSection = () => {
   const { pathname } = useLocation();
   const registryMeta = getToolMeta(pathname);
   const rich = getRichContent(pathname);
+  const seo = getToolSeo(pathname);
+  const selfUrl = canonicalFor(pathname);
 
   // Fall back to the long-form content library for tools that are not in the
   // hand-written registry, so every tool page ships substantial publisher content.
@@ -88,9 +91,20 @@ const ToolSEOSection = () => {
             <h2 id="tool-guide-heading" className="text-2xl md:text-3xl font-bold mb-4">
               About {meta.name}
             </h2>
+            {/* Page-specific facts first, so no two guides open with the same text */}
+            {seo?.facts.map((fact, i) => (
+              <p key={`fact-${i}`} className="text-muted-foreground leading-relaxed mb-4">{fact}</p>
+            ))}
             {meta.guide.split("\n\n").map((p, i) => (
               <p key={i} className="text-muted-foreground leading-relaxed mb-4">{p}</p>
             ))}
+            <p className="text-sm text-muted-foreground mb-2">
+              This guide belongs to{" "}
+              <Link to={meta.slug} className="text-primary hover:underline font-medium">
+                {seo?.h1 ?? meta.name}
+              </Link>{" "}
+              at <span className="font-mono text-xs">{selfUrl}</span>.
+            </p>
             <p className="text-sm">
               Browse more in{" "}
               <Link to={categoryPath} className="text-primary hover:underline font-medium">

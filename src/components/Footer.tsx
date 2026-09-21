@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { Star, Heart, Coffee } from "lucide-react";
 import ToolSEOSection from "@/components/ToolSEOSection";
+import ToolHead from "@/components/ToolHead";
 
 const Footer = () => {
   return (
     <>
+    <ToolHead />
     <ToolSEOSection />
     <footer className="bg-muted/30 border-t border-border py-16 relative overflow-hidden" role="contentinfo" aria-label="Site footer">
       {/* Background decoration */}

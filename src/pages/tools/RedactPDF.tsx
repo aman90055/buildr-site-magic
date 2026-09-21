@@ -106,8 +106,6 @@ const RedactPDF = () => {
       <Helmet>
         <title>Redact PDF - Black Out Sensitive Information | AI-Powered</title>
         <meta name="description" content="Redact sensitive information from PDF documents. AI-powered redaction tool. Free PDF redactor." />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="Redact PDF - Black Out Sensitive Information | AI-Powered" />

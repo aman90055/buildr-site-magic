@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
+import { getToolSeo } from "@/lib/toolSeo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -36,6 +38,9 @@ const AITextTool = ({
   systemPrompt, inputLabel, inputPlaceholder, outputLabel, actionLabel,
   extraInput, getFullPrompt, cleanOutput, speakLang, sttLang,
 }: AITextToolProps) => {
+  const { pathname } = useLocation();
+  const pageH1 = getToolSeo(pathname)?.h1 ?? title;
+
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -145,8 +150,6 @@ const AITextTool = ({
   return (
     <>
       <Helmet><title>{metaTitle}</title><meta name="description" content={metaDescription} />
-        <link rel="canonical" href={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
-        <meta property="og:url" content={`https://docunova.online${typeof window !== "undefined" ? window.location.pathname : "/"}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content={metaTitle} />
@@ -161,7 +164,7 @@ const AITextTool = ({
             <div className="text-center mb-12">
               <AIBadge variant="default" glow />
               <div className={`w-16 h-16 mx-auto my-4 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center`}><Icon className="w-8 h-8 text-white" /></div>
-              <h1 className="text-4xl font-bold text-foreground mb-3">{title}</h1>
+              <h1 className="text-4xl font-bold text-foreground mb-3">{pageH1}</h1>
               <p className="text-muted-foreground">{description}</p>
             </div>
             <div className="space-y-6">
