@@ -31,6 +31,9 @@ const ImageConverterTool = ({
   title, description, metaTitle, metaDescription, icon: Icon, gradient,
   acceptTypes, outputFormat, outputMime, outputExt, showQuality = false,
 }: ImageConverterProps) => {
+  const { pathname } = useLocation();
+  const pageH1 = getToolSeo(pathname)?.h1 ?? title;
+
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [quality, setQuality] = useState(85);

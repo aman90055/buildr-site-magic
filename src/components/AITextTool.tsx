@@ -38,6 +38,9 @@ const AITextTool = ({
   systemPrompt, inputLabel, inputPlaceholder, outputLabel, actionLabel,
   extraInput, getFullPrompt, cleanOutput, speakLang, sttLang,
 }: AITextToolProps) => {
+  const { pathname } = useLocation();
+  const pageH1 = getToolSeo(pathname)?.h1 ?? title;
+
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);

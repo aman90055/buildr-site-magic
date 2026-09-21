@@ -47,6 +47,9 @@ const ToolPageTemplate = ({
   faqs,
   longFormContent,
 }: ToolPageTemplateProps) => {
+  const { pathname } = useLocation();
+  const pageH1 = getToolSeo(pathname)?.h1 ?? title;
+
   // Programmatic SEO: auto-emit HowTo + FAQPage JSON-LD for every tool page
   const howToSchema = {
     "@context": "https://schema.org",
