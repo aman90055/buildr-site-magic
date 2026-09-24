@@ -46,7 +46,7 @@ const ToolSEOSection = () => {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: meta.faqs.map((f) => ({
+    mainEntity: meta.faqs.slice(0, 4).map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -95,16 +95,9 @@ const ToolSEOSection = () => {
             {seo?.facts.map((fact, i) => (
               <p key={`fact-${i}`} className="text-muted-foreground leading-relaxed mb-4">{fact}</p>
             ))}
-            {meta.guide.split("\n\n").map((p, i) => (
+            {meta.guide.split("\n\n").slice(0, 1).map((p, i) => (
               <p key={i} className="text-muted-foreground leading-relaxed mb-4">{p}</p>
             ))}
-            <p className="text-sm text-muted-foreground mb-2">
-              This guide belongs to{" "}
-              <Link to={meta.slug} className="text-primary hover:underline font-medium">
-                {seo?.h1 ?? meta.name}
-              </Link>{" "}
-              at <span className="font-mono text-xs">{selfUrl}</span>.
-            </p>
             <p className="text-sm">
               Browse more in{" "}
               <Link to={categoryPath} className="text-primary hover:underline font-medium">
@@ -122,7 +115,7 @@ const ToolSEOSection = () => {
           <div className="mb-8">
             <h2 className="text-2xl md:text-3xl font-bold mb-6">Frequently Asked Questions</h2>
             <Accordion type="single" collapsible className="w-full">
-              {meta.faqs.map((f, i) => (
+              {meta.faqs.slice(0, 4).map((f, i) => (
                 <AccordionItem key={i} value={`item-${i}`}>
                   <AccordionTrigger className="text-left text-base font-semibold">
                     {f.q}
