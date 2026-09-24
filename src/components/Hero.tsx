@@ -63,7 +63,7 @@ const Hero = () => {
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
               The Docunova AI Suite helps individuals, students, professionals, and
               businesses manage documents smarter. Edit, convert, organize,
-              summarize, sign, and collaborate using 100+ powerful tools — all from
+              summarize, sign, and collaborate using 74 powerful tools — all from
               a single modern workspace.
             </p>
 
@@ -161,7 +161,7 @@ const Hero = () => {
               </div>
               <div className="w-px h-8 sm:h-10 bg-border" />
               <div className="text-center">
-                <div className="text-xl sm:text-2xl font-display font-bold text-foreground">100+</div>
+                <div className="text-xl sm:text-2xl font-display font-bold text-foreground">74</div>
                 <div className="text-[11px] sm:text-xs text-muted-foreground">OCR languages</div>
               </div>
             </div>

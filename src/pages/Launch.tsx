@@ -97,10 +97,10 @@ const Launch = () => {
               {/* Metric strip */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
                 {[
-                  { n: "100+", l: "AI tools" },
+                  { n: "74", l: "AI tools" },
                   { n: "0", l: "Signups required" },
                   { n: "∞", l: "File size" },
-                  { n: "100+", l: "Languages" },
+                  { n: "74", l: "Languages" },
                 ].map((m) => (
                   <div key={m.l} className="p-4 rounded-xl bg-muted/30">
                     <div className="text-3xl font-bold text-primary">{m.n}</div>

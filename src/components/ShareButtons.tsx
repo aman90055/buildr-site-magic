@@ -29,8 +29,8 @@ interface ShareButtonsProps {
 
 const ShareButtons = ({
   url = typeof window !== "undefined" ? window.location.href : "",
-  title = "The Docunova AI Suite — 100+ Free PDF, AI & Document Tools",
-  description = "Edit, convert, summarize and sign documents with 100+ free tools.",
+  title = "The Docunova AI Suite — 74 Free PDF, AI & Document Tools",
+  description = "Edit, convert, summarize and sign documents with 74 free tools.",
   image,
   hashtags = ["DocumentEditPro", "PDFTools", "AI"],
   className,

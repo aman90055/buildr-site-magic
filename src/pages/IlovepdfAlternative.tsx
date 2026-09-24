@@ -5,7 +5,7 @@ const IlovepdfAlternative = () => (
     brand="iLovePDF"
     path="/ilovepdf-alternative"
     metaTitle="Free iLovePDF Alternative — Merge, Split & Compress PDF"
-    metaDescription="Looking for an iLovePDF alternative? Docunova AI runs 100+ PDF tools free in your browser — merge, split, compress, convert and sign with no page or size limits."
+    metaDescription="Looking for an iLovePDF alternative? Docunova AI runs 74 PDF tools free in your browser — merge, split, compress, convert and sign with no page or size limits."
     h1="A free iLovePDF alternative that runs in your browser"
     intro={[
       "If you searched for i love pdf, ilovepdf or simply \"pdf converter\", you are almost certainly after one thing: a page where you drop a file, pick an action, and download the result seconds later. Docunova AI does exactly that for more than 100 document jobs — merging, splitting, compressing, converting, OCR, signing and AI summarising — without an account and without a paid tier standing between you and the download button.",
@@ -17,7 +17,7 @@ const IlovepdfAlternative = () => (
       { feature: "Where files are processed", docunova: "In-browser for PDF and image tools; files never leave your device", typical: "Usually uploaded to a conversion server" },
       { feature: "Account", docunova: "Not required for any tool", typical: "Often required beyond a few tasks" },
       { feature: "AI features", docunova: "Summarise, translate, OCR, rewrite, data extraction included", typical: "Varies; often a separate paid add-on" },
-      { feature: "Tool count", docunova: "100+ across PDF, image, AI, and document generation", typical: "Focused mainly on core PDF conversions" },
+      { feature: "Tool count", docunova: "74 across PDF, image, AI, and document generation", typical: "Focused mainly on core PDF conversions" },
     ]}
     tools={[
       { name: "Merge PDF", to: "/merge", blurb: "Combine any number of PDFs, reorder pages by drag and drop." },

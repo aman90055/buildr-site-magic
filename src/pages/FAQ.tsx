@@ -51,7 +51,7 @@ const FAQ = () => {
         },
         {
           question: "What is OCR and how accurate is it?",
-          answer: "OCR (Optical Character Recognition) converts images of text into actual editable text. Our AI-powered OCR supports 100+ languages and achieves over 99% accuracy on clear documents. It works on scanned documents, photos of text, and image-based PDFs."
+          answer: "OCR (Optical Character Recognition) converts images of text into actual editable text. Our AI-powered OCR supports 100+ languages and achieves over good accuracy on clear documents. It works on scanned documents, photos of text, and image-based PDFs."
         },
         {
           question: "Can I edit text directly in a PDF?",

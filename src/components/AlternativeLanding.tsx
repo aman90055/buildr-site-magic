@@ -104,7 +104,7 @@ const AlternativeLanding = ({
           <div className="flex flex-wrap gap-3 mb-12">
             <Button asChild size="lg">
               <Link to="/tools">
-                Browse all 100+ free tools <ArrowRight className="ml-2 w-4 h-4" />
+                Browse all 74 free tools <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
