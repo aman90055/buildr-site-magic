@@ -75,11 +75,11 @@ export default function Tools() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>All Tools — Search 100+ PDF, AI & Image Tools | The Docunova AI Suite</title>
+        <title>All Tools — Search 74 PDF, AI & Image Tools | The Docunova AI Suite</title>
         <meta name="description" content="Browse and search every free tool — merge, split, compress, convert, OCR, AI summarize, translate, image edit and more. Instant search by name or category." />
         <link rel="canonical" href="https://docunova.online/tools" />
-        <meta property="og:title" content="All Tools — Search 100+ PDF, AI & Image Tools" />
-        <meta property="og:description" content="Find the right tool in seconds. Instant search across 100+ free PDF, AI and image tools." />
+        <meta property="og:title" content="All Tools — Search 74 PDF, AI & Image Tools" />
+        <meta property="og:description" content="Find the right tool in seconds. Instant search across 74 free PDF, AI and image tools." />
       </Helmet>
 
       <Header />

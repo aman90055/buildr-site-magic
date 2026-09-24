@@ -11,7 +11,7 @@ const facts = [
   { label: "Founder", value: "Aman Vishwakarma" },
   { label: "HQ", value: "India · Remote" },
   { label: "Tools", value: "60+" },
-  { label: "OCR languages", value: "100+" },
+  { label: "OCR languages", value: "74" },
   { label: "Pricing", value: "Free forever" },
 ];
 

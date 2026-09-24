@@ -5,7 +5,7 @@ const ElevenzonAlternative = () => (
     brand="11zon"
     path="/11zon-alternative"
     metaTitle="Free 11zon Alternative — Image Resizer & PDF Converter"
-    metaDescription="A clean 11zon alternative: compress and resize images, convert WebP, PNG and JPG, and run 100+ PDF tools free in your browser with no size limits."
+    metaDescription="A clean 11zon alternative: compress and resize images, convert WebP, PNG and JPG, and run 74 PDF tools free in your browser with no size limits."
     h1="A free 11zon alternative for image and PDF conversion"
     intro={[
       "People arrive at 11zon-style sites for fast, single-purpose jobs: resize an image to a fixed pixel size, compress a photo under 200 KB for a form, convert WebP to PNG, or turn a stack of JPGs into one PDF. Docunova AI covers the same jobs with the same one-page flow — drop the file, set the option, download — plus the full PDF toolset and AI text tools alongside it.",
@@ -16,7 +16,7 @@ const ElevenzonAlternative = () => (
       { feature: "Image size cap", docunova: "None enforced; bounded by device memory", typical: "Frequently capped per file or per batch" },
       { feature: "Processing location", docunova: "Local, in your browser tab", typical: "Often server-side upload" },
       { feature: "Output control", docunova: "Quality slider with live output-size preview", typical: "Fixed presets in many cases" },
-      { feature: "Beyond images", docunova: "100+ PDF, document and AI tools in one place", typical: "Mostly isolated single-purpose pages" },
+      { feature: "Beyond images", docunova: "74 PDF, document and AI tools in one place", typical: "Mostly isolated single-purpose pages" },
       { feature: "Watermarks", docunova: "Never added to output", typical: "Sometimes added on free tiers" },
     ]}
     tools={[

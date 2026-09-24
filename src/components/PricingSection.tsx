@@ -15,7 +15,7 @@ const plans = [
     highlight: false,
     color: "from-brand-blue to-brand-cyan",
     features: [
-      "100+ PDF, AI & document tools",
+      "74 PDF, AI & document tools",
       "Unlimited file size",
       "Client-side processing (private)",
       "OCR, summarization, translation",
@@ -63,7 +63,7 @@ const plans = [
 ];
 
 const comparisonRows: { label: string; free: string | boolean; pro: string | boolean; business: string | boolean }[] = [
-  { label: "Tool access", free: "100+", pro: "100+", business: "100+ · API" },
+  { label: "Tool access", free: "74", pro: "74", business: "100+ · API" },
   { label: "Max file size", free: "Unlimited", pro: "Unlimited", business: "Unlimited" },
   { label: "Batch processing", free: "5 files", pro: "100 files", business: "Unlimited" },
   { label: "AI credits / month", free: "50", pro: "5,000", business: "50,000" },
