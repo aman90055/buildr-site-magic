@@ -150,7 +150,17 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="pt-4 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
-            <p>Made in India 🇮🇳 • Free document tools, built in the open</p>
+            <p className="inline-flex items-center gap-1.5">
+              Made in India
+              <svg viewBox="0 0 30 20" width="20" height="14" role="img" aria-label="Flag of India" className="rounded-[2px] shadow-sm">
+                <rect width="30" height="20" fill="#FF9933" />
+                <rect y="6.67" width="30" height="6.67" fill="#FFFFFF" />
+                <rect y="13.33" width="30" height="6.67" fill="#138808" />
+                <circle cx="15" cy="10" r="2.6" fill="none" stroke="#000080" strokeWidth="0.6" />
+                <circle cx="15" cy="10" r="0.5" fill="#000080" />
+              </svg>
+              • Free document tools, built in the open
+            </p>
             <span className="hidden md:inline">•</span>
             <p className="font-medium text-foreground">
               Managed by{" "}
