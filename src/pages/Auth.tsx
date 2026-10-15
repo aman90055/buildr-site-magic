@@ -38,7 +38,8 @@ const Auth = () => {
   const [mode, setMode] = useState<"login" | "signup" | "forgot">("login");
   const [isSubmitting, setIsSubmitting] = useState(false);
  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
- const [isAppleLoading, setIsAppleLoading] = useState(false);
+const [isAppleLoading, setIsAppleLoading] = useState(false);
+  const [isMicrosoftLoading, setIsMicrosoftLoading] = useState(false);
 
   // password form state
   const [pwEmail, setPwEmail] = useState("");
@@ -99,6 +100,27 @@ const Auth = () => {
     } catch {
       toast({ title: "Error", description: "Could not start Apple sign-in.", variant: "destructive" });
       setIsAppleLoading(false);
+    }
+  };
+
+  const handleMicrosoftSignIn = async () => {
+    setIsMicrosoftLoading(true);
+    try {
+      sessionStorage.setItem("auth_next", nextPath);
+      const result = await lovable.auth.signInWithOAuth("microsoft", {
+        redirect_uri: window.location.origin,
+      });
+      if (result.error) {
+        toast({
+          title: "Microsoft sign-in failed",
+          description: result.error.message || "Please try again.",
+          variant: "destructive",
+        });
+        setIsMicrosoftLoading(false);
+      }
+    } catch {
+      toast({ title: "Error", description: "Could not start Microsoft sign-in.", variant: "destructive" });
+      setIsMicrosoftLoading(false);
     }
   };
 
@@ -319,6 +341,27 @@ const Auth = () => {
                   )}
                   Continue with Apple
                 </Button>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full mb-4"
+                  onClick={handleMicrosoftSignIn}
+                  disabled={isMicrosoftLoading || isAppleLoading || isGoogleLoading || isSubmitting}
+                >
+                  {isMicrosoftLoading ? (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    <svg className="mr-2 h-4 w-4" viewBox="0 0 23 23" aria-hidden="true">
+                      <path fill="#f35325" d="M1 1h10v10H1z" />
+                      <path fill="#81bc06" d="M12 1h10v10H12z" />
+                      <path fill="#05a6f0" d="M1 12h10v10H1z" />
+                      <path fill="#ffba08" d="M12 12h10v10H12z" />
+                    </svg>
+                  )}
+                  Continue with Microsoft
+                </Button>
+
 
                 <div className="relative my-4">
                   <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-border" /></div>
