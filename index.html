@@ -22,12 +22,10 @@
         if (c && c.ad_storage) gtag('consent', 'update', c);
       } catch(e) {}
     </script>
-    <!-- Google AdSense verification snippet (required site-wide for review/approval).
-         Ad UNITS are still gated: they render only on content-rich, allow-listed
-         routes (src/lib/adsRoutes.ts) and only after marketing consent. Keep
-         Auto ads OFF in the AdSense dashboard so no units appear on thin screens. -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4830449684268109"
-      crossorigin="anonymous"></script>
+    <!-- AdSense: NO global script here. The adsbygoogle.js script is injected
+         on-demand by src/lib/adsRoutes.ts (ensureAdsenseLoaded) only on
+         content-rich allow-listed routes AND only after marketing consent.
+         Site verification uses the google-adsense-account meta tag below. -->
     <meta name="google-adsense-account" content="ca-pub-4830449684268109" />
 
 
