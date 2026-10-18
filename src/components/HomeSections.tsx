@@ -51,12 +51,12 @@ const services = [
 ];
 
 const whyUs = [
-  "100+ Professional Tools",
+  "Free core PDF tools without sign-in",
   "No Daily Limits on Core Features",
   "AI PDF Chat & Smart Summaries",
-  "Google Login, Email OTP & Phone OTP",
+  "AI tools with separate usage limits",
   "Cloud Storage & Document History",
-  "Team Workspaces & Shared Access",
+  "Optional account features",
   "Multi-Language Support",
   "Fast, Secure & Scalable Infrastructure",
 ];
@@ -87,8 +87,9 @@ const HomeSections = () => {
                 The Docunova AI Suite is an all-in-one productivity platform designed
                 to simplify document management. Whether you need PDF editing,
                 AI-powered document analysis, image optimization, file conversion,
-                cloud storage, or team collaboration, everything is available in one
-                place with a clean and intuitive experience.
+                or optional signed-in cloud storage, you can choose the right tool
+                for the task. Core PDF tools are public and free; AI requests have
+                separate usage and input limits.
               </p>
             </div>
             <div>

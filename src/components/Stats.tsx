@@ -7,7 +7,7 @@ import { TOOL_COUNT } from "@/lib/toolRegistry";
 const stats = [
   { value: String(TOOL_COUNT), label: "Tools available", icon: FileText, color: "text-brand-blue" },
   { value: "In-browser", label: "PDF & image processing", icon: Laptop, color: "text-brand-ai" },
-  { value: "₹0", label: "Cost to use every tool", icon: BadgeIndianRupee, color: "text-brand-green" },
+  { value: "₹0", label: "Cost to use core PDF tools", icon: BadgeIndianRupee, color: "text-brand-green" },
   { value: "No signup", label: "Required for PDF tools", icon: UserX, color: "text-brand-orange" },
 ];
 
@@ -39,8 +39,8 @@ const Stats = () => {
           </div>
           <p className="text-center text-xs text-muted-foreground mt-8 max-w-2xl mx-auto">
             We don't publish user or usage statistics. AI tools (OCR, chat, translation, image
-            generation) send your input to our AI provider for processing — every other tool runs
-            entirely on your device.
+            generation) send submitted content to our AI provider and have usage and input limits.
+            Core PDF processing runs on your device; optional cloud storage is separate.
           </p>
         </div>
       </div>
