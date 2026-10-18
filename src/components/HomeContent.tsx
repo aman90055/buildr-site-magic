@@ -23,10 +23,10 @@ const HomeContent = () => {
             PDF is the format your bank, your government office, your school and your
             employer all agree on — and yet most people still pay for clunky desktop
             software just to combine two pages or shrink a 30&nbsp;MB scan. We built
-            this site to fix that. Every tool here runs free in your browser, has no
-            file-size cap, never asks you to sign up, and processes files locally
-            whenever the operation allows it, so your documents do not leave your
-            device.
+            this site to fix that. Core PDF tools are free without sign-in, with no app-defined
+            file-size cap or daily quota. They process files locally; large files
+            depend on your device’s memory. AI tools have separate usage and input
+            limits and send submitted content for online processing.
           </p>
           <p className="text-muted-foreground leading-relaxed text-lg mt-4">
             We started in 2024 as a side project to merge invoices for a small
@@ -91,7 +91,7 @@ const HomeContent = () => {
                 icon: Brain,
                 title: "AI helpers that actually help",
                 body:
-                  "Summarise a long PDF in one paragraph, extract the action items, translate a section into another language, or chat with the document to ask focused questions. Powered by our own AI gateway — no third-party data sharing.",
+                  "Summarise a long PDF in one paragraph, extract the action items, translate a section into another language, or chat with the document to ask focused questions. Submitted content is sent to our AI provider; usage and input limits apply.",
               },
             ].map((item) => (
               <Card key={item.title} className="glass-card border-border/50">
@@ -128,7 +128,7 @@ const HomeContent = () => {
                 n: "02",
                 title: "Drop your files",
                 body:
-                  "Drag and drop, browse, or capture a page with your phone camera. Files are read in the browser; for tools that need server processing (OCR, AI) they upload over HTTPS to an isolated worker and are deleted within the hour.",
+                  "Drag and drop, browse, or capture a page with your phone camera. Core PDF files are read in your browser. AI and OCR tools send submitted content for online processing; check the privacy policy before submitting sensitive information.",
               },
               {
                 n: "03",
@@ -183,62 +183,16 @@ const HomeContent = () => {
           </div>
         </article>
 
-        {/* Comparison table */}
-        <article>
-          <h2 className="text-3xl font-display font-bold tracking-tight mb-6">
-            How we compare to other PDF services
-          </h2>
-          <p className="text-muted-foreground mb-6">
-            Most free online PDF tools cap your file size, lock the best features
-            behind a subscription, or watermark the output. Here is an honest
-            side-by-side based on what we offer today.
-          </p>
-          <div className="overflow-x-auto rounded-2xl border border-border/50">
-            <table className="w-full text-sm">
-              <thead className="bg-muted/40 text-foreground">
-                <tr>
-                  <th className="text-left p-4 font-display font-semibold">Feature</th>
-                  <th className="p-4 font-display font-semibold">This site</th>
-                  <th className="p-4 font-display font-semibold">Typical free competitor</th>
-                  <th className="p-4 font-display font-semibold">Paid desktop apps</th>
-                </tr>
-              </thead>
-              <tbody className="text-muted-foreground">
-                {[
-                  ["File size limit", "Unlimited", "25-100 MB", "Unlimited"],
-                  ["Daily task limit", "Unlimited", "2-3 free / day", "Unlimited"],
-                  ["Output watermark", "Never", "Sometimes", "No"],
-                  ["Signup required", "No", "Often", "Yes (license)"],
-                  ["Local processing", "Yes, where possible", "Rare", "Yes"],
-                  ["AI summary / chat", "Included free", "Paid add-on", "Limited"],
-                  ["Price", "₹0", "₹0 with limits", "₹6,000+/yr"],
-                ].map(([f, a, b, c]) => (
-                  <tr key={f} className="border-t border-border/40">
-                    <td className="p-4 text-foreground font-medium">{f}</td>
-                    <td className="p-4 text-center">{a}</td>
-                    <td className="p-4 text-center">{b}</td>
-                    <td className="p-4 text-center">{c}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </article>
-
         {/* Privacy explainer */}
         <article className="prose prose-lg max-w-none dark:prose-invert">
           <h2 className="text-3xl font-display font-bold tracking-tight mb-4">
             A note on privacy
           </h2>
           <p className="text-muted-foreground leading-relaxed">
-            For merge, split, compress, rotate, watermark, image-conversion, and
-            most editing operations, the heavy lifting runs inside a Web Worker in
-            your own browser. Your file never touches our servers. For tools that
-            genuinely need server compute — OCR on a large scan, AI summarisation,
-            password cracking on a forgotten PDF — files are uploaded over TLS to a
-            short-lived worker, processed in memory, and deleted within sixty
-            minutes. We never sell file contents, we do not train models on your
-            documents, and we publish our retention rules on the{" "}
+            Core PDF operations such as merge, split and rotate run locally in
+            your browser. AI tools send submitted text or images to an online AI
+            provider and have usage and input limits. Optional signed-in cloud
+            storage is separate from local PDF processing. Read the{" "}
             <a href="/privacy" className="text-primary underline-offset-4 hover:underline">
               privacy page
             </a>
@@ -255,11 +209,11 @@ const HomeContent = () => {
             {[
               {
                 q: "Are these PDF tools really free, with no hidden limits?",
-                a: "Yes. Every tool on the site is free with no file-size cap and no daily task limit. We do not show a watermark on the output and we do not gate features behind a paid plan. The site is supported by unobtrusive ads and optional donations.",
+                a: "Core PDF tools are free with no app-defined file-size cap or daily processing quota. Browser memory and supported formats still apply. AI requests have tool-specific usage and input limits. Donations are optional and are not required for core PDF tools.",
               },
               {
                 q: "Do I need to create an account?",
-                a: "No. You can use every tool without signing in. An optional account adds a private dashboard, AI credits for heavy tasks, and the referral program — but it is never required to process a PDF.",
+                a: "No account is required for core PDF tools such as merge, split and compress. Signed-in history and cloud storage are separate account features. AI tools have their own request and input limits; they are not an unlimited free allowance.",
               },
               {
                 q: "How do I merge multiple PDFs into one?",
@@ -279,7 +233,7 @@ const HomeContent = () => {
               },
               {
                 q: "What happens to my files after I upload them?",
-                a: "Whenever a tool can run in your browser, the file never leaves your device. For server-side tools, files are uploaded over TLS, held in memory or temporary storage for at most one hour, then deleted. We do not retain copies, do not analyse contents for advertising, and do not use your files to train AI models.",
+                a: "Core PDF tools process files on your device. AI tools send submitted content to our AI provider for processing; optional cloud storage also uploads files. See the privacy policy for details before submitting sensitive documents.",
               },
               {
                 q: "Can I use these tools on a phone?",
@@ -287,7 +241,7 @@ const HomeContent = () => {
               },
               {
                 q: "Why is there an ad on the page?",
-                a: "Ads are how we keep every tool free with no file-size limits. We try to keep them few, slow-loading, and away from the working area of each tool. If you prefer an ad-free experience, you can donate via UPI or Buy Me a Coffee — the support button is in the footer.",
+                a: "Ads are how we keep every tool free with no file-size limits. We try to keep them few, slow-loading, and away from the working area of each tool. Donations via UPI or Buy Me a Coffee are optional support, not a promise of ad removal or extra access.",
               },
               {
                 q: "Do you have an API for businesses?",
