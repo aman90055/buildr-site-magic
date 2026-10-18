@@ -4,13 +4,13 @@ const steps = [
   {
     icon: Upload,
     title: "1. Upload PDF or Image",
-    desc: "Drag & drop any PDF, DOCX, or image. Unlimited size, 100% private — files never leave your browser.",
+    desc: "Choose a supported file. Core PDF tools have no app-defined size cap; larger files need more device memory.",
     color: "from-brand-blue to-brand-cyan",
   },
   {
     icon: Sparkles,
     title: "2. Smart Extraction",
-    desc: "OCR, summarization, translation & data extraction powered by our 2026 document engine.",
+    desc: "AI OCR, summaries and translation send submitted content for online processing and have usage and input limits.",
     color: "from-brand-ai to-brand-purple",
   },
   {

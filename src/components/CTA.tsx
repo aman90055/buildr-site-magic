@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import ShareButtons from "./ShareButtons";
+import { PUBLIC_PDF_START_PATH } from "@/lib/homeAccess";
 
 const CTA = () => {
   return (
@@ -14,7 +15,7 @@ const CTA = () => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-3 mb-8 animate-fade-in">
-            <span className="text-muted-foreground font-medium">Free to use • No signup required</span>
+            <span className="text-muted-foreground font-medium">Free PDF tools • No signup required</span>
           </div>
           
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 tracking-tight animate-fade-in" style={{ animationDelay: "0.1s" }}>
@@ -23,12 +24,12 @@ const CTA = () => {
           </h2>
           
           <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto font-light animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            Every tool is free to use, with no sign-up for PDF and image work. Pick a tool and get started in seconds.
+            Merge, split and compress PDFs for free without signing in. No app-defined file-size cap; large files depend on your device. AI tools have separate usage and input limits.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: "0.3s" }}>
             <Button size="lg" className="text-lg shadow-cta group bg-gradient-ai hover:opacity-90 transition-opacity h-16 px-10 rounded-2xl font-display font-semibold" asChild>
-              <Link to="/merge">
+              <Link to={PUBLIC_PDF_START_PATH}>
                 <Star className="w-5 h-5 mr-2" />
                 Start Free Now
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -42,13 +43,13 @@ const CTA = () => {
               <svg className="w-4 h-4 text-brand-green" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-              No file limits
+              No PDF file-size cap
             </span>
             <span className="flex items-center gap-2">
               <svg className="w-4 h-4 text-brand-green" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-              Unlimited processing
+              No core PDF daily quota
             </span>
             <span className="flex items-center gap-2">
               <svg className="w-4 h-4 text-brand-green" fill="currentColor" viewBox="0 0 20 20">
@@ -60,14 +61,14 @@ const CTA = () => {
               <svg className="w-4 h-4 text-brand-green" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-              Files stay in your browser
+              Core PDF files stay in your browser
             </span>
           </div>
 
           {/* Share Section */}
           <div className="mt-8 flex justify-center animate-fade-in" style={{ animationDelay: "0.5s" }}>
             <ShareButtons 
-              title="Free PDF Tools Online - 50+ AI-Powered Tools" 
+              title="Docunova — Free PDF tools online" 
               description="Check out these amazing free AI-powered PDF tools! Merge, split, compress & convert PDFs instantly."
               url="https://docunova.online"
             />

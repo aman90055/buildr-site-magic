@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import AIBadge from "./AIBadge";
 import { trackCTA, trackToolCard } from "@/lib/analytics";
 import { TOOL_COUNT } from "@/lib/toolRegistry";
+import { PUBLIC_PDF_START_PATH } from "@/lib/homeAccess";
 
 const tools = [
   { to: "/merge", icon: Merge, label: "Merge PDF", desc: "AI-optimized combining", color: "bg-brand-blue", glow: "hsl(var(--brand-blue))", ai: true },
@@ -63,8 +64,13 @@ const Hero = () => {
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
               The Docunova AI Suite helps individuals, students, professionals, and
               businesses manage documents smarter. Edit, convert, organize,
-              summarize, sign, and collaborate using 74 powerful tools — all from
+              summarize and sign using {TOOL_COUNT} tools — all from
               a single modern workspace.
+            </p>
+            <p className="text-sm text-muted-foreground max-w-xl">
+              Core PDF tools are free, with no sign-in or app-defined file-size cap.
+              Large files depend on your device’s memory. AI tools have usage and input limits
+              and send submitted content for online processing.
             </p>
 
             {/* Live Activity Spotlight — fills the visual gap with motion + social proof */}
@@ -135,7 +141,7 @@ const Hero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
               <Button size="lg" className="text-base shadow-cta group bg-gradient-ai hover:shadow-[0_0_40px_-10px_hsl(var(--primary)/0.5)] hover:scale-[1.03] transition-all duration-300 h-12 sm:h-14 px-6 sm:px-8 rounded-2xl font-display font-semibold w-full sm:w-auto cursor-pointer" asChild>
-                <Link to="/auth?next=/merge" onClick={() => trackCTA("Start Free", "hero", "/auth")}>
+                <Link to={PUBLIC_PDF_START_PATH} onClick={() => trackCTA("Start Free", "hero", PUBLIC_PDF_START_PATH)}>
                   Start Free
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
@@ -157,7 +163,7 @@ const Hero = () => {
               <div className="w-px h-8 sm:h-10 bg-border" />
               <div className="text-center">
                 <div className="text-xl sm:text-2xl font-display font-bold text-foreground">₹0</div>
-                <div className="text-[11px] sm:text-xs text-muted-foreground">Cost to use</div>
+                <div className="text-[11px] sm:text-xs text-muted-foreground">Core PDF tools</div>
               </div>
               <div className="w-px h-8 sm:h-10 bg-border" />
               <div className="text-center">
