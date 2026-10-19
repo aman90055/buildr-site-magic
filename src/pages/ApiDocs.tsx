@@ -3,7 +3,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Code2, Key, Zap, BookOpen } from "lucide-react";
+import { Code2, Key, Zap, BookOpen, ArrowLeft, Home } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
 const endpoints = [
   { method: "POST", path: "/v1/pdf/compress", desc: "Compress a PDF (multipart/form-data: file)" },
@@ -21,6 +22,7 @@ const sample = `curl -X POST https://api.docunova-ai.com/v1/pdf/compress \\
   --output compressed.pdf`;
 
 export default function ApiDocs() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -30,12 +32,20 @@ export default function ApiDocs() {
         <link rel="canonical" href="https://docunova.online/api-docs" />
       </Helmet>
       <Header />
-      <main className="container mx-auto px-4 py-16 max-w-5xl">
+      <main className="container mx-auto min-w-0 px-4 pt-32 pb-16 max-w-5xl">
+        <nav aria-label="Page navigation" className="flex items-center gap-2 mb-6">
+          <Button variant="ghost" size="sm" onClick={() => window.history.state?.idx > 0 ? navigate(-1) : navigate("/")}>
+            <ArrowLeft className="w-4 h-4 mr-2" />Back
+          </Button>
+          <Button variant="outline" size="sm" asChild>
+            <Link to="/"><Home className="w-4 h-4 mr-2" />Home</Link>
+          </Button>
+        </nav>
         <div className="flex items-center gap-2 mb-3">
           <Code2 className="w-6 h-6 text-primary" />
           <span className="text-sm text-muted-foreground">Developer Platform · Beta</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Build with our document API</h1>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 break-words">Build with our document API</h1>
         <p className="text-muted-foreground mb-10 text-lg">
           Programmatic access to 60+ PDF, image, OCR, and AI tools. Simple REST. JSON in, files or JSON out.
         </p>
@@ -47,13 +57,13 @@ export default function ApiDocs() {
         </div>
 
         <h2 className="text-2xl font-semibold mb-4">Quickstart</h2>
-        <Card className="p-0 overflow-hidden mb-10">
-          <pre className="bg-zinc-950 text-zinc-100 p-5 text-sm overflow-x-auto"><code>{sample}</code></pre>
+        <Card className="min-w-0 p-0 overflow-hidden mb-10">
+          <pre className="bg-muted text-foreground p-5 text-sm overflow-x-auto"><code>{sample}</code></pre>
         </Card>
 
         <h2 className="text-2xl font-semibold mb-4">Endpoints</h2>
-        <Card className="overflow-hidden mb-10">
-          <table className="w-full text-sm">
+        <Card className="overflow-x-auto mb-10">
+          <table className="w-full min-w-[560px] text-sm">
             <thead className="bg-muted/50">
               <tr><th className="text-left p-3">Method</th><th className="text-left p-3">Path</th><th className="text-left p-3">Description</th></tr>
             </thead>

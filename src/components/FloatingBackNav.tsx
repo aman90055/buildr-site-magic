@@ -43,7 +43,8 @@ const FloatingBackNav = () => {
     lastPath.current = current;
   }, [location.pathname, location.search]);
 
-  if (isHome) return null;
+  // API documentation has page navigation in normal flow, clear of examples.
+  if (isHome || location.pathname === "/api-docs") return null;
 
   const handleBack = () => {
     const h = readHistory();
