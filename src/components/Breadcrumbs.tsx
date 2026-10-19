@@ -53,7 +53,7 @@ const Breadcrumbs = () => {
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`${location.pathname === "/api-docs" ? "absolute" : "fixed"} top-16 sm:top-20 left-0 right-0 z-30 pointer-events-none`}
+      className={`${location.pathname === "/api-docs" ? "absolute top-20" : "fixed top-16 sm:top-20"} left-0 right-0 z-30 pointer-events-none`}
     >
       <div className="container mx-auto px-3 sm:px-6">
         <ol className="pointer-events-auto inline-flex items-center gap-1 sm:gap-1.5 max-w-full overflow-x-auto whitespace-nowrap rounded-full glass-card px-3 py-1.5 text-xs sm:text-sm shadow-sm border border-border/40 backdrop-blur-md">
