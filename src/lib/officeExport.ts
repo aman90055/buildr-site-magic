@@ -21,7 +21,7 @@ export async function presentationBlob(images: string[]): Promise<Blob> {
   deck.layout = "LAYOUT_WIDE";
   for (const data of images) {
     const slide = deck.addSlide();
-    slide.addImage({ data, ...deck.defineSlideMaster && PptxGenJS.prototype ? {} : {}, x: 0, y: 0, w: 13.333333, h: 7.5, sizingContain: true });
+    slide.addImage({ data, x: 0, y: 0, w: 13.333333, h: 7.5, sizing: { type: "contain", x: 0, y: 0, w: 13.333333, h: 7.5 } });
   }
   const result = await deck.write({ outputType: "blob" });
   if (!(result instanceof Blob)) throw new Error("Could not create presentation");
