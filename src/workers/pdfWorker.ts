@@ -11,7 +11,8 @@ type WorkerOp =
   | { id: string; op: "extractPages"; payload: { file: ArrayBuffer; pages: number[] } }
   | { id: string; op: "rotate"; payload: { file: ArrayBuffer; rotation: number; pages?: number[] } }
   | { id: string; op: "removePages"; payload: { file: ArrayBuffer; pages: number[] } }
-  | { id: string; op: "reorder"; payload: { file: ArrayBuffer; order: number[] } };
+  | { id: string; op: "reorder"; payload: { file: ArrayBuffer; order: number[] } }
+  | { id: string; op: "imagePages"; payload: { pages: { image: ArrayBuffer; width: number; height: number }[] } };
 
 const ctx = self as unknown as DedicatedWorkerGlobalScope;
 
@@ -112,6 +113,17 @@ ctx.addEventListener("message", async (e: MessageEvent<WorkerOp>) => {
       case "reorder":
         result = await reorder(id, payload.file, payload.order);
         break;
+      case "imagePages": {
+        const pdf = await PDFDocument.create();
+        for (const [i, input] of payload.pages.entries()) {
+          const image = await pdf.embedPng(input.image);
+          const page = pdf.addPage([input.width, input.height]);
+          page.drawImage(image, { x: 0, y: 0, width: input.width, height: input.height });
+          post(id, { progress: (i + 1) / payload.pages.length * 90 });
+        }
+        result = toAB(await pdf.save());
+        break;
+      }
       default:
         throw new Error(`Unknown op`);
     }

@@ -13,7 +13,8 @@ export type PDFWorkerOp =
   | { op: "extractPages"; payload: { file: ArrayBuffer; pages: number[] } }
   | { op: "rotate"; payload: { file: ArrayBuffer; rotation: number; pages?: number[] } }
   | { op: "removePages"; payload: { file: ArrayBuffer; pages: number[] } }
-  | { op: "reorder"; payload: { file: ArrayBuffer; order: number[] } };
+  | { op: "reorder"; payload: { file: ArrayBuffer; order: number[] } }
+  | { op: "imagePages"; payload: { pages: { image: ArrayBuffer; width: number; height: number }[] } };
 
 class PDFWorkerClient {
   private worker: Worker | null = null;
@@ -93,6 +94,7 @@ class PDFWorkerClient {
       // Transfer buffers to avoid copy
       const transfer: Transferable[] = [];
       if (op.op === "merge") transfer.push(...op.payload.files);
+      else if (op.op === "imagePages") transfer.push(...op.payload.pages.map((page) => page.image));
       else if ("file" in op.payload) transfer.push(op.payload.file);
 
       try {
@@ -112,6 +114,15 @@ class PDFWorkerClient {
       new Uint8Array(out).set(u8);
       return out;
     };
+    if (op.op === "imagePages") {
+      const pdf = await PDFDocument.create();
+      for (const input of op.payload.pages) {
+        const image = await pdf.embedPng(input.image);
+        pdf.addPage([input.width, input.height]).drawImage(image, { x: 0, y: 0, width: input.width, height: input.height });
+      }
+      onProgress?.(100);
+      return toAB(await pdf.save());
+    }
     if (op.op === "merge") {
       const merged = await PDFDocument.create();
       for (let i = 0; i < op.payload.files.length; i++) {
