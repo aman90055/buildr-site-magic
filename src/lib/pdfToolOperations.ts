@@ -25,7 +25,7 @@ export async function extractPdfRows(file: File, onProgress: (value: number) => 
     }
     if (!rows.length) throw new Error("No selectable text found. Use OCR for scanned PDFs first.");
     return rows;
-  } finally { await pdf.destroy(); }
+  } finally { await pdf.cleanup(); }
 }
 
 async function renderedPage(pdf: Awaited<ReturnType<typeof openPDFDocument>>, number: number) {
@@ -81,7 +81,7 @@ export async function rasterPdf(file: File, password: string | undefined, onProg
     }
     if (phrase && !matches) throw new Error("Text not found. Use exact text on one line. Scans need OCR first.");
     return await pdfWorker.run({ op: "imagePages", payload: { pages } }, { onProgress: (value) => onProgress(85 + value * .15) });
-  } finally { await pdf.destroy(); }
+  } finally { await pdf.cleanup(); }
 }
 
 export async function comparePdfContent(file1: File, file2: File, onProgress: (value: number) => void) {
@@ -105,5 +105,5 @@ export async function comparePdfContent(file1: File, file2: File, onProgress: (v
       onProgress(number / Math.min(first.numPages, second.numPages) * 100);
     }
     return { pdf1Pages: first.numPages, pdf2Pages: second.numPages, pdf1Size: file1.size, pdf2Size: file2.size, differences: differences.length ? differences : ["No text or visible page differences found"] };
-  } finally { await Promise.all([first.destroy(), second.destroy()]); }
+  } finally { await Promise.all([first.cleanup(), second.cleanup()]); }
 }
