@@ -4,6 +4,7 @@
  * Keeps UI responsive even when processing 100MB+ files or 50+ page PDFs.
  */
 import { PDFDocument, degrees } from "pdf-lib";
+import { passwordPdf } from "../lib/pdfSecurity";
 
 type WorkerOp =
   | { id: string; op: "merge"; payload: { files: ArrayBuffer[] } }
@@ -12,7 +13,8 @@ type WorkerOp =
   | { id: string; op: "rotate"; payload: { file: ArrayBuffer; rotation: number; pages?: number[] } }
   | { id: string; op: "removePages"; payload: { file: ArrayBuffer; pages: number[] } }
   | { id: string; op: "reorder"; payload: { file: ArrayBuffer; order: number[] } }
-  | { id: string; op: "imagePages"; payload: { pages: { image: ArrayBuffer; width: number; height: number }[] } };
+  | { id: string; op: "imagePages"; payload: { pages: { image: ArrayBuffer; width: number; height: number }[] } }
+  | { id: string; op: "password"; payload: { file: ArrayBuffer; password: string; mode: "protect" | "unlock" } };
 
 const ctx = self as unknown as DedicatedWorkerGlobalScope;
 
@@ -97,6 +99,9 @@ ctx.addEventListener("message", async (e: MessageEvent<WorkerOp>) => {
   try {
     let result: ArrayBuffer;
     switch (op) {
+      case "password":
+        result = await passwordPdf(payload.file, payload.password, payload.mode);
+        break;
       case "merge":
         result = await merge(id, payload.files);
         break;
