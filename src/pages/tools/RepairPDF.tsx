@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Wrench, Upload, Download, RotateCcw, CheckCircle, Sparkles } from "lucide-react";
-import { PDFDocument } from "pdf-lib";
+import { rasterPdf } from "@/lib/pdfToolOperations";
 import { toast } from "@/hooks/use-toast";
 import AIBadge from "@/components/AIBadge";
 import { usePremium } from "@/hooks/usePremium";
@@ -36,35 +36,8 @@ const RepairPDF = () => {
     setRepairInfo([]);
 
     try {
-      const arrayBuffer = await file.arrayBuffer();
-      setProgress(40);
-      const repairs: string[] = [];
-
-      // Try to load and rebuild the PDF
-      const pdfDoc = await PDFDocument.load(arrayBuffer, { 
-        ignoreEncryption: true,
-        updateMetadata: false 
-      });
-      setProgress(60);
-      repairs.push("✓ PDF structure validated");
-
-      // Create a new clean document
-      const newPdf = await PDFDocument.create();
-      const pages = pdfDoc.getPages();
-      
-      for (let i = 0; i < pages.length; i++) {
-        const [copiedPage] = await newPdf.copyPages(pdfDoc, [i]);
-        newPdf.addPage(copiedPage);
-      }
-      repairs.push(`✓ ${pages.length} pages recovered`);
-      setProgress(80);
-
-      // Set clean metadata
-      newPdf.setProducer("PDF Tools - Repair Engine");
-      newPdf.setCreator("PDF Repair Tool");
-      repairs.push("✓ Metadata cleaned");
-
-      const pdfBytes = await newPdf.save();
+      const pdfBytes = await rasterPdf(file, undefined, setProgress);
+      const repairs = ["Readable pages recovered with the PDF viewer", "New image-only PDF created; text, forms and links are not retained"];
       const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       
@@ -129,7 +102,7 @@ const RepairPDF = () => {
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Repair PDF</h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Fix corrupted or damaged PDF files with AI-powered repair.
+                Recover pages that the PDF viewer can still render. Output is an image-only PDF; severely truncated files may not be recoverable.
               </p>
             </div>
 

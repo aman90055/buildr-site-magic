@@ -69,13 +69,15 @@ const ImageConverterTool = ({
       const canvas = document.createElement("canvas");
       canvas.width = img.naturalWidth;
       canvas.height = img.naturalHeight;
-      const ctx = canvas.getContext("2d")!;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) throw new Error("Canvas unavailable");
       ctx.drawImage(img, 0, 0);
 
       const blob = await new Promise<Blob>((resolve, reject) => {
         canvas.toBlob((b) => b ? resolve(b) : reject(new Error("Conversion failed")), outputMime, quality / 100);
       });
 
+      if (blob.type !== outputMime) throw new Error("This browser cannot encode the requested format.");
       if (downloadUrl) URL.revokeObjectURL(downloadUrl);
       setDownloadUrl(URL.createObjectURL(blob));
       setOutputSize(blob.size);
