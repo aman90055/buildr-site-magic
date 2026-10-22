@@ -9,7 +9,8 @@ import { FileText, Upload, Download, RotateCcw, Copy } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
-import { openPDFDocument } from "@/lib/lazyLoaders";
+import { extractPdfRows } from "@/lib/pdfToolOperations";
+import { wordBlob, downloadBlob } from "@/lib/officeExport";
 
 const PDFToWord = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -40,34 +41,22 @@ const PDFToWord = () => {
     setIsProcessing(true);
     setProgress(10);
     try {
-      const pdf = await openPDFDocument(file);
-      let text = "";
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const content = await page.getTextContent();
-        const pageText = content.items.map((item) => ("str" in item ? item.str : "")).join(" ");
-        text += `--- Page ${i} ---\n${pageText}\n\n`;
-        setProgress(10 + (i / pdf.numPages) * 80);
-      }
+      const rows = await extractPdfRows(file, setProgress);
+      const text = rows.map(row => row.join(" ")).join("\n");
       setExtractedText(text);
       setProgress(100);
-      toast({ title: "Text Extracted!", description: `${pdf.numPages} pages processed.` });
+      toast({ title: "Text Extracted!", description: "Editable text is ready for Word export." });
     } catch (error) {
       console.error(error);
-      toast({ title: "Error", description: "Failed to extract text.", variant: "destructive" });
+      toast({ title: "Error", description: "No text extracted. Scans need OCR first, or try a readable PDF.", variant: "destructive" });
     } finally {
       setIsProcessing(false);
     }
   };
 
-  const handleDownload = () => {
-    const blob = new Blob([extractedText], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${file?.name?.replace(".pdf", "") || "document"}.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
+  const handleDownload = async () => {
+    try { downloadBlob(await wordBlob(extractedText), `${file?.name.replace(/\.pdf$/i, "") || "document"}.docx`); }
+    catch { toast({ title: "Export failed", variant: "destructive" }); }
   };
 
   const handleCopy = () => {
@@ -112,7 +101,7 @@ const PDFToWord = () => {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
                 <FileText className="w-8 h-8 text-primary" />
               </div>
-              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">PDF to Word / Text</h1>
+              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">PDF to Word</h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Extract all text content from your PDF for editing in any word processor.</p>
             </div>
             <div className="max-w-3xl mx-auto">
@@ -130,7 +119,7 @@ const PDFToWord = () => {
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Button onClick={handleExtract} disabled={!file || isProcessing} size="lg">
                       <FileText className="w-4 h-4 mr-2" />
-                      {isProcessing ? "Extracting..." : "Extract Text"}
+                      {isProcessing ? "Extracting..." : "Convert to Word"}
                     </Button>
                   </div>
                   {isProcessing && <Progress value={progress} className="h-2" />}
@@ -139,7 +128,7 @@ const PDFToWord = () => {
                 <div className="space-y-6 animate-fade-in">
                   <Textarea value={extractedText} readOnly className="min-h-[300px] font-mono text-sm" />
                   <div className="flex flex-wrap gap-4 justify-center">
-                    <Button onClick={handleDownload}><Download className="w-4 h-4 mr-2" />Download as TXT</Button>
+                    <Button onClick={handleDownload}><Download className="w-4 h-4 mr-2" />Download Word (.docx)</Button>
                     <Button variant="outline" onClick={handleCopy}><Copy className="w-4 h-4 mr-2" />Copy Text</Button>
                     <Button variant="outline" onClick={handleReset}><RotateCcw className="w-4 h-4 mr-2" />Convert Another</Button>
                   </div>
