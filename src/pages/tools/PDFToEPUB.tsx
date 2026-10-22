@@ -10,6 +10,7 @@ import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 import { openPDFDocument } from "@/lib/lazyLoaders";
+import { epubBlob, escapeXml, downloadBlob } from "@/lib/officeExport";
 
 const PDFToEPUB = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -42,7 +43,7 @@ const PDFToEPUB = () => {
     try {
       const pdf = await openPDFDocument(file);
 
-      let html = `<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html>\n<html xmlns="http://www.w3.org/1999/xhtml">\n<head><title>${file.name}</title>\n<style>body{font-family:serif;line-height:1.8;padding:20px;max-width:700px;margin:0 auto;}h2{margin-top:2em;color:#333;border-bottom:1px solid #ccc;padding-bottom:4px;}.page{margin-bottom:2em;}</style>\n</head>\n<body>\n<h1>${file.name.replace(".pdf", "")}</h1>\n`;
+      let html = `<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html>\n<html xmlns="http://www.w3.org/1999/xhtml">\n<head><title>${escapeXml(file.name)}</title>\n<style>body{font-family:serif;line-height:1.8;padding:20px;max-width:700px;margin:0 auto;}h2{margin-top:2em;color:#333;border-bottom:1px solid #ccc;padding-bottom:4px;}.page{margin-bottom:2em;}</style>\n</head>\n<body>\n<h1>${escapeXml(file.name.replace(/\.pdf$/i, ""))}</h1>\n`;
 
       for (let i = 1; i <= pdf.numPages; i++) {
         const page = await pdf.getPage(i);
@@ -51,7 +52,7 @@ const PDFToEPUB = () => {
         if (text) {
           html += `<div class="page">\n<h2>Chapter ${i}</h2>\n`;
           text.split(/\.\s+/).forEach(sentence => {
-            if (sentence.trim()) html += `<p>${sentence.trim()}.</p>\n`;
+            if (sentence.trim()) html += `<p>${escapeXml(sentence.trim())}.</p>\n`;
           });
           html += `</div>\n`;
         }
@@ -70,14 +71,9 @@ const PDFToEPUB = () => {
     }
   };
 
-  const handleDownload = () => {
-    const blob = new Blob([htmlContent], { type: "application/xhtml+xml" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${file?.name?.replace(".pdf", "") || "ebook"}.xhtml`;
-    a.click();
-    URL.revokeObjectURL(url);
+  const handleDownload = async () => {
+    try { downloadBlob(await epubBlob(file?.name || "Book", htmlContent), `${file?.name.replace(/\.pdf$/i, "") || "ebook"}.epub`); }
+    catch { toast({ title: "Export failed", variant: "destructive" }); }
   };
 
   const handleCopy = () => {
@@ -94,14 +90,14 @@ const PDFToEPUB = () => {
         <meta name="description" content="Convert PDF to eBook format (XHTML) for reading on e-readers. Free converter." />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
-        <meta property="og:title" content="${file.name}" />
+        <meta property="og:title" content="${escapeXml(file.name)}" />
         <meta property="og:description" content="Convert PDF to eBook format (XHTML) for reading on e-readers. Free converter." />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="${file.name}" />
+        <meta name="twitter:title" content="${escapeXml(file.name)}" />
         <meta name="twitter:description" content="Convert PDF to eBook format (XHTML) for reading on e-readers. Free converter." />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org", "@type": "HowTo",
-          name: "${file.name}", description: "Convert PDF to eBook format (XHTML) for reading on e-readers. Free converter.",
+          name: "${escapeXml(file.name)}", description: "Convert PDF to eBook format (XHTML) for reading on e-readers. Free converter.",
           totalTime: "PT1M",
           step: [
             { "@type": "HowToStep", position: 1, name: "Add your file", text: "Select or drag your file into the tool. Everything is processed in your browser, so nothing is uploaded." },
@@ -118,8 +114,8 @@ const PDFToEPUB = () => {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-accent/10 mb-4">
                 <BookOpen className="w-8 h-8 text-accent" />
               </div>
-              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">PDF to eBook</h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Convert PDF documents to eBook-ready XHTML format.</p>
+              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">PDF to EPUB</h1>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Convert PDF documents to a reflowable EPUB ebook.</p>
             </div>
             <div className="max-w-3xl mx-auto">
               {!htmlContent ? (
@@ -144,7 +140,7 @@ const PDFToEPUB = () => {
                 <div className="space-y-6 animate-fade-in">
                   <Textarea value={htmlContent} readOnly className="min-h-[300px] font-mono text-sm" />
                   <div className="flex flex-wrap gap-4 justify-center">
-                    <Button onClick={handleDownload}><Download className="w-4 h-4 mr-2" />Download XHTML</Button>
+                    <Button onClick={handleDownload}><Download className="w-4 h-4 mr-2" />Download EPUB</Button>
                     <Button variant="outline" onClick={handleCopy}><Copy className="w-4 h-4 mr-2" />Copy</Button>
                     <Button variant="outline" onClick={handleReset}><RotateCcw className="w-4 h-4 mr-2" />Convert Another</Button>
                   </div>

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Unlock, Upload, Download, RotateCcw, KeyRound } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { PDFDocument } from "pdf-lib";
+import { pdfWorker } from "@/lib/pdfWorkerClient";
 import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
@@ -35,26 +35,7 @@ const UnlockPDF = () => {
     setProgress(20);
 
     try {
-      const arrayBuffer = await file.arrayBuffer();
-      setProgress(40);
-
-      // Try to load with ignoreEncryption flag
-      const pdfDoc = await PDFDocument.load(arrayBuffer, { 
-        ignoreEncryption: true 
-      });
-      setProgress(60);
-
-      // Create a new unlocked document
-      const newPdf = await PDFDocument.create();
-      const pages = pdfDoc.getPages();
-      
-      for (let i = 0; i < pages.length; i++) {
-        const [copiedPage] = await newPdf.copyPages(pdfDoc, [i]);
-        newPdf.addPage(copiedPage);
-      }
-      setProgress(80);
-
-      const pdfBytes = await newPdf.save();
+      const pdfBytes = await pdfWorker.run({ op: "password", payload: { file: await file.arrayBuffer(), password, mode: "unlock" } }, { onProgress: setProgress });
       const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       
@@ -69,7 +50,7 @@ const UnlockPDF = () => {
       console.error("Error unlocking PDF:", error);
       toast({
         title: "Error",
-        description: "Failed to unlock PDF. The file may be encrypted with a strong password.",
+        description: "Cannot unlock PDF. Check the password and try again.",
         variant: "destructive",
       });
     } finally {

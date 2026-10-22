@@ -9,6 +9,7 @@ import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 import { openPDFDocument } from "@/lib/lazyLoaders";
+import { presentationBlob, downloadBlob } from "@/lib/officeExport";
 
 const PDFToPowerPoint = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -48,7 +49,8 @@ const PDFToPowerPoint = () => {
         const canvas = document.createElement("canvas");
         canvas.width = viewport.width;
         canvas.height = viewport.height;
-        const ctx = canvas.getContext("2d")!;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) throw new Error("Canvas unavailable");
         await page.render({ canvas, canvasContext: ctx, viewport }).promise;
         pageImages.push(canvas.toDataURL("image/png"));
         setProgress(10 + (i / pdf.numPages) * 80);
@@ -72,7 +74,10 @@ const PDFToPowerPoint = () => {
     a.click();
   };
 
-  const downloadAll = () => images.forEach((img, i) => downloadSlide(img, i));
+  const downloadAll = async () => {
+    try { downloadBlob(await presentationBlob(images), `${file?.name.replace(/\.pdf$/i, "") || "slides"}.pptx`); }
+    catch { toast({ title: "Export failed", variant: "destructive" }); }
+  };
 
   const handleReset = () => {
     setFile(null);
@@ -111,8 +116,8 @@ const PDFToPowerPoint = () => {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
                 <Presentation className="w-8 h-8 text-primary" />
               </div>
-              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">PDF to Slides</h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Convert PDF pages to slide images for presentations.</p>
+              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">PDF to PowerPoint</h1>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Create a PowerPoint file with one image-based slide per PDF page. Slide text is not editable.</p>
             </div>
             <div className="max-w-3xl mx-auto">
               {images.length === 0 ? (
@@ -136,16 +141,16 @@ const PDFToPowerPoint = () => {
               ) : (
                 <div className="space-y-6 animate-fade-in">
                   <div className="flex flex-wrap gap-4 justify-center mb-4">
-                    <Button onClick={downloadAll}><Download className="w-4 h-4 mr-2" />Download All Slides</Button>
+                    <Button onClick={downloadAll}><Download className="w-4 h-4 mr-2" />Download PowerPoint (.pptx)</Button>
                     <Button variant="outline" onClick={handleReset}><RotateCcw className="w-4 h-4 mr-2" />Start Over</Button>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {images.map((img, i) => (
                       <div key={i} className="relative group border border-border rounded-lg overflow-hidden">
                         <img src={img} alt={`Slide ${i + 1}`} className="w-full" />
-                        <button onClick={() => downloadSlide(img, i)} className="absolute bottom-2 right-2 bg-primary text-primary-foreground px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Button size="sm" onClick={() => downloadSlide(img, i)} className="absolute bottom-2 right-2 bg-primary text-primary-foreground px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                           <Download className="w-3 h-3 inline mr-1" />Slide {i + 1}
-                        </button>
+                        </Button>
                       </div>
                     ))}
                   </div>

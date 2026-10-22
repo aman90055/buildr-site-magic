@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
 import { EyeOff, Upload, Download, RotateCcw, Sparkles } from "lucide-react";
-import { PDFDocument, rgb } from "pdf-lib";
+import { rasterPdf } from "@/lib/pdfToolOperations";
 import { toast } from "@/hooks/use-toast";
 import AIBadge from "@/components/AIBadge";
 import { usePremium } from "@/hooks/usePremium";
@@ -30,42 +30,13 @@ const RedactPDF = () => {
   };
 
   const handleRedact = async () => {
-    if (!file) return;
+    if (!file || !redactText.trim()) return;
 
     setIsProcessing(true);
     setProgress(20);
 
     try {
-      const arrayBuffer = await file.arrayBuffer();
-      setProgress(40);
-
-      const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-      const pages = pdfDoc.getPages();
-      setProgress(60);
-
-      // Add redaction overlay to each page (visual redaction)
-      // Note: This is a visual redaction - full text redaction would require text extraction
-      for (const page of pages) {
-        const { width, height } = page.getSize();
-        
-        // Add a note about redaction
-        page.drawRectangle({
-          x: 10,
-          y: height - 30,
-          width: 200,
-          height: 20,
-          color: rgb(0, 0, 0),
-        });
-      }
-      
-      setProgress(80);
-
-      // Update metadata to indicate redaction
-      pdfDoc.setProducer("PDF Tools - Redaction Engine");
-      pdfDoc.setCreator("PDF Redact Tool");
-      pdfDoc.setSubject("Redacted Document");
-
-      const pdfBytes = await pdfDoc.save();
+      const pdfBytes = await rasterPdf(file, undefined, setProgress, redactText.trim());
       const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       
@@ -74,13 +45,13 @@ const RedactPDF = () => {
 
       toast({
         title: "PDF Redacted!",
-        description: "Sensitive areas have been marked for redaction.",
+        description: "Matching lines removed from an image-only PDF.",
       });
     } catch (error) {
       console.error("Error redacting PDF:", error);
       toast({
         title: "Error",
-        description: "Failed to redact PDF. Please try again.",
+        description: "Text not found or PDF unreadable. Enter exact text on a single line.",
         variant: "destructive",
       });
     } finally {
@@ -121,15 +92,13 @@ const RedactPDF = () => {
         <main className="flex-1 pt-24 pb-16">
           <div className="container mx-auto px-6">
             <div className="text-center mb-12 animate-fade-in">
-              <div className="inline-flex items-center gap-2 mb-4">
-                <AIBadge variant="inline" />
-              </div>
+
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-destructive/10 mb-4">
                 <EyeOff className="w-8 h-8 text-destructive" />
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Redact PDF</h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Black out sensitive information with AI-powered redaction.
+                Black out lines containing your text and rebuild the PDF without recoverable original text.
               </p>
             </div>
 
@@ -167,12 +136,12 @@ const RedactPDF = () => {
                     <div className="bg-card border border-border rounded-2xl p-6 space-y-4">
                       <h3 className="font-semibold text-foreground">Redaction Options</h3>
                       <Input
-                        placeholder="Text to find and redact (optional)..."
+                        placeholder="Exact text to find and redact..."
                         value={redactText}
                         onChange={(e) => setRedactText(e.target.value)}
                       />
                       <p className="text-xs text-muted-foreground">
-                        Enter text patterns to automatically find and redact, or leave empty for manual redaction.
+                        Matching lines are blacked out. Output pages become images, with no original text, links or metadata. Scanned text is not supported; inspect every page before sharing.
                       </p>
                     </div>
                   )}
@@ -181,7 +150,7 @@ const RedactPDF = () => {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                       <Button
                         onClick={handleRedact}
-                        disabled={isProcessing}
+                        disabled={isProcessing || !redactText.trim()}
                         className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                         size="lg"
                       >

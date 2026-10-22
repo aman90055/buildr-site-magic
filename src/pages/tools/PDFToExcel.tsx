@@ -9,11 +9,13 @@ import { Table, Upload, Download, RotateCcw, Copy } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
-import { openPDFDocument } from "@/lib/lazyLoaders";
+import { extractPdfRows } from "@/lib/pdfToolOperations";
+import { excelBlob, downloadBlob } from "@/lib/officeExport";
 
 const PDFToExcel = () => {
   const [file, setFile] = useState<File | null>(null);
   const [csvData, setCsvData] = useState("");
+  const [rows, setRows] = useState<string[][]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const { isPremium } = usePremium();
@@ -40,34 +42,11 @@ const PDFToExcel = () => {
     setIsProcessing(true);
     setProgress(10);
     try {
-      const pdf = await openPDFDocument(file);
-      let allCsv = "";
-
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const content = await page.getTextContent();
-
-        // Group items by Y position to detect rows
-        const rows: Map<number, { x: number; text: string }[]> = new Map();
-        content.items.forEach((item) => {
-          if (!("str" in item) || !("transform" in item)) return;
-          const y = Math.round(item.transform[5]);
-          if (!rows.has(y)) rows.set(y, []);
-          rows.get(y)!.push({ x: item.transform[4], text: item.str });
-        });
-
-        // Sort rows by Y (top to bottom) and columns by X
-        const sortedRows = Array.from(rows.entries())
-          .sort((a, b) => b[0] - a[0])
-          .map(([_, items]) => items.sort((a, b) => a.x - b.x).map(i => `"${i.text.replace(/"/g, '""')}"`).join(","));
-
-        allCsv += sortedRows.join("\n") + "\n\n";
-        setProgress(10 + (i / pdf.numPages) * 80);
-      }
-
-      setCsvData(allCsv.trim());
+      const extracted = await extractPdfRows(file, setProgress);
+      setRows(extracted);
+      setCsvData(extracted.map(row => row.map(cell => `"${cell.replace(/"/g, '""')}"`).join(",")).join("\n"));
       setProgress(100);
-      toast({ title: "Data Extracted!", description: `${pdf.numPages} pages converted to CSV.` });
+      toast({ title: "Data Extracted!", description: "Spreadsheet data is ready." });
     } catch (error) {
       console.error(error);
       toast({ title: "Error", description: "Failed to extract data.", variant: "destructive" });
@@ -76,14 +55,9 @@ const PDFToExcel = () => {
     }
   };
 
-  const handleDownload = () => {
-    const blob = new Blob([csvData], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${file?.name?.replace(".pdf", "") || "data"}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+  const handleDownload = async () => {
+    try { downloadBlob(await excelBlob(rows), `${file?.name.replace(/\.pdf$/i, "") || "data"}.xlsx`); }
+    catch { toast({ title: "Export failed", variant: "destructive" }); }
   };
 
   const handleCopy = () => {
@@ -94,6 +68,7 @@ const PDFToExcel = () => {
   const handleReset = () => {
     setFile(null);
     setCsvData("");
+    setRows([]);
     setProgress(0);
   };
 
@@ -128,8 +103,8 @@ const PDFToExcel = () => {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-accent/10 mb-4">
                 <Table className="w-8 h-8 text-accent" />
               </div>
-              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">PDF to Excel / CSV</h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Extract tabular data from PDF and download as CSV for Excel.</p>
+              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">PDF to Excel</h1>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Extract tabular data from PDF and download as an Excel workbook.</p>
             </div>
             <div className="max-w-3xl mx-auto">
               {!csvData ? (
@@ -154,7 +129,7 @@ const PDFToExcel = () => {
                 <div className="space-y-6 animate-fade-in">
                   <Textarea value={csvData} readOnly className="min-h-[300px] font-mono text-sm" />
                   <div className="flex flex-wrap gap-4 justify-center">
-                    <Button onClick={handleDownload}><Download className="w-4 h-4 mr-2" />Download CSV</Button>
+                    <Button onClick={handleDownload}><Download className="w-4 h-4 mr-2" />Download Excel (.xlsx)</Button>
                     <Button variant="outline" onClick={handleCopy}><Copy className="w-4 h-4 mr-2" />Copy</Button>
                     <Button variant="outline" onClick={handleReset}><RotateCcw className="w-4 h-4 mr-2" />Convert Another</Button>
                   </div>

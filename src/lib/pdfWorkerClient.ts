@@ -14,7 +14,8 @@ export type PDFWorkerOp =
   | { op: "rotate"; payload: { file: ArrayBuffer; rotation: number; pages?: number[] } }
   | { op: "removePages"; payload: { file: ArrayBuffer; pages: number[] } }
   | { op: "reorder"; payload: { file: ArrayBuffer; order: number[] } }
-  | { op: "imagePages"; payload: { pages: { image: ArrayBuffer; width: number; height: number }[] } };
+  | { op: "imagePages"; payload: { pages: { image: ArrayBuffer; width: number; height: number }[] } }
+  | { op: "password"; payload: { file: ArrayBuffer; password: string; mode: "protect" | "unlock" } };
 
 class PDFWorkerClient {
   private worker: Worker | null = null;
@@ -108,6 +109,10 @@ class PDFWorkerClient {
 
   /** Fallback for environments without Worker support. */
   private async runMainThread(op: PDFWorkerOp, onProgress?: ProgressFn): Promise<ArrayBuffer> {
+    if (op.op === "password") {
+      const { passwordPdf } = await import("./pdfSecurity");
+      return passwordPdf(op.payload.file, op.payload.password, op.payload.mode);
+    }
     const { PDFDocument, degrees } = await import("pdf-lib");
     const toAB = (u8: Uint8Array): ArrayBuffer => {
       const out = new ArrayBuffer(u8.byteLength);

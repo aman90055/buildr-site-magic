@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { Table, Upload, Download, RotateCcw } from "lucide-react";
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+import { readSpreadsheet, parseDelimited, textPagesPdf } from "@/lib/officeImport";
 import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
@@ -24,8 +24,10 @@ const ExcelToPDF = () => {
     if (!f) return;
     if (!checkFileSizeLimit(f, isPremium)) return;
     setFile(f);
-    const content = await f.text();
-    setCsvText(content);
+    try {
+      const rows = await readSpreadsheet(f);
+      setCsvText(rows.map(row => row.map(cell => `"${cell.replace(/"/g, '""')}"`).join(",")).join("\n"));
+    } catch (error) { setCsvText(""); toast({ title: "Cannot read workbook", description: error instanceof Error ? error.message : "Invalid file", variant: "destructive" }); }
   };
 
   const handleConvert = async () => {
@@ -36,55 +38,8 @@ const ExcelToPDF = () => {
     setIsProcessing(true);
     setProgress(20);
     try {
-      const rows = csvText.trim().split("\n").map(r => r.split(/[,\t]/));
-      const pdfDoc = await PDFDocument.create();
-      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-      const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-      const fontSize = 9;
-      const margin = 40;
-      const pageWidth = 842; // landscape
-      const pageHeight = 595;
-      const rowHeight = 20;
-      const colCount = Math.max(...rows.map(r => r.length));
-      const colWidth = (pageWidth - margin * 2) / colCount;
-
-      setProgress(40);
-      let page = pdfDoc.addPage([pageWidth, pageHeight]);
-      let y = pageHeight - margin;
-
-      rows.forEach((row, ri) => {
-        if (y < margin + rowHeight) {
-          page = pdfDoc.addPage([pageWidth, pageHeight]);
-          y = pageHeight - margin;
-        }
-        const isHeader = ri === 0;
-        const currentFont = isHeader ? boldFont : font;
-
-        // Draw row background
-        if (isHeader) {
-          page.drawRectangle({ x: margin, y: y - rowHeight + 4, width: pageWidth - margin * 2, height: rowHeight, color: rgb(0.9, 0.9, 0.95) });
-        } else if (ri % 2 === 0) {
-          page.drawRectangle({ x: margin, y: y - rowHeight + 4, width: pageWidth - margin * 2, height: rowHeight, color: rgb(0.97, 0.97, 0.97) });
-        }
-
-        row.forEach((cell, ci) => {
-          const text = (cell || "").trim().substring(0, 30);
-          page.drawText(text, {
-            x: margin + ci * colWidth + 4,
-            y: y - 10,
-            size: fontSize,
-            font: currentFont,
-            color: rgb(0.1, 0.1, 0.1),
-          });
-        });
-
-        // Draw grid lines
-        page.drawLine({ start: { x: margin, y: y - rowHeight + 4 }, end: { x: pageWidth - margin, y: y - rowHeight + 4 }, thickness: 0.5, color: rgb(0.8, 0.8, 0.8) });
-        y -= rowHeight;
-      });
-
-      setProgress(80);
-      const pdfBytes = await pdfDoc.save();
+      const rows = parseDelimited(csvText);
+      const pdfBytes = await textPagesPdf([rows.map(row => row.join("    |    ")).join("\n")], setProgress);
       const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
       setDownloadUrl(URL.createObjectURL(blob));
       setProgress(100);
@@ -137,16 +92,16 @@ const ExcelToPDF = () => {
                 <Table className="w-8 h-8 text-accent" />
               </div>
               <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Excel / CSV to PDF</h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Upload a CSV file or paste tabular data to create a formatted PDF table.</p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Convert worksheet values or CSV data to an image-based PDF. Charts, formulas and original formatting are not reproduced.</p>
             </div>
             <div className="max-w-3xl mx-auto">
               {!downloadUrl ? (
                 <div className="space-y-6 animate-fade-in-up">
                   <div className="border-2 border-dashed border-border rounded-2xl p-8 text-center hover:border-accent/50 transition-colors">
-                    <input type="file" accept=".csv,.tsv,.txt" onChange={handleFileChange} className="hidden" id="csv-upload" />
+                    <input type="file" accept=".xlsx,.csv,.tsv,.txt" onChange={handleFileChange} className="hidden" id="csv-upload" />
                     <label htmlFor="csv-upload" className="cursor-pointer">
                       <Upload className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-                      <p className="text-lg font-medium text-foreground">Upload a CSV/TSV file</p>
+                      <p className="text-lg font-medium text-foreground">Upload an XLSX/CSV/TSV file</p>
                       <p className="text-sm text-muted-foreground">or paste comma/tab-separated data below</p>
                     </label>
                   </div>

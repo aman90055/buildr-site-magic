@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { GitCompare, Upload, RotateCcw, FileText, Sparkles, ArrowLeftRight } from "lucide-react";
-import { PDFDocument } from "pdf-lib";
+import { comparePdfContent } from "@/lib/pdfToolOperations";
 import { toast } from "@/hooks/use-toast";
 import AIBadge from "@/components/AIBadge";
 import { usePremium } from "@/hooks/usePremium";
@@ -50,60 +50,13 @@ const ComparePDF = () => {
     setProgress(20);
 
     try {
-      const [arrayBuffer1, arrayBuffer2] = await Promise.all([
-        file1.arrayBuffer(),
-        file2.arrayBuffer()
-      ]);
-      setProgress(40);
-
-      const [pdf1, pdf2] = await Promise.all([
-        PDFDocument.load(arrayBuffer1, { ignoreEncryption: true }),
-        PDFDocument.load(arrayBuffer2, { ignoreEncryption: true })
-      ]);
-      setProgress(60);
-
-      const pdf1Pages = pdf1.getPageCount();
-      const pdf2Pages = pdf2.getPageCount();
-      const differences: string[] = [];
-
-      if (pdf1Pages !== pdf2Pages) {
-        differences.push(`Page count differs: ${pdf1Pages} vs ${pdf2Pages} pages`);
-      }
-
-      if (file1.size !== file2.size) {
-        differences.push(`File size differs: ${(file1.size / 1024).toFixed(1)}KB vs ${(file2.size / 1024).toFixed(1)}KB`);
-      }
-
-      // Compare page dimensions
-      for (let i = 0; i < Math.min(pdf1Pages, pdf2Pages); i++) {
-        const page1 = pdf1.getPage(i);
-        const page2 = pdf2.getPage(i);
-        const size1 = page1.getSize();
-        const size2 = page2.getSize();
-
-        if (size1.width !== size2.width || size1.height !== size2.height) {
-          differences.push(`Page ${i + 1} dimensions differ: ${size1.width}x${size1.height} vs ${size2.width}x${size2.height}`);
-        }
-      }
-
-      setProgress(80);
-
-      if (differences.length === 0) {
-        differences.push("No structural differences found between the PDFs");
-      }
-
-      setComparisonResult({
-        pdf1Pages,
-        pdf2Pages,
-        pdf1Size: file1.size,
-        pdf2Size: file2.size,
-        differences
-      });
+      const result = await comparePdfContent(file1, file2, setProgress);
+      setComparisonResult(result);
       setProgress(100);
 
       toast({
         title: "Comparison Complete!",
-        description: `Found ${differences.length} difference(s)`,
+        description: "Text and visible page comparison complete.",
       });
     } catch (error) {
       console.error("Error comparing PDFs:", error);
@@ -146,15 +99,13 @@ const ComparePDF = () => {
         <main className="flex-1 pt-24 pb-16">
           <div className="container mx-auto px-6">
             <div className="text-center mb-12 animate-fade-in">
-              <div className="inline-flex items-center gap-2 mb-4">
-                <AIBadge variant="inline" />
-              </div>
+
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-brand-ai/10 mb-4">
                 <GitCompare className="w-8 h-8 text-brand-ai" />
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Compare PDF</h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Find differences between two PDF documents with AI.
+                Compare page text, images and visible layout between two PDFs.
               </p>
             </div>
 

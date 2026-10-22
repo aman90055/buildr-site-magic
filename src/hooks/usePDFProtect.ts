@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { PDFDocument } from "pdf-lib";
+import { pdfWorker } from "@/lib/pdfWorkerClient";
 import { toast } from "@/hooks/use-toast";
 
 export const usePDFProtect = () => {
@@ -21,23 +21,7 @@ export const usePDFProtect = () => {
     setProgress(20);
 
     try {
-      const arrayBuffer = await file.arrayBuffer();
-      setProgress(40);
-
-      const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-      setProgress(60);
-
-      // Note: pdf-lib doesn't support password protection natively
-      // We'll simulate protection by adding metadata and creating a new PDF
-      pdfDoc.setTitle(`Protected: ${file.name}`);
-      pdfDoc.setSubject("Password Protected Document");
-      pdfDoc.setKeywords(["protected", "encrypted"]);
-      pdfDoc.setProducer("PDF Tools - AI Edition");
-      pdfDoc.setCreator("PDF Protect Tool");
-
-      setProgress(80);
-
-      const pdfBytes = await pdfDoc.save();
+      const pdfBytes = await pdfWorker.run({ op: "password", payload: { file: await file.arrayBuffer(), password, mode: "protect" } }, { onProgress: setProgress });
       const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       
@@ -46,7 +30,7 @@ export const usePDFProtect = () => {
 
       toast({
         title: "PDF Protected!",
-        description: "Your PDF has been processed. Note: Full encryption requires server-side processing.",
+        description: "Your PDF now requires your password to open (AES-256).",
       });
     } catch (error) {
       console.error("Error protecting PDF:", error);

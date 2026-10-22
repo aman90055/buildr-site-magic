@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { Presentation, Upload, Download, RotateCcw, Plus, Trash2 } from "lucide-react";
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+import { readPresentation, textPagesPdf } from "@/lib/officeImport";
 import { toast } from "@/hooks/use-toast";
 
 interface Slide {
@@ -36,40 +36,7 @@ const PowerPointToPDF = () => {
     setIsProcessing(true);
     setProgress(20);
     try {
-      const pdfDoc = await PDFDocument.create();
-      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-      const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-      const pageWidth = 842;
-      const pageHeight = 595;
-
-      slides.forEach((slide, si) => {
-        const page = pdfDoc.addPage([pageWidth, pageHeight]);
-        // Background gradient effect
-        page.drawRectangle({ x: 0, y: 0, width: pageWidth, height: pageHeight, color: rgb(0.95, 0.95, 1) });
-        page.drawRectangle({ x: 0, y: pageHeight - 80, width: pageWidth, height: 80, color: rgb(0.2, 0.3, 0.7) });
-
-        // Title
-        const title = slide.title.substring(0, 60);
-        page.drawText(title, { x: 40, y: pageHeight - 55, size: 28, font: boldFont, color: rgb(1, 1, 1) });
-
-        // Slide number
-        page.drawText(`${si + 1} / ${slides.length}`, { x: pageWidth - 80, y: 20, size: 10, font, color: rgb(0.5, 0.5, 0.5) });
-
-        // Content with word wrap
-        const lines = slide.content.split("\n");
-        let y = pageHeight - 130;
-        for (const line of lines) {
-          if (y < 40) break;
-          const trimmed = line.substring(0, 100);
-          const isBullet = trimmed.startsWith("- ") || trimmed.startsWith("• ");
-          page.drawText(isBullet ? `  ${trimmed}` : trimmed, { x: 50, y, size: 16, font, color: rgb(0.15, 0.15, 0.15) });
-          y -= 28;
-        }
-        setProgress(20 + ((si + 1) / slides.length) * 60);
-      });
-
-      setProgress(90);
-      const pdfBytes = await pdfDoc.save();
+      const pdfBytes = await textPagesPdf(slides.map(slide => `${slide.title}\n\n${slide.content}`), setProgress);
       const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
       setDownloadUrl(URL.createObjectURL(blob));
       setProgress(100);
@@ -121,11 +88,20 @@ const PowerPointToPDF = () => {
                 <Presentation className="w-8 h-8 text-primary" />
               </div>
               <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Presentation to PDF</h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Create slides and export as a professional PDF presentation.</p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Import PPTX slide text or create slides. Output is text rendered on PDF pages; original design, images and animations are not retained.</p>
             </div>
             <div className="max-w-3xl mx-auto">
               {!downloadUrl ? (
                 <div className="space-y-4 animate-fade-in-up">
+                  <label className="block border border-border p-4 rounded-lg cursor-pointer">
+                    <Upload className="inline w-4 h-4 mr-2" />Upload PPTX
+                    <input type="file" accept=".pptx" className="block mt-3 text-sm max-w-full" onChange={async e => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
+                      try { setSlides(await readPresentation(file)); }
+                      catch (error) { toast({ title: "Import failed", description: error instanceof Error ? error.message : "Invalid presentation", variant: "destructive" }); }
+                    }} />
+                  </label>
                   {slides.map((slide, i) => (
                     <div key={i} className="bg-card border border-border rounded-xl p-4 space-y-3">
                       <div className="flex items-center justify-between">

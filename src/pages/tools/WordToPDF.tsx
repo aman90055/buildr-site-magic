@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { FileText, Upload, Download, RotateCcw } from "lucide-react";
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+import { readWord, textPagesPdf } from "@/lib/officeImport";
 import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
@@ -24,8 +24,8 @@ const WordToPDF = () => {
     if (!f) return;
     if (!checkFileSizeLimit(f, isPremium)) return;
     setFile(f);
-    const content = await f.text();
-    setText(content);
+    try { setText(await readWord(f)); }
+    catch (error) { setText(""); toast({ title: "Cannot read document", description: error instanceof Error ? error.message : "Invalid file", variant: "destructive" }); }
   };
 
   const handleConvert = async () => {
@@ -36,54 +36,7 @@ const WordToPDF = () => {
     setIsProcessing(true);
     setProgress(20);
     try {
-      const pdfDoc = await PDFDocument.create();
-      const font = await pdfDoc.embedFont(StandardFonts.TimesRoman);
-      const boldFont = await pdfDoc.embedFont(StandardFonts.TimesRomanBold);
-      const fontSize = 12;
-      const margin = 50;
-      const pageWidth = 595;
-      const pageHeight = 842;
-      const maxWidth = pageWidth - margin * 2;
-      const lineHeight = fontSize * 1.5;
-
-      const lines = text.split("\n");
-      let page = pdfDoc.addPage([pageWidth, pageHeight]);
-      let y = pageHeight - margin;
-      setProgress(40);
-
-      for (const line of lines) {
-        const words = line.split(" ");
-        let currentLine = "";
-
-        for (const word of words) {
-          const testLine = currentLine ? `${currentLine} ${word}` : word;
-          const width = font.widthOfTextAtSize(testLine, fontSize);
-
-          if (width > maxWidth && currentLine) {
-            if (y < margin + lineHeight) {
-              page = pdfDoc.addPage([pageWidth, pageHeight]);
-              y = pageHeight - margin;
-            }
-            page.drawText(currentLine, { x: margin, y, size: fontSize, font, color: rgb(0.1, 0.1, 0.1) });
-            y -= lineHeight;
-            currentLine = word;
-          } else {
-            currentLine = testLine;
-          }
-        }
-
-        if (currentLine) {
-          if (y < margin + lineHeight) {
-            page = pdfDoc.addPage([pageWidth, pageHeight]);
-            y = pageHeight - margin;
-          }
-          page.drawText(currentLine, { x: margin, y, size: fontSize, font, color: rgb(0.1, 0.1, 0.1) });
-        }
-        y -= lineHeight;
-      }
-
-      setProgress(80);
-      const pdfBytes = await pdfDoc.save();
+      const pdfBytes = await textPagesPdf([text], setProgress);
       const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
       setDownloadUrl(URL.createObjectURL(blob));
       setProgress(100);
@@ -136,17 +89,17 @@ const WordToPDF = () => {
                 <FileText className="w-8 h-8 text-primary" />
               </div>
               <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Word to PDF</h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Upload a text/doc file or paste content to convert to PDF.</p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Convert DOCX text or pasted content to an image-based PDF. Original formatting and images are not preserved.</p>
             </div>
             <div className="max-w-3xl mx-auto">
               {!downloadUrl ? (
                 <div className="space-y-6 animate-fade-in-up">
                   <div className="border-2 border-dashed border-border rounded-2xl p-8 text-center hover:border-primary/50 transition-colors">
-                    <input type="file" accept=".txt,.doc,.rtf,.md" onChange={handleFileChange} className="hidden" id="word-upload" />
+                    <input type="file" accept=".docx,.txt,.md" onChange={handleFileChange} className="hidden" id="word-upload" />
                     <label htmlFor="word-upload" className="cursor-pointer">
                       <Upload className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-                      <p className="text-lg font-medium text-foreground">Upload a text file</p>
-                      <p className="text-sm text-muted-foreground">Supports .txt, .doc, .rtf, .md</p>
+                      <p className="text-lg font-medium text-foreground">Upload a Word or text file</p>
+                      <p className="text-sm text-muted-foreground">Supports .docx, .txt, .md</p>
                     </label>
                   </div>
                   {file && <p className="text-sm text-muted-foreground text-center">File: {file.name}</p>}
