@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Shield, Upload, Download, RotateCcw } from "lucide-react";
-import { PDFDocument } from "pdf-lib";
+import { pdfWorker } from "@/lib/pdfWorkerClient";
 import { toast } from "@/hooks/use-toast";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
@@ -39,21 +39,11 @@ const PDFToPDFA = () => {
     setIsProcessing(true);
     setProgress(20);
     try {
-      const arrayBuffer = await file.arrayBuffer();
-      const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-      setProgress(50);
-      pdfDoc.setTitle(file.name.replace(".pdf", ""));
-      pdfDoc.setAuthor("PDF Tools - Made in India");
-      pdfDoc.setCreator("PDF Tools Archive Converter");
-      pdfDoc.setProducer("pdf-lib (PDF/A Compatible)");
-      pdfDoc.setCreationDate(new Date());
-      pdfDoc.setModificationDate(new Date());
-      setProgress(80);
-      const pdfBytes = await pdfDoc.save();
+      const pdfBytes = await pdfWorker.run({ op: "archive", payload: { file: await file.arrayBuffer() } }, { onProgress: setProgress });
       const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
       setDownloadUrl(URL.createObjectURL(blob));
       setProgress(100);
-      toast({ title: "PDF/A Ready!", description: "PDF optimized for archival." });
+      toast({ title: "Archive copy ready", description: "PDF/A-2B metadata and colour profile added. Full compliance requires independent validation." });
     } catch (error) {
       console.error(error);
       toast({ title: "Error", description: "Failed to convert.", variant: "destructive" });
@@ -91,7 +81,7 @@ const PDFToPDFA = () => {
                 <Shield className="w-8 h-8 text-primary" />
               </div>
               <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">PDF to PDF/A</h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Convert your PDF to archival format for long-term preservation.</p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Add PDF/A-2B metadata and an embedded colour profile. Fonts and other source content may still fail compliance checks; validate before formal archive submission.</p>
             </div>
             <div className="max-w-3xl mx-auto">
               {!downloadUrl ? (
@@ -117,7 +107,7 @@ const PDFToPDFA = () => {
                   <div className="w-20 h-20 mx-auto bg-accent/10 rounded-full flex items-center justify-center">
                     <Shield className="w-10 h-10 text-accent" />
                   </div>
-                  <h2 className="text-2xl font-semibold text-foreground">PDF/A Ready!</h2>
+                  <h2 className="text-2xl font-semibold text-foreground">Archive copy ready — validation required</h2>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href={downloadUrl} download={`${file?.name?.replace(".pdf", "")}_archive.pdf`} className="inline-flex items-center justify-center gap-2 bg-accent text-accent-foreground px-6 py-3 rounded-lg font-medium hover:bg-accent/90 transition-colors">
                       <Download className="w-5 h-5" /> Download PDF/A
