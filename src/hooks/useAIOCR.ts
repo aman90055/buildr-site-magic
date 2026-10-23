@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { prepareOCRImage } from "@/lib/ocrImage";
 
 export const useAIOCR = () => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -16,7 +17,7 @@ export const useAIOCR = () => {
       setProgress(30);
       
       const { data, error } = await supabase.functions.invoke("ai-ocr", {
-        body: { imageData },
+        body: { imageData: await prepareOCRImage(imageData) },
       });
 
       setProgress(80);

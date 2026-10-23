@@ -81,19 +81,19 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
   "/pdf-to-word": T(
     "Convert PDF to editable Word text",
     "PDF to Word — Editable Text Export",
-    "Pull the text out of a PDF for editing in Word, Google Docs or Pages. Paragraph order is preserved; output is plain text, not a .docx clone.",
+    "Extract selectable PDF text into a real editable DOCX file. Images, original fonts and complex page layouts are not preserved.",
     [
-      "The extractor reads the PDF text layer page by page and reflows it into paragraphs — it is honest plain text, not a pixel-perfect .docx rebuild.",
+      "PDF text is grouped into lines and exported as Word paragraphs. Scanned pages need OCR first.",
       "For scans with no text layer, run OCR first and then bring the recognised text back here.",
     ],
   ),
   "/word-to-pdf": T(
     "Convert Word documents to PDF",
     "Word to PDF — DOCX to PDF Free",
-    "Turn .doc and .docx files into PDFs that look the same everywhere. Headings, lists and tables are preserved, and nothing is uploaded.",
+    "Read DOCX text and export a readable image-based PDF locally. Original layout, pictures and styling are not preserved.",
     [
-      "Word files are parsed with mammoth into clean HTML, then laid out and printed to PDF so headings, bullet lists and simple tables survive.",
-      "Fonts your document references are substituted with close web equivalents, so check the preview before sending a print-critical file.",
+      "DOCX text is parsed with Mammoth and rendered into paginated PDF images. Save legacy DOC files as DOCX first.",
+      "Browser fonts render the extracted text; output text is not selectable. Check every page before sharing.",
     ],
   ),
   "/edit-pdf": T(
@@ -191,26 +191,26 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
     "Repair PDF — Fix Corrupted Files",
     "Try to recover a PDF that will not open. The tool rebuilds the file structure and salvages every page it can read.",
     [
-      "Repair parses the document leniently, rebuilds the cross-reference table and writes a clean file from whatever objects are still valid.",
+      "Pages that the PDF viewer can render are rebuilt as an image-only document. Text selection, forms and links are not retained.",
       "Badly truncated downloads may recover only some pages — repair is a best effort, not a guarantee.",
     ],
   ),
   "/powerpoint-to-pdf": T(
     "Convert PowerPoint slides to PDF",
     "PowerPoint to PDF — PPTX to PDF",
-    "Turn .ppt and .pptx decks into a PDF with one slide per page, ready to share or print without PowerPoint installed.",
+    "Extract PPTX slide text and create readable PDF pages. Images, original slide design and animations are not retained.",
     [
-      "Slide content is read from the deck and laid out one slide per PDF page at 16:9 or 4:3 to match the source.",
-      "Animations and transitions cannot survive in a PDF, so each slide is exported in its final state.",
+      "Slide text is read in presentation order, with one section per slide; long text may span multiple pages.",
+      "Save legacy PPT files as PPTX first. Use PowerPoint export when exact appearance matters.",
     ],
   ),
   "/excel-to-pdf": T(
     "Convert Excel spreadsheets to PDF",
     "Excel to PDF — XLSX to PDF Free",
-    "Convert .xls, .xlsx and .csv sheets into a readable PDF table. Column widths and headers are preserved for printing and sharing.",
+    "Read XLSX worksheets or quoted CSV/TSV cells and export their values to a readable PDF. Charts and original spreadsheet styling are not retained.",
     [
-      "SheetJS reads each worksheet and the values are typeset as a paginated table, repeating the header row on every page.",
-      "Very wide sheets are switched to landscape automatically so columns are not cut off.",
+      "ExcelJS reads worksheet values; cached formula results are used when present. Legacy XLS files must be saved as XLSX first.",
+      "Rows wrap onto additional lines instead of being clipped. Output is image-based and should be reviewed before printing.",
     ],
   ),
   "/html-to-pdf": T(
@@ -252,27 +252,27 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
   "/pdf-to-powerpoint": T(
     "Convert PDF pages to slide images",
     "PDF to PowerPoint — Pages as Slides",
-    "Export each PDF page as a slide-sized image you can drop straight into PowerPoint, Keynote or Google Slides. Output is images, not .pptx.",
+    "Create a real PPTX presentation with one image-based slide per PDF page. Text inside each page image is not editable.",
     [
-      "Every page is rendered at 16:9 slide resolution so the images fill a deck without letterboxing.",
-      "This is an image export, not an editable .pptx — text on the slides cannot be retyped in PowerPoint.",
+      "Page images are placed in a widescreen presentation while preserving their proportions; portrait pages have blank space beside them.",
+      "Slides can be rearranged and annotated, but the PDF text remains part of the page image.",
     ],
   ),
   "/pdf-to-excel": T(
     "Extract PDF tables to a spreadsheet",
-    "PDF to Excel — Tables to CSV/Sheets",
-    "Pull tabular data out of a PDF into a CSV you can open in Excel, Numbers or Google Sheets. Best on ruled, machine-generated tables.",
+    "PDF to Excel — XLSX Text Export",
+    "Extract positioned PDF text into a real XLSX workbook. Best for selectable text; scanned pages need OCR first.",
     [
-      "Rows are detected from text positions on each page and written as CSV, which Excel and Sheets open directly.",
+      "Text fragments are grouped by row position and exported as spreadsheet cells; complex tables may need manual cleanup.",
       "Merged cells and multi-line rows may need a quick manual tidy after import.",
     ],
   ),
   "/pdf-to-pdfa": T(
     "Convert a PDF to PDF/A for archiving",
     "PDF to PDF/A — Archive-Ready PDFs",
-    "Produce a PDF/A-flavoured file for long-term archiving and records retention, with metadata written for compliance workflows.",
+    "Add PDF/A-2B metadata, a document identifier and an embedded sRGB colour profile. Source content still requires independent compliance validation.",
     [
-      "The conversion normalises the document structure and writes archival metadata so the file stays readable decades from now.",
+      "This preparation step does not embed missing source fonts or certify PDF/A compliance.",
       "Strict validators may still flag exotic source files — check the output if you submit to a formal archive.",
     ],
   ),
@@ -317,7 +317,7 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
     "PDF to EPUB — PDF for E-Readers",
     "Turn a text PDF into reflowable reading text for Kindle, Kobo and phone readers, so paragraphs adapt to your screen and font size.",
     [
-      "Paragraphs are extracted and reflowed for small screens — the output is reading text, not a full multimedia EPUB package.",
+      "Selectable text is packaged into a standard EPUB 3 ebook with navigation and metadata. Illustrations and original page design are not retained.",
       "Fixed-layout material such as magazines and comics does not reflow well; keep those as PDFs.",
     ],
   ),
@@ -405,19 +405,19 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
   "/redact-pdf": T(
     "Redact sensitive text in a PDF",
     "Redact PDF — Black Out Private Info",
-    "Cover names, account numbers and addresses with true redaction boxes, then flatten so the hidden text cannot be copied back out.",
+    "Find exact text on a line, black out the whole matching line and rebuild as image-only PDF pages without the original text layer.",
     [
-      "Redaction draws opaque boxes and removes the covered text from the content stream — unlike a black highlighter, the words are gone.",
+      "All pages become images without original text, attachments or links. Text in scans is not detected; inspect every page visually before sharing.",
       "Always check the output by searching for the redacted word before you share the file.",
     ],
   ),
   "/compare-pdf": T(
     "Compare two PDFs for differences",
     "Compare PDFs — Spot Text Changes",
-    "Put two PDF versions side by side and see which words and paragraphs changed — useful for contracts and revised drafts.",
+    "Compare page text, dimensions and rendered page appearance. See which pages have changed text or visible content.",
     [
-      "Text is extracted from both files and diffed paragraph by paragraph, with additions and removals highlighted per page.",
-      "Scans need OCR first, since comparison works on text rather than pixels.",
+      "A page-level report flags text and visual differences; it does not show a word-by-word redline.",
+      "Rendered pages are also compared, so visible changes in scans and images can be detected without OCR.",
     ],
   ),
   "/compress-image": T(

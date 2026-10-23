@@ -15,7 +15,8 @@ export type PDFWorkerOp =
   | { op: "removePages"; payload: { file: ArrayBuffer; pages: number[] } }
   | { op: "reorder"; payload: { file: ArrayBuffer; order: number[] } }
   | { op: "imagePages"; payload: { pages: { image: ArrayBuffer; width: number; height: number }[] } }
-  | { op: "password"; payload: { file: ArrayBuffer; password: string; mode: "protect" | "unlock" } };
+  | { op: "password"; payload: { file: ArrayBuffer; password: string; mode: "protect" | "unlock" } }
+  | { op: "archive"; payload: { file: ArrayBuffer } };
 
 class PDFWorkerClient {
   private worker: Worker | null = null;
@@ -109,6 +110,10 @@ class PDFWorkerClient {
 
   /** Fallback for environments without Worker support. */
   private async runMainThread(op: PDFWorkerOp, onProgress?: ProgressFn): Promise<ArrayBuffer> {
+    if (op.op === "archive") {
+      const { archivePdf } = await import("./pdfArchive");
+      return archivePdf(op.payload.file);
+    }
     if (op.op === "password") {
       const { passwordPdf } = await import("./pdfSecurity");
       return passwordPdf(op.payload.file, op.payload.password, op.payload.mode);

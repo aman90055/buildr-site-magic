@@ -11,6 +11,7 @@ import AIBadge from "@/components/AIBadge";
 import { usePremium } from "@/hooks/usePremium";
 import { checkFileSizeLimit } from "@/lib/fileSizeLimit";
 import SmartFileInput from "@/components/SmartFileInput";
+import { prepareOCRImage } from "@/lib/ocrImage";
 
 const ACCEPTED = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
@@ -55,7 +56,7 @@ const ImageToText = () => {
 
     try {
       const { data, error: fnError } = await supabase.functions.invoke("ai-ocr", {
-        body: { imageData: preview },
+        body: { imageData: await prepareOCRImage(preview) },
       });
 
       if (fnError) throw fnError;
