@@ -42,7 +42,7 @@ export const usePremium = (): PremiumStatus => {
 
     // Realtime: refresh immediately when this user's premium status changes.
     const channel = supabase
-      .channel(`premium-status-${user.id}`)
+      .channel(`premium-status-${user.id}-${crypto.randomUUID()}`)
       .on(
         "postgres_changes",
         {
@@ -59,7 +59,7 @@ export const usePremium = (): PremiumStatus => {
       cancelled = true;
       supabase.removeChannel(channel);
     };
-  }, [user]);
+  }, [user?.id]);
 
   return { isPremium, plan, loading };
 };
