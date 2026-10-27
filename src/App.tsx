@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import GoogleAdsTracker from "@/components/GoogleAdsTracker";
 import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "next-themes";
 import AIChatWidget from "@/components/AIChatWidget";
@@ -170,6 +171,7 @@ const App = () => (
             <InstallPrompt />
             <ExitIntentOffer />
             <CookieConsent />
+            <GoogleAdsTracker />
             <AdDebugPanel />
 
             <FloatingBackNav />
