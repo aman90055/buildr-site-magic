@@ -53,8 +53,8 @@ const PrivacyPolicy = () => {
       content: [
         "We use essential cookies to ensure the proper functioning of our website.",
         "Analytics cookies help us understand how you use our services (you can opt out of these).",
-        "We do not use advertising or third-party tracking cookies.",
-        "You can manage cookie preferences through your browser settings.",
+        "Only if you accept marketing cookies in our cookie banner, we load the Google Ads tag to measure ad clicks and visits to our Merge PDF page (page address, browser details and an ad click ID are shared with Google). See how Google uses this data: https://business.safety.google/privacy/",
+        "You can withdraw or change this choice anytime from the cookie banner / cookie settings, or by clearing site data in your browser.",
       ],
     },
     {
