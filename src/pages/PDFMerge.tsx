@@ -71,7 +71,7 @@ const PDFMerge = () => {
           tool: [{ "@type": "HowToTool", name: "The Docunova AI Suite - Merge PDF" }],
           step: [
             { "@type": "HowToStep", position: 1, name: "Upload PDFs", text: "Click 'Select Files' and choose the PDF files you want to combine." },
-            { "@type": "HowToStep", position: 2, name: "Reorder pages", text: "Drag-and-drop the files to set the order you want." },
+            { "@type": "HowToStep", position: 2, name: "Reorder files", text: "Drag-and-drop the files to set the order you want." },
             { "@type": "HowToStep", position: 3, name: "Merge & download", text: "Click 'Merge PDF' and download the combined file instantly." }
           ]
         })}</script>
@@ -89,7 +89,7 @@ const PDFMerge = () => {
                 Merge PDF Files
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Combine multiple PDF documents into a single file. Drag and drop to reorder pages.
+                Combine multiple PDF documents into a single file. Drag and drop to reorder the files. Merging runs in your browser.
               </p>
             </div>
 
