@@ -274,21 +274,21 @@
           setTimeout(function(){ s && s.remove(); },500);
         }
         // Hide once React mounts (root has children) OR after 2.5s max — whichever first.
-        var maxWait=setTimeout(hideSplash,1500);
+        var maxWait=setTimeout(hideSplash,10000);
         var iv=setInterval(function(){
           var root=document.getElementById('root');
-          if(root && root.childElementCount>0){
+          if(root && root.childElementCount>0 && !document.getElementById('static-fallback')){
             clearInterval(iv);
             clearTimeout(maxWait);
             setTimeout(hideSplash,150);
           }
         },100);
         // Hard safety net
-        window.addEventListener('load',function(){ setTimeout(hideSplash,1500); });
+        
       })();
     </script>
 
-    <div id="root"><main style="max-width:960px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif">
+    <div id="root"><main id="static-fallback" style="max-width:960px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif">
 <h1>The Docunova AI Suite — free PDF tools and AI helpers</h1>
 <p>Docunova AI lets you merge, split, compress, convert, edit, sign and protect PDFs, work with images, and use AI helpers for summaries, translation and OCR. Most PDF and image tools run directly in your browser, so your files are not uploaded to our servers. No signup is needed for core PDF tools. There is no app-defined PDF file-size cap or daily quota; device memory still applies. AI tools have separate usage and input limits.</p>
 <h2>How it works</h2><ol><li>Pick a tool below.</li><li>Choose or drop your file (or use your camera).</li><li>Adjust options and download the result.</li></ol>
