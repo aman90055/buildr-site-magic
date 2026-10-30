@@ -1,5 +1,5 @@
 const faqs = [
-  { q: "Can I change the order of the files?", a: "Yes. After adding files, drag them in the list or use the arrows. The merged PDF follows the order shown. You change the order of whole files, not single pages; to move pages inside a PDF, use Organize PDF after merging." },
+  { q: "Can I change the order of the files?", a: "Yes. After adding files, drag them up or down in the list. The merged PDF follows the order shown. You change the order of whole files, not single pages; to move pages inside a PDF, use Organize PDF after merging." },
   { q: "Are my files uploaded to a server?", a: "No. Merging runs in your browser using your device's memory. Files are not sent to our servers, and closing the tab clears them." },
   { q: "Do I need an account?", a: "No. Merge PDF works without signing in." },
   { q: "Is there a file size or file count limit?", a: "We do not set one. Very large or many files can be slow or fail on phones or older computers because they run out of memory. If that happens, merge in smaller groups." },
