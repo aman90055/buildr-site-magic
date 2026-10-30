@@ -6,6 +6,7 @@ import PDFDropzone from "@/components/pdf/PDFDropzone";
 import PDFFileList from "@/components/pdf/PDFFileList";
 import MergeActions from "@/components/pdf/MergeActions";
 import RelatedTools from "@/components/RelatedTools";
+import MergeGuide from "@/components/MergeGuide";
 import { usePDFMerge } from "@/hooks/usePDFMerge";
 
 export interface PDFFile {
@@ -176,6 +177,8 @@ const PDFMerge = () => {
                 </div>
               )}
             </div>
+
+            <MergeGuide />
 
             {/* Related tools — internal linking */}
             <RelatedTools currentSlug="/merge" category="Organize" limit={6} />
