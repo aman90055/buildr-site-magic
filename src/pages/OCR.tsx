@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolGuide from "@/components/ToolGuide";
+import { ocrGuide } from "@/lib/toolGuides";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
@@ -265,6 +267,7 @@ const OCR = () => {
               )}
             </div>
           </div>
+        <ToolGuide {...ocrGuide} />
         </main>
 
         <Footer />

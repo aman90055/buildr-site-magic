@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolGuide from "@/components/ToolGuide";
+import { compressGuide } from "@/lib/toolGuides";
 import PDFCompressDropzone from "@/components/pdf/PDFCompressDropzone";
 import CompressionOptions from "@/components/pdf/CompressionOptions";
 import CompressActions from "@/components/pdf/CompressActions";
@@ -305,6 +307,7 @@ const PDFCompress = () => {
             {/* Related tools — internal linking */}
             <RelatedTools currentSlug="/compress" category="Optimize" limit={6} />
           </div>
+        <ToolGuide {...compressGuide} />
         </main>
 
         <Footer />
