@@ -99,16 +99,16 @@ const OCR = () => {
         <title>Free AI OCR — Extract Text from Images & Scanned PDFs | Docunova AI</title>
         <meta
           name="description"
-          content="Free online OCR tool powered by AI. Extract text from images, photos, and scanned documents in 100+ languages including Hindi & English. No signup, unlimited use."
+          content="Free online OCR tool powered by AI. Extract text from images, photos, and scanned documents, including Hindi and English text."
         />
         <link rel="canonical" href="https://docunova.online/ocr" />
         <meta property="og:title" content="Free AI OCR — Extract Text from Images & Scanned PDFs" />
-        <meta property="og:description" content="AI-powered OCR that extracts text from images and scanned documents in 100+ languages. Free, no signup." />
+        <meta property="og:description" content="AI-powered OCR that extracts text from images and scanned documents , including Hindi and English." />
         <meta property="og:url" content="https://docunova.online/ocr" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free AI OCR — Extract Text from Images & Scanned PDFs" />
-        <meta name="twitter:description" content="AI-powered OCR. 100+ languages. Free & unlimited." />
+        <meta name="twitter:description" content="AI-powered OCR for photos and scans." />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "HowTo",
@@ -117,7 +117,7 @@ const OCR = () => {
           "totalTime": "PT1M",
           "step": [
             { "@type": "HowToStep", "name": "Upload image", "text": "Drop or select the image / scanned PDF you want to extract text from." },
-            { "@type": "HowToStep", "name": "Run OCR", "text": "Click Extract Text — the AI reads text in 100+ languages including Hindi." },
+            { "@type": "HowToStep", "name": "Run OCR", "text": "Click Extract Text — the AI reads the text, including Hindi and English." },
             { "@type": "HowToStep", "name": "Copy or download", "text": "Copy the recognized text or download it as a .txt file." }
           ]
         })}</script>
@@ -148,7 +148,7 @@ const OCR = () => {
                 Smart OCR
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Extract text from images and scans in 100+ languages using AI-powered recognition.
+                Extract text from images and scans using AI-powered recognition.
               </p>
             </div>
 
