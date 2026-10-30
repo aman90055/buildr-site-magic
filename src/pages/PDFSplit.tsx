@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ToolGuide from "@/components/ToolGuide";
+import { splitGuide } from "@/lib/toolGuides";
 import PDFSplitDropzone from "@/components/pdf/PDFSplitDropzone";
 import PageSelector from "@/components/pdf/PageSelector";
 import SplitActions from "@/components/pdf/SplitActions";
@@ -195,6 +197,7 @@ const PDFSplit = () => {
             {/* Related tools — internal linking */}
             <RelatedTools currentSlug="/split" category="Organize" limit={6} />
           </div>
+        <ToolGuide {...splitGuide} />
         </main>
 
         <Footer />
