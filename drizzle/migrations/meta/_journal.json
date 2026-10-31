@@ -8,6 +8,13 @@
       "when": 1788581609050,
       "tag": "0000_ensure_referral_stats_rpc",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793463564248,
+      "tag": "0001_support_chat",
+      "breakpoints": true
     }
   ]
 }
