@@ -48,7 +48,7 @@ const humanize = (seg: string) =>
 const Breadcrumbs = () => {
   const location = useLocation();
   const segments = location.pathname.split("/").filter(Boolean);
-  if (segments.length === 0) return null;
+  if (segments.length === 0 || segments[0] === "support") return null;
 
   return (
     <nav
