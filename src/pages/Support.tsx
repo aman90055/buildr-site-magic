@@ -59,7 +59,7 @@ function ChatWindow({ threadId, initial, handedOff, onActivity }: {
   return (
     <div className="flex h-full min-h-0 flex-col">
       <Conversation className="min-h-0 flex-1">
-        <ConversationContent className="mx-auto w-full max-w-3xl">
+        <ConversationContent className="mx-auto w-full min-w-0 max-w-3xl">
           {messages.length === 0 ? (
             <ConversationEmptyState
               icon={<LifeBuoy className="size-10 text-primary" />}
@@ -68,7 +68,7 @@ function ChatWindow({ threadId, initial, handedOff, onActivity }: {
             />
           ) : messages.map((m) => (
             <Message from={m.role} key={m.id}>
-              <MessageContent className={m.role === "user" ? "bg-primary text-primary-foreground" : ""}>
+              <MessageContent className={cn("min-w-0 max-w-full overflow-x-auto", m.role === "user" && "bg-primary text-primary-foreground")}>
                 {m.parts.map((part, i) => {
                   if (part.type === "text") return <MessageResponse key={i}>{part.text}</MessageResponse>;
                   if (part.type.startsWith("tool-")) {
@@ -215,7 +215,7 @@ export default function Support() {
             Answers come from our <Link to="/help" className="underline">help docs</Link> and your account.
           </p>
         </aside>
-        <main className="flex min-h-0 flex-1 flex-col">
+        <main className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
           <div className="flex items-center justify-between border-b border-border px-4 py-2 md:hidden">
             <span className="truncate text-sm font-medium">{active?.title ?? "Support"}</span>
             <Button size="sm" variant="outline" onClick={createThread}><Plus className="size-4" /></Button>
