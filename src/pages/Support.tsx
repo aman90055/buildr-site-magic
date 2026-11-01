@@ -217,7 +217,10 @@ export default function Support() {
         </aside>
         <main className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
           <div className="flex items-center justify-between border-b border-border px-4 py-2 md:hidden">
-            <span className="truncate text-sm font-medium">{active?.title ?? "Support"}</span>
+            <select aria-label="Choose conversation" value={threadId ?? ""} onChange={(e) => navigate(`/support/${e.target.value}`)}
+              className="min-w-0 flex-1 truncate bg-transparent text-sm font-medium text-foreground">
+              {threads.map((t) => <option key={t.id} value={t.id}>{t.title}</option>)}
+            </select>
             <Button size="sm" variant="outline" onClick={createThread}><Plus className="size-4" /></Button>
           </div>
           {threadId && initial ? (
