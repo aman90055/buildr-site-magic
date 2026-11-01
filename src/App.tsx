@@ -122,6 +122,7 @@ const CategoryPage = lazy(() => import("./pages/CategoryPage"));
 const Roadmap = lazy(() => import("./pages/Roadmap"));
 const Changelog = lazy(() => import("./pages/Changelog"));
 const HelpCenter = lazy(() => import("./pages/HelpCenter"));
+const Support = lazy(() => import("./pages/Support"));
 const Newsletter = lazy(() => import("./pages/Newsletter"));
 const Terms = lazy(() => import("./pages/legal/Terms"));
 const Cookies = lazy(() => import("./pages/legal/Cookies"));
@@ -285,6 +286,8 @@ const App = () => (
                 <Route path="/roadmap" element={<Roadmap />} />
                 <Route path="/changelog" element={<Changelog />} />
                 <Route path="/help" element={<HelpCenter />} />
+                <Route path="/support" element={<Support />} />
+                <Route path="/support/:threadId" element={<Support />} />
                 <Route path="/newsletter" element={<Newsletter />} />
                 <Route path="/brand" element={<Brand />} />
                 <Route path="/press" element={<Press />} />

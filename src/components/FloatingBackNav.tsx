@@ -44,7 +44,7 @@ const FloatingBackNav = () => {
   }, [location.pathname, location.search]);
 
   // API documentation has page navigation in normal flow, clear of examples.
-  if (isHome || location.pathname === "/api-docs") return null;
+  if (isHome || location.pathname === "/api-docs" || location.pathname.startsWith("/support")) return null;
 
   const handleBack = () => {
     const h = readHistory();

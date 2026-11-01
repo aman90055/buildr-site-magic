@@ -41,7 +41,8 @@ const sections: Section[] = [
   },
   {
     title: "Community & Support", icon: Users, articles: [
-      { title: "Contact support", desc: "Email us — we reply within 24 hours.", href: "/contact" },
+      { title: "Chat with support", desc: "Ask Nova; a person takes over if needed.", href: "/support" },
+      { title: "Contact support", desc: "Email us at documentai999@gmail.com.", href: "/contact" },
       { title: "FAQ", desc: "Top 20 questions answered.", href: "/faq" },
       { title: "Roadmap", desc: "What we're building next.", href: "/roadmap" },
     ],
