@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
         "**Personal Information**: When you create an account, we collect your email address and any profile information you choose to provide.",
         "**Usage Data**: We automatically collect information about how you use our services, including the types of documents you process (but not the content), features used, and interaction patterns.",
         "**Device Information**: We collect information about the device you use to access our services, including browser type, operating system, and IP address.",
-        "**Files**: When you upload files for processing, they are temporarily stored on our servers only for the duration needed to complete the requested operation.",
+        "**Files**: Most PDF and image processing runs in your browser. When signed in, Merge, Split and Compress also upload the finished PDF to private account storage and save a job record. AI features send submitted text or images to an AI service.",
       ],
     },
     {
@@ -31,8 +31,8 @@ const PrivacyPolicy = () => {
       title: "Data Security",
       content: [
         "We implement industry-standard security measures to protect your data, including SSL/TLS encryption for data in transit.",
-        "Files are processed in secure, isolated environments and are automatically deleted after processing is complete.",
-        "We do not store the content of your documents beyond the time required for processing.",
+        "Private account storage is separate from browser processing. Closing the tab does not delete finished PDFs already saved to your account.",
+        "We do not promise a universal automatic deletion period. AI provider handling can differ by service. Support conversations and submitted payment or contact information are stored to fulfil those requests.",
         "Access to personal data is restricted to authorized personnel only.",
       ],
     },
@@ -62,7 +62,7 @@ const PrivacyPolicy = () => {
       title: "Third-Party Services",
       content: [
         "We may use third-party services for analytics, email delivery, and payment processing.",
-        "These providers are contractually bound to protect your data and use it only for specified purposes.",
+        "AI services receive the text, images or prompts needed for the feature you request. Review Privacy & File Processing and the relevant provider terms before sending confidential information.",
         "We do not sell your personal information to third parties.",
       ],
     },
@@ -102,7 +102,7 @@ const PrivacyPolicy = () => {
                 </p>
                 <div className="flex items-center justify-center gap-2 mt-4 text-sm text-muted-foreground">
                   <Clock className="w-4 h-4" />
-                  <span>Last updated: September 15, 2026</span>
+                  <span>Last updated: November 2, 2026</span>
                 </div>
               </div>
             </div>

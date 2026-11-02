@@ -1,6 +1,6 @@
 const faqs = [
   { q: "Can I change the order of the files?", a: "Yes. After adding files, drag them up or down in the list. The merged PDF follows the order shown. You change the order of whole files, not single pages; to move pages inside a PDF, use Organize PDF after merging." },
-  { q: "Are my files uploaded to a server?", a: "No. Merging runs in your browser using your device's memory. Files are not sent to our servers, and closing the tab clears them." },
+  { q: "Are my files uploaded to a server?", a: "Merging runs in your browser. If you are signed in, the finished PDF is also uploaded to your private account storage and a job record is saved. Signed-out use does not save the result to an account." },
   { q: "Do I need an account?", a: "No. Merge PDF works without signing in." },
   { q: "Is there a file size or file count limit?", a: "We do not set one. Very large or many files can be slow or fail on phones or older computers because they run out of memory. If that happens, merge in smaller groups." },
   { q: "Will password-protected PDFs work?", a: "Not directly. Remove the password first with Unlock PDF (you need the password), then merge." },
@@ -32,7 +32,7 @@ const MergeGuide = () => (
         <h3 className="text-lg font-semibold mb-2">How it differs from other merge tools</h3>
         <p className="text-muted-foreground">
           Many popular tools, such as iLovePDF, upload your files to their servers to process them.
-          Docunova merges in your browser instead, so files stay on your device. The trade-off: speed
+          Docunova merges in your browser; signed-in results are also saved to private account storage. The trade-off: speed
           depends on your device, and very large jobs can run out of memory on phones.
         </p>
       </div>
