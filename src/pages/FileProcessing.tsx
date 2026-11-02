@@ -37,8 +37,10 @@ const FileProcessing = () => {
             numbers, protect/unlock, sign, flatten, redact, image conversion and resizing, plus the
             document builders (resume, invoice, certificate, letter) — are performed locally using
             JavaScript running on your device. The file is read into memory in the browser tab and
-            the result is written back to a download. <strong>These files are never uploaded to our
-            servers.</strong> If you close the tab, nothing remains.
+            the result is written back to a download. <strong>When signed in, Merge, Split and
+            Compress also upload the finished PDF to your private account storage and save a job
+            record.</strong> Signed-out use of these tools does not save results to an account.
+            Closing the tab does not delete account files or projects saved on your device.
           </p>
         </Card>
 
@@ -60,8 +62,9 @@ const FileProcessing = () => {
             <li>Smart compression suggestions — only file statistics are sent, not the file</li>
           </ul>
           <p className="text-sm text-muted-foreground mt-3">
-            We do not use your content to train models, and we do not store the request contents
-            after the response is returned. Please don't paste confidential material into AI tools if
+            Provider handling may differ by feature and model; we do not make a blanket promise
+            that every AI request has zero retention. Support chat stores conversations and may
+            use your account's payment and plan information to answer questions. Please don't paste confidential material into AI tools if
             your organisation forbids third-party processing.
           </p>
         </Card>
@@ -73,7 +76,8 @@ const FileProcessing = () => {
           </div>
           <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
             <li>Your account email and sign-in metadata, if you create an account</li>
-            <li>Job records (tool used, status, timestamps) for signed-in users — not the files</li>
+            <li>Job records and finished PDFs saved by signed-in Merge, Split and Compress workflows</li>
+            <li>Support chat conversations, including requests for a person to review them</li>
             <li>Contact-form messages and newsletter subscriptions you submit</li>
             <li>Payment verification details you submit for a premium plan</li>
             <li>Anonymous analytics and, with your consent, advertising cookies</li>
@@ -91,8 +95,9 @@ const FileProcessing = () => {
               documentai999@gmail.com
             </a>{" "}
             from your account address and ask for deletion. We remove the account, its job records,
-            contact messages and newsletter subscription. Because tool files are never uploaded,
-            there is nothing else to delete.
+            contact messages, support conversations, saved PDF results and newsletter subscription.
+            Tell us which records you want removed. Downloads and projects stored on your device
+            must be deleted on your device.
           </p>
         </Card>
 

@@ -1,4 +1,3 @@
-import { TOOL_COUNT_LABEL } from "@/lib/toolRegistry";
 import { useLocation, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -8,6 +7,7 @@ import { getRichContent } from "@/lib/richToolContent";
 import { getToolSeo, canonicalFor } from "@/lib/toolSeo";
 import RelatedTools from "@/components/RelatedTools";
 import RichToolContentSection from "@/components/RichToolContentSection";
+import { toolPrivacy } from "@/lib/toolInstructions";
 
 
 /**
@@ -69,7 +69,7 @@ const ToolSEOSection = () => {
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
 
-      <RichToolContentSection slug={meta.slug} />
+      {!["/merge", "/split", "/compress", "/ocr"].includes(meta.slug) && <RichToolContentSection slug={meta.slug} />}
 
       <section className="border-t border-border bg-background" aria-labelledby="tool-guide-heading">
         <div className="container mx-auto max-w-4xl px-6 py-12">
@@ -89,15 +89,11 @@ const ToolSEOSection = () => {
           {/* Usage guide (200+ words) */}
           <article className="prose prose-slate dark:prose-invert max-w-none mb-12">
             <h2 id="tool-guide-heading" className="text-2xl md:text-3xl font-bold mb-4">
-              About {meta.name}
+              Privacy and results
             </h2>
             {/* Page-specific facts first, so no two guides open with the same text */}
-            {seo?.facts.map((fact, i) => (
-              <p key={`fact-${i}`} className="text-muted-foreground leading-relaxed mb-4">{fact}</p>
-            ))}
-            {meta.guide.split("\n\n").slice(0, 1).map((p, i) => (
-              <p key={i} className="text-muted-foreground leading-relaxed mb-4">{p}</p>
-            ))}
+            <p className="text-muted-foreground leading-relaxed mb-4">{toolPrivacy(pathname)}</p>
+            <Link to="/file-processing" className="text-primary hover:underline">Privacy &amp; File Processing</Link>
             <p className="text-sm">
               Browse more in{" "}
               <Link to={categoryPath} className="text-primary hover:underline font-medium">
@@ -107,7 +103,7 @@ const ToolSEOSection = () => {
               <Link to="/" className="text-primary hover:underline font-medium">
                 homepage
               </Link>{" "}
-              to see all {TOOL_COUNT_LABEL} free tools.
+              to choose another tool.
             </p>
           </article>
 

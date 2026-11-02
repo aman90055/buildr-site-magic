@@ -1,4 +1,5 @@
-import toolContent from "@/data/toolContent.json";
+import { getToolSeo } from "@/lib/toolSeo";
+import { TOOL_STEPS } from "@/lib/toolInstructions";
 
 export interface RichToolContent {
   name: string;
@@ -14,7 +15,6 @@ export interface RichToolContent {
   faqs?: { q: string; a: string }[];
 }
 
-const DATA = toolContent as Record<string, RichToolContent>;
 const verifiedGuides: Record<string, RichToolContent> = {
   "/pdf-to-word": { name: "PDF to Word", category: "convert", whatIsIt: "Extract selectable PDF text into a real editable DOCX. Original images, fonts and layout are not reproduced.", tutorial: ["Choose a PDF with selectable text.", "Click Convert to Word.", "Download Word (.docx) and check the paragraphs."], bestPractices: ["Use OCR first for scans.", "Review reading order in multi-column pages.", "Keep the original PDF for its layout."] },
   "/pdf-to-excel": { name: "PDF to Excel", category: "convert", whatIsIt: "Extract PDF text rows into a real XLSX workbook. Complex table structures may need manual cleanup.", tutorial: ["Choose a text PDF.", "Click Extract Data.", "Download Excel (.xlsx) and check the cells."], bestPractices: ["Use OCR first for scans.", "Check columns and numeric values.", "This tool does not recreate formulas."] },
@@ -29,18 +29,30 @@ const verifiedGuides: Record<string, RichToolContent> = {
   "/pdf-to-pdfa": { name: "PDF to PDF/A", category: "convert", whatIsIt: "Add PDF/A-2B metadata and an embedded colour profile. This is preparation, not a compliance certificate.", tutorial: ["Choose a readable PDF.", "Convert to PDF/A.", "Download and independently validate before archive submission."], bestPractices: ["Missing source fonts are not embedded by this step.", "Unlock encrypted PDFs first.", "Formal archives may require additional corrections."] },
 };
 
-export const getRichContent = (slug: string): RichToolContent | null =>
-  verifiedGuides[slug] ?? DATA[slug] ?? null;
+export const getRichContent = (slug: string): RichToolContent | null => {
+  const verified = verifiedGuides[slug];
+  if (verified) return verified;
+  const seo = getToolSeo(slug);
+  const steps = TOOL_STEPS[slug];
+  if (!seo || !steps) return null;
+  return {
+    name: seo.h1,
+    category: slug.startsWith("/ai-") || ["/ocr", "/image-to-text"].includes(slug) ? "ai" : "documents",
+    whatIsIt: seo.description,
+    tutorial: steps,
+    bestPractices: seo.facts,
+  };
+};
 
 export const AUTHOR = {
   name: "Aman Vishwakarma",
   role: "Founder & Lead Engineer",
-  url: "https://github.com/aman90055",
+  url: "https://github.com/aman9005573",
 };
 
-export const LAST_UPDATED = "2026-09-15";
+export const LAST_UPDATED = "2026-11-02";
 
 export function readingMinutes(text: string): number {
   const words = text.trim().split(/\s+/).length;
-  return Math.max(3, Math.round(words / 220));
+  return Math.max(1, Math.ceil(words / 220));
 }
