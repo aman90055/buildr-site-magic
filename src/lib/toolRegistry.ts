@@ -1,3 +1,5 @@
+import { getRichContent } from "@/lib/richToolContent";
+import { toolPrivacy } from "@/lib/toolInstructions";
 /**
  * Tool registry: powers ToolSEOSection (FAQ + usage guide + JSON-LD)
  * and the /category/:slug landing pages. One source of truth.
@@ -29,15 +31,15 @@ export const CATEGORY_META: Record<ToolCategory, {
     tagline: "Merge, split, reorder & extract pages — all free",
     description: "Free online tools to organize, merge, split, rotate, extract and reorder PDF pages. Process files of any size right in your browser. No watermarks, no signup.",
     hero: "Organize PDFs the easy way",
-    intro: "Whether you're combining a 5-page contract with its appendix, pulling chapter 3 out of an ebook, or stripping blank pages out of a scan, our organize-PDF tools do it in seconds — entirely in your browser, with no upload to any server and no file-size limit.",
+    intro: "Whether you're combining a 5-page contract with its appendix, pulling chapter 3 out of an ebook, or stripping blank pages out of a scan, our organize-PDF tools do it in seconds — processed in your browser. Signed-in Merge, Split and Compress results are also saved to private account storage. Device memory affects large jobs.",
     cta: "Start organizing — pick a tool below",
   },
   convert: {
     title: "Convert PDF Tools",
     tagline: "PDF ↔ Word, Excel, PPT, Image, HTML, EPUB — free",
-    description: "Convert PDF to Word, Excel, PowerPoint, JPG, PNG, HTML, EPUB and back. Pixel-perfect formatting, unlimited file size, 100% free with no watermark.",
+    description: "Convert PDF to Word, Excel, PowerPoint, JPG, PNG, HTML, EPUB and back. Format-specific results with no watermark. Review each converter’s limitations.",
     hero: "Convert PDFs to any format",
-    intro: "Move content between formats without losing layout. Our converters use battle-tested client-side engines (pdf-lib, pdfjs-dist, mammoth) so your files never leave your device — and there's no daily limit, no signup, and no watermark.",
+    intro: "Move text and page images between formats. Some exports retain only text or use image-based pages; check the individual converter before relying on its output.",
     cta: "Choose a converter to get started",
   },
   edit: {
@@ -45,7 +47,7 @@ export const CATEGORY_META: Record<ToolCategory, {
     tagline: "Sign, watermark, redact, crop, number — instantly",
     description: "Edit PDFs online: add e-signatures, watermarks, page numbers, redact sensitive text, crop margins or change metadata. Free, unlimited and private.",
     hero: "Edit & sign PDFs in seconds",
-    intro: "Sign a contract, add a confidentiality watermark, redact a name from a deposition, or crop the margins of a scan. Every editor runs in the browser so confidential pages stay on your machine.",
+    intro: "Sign a contract, add a confidentiality watermark, redact a name from a deposition, or crop the margins of a scan. Review the output and the file-processing disclosure before sharing confidential documents.",
     cta: "Pick an editor below",
   },
   ai: {
@@ -53,7 +55,7 @@ export const CATEGORY_META: Record<ToolCategory, {
     tagline: "Summarize, translate, OCR, rewrite, extract — with AI",
     description: "AI-powered tools to summarize, translate, grammar-check, rewrite and extract data from PDFs and text. Powered by frontier models, free for everyone.",
     hero: "AI tools for documents and text",
-    intro: "Use frontier models (Gemini, Llama and OpenAI-class) to skim long PDFs, translate copy to 15+ languages, fix grammar, rewrite for tone, OCR scanned pages and pull structured data — all without leaving your browser tab.",
+    intro: "Summarise text, translate, correct grammar and recognise scanned text. AI features send submitted content to an AI service; request limits and sign-in may apply. Review every response.",
     cta: "Try an AI tool below",
   },
   image: {
@@ -61,15 +63,15 @@ export const CATEGORY_META: Record<ToolCategory, {
     tagline: "Compress, resize, crop, convert, remove background",
     description: "Free image tools: compress, resize, crop, rotate, remove background, and convert between JPG, PNG and WebP. Unlimited size, no signup.",
     hero: "Image tools, free and unlimited",
-    intro: "Optimize images for the web, prepare batch uploads, swap formats, or strip the background for a logo — all in-browser using canvas and WebAssembly.",
+    intro: "Optimize images for the web, prepare batch uploads, swap formats, or strip the background for a logo — using browser image tools. Background removal handles white or very light pixels rather than arbitrary backgrounds.",
     cta: "Pick an image tool",
   },
   security: {
     title: "PDF Security Tools",
     tagline: "Protect, unlock, sign and redact — privately",
-    description: "Add or remove PDF passwords, e-sign documents, and redact sensitive text. All processing happens in your browser — your files never leave your device.",
+    description: "Add or remove PDF passwords, e-sign documents, and redact sensitive text. These password operations run locally; unlocking requires the correct password.",
     hero: "Secure your PDFs",
-    intro: "Add a password before emailing a contract, unlock a PDF you legitimately own but lost the password for, redact a Social Security number, or e-sign with a typed or drawn signature.",
+    intro: "Add a password before emailing a contract, unlock a PDF you are authorised to use with its known password, redact a Social Security number, or e-sign with a typed or drawn signature.",
     cta: "Choose a security tool",
   },
   documents: {
@@ -77,7 +79,7 @@ export const CATEGORY_META: Record<ToolCategory, {
     tagline: "Resumes, invoices, certificates, letters — instant PDF",
     description: "Build professional PDFs in minutes: resumes, invoices, certificates and formal letters. Free, customizable templates with instant PDF export.",
     hero: "Document builders that ship to PDF",
-    intro: "Skip Word, Canva and Pages — fill in a form, preview the result, export to a clean, ATS-friendly PDF in seconds.",
+    intro: "Fill in the builder’s fields and export a PDF. Check the names, dates and amounts; invoice generation does not calculate tax or add logos.",
     cta: "Pick a builder",
   },
 };
@@ -286,53 +288,31 @@ const CATEGORY_OF: Record<string, ToolCategory> = {
   "/certificate-maker": "documents", "/letter-writer": "documents",
 };
 
-function genericGuide(name: string, category: ToolCategory): string {
-  const c = CATEGORY_META[category];
-  const isAI = category === "ai";
-  const privacy = isAI
-    ? `Because this is an AI feature, the text extracted from your document is sent to our AI provider to generate the result. The file itself is not uploaded or stored, and nothing is kept after the request completes — see our Privacy & File Processing page for the exact details.`
-    : `It runs entirely in your browser — the file is read locally and never uploaded to a server.`;
-  return (
-    `${name} is part of our free ${c.title.toLowerCase()} suite. ${privacy} There are no signups, watermarks, or daily limits.\n\n` +
-    `${c.intro}\n\n` +
-    `To use ${name}: drop your file into the upload area, adjust any options (these vary by tool — quality slider, page range, target format, etc.), and click the action button. Processing time depends on your file size and device; a short document is usually near-instant, while a large scanned PDF can take longer. The result downloads directly to your computer as a fresh file; the original is untouched.\n\n` +
-    `${name} pairs well with other tools in our ${c.title.toLowerCase()} category and with the converters in the main toolkit — you can chain operations (for example, OCR a scan → convert to Word → edit → re-export as PDF) without juggling desktop software. ${
-      isAI
-        ? `Once the AI returns its result you can copy it, download it, or feed it into one of the local document builders.`
-        : `Because the work happens client-side, the tool keeps confidential legal, medical and financial documents on your own machine.`
-    }\n\n` +
-    `Built on battle-tested open-source engines (pdf-lib, pdfjs-dist, mammoth, sheetjs, browser-native canvas APIs), ${name} is designed to behave predictably: same input, same output, every time. If anything goes wrong, the tool surfaces a clear error message — most issues come from corrupted source files or files protected with a password, both of which can be fixed using the Repair PDF or Unlock PDF tool first.`
-  );
-}
-
-
-function genericFAQs(name: string): ToolFAQ[] {
-  return [
-    { q: `Is ${name} really free?`, a: `Yes — completely free, no signup, no watermark, no daily cap. Files of any size are supported.` },
-    { q: `Are my files uploaded anywhere?`, a: `No. Processing happens entirely in your browser. Your files never leave your device, which makes ${name} safe for confidential documents.` },
-    { q: `What is the maximum file size?`, a: `There is no hard limit — only your device's available memory. Most users process files up to 1 GB without issues.` },
-    { q: `Does ${name} work on mobile?`, a: `Yes. The site is fully responsive and ${name} runs in mobile browsers (Chrome, Safari, Firefox). Heavy operations may take a little longer on phones.` },
-    { q: `Can I use ${name} offline?`, a: `Once the page is loaded, yes — install it as a PWA from your browser's menu and it works without a connection (except for tools that explicitly need AI servers, like OCR or translation).` },
-  ];
-}
-
 export function getToolMeta(pathname: string): ToolMeta | null {
-  if (TOOL_REGISTRY[pathname]) return TOOL_REGISTRY[pathname];
-  const name = NAME_MAP[pathname];
+  const existing = TOOL_REGISTRY[pathname];
+  const extra = EXTRA_TOOL_DEFS.find(tool => tool.slug === pathname);
+  const name = existing?.name ?? NAME_MAP[pathname] ?? extra?.name;
   if (!name) return null;
-  const category = CATEGORY_OF[pathname] ?? "organize";
+  const category = existing?.category ?? CATEGORY_OF[pathname] ?? extra?.category ?? "organize";
+  const content = getRichContent(pathname);
+  const privacy = toolPrivacy(pathname);
   return {
     slug: pathname, name, category,
-    short: `${name} — free, private, in-browser`,
-    guide: genericGuide(name, category),
-    faqs: genericFAQs(name),
+    short: content?.whatIsIt ?? existing?.short ?? extra?.short ?? name,
+    guide: [content?.whatIsIt, ...(content?.tutorial ?? []), privacy].filter(Boolean).join("\n\n"),
+    faqs: [
+      ...(content?.faqs ?? []),
+      { q: "Where is my input processed?", a: privacy },
+      { q: "What should I check before sharing?", a: (content?.bestPractices ?? []).join(" ") || "Compare the result with your original. Check page order, names, numbers and readability before relying on it." },
+      { q: "What if the tool cannot finish?", a: "Check the input format and any shown error. Large local jobs can exceed device memory; use a smaller job. AI features need an internet connection and may require sign-in or apply request limits." },
+    ],
   };
 }
 
 export function getToolsByCategory(category: ToolCategory): ToolMeta[] {
   const all = [
-    ...Object.values(TOOL_REGISTRY),
-    ...Object.keys(NAME_MAP).filter(s => !TOOL_REGISTRY[s]).map(s => getToolMeta(s)!).filter(Boolean),
+    ...Object.keys(TOOL_REGISTRY).map(s => getToolMeta(s)).filter((t): t is ToolMeta => t !== null),
+    ...Object.keys(NAME_MAP).filter(s => !TOOL_REGISTRY[s]).map(s => getToolMeta(s)).filter((t): t is ToolMeta => t !== null),
   ];
   return all.filter(t => t.category === category);
 }
@@ -381,9 +361,9 @@ export function getAllTools(): ToolMeta[] {
     seen.add(t.slug);
     out.push(t);
   };
-  Object.values(TOOL_REGISTRY).forEach(push);
+  Object.keys(TOOL_REGISTRY).forEach(s => push(getToolMeta(s)));
   FALLBACK_SLUGS.forEach((s) => push(getToolMeta(s)));
-  EXTRA_TOOL_DEFS.forEach((t) => push({ ...t, guide: "", faqs: [] }));
+  EXTRA_TOOL_DEFS.forEach(t => push(getToolMeta(t.slug)));
   _all = out;
   return out;
 }
