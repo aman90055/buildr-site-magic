@@ -95,17 +95,17 @@ const SVGToPDF = () => {
     <>
       <Helmet>
         <title>SVG to PDF - Convert Vector Graphics to PDF</title>
-        <meta name="description" content="Convert SVG vector files to high-quality PDF documents. Free online converter." />
+        <meta name="description" content="Render SVG files as image-based PDF pages. Original vector paths are not retained." />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta property="og:title" content="SVG to PDF - Convert Vector Graphics to PDF" />
-        <meta property="og:description" content="Convert SVG vector files to high-quality PDF documents. Free online converter." />
+        <meta property="og:description" content="Render SVG files as image-based PDF pages. Original vector paths are not retained." />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="SVG to PDF - Convert Vector Graphics to PDF" />
-        <meta name="twitter:description" content="Convert SVG vector files to high-quality PDF documents. Free online converter." />
+        <meta name="twitter:description" content="Render SVG files as image-based PDF pages. Original vector paths are not retained." />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org", "@type": "HowTo",
-          name: "SVG to PDF - Convert Vector Graphics to PDF", description: "Convert SVG vector files to high-quality PDF documents. Free online converter.",
+          name: "SVG to PDF - Convert Vector Graphics to PDF", description: "Render SVG files as image-based PDF pages. Original vector paths are not retained.",
           totalTime: "PT1M",
           step: [
             { "@type": "HowToStep", position: 1, name: "Add your file", text: "Select or drag your file into the tool. Everything is processed in your browser, so nothing is uploaded." },
@@ -123,7 +123,7 @@ const SVGToPDF = () => {
                 <FileText className="w-8 h-8 text-primary" />
               </div>
               <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">SVG to PDF</h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Convert SVG vector graphics to PDF documents.</p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Render SVG artwork into image-based PDF pages; vector paths are not retained.</p>
             </div>
             <div className="max-w-3xl mx-auto">
               {!downloadUrl ? (

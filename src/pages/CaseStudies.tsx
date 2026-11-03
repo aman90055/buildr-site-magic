@@ -14,7 +14,7 @@ const useCases = [
   {
     icon: Scale,
     audience: "Legal and admin teams",
-    headline: "Prepare contract bundles without uploading client files",
+    headline: "Prepare and review contract bundles",
     steps: [
       "Merge signed pages and annexures into a single PDF",
       "Add page numbers and a confidentiality watermark",
@@ -27,7 +27,7 @@ const useCases = [
       { to: "/redact-pdf", label: "Redact PDF" },
       { to: "/protect-pdf", label: "Protect PDF" },
     ],
-    note: "All four steps run inside your browser — the documents are never uploaded to us.",
+    note: "Processing runs in your browser. Signed-in Merge results are also saved to private account storage; review redacted pages before sharing.",
   },
   {
     icon: GraduationCap,
@@ -44,16 +44,16 @@ const useCases = [
       { to: "/image-to-text", label: "Image to Text (OCR)" },
       { to: "/compress", label: "Compress PDF" },
     ],
-    note: "OCR uses an AI provider, so the page image you submit is sent for processing. Everything else stays local.",
+    note: "OCR uses an AI provider, so the page image you submit is sent for processing. Signed-in Compress results are also saved to private account storage.",
   },
   {
     icon: Briefcase,
     audience: "Freelancers and small businesses",
     headline: "Send invoices and proposals that look professional",
     steps: [
-      "Generate an invoice with your own branding and line items",
-      "Convert a Word or Excel quote into a fixed-layout PDF",
-      "Sign the document and flatten it so fields can't be edited",
+      "Generate a basic INR invoice with client details and line items; tax is not calculated",
+      "Extract Word or Excel text into a readable PDF; original formatting is not reproduced",
+      "Sign the document and inspect the downloaded copy",
       "Compress before sending to keep attachments small",
     ],
     tools: [
@@ -67,7 +67,7 @@ const useCases = [
   {
     icon: Users,
     audience: "Job seekers",
-    headline: "Get a resume past automated screening",
+    headline: "Prepare a resume for a job application",
     steps: [
       "Build or refine your resume with a clean, parseable layout",
       "Check it against a job description for missing keywords",
