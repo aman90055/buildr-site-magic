@@ -43,7 +43,7 @@ const FAQ = () => {
       faqs: [
         {
           question: "How does PDF compression work?",
-          answer: "Less compression rewrites the PDF without rasterising its pages; savings can be small or zero. Stronger settings may rebuild pages as images and affect readability or text selection. Compare the actual output; no fixed reduction is promised."
+          answer: "Less compression rewrites the PDF without turning pages into images; the result may be the same size or larger. Stronger settings may rebuild pages as images, affecting quality and selectable text. Savings depend on the source PDF and settings, not a guaranteed percentage. Compare the original and downloaded copy before sharing."
         },
         {
           question: "Can I merge PDFs with different page sizes?",
@@ -73,7 +73,7 @@ const FAQ = () => {
         },
         {
           question: "How long do you keep my files?",
-          answer: "Closing a tab clears local processing state, but does not delete saved account files, support conversations or downloads on your device. We do not promise automatic deletion within one hour. Contact support to request deletion of account records."
+          answer: "When signed in, Merge, Split and Compress upload the finished PDF to private account storage and save a job record. Closing the tab or signing out does not delete those saved results. No universal automatic deletion deadline has been verified. Contact support from your account email to request deletion; delete downloaded files and locally saved projects on your own device."
         },
         {
           question: "Can I password-protect my PDFs?",
@@ -85,7 +85,7 @@ const FAQ = () => {
         },
         {
           question: "Are you GDPR compliant?",
-          answer: "We do not claim independent GDPR certification. Our Privacy Policy explains how to request access, correction or deletion of account data; contact support with your request."
+          answer: "We cannot substantiate a claim of GDPR compliance and do not advertise GDPR certification. Browser-based processing alone does not establish compliance. Our Privacy Policy describes the data we handle and how to request access, correction or deletion; contact support for privacy questions."
         }
       ]
     },
@@ -125,7 +125,7 @@ const FAQ = () => {
         },
         {
           question: "Do you offer refunds?",
-          answer: "Refund eligibility depends on the applicable plan and payment terms. Read the Refund Policy and contact support with your payment details; there is no blanket money-back guarantee here."
+          answer: "There is no blanket 14-day refund or money-back guarantee. Eligibility depends on the purchased plan, its conditions and the applicable Refund Policy. Contact support with your account email, payment or order ID and reason for the request. Do not send passwords or full card details."
         },
         {
           question: "Are there discounts for teams or businesses?",

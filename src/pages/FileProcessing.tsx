@@ -33,14 +33,15 @@ const FileProcessing = () => {
             <h2 className="text-xl font-display font-semibold">Tools that run in your browser</h2>
           </div>
           <p className="text-sm text-muted-foreground">
-            All PDF and image tools — merge, split, compress, rotate, crop, organise, watermark, page
+            Browser-based PDF and image operations — merge, split, compress, rotate, crop, organise, watermark, page
             numbers, protect/unlock, sign, flatten, redact, image conversion and resizing, plus the
             document builders (resume, invoice, certificate, letter) — are performed locally using
             JavaScript running on your device. The file is read into memory in the browser tab and
             the result is written back to a download. <strong>When signed in, Merge, Split and
             Compress also upload the finished PDF to your private account storage and save a job
             record.</strong> Signed-out use of these tools does not save results to an account.
-            Closing the tab does not delete account files or projects saved on your device.
+            Closing the tab or signing out does not delete account files or projects saved on your device.
+            No universal automatic file-deletion deadline has been verified.
           </p>
         </Card>
 
@@ -94,9 +95,10 @@ const FileProcessing = () => {
             <a className="text-primary hover:underline" href="mailto:documentai999@gmail.com">
               documentai999@gmail.com
             </a>{" "}
-            from your account address and ask for deletion. We remove the account, its job records,
-            contact messages, support conversations, saved PDF results and newsletter subscription.
-            Tell us which records you want removed. Downloads and projects stored on your device
+            from your account address to request deletion of your account, job records,
+            contact messages, support conversations, saved PDF results or newsletter subscription.
+            Tell us which records you want removed; this page does not promise an automatic deletion deadline.
+            Downloads and projects stored on your device
             must be deleted on your device.
           </p>
         </Card>
