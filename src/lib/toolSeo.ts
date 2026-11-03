@@ -36,19 +36,19 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
   "/merge": T(
     "Merge PDF files into one document",
     "Merge PDF — Combine PDF Files Free",
-    "Combine two or more PDFs into a single file in your browser. Drag pages into order, keep original quality, no upload and no watermark.",
+    "Combine two or more PDFs into a single file in your browser. Reorder whole files and keep page quality. Signed-in results are also saved to private account storage.",
     [
-      "Merge PDF rebuilds a new document with pdf-lib, copying each source page byte-for-byte so text stays selectable and embedded fonts survive.",
+      "Merge copies PDF pages without rasterising them, so selectable source text stays selectable. Check forms, links and bookmarks in the output.",
       "You can reorder files by dragging the cards before merging, and mix portrait and landscape pages in the same output.",
     ],
   ),
   "/split": T(
     "Split a PDF into separate files",
     "Split PDF — Extract Page Ranges Free",
-    "Split one PDF into several files by page range or split every page into its own document. Runs locally, keeps quality, downloads as a ZIP.",
+    "Select page thumbnails and extract them into one new PDF. Processing runs locally; signed-in results are also saved to private account storage.",
     [
-      "Split PDF accepts ranges like 1-3, 7, 10-12 and writes one output file per range, bundled into a ZIP when there is more than one.",
-      "Because pages are copied rather than re-rendered, form fields, links and bookmarks inside each range stay intact.",
+      "Split PDF extracts the selected pages into one PDF in their original order, rather than making one file per range.",
+      "Pages are copied rather than rasterised. Check forms, links and bookmarks before sharing the output.",
     ],
   ),
   "/compress": T(
@@ -75,7 +75,7 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
     "Turn scanned pages and photos of documents into text you can copy, search and edit. Supports multi-page PDFs and dozens of languages.",
     [
       "Pages are rendered to high-resolution bitmaps in your browser, then the image text is recognised and returned as plain text you can copy or download.",
-      "OCR quality depends on the scan: 300 DPI and straight pages read almost perfectly, while skewed phone photos may need a re-shot.",
+      "OCR quality depends on the scan: clear, straight pages help recognition, while skewed phone photos may need a new shot. Always proofread.",
     ],
   ),
   "/pdf-to-word": T(
@@ -218,26 +218,26 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
     "HTML to PDF — Save Web Pages as PDF",
     "Paste HTML or upload an .html file and get a paginated PDF. Useful for archiving receipts, reports and email templates.",
     [
-      "The markup is rendered in an isolated frame and printed to PDF, so inline CSS, tables and images appear as they do on screen.",
+      "HTML tags are stripped and extracted text is written into a PDF. CSS, images and original web layout are not reproduced.",
       "External scripts are not executed, which keeps the conversion predictable and safe.",
     ],
   ),
   "/svg-to-pdf": T(
     "Convert SVG vector files to PDF",
     "SVG to PDF — Vector Graphics to PDF",
-    "Turn SVG illustrations, logos and charts into print-ready PDFs at any size, with edges that stay sharp at every zoom level.",
+    "Render SVG files as image-based PDF pages. Original vector paths are not retained; inspect clarity before printing.",
     [
-      "SVG paths are drawn at the page scale you pick, so a logo exported here stays crisp on a billboard or a business card.",
-      "Fonts referenced by text elements are rasterized if unavailable — convert text to paths first for exact typography.",
+      "SVG files are rendered to PNG images and embedded in PDF pages. Enlarging the result can reveal pixels.",
+      "Make sure the SVG renders correctly in your browser before conversion; missing fonts or resources can change its appearance.",
     ],
   ),
   "/markdown-to-pdf": T(
     "Convert Markdown to a formatted PDF",
     "Markdown to PDF — MD to PDF Free",
-    "Paste Markdown or upload a .md file and download a typeset PDF with headings, lists, tables, quotes and code blocks styled cleanly.",
+    "Paste Markdown and export a PDF with basic headings and lists. Complex tables, images and full Markdown styling are not reproduced.",
     [
-      "Markdown is converted to HTML and then typeset with a readable document stylesheet — code blocks keep monospaced formatting.",
-      "Front-matter is ignored, so notes exported from Obsidian or a static site convert without cleanup.",
+      "Basic heading and list markers are recognised. Inline emphasis markers are removed rather than fully typeset.",
+      "Remove front matter and check code and table layout before sharing the PDF.",
     ],
   ),
   "/text-to-pdf": T(
@@ -246,7 +246,7 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
     "Turn notes, logs or any .txt file into a paginated PDF. Choose font size and page size; long lines wrap instead of being cut.",
     [
       "Text is flowed into pages with proper wrapping and page breaks, so a 200 KB log file becomes a readable document rather than one giant line.",
-      "Unicode content such as Hindi or emoji is embedded with a font that supports it.",
+      "The built-in PDF font supports a limited character set; some scripts and emoji cannot be exported with this tool.",
     ],
   ),
   "/pdf-to-powerpoint": T(
@@ -304,12 +304,12 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
     ],
   ),
   "/pdf-to-svg": T(
-    "Convert PDF pages to SVG vectors",
-    "PDF to SVG — Vector Page Export",
-    "Export PDF pages as SVG so text and shapes stay vector and scale infinitely. Perfect for logos and diagrams headed into design tools.",
+    "Convert PDF pages to image-based SVG",
+    "PDF to SVG — Page Image Export",
+    "Export PDF pages as SVG files containing rendered page images. Text and shapes are not editable vector paths.",
     [
-      "Each page becomes an SVG document with vector paths, ready to open in Figma, Illustrator or Inkscape.",
-      "Scanned pages contain only a photo, so their SVG will wrap a bitmap rather than real vectors.",
+      "Each SVG wraps a rendered PNG page image; increasing the display size does not add detail.",
+      "Use original vector artwork when editable paths or resolution-independent graphics are required.",
     ],
   ),
   "/pdf-to-epub": T(
@@ -360,9 +360,9 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
   "/flatten-pdf": T(
     "Flatten PDF forms and annotations",
     "Flatten PDF — Lock Forms & Markup",
-    "Bake form fields, signatures and comments into the page so nobody can edit or clear them. The file still looks identical.",
+    "Create a new PDF copy and inspect its form appearances. This implementation does not guarantee complete form or annotation flattening.",
     [
-      "Flattening merges the interactive layer into page content, which is how a filled form becomes a final, tamper-resistant record.",
+      "This tool copies pages into a new document; it does not provide tamper-proofing or verified removal of all interactive content.",
       "Keep an unflattened copy if you may need to change the answers later.",
     ],
   ),
@@ -387,7 +387,7 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
   "/sign-pdf": T(
     "Sign a PDF with your own signature",
     "Sign PDF — Draw or Upload Signature",
-    "Draw, type or upload your signature, place it anywhere on the page, and download the signed PDF. Nothing is stored after download.",
+    "Draw, type or upload your signature, place it anywhere on the page, and download the signed PDF. Review account storage details in Privacy & File Processing.",
     [
       "Your signature is drawn on a canvas in the browser and stamped into the page — the image is never uploaded to a server.",
       "Add the date and initials as text, then flatten the file so the signature cannot be dragged away.",
@@ -426,7 +426,7 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
     "Shrink JPG, PNG and WebP files with a quality slider and live preview, so photos load fast without visible artefacts.",
     [
       "Compression is re-encoded on a canvas in your browser, and the before/after sizes are shown so you can stop at the right quality.",
-      "Around 70-80% quality is usually indistinguishable from the original while cutting file size by more than half.",
+      "Lower quality may save space but can blur fine details. Compare the actual size and appearance rather than expecting a fixed reduction.",
     ],
   ),
   "/resize-image": T(
@@ -486,9 +486,9 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
   "/jpg-to-webp": T(
     "Convert JPG images to WebP",
     "JPG to WebP — Faster Web Images",
-    "Convert JPGs to WebP to cut page weight by roughly a quarter to a third at the same visual quality, improving load speed.",
+    "Convert JPG images to WebP and compare the resulting size and quality for your web pages.",
     [
-      "WebP encodes photographs more efficiently than JPG, which usually means a 25-35% smaller file at matching quality.",
+      "WebP size depends on the image and encoding settings; the output is not guaranteed to be smaller.",
       "Every current browser supports WebP; keep a JPG fallback only for very old email clients.",
     ],
   ),
@@ -504,10 +504,10 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
   "/remove-background": T(
     "Remove image backgrounds automatically",
     "Remove Background — Transparent PNG",
-    "Cut the background out of photos of people, products and pets and download a transparent PNG ready for any design.",
+    "Make white or very light pixels transparent and download PNG. Light areas inside the subject can also be removed.",
     [
-      "Subject detection runs on your device and returns a transparent PNG, so product shots and portraits never leave the browser.",
-      "Clean, contrasting backgrounds give the sharpest cut-outs; wispy hair may need a touch-up.",
+      "The tool makes very light pixels transparent; it does not detect subjects or remove arbitrary coloured backgrounds.",
+      "Use a dark subject on a plain light background and inspect edges before sharing.",
     ],
   ),
   "/image-to-text": T(
@@ -529,12 +529,12 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
     ],
   ),
   "/ai-image-enhance": T(
-    "Enhance and upscale images with AI",
-    "AI Image Enhance — Sharpen & Upscale",
-    "Improve sharpness, lighting and detail in blurry or low-resolution photos, and enlarge them without the usual mush.",
+    "Adjust image brightness and sharpness",
+    "Image Enhance — Local Adjustments",
+    "Adjust brightness, contrast, saturation and sharpness locally, then download PNG. This tool does not use AI or upscale the image.",
     [
-      "Enhancement is an AI request: the image is sent for processing, the result is returned to you, and nothing is retained afterwards.",
-      "It reconstructs plausible detail rather than recovering lost data, so treat results as improved, not forensic.",
+      "Adjustments use browser image filters at the original image dimensions; the image is not sent for AI processing.",
+      "Local filters cannot recover missing detail. Check highlights and shadows to avoid over-correcting the image.",
     ],
   ),
   "/ai-summarizer": T(
@@ -542,7 +542,7 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
     "AI Summarizer — Key Points in Seconds",
     "Paste a report, article or contract and get a short summary with the key points as bullets, so you can skim before reading in full.",
     [
-      "Your text is sent to the AI model for summarising and the response is streamed back; the source is not stored after the request.",
+      "Your text is sent to an AI service for summarising. Review provider handling in Privacy & File Processing before submitting confidential content.",
       "Summaries are a reading aid — verify numbers and legal wording against the original document.",
     ],
   ),
@@ -684,9 +684,9 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
   "/invoice-generator": T(
     "Create invoices and download as PDF",
     "Invoice Generator — Free PDF Invoices",
-    "Create a professional invoice with line items, tax and totals calculated for you, then download it as a PDF to send.",
+    "Create a basic INR invoice with sender and client details, item quantities, prices and a calculated total. Download PDF; tax is not calculated.",
     [
-      "Line totals, tax and the grand total are calculated as you type, and the PDF is built on your device.",
+      "Item quantities and prices determine the total. There are no tax, discount or logo-upload controls; add explanatory payment notes if needed.",
       "Client details are never uploaded, which matters when you bill under an NDA.",
     ],
   ),

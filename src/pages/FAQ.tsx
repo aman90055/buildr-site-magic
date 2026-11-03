@@ -21,7 +21,7 @@ const FAQ = () => {
       faqs: [
         {
           question: "What is Document Editor?",
-          answer: "Document Editor is a comprehensive online platform for all your PDF needs. We offer 25+ tools including merge, split, compress, convert, OCR, and more. Our AI-powered features make document processing faster and smarter than ever before."
+          answer: "Docunova provides PDF, image and document tools including merge, page extraction, compression, conversion and OCR. Individual pages explain the available controls and output limitations."
         },
         {
           question: "Is Document Editor free to use?",
@@ -29,11 +29,11 @@ const FAQ = () => {
         },
         {
           question: "Do I need to create an account?",
-          answer: "You can use many of our tools without creating an account. However, creating a free account gives you access to your processing history, saved settings, and cloud storage for your documents."
+          answer: "Public PDF tools work without an account. When signed in, Merge, Split and Compress save finished PDFs and job records to your account. AI features may require sign-in and have request limits."
         },
         {
           question: "What file formats do you support?",
-          answer: "We support PDF, Word (DOC, DOCX), Excel (XLS, XLSX), PowerPoint (PPT, PPTX), images (JPG, PNG, TIFF, BMP, WebP), HTML, and many more formats. Our conversion tools can transform between most common document formats."
+          answer: "Supported inputs vary by tool. Office imports accept modern DOCX, XLSX and PPTX; save older DOC, XLS and PPT files in the newer format first. Check the selected converter for image formats and layout limitations."
         }
       ]
     },
@@ -43,7 +43,7 @@ const FAQ = () => {
       faqs: [
         {
           question: "How does PDF compression work?",
-          answer: "Our compression tool analyzes your PDF and optimizes images, fonts, and other elements to reduce file size while maintaining quality. Our AI-powered compression can achieve up to 90% size reduction by intelligently processing each component."
+          answer: "Less compression rewrites the PDF without rasterising its pages; savings can be small or zero. Stronger settings may rebuild pages as images and affect readability or text selection. Compare the actual output; no fixed reduction is promised."
         },
         {
           question: "Can I merge PDFs with different page sizes?",
@@ -51,11 +51,11 @@ const FAQ = () => {
         },
         {
           question: "What is OCR and how accurate is it?",
-          answer: "OCR (Optical Character Recognition) converts images of text into actual editable text. Our AI-powered OCR supports 100+ languages and achieves over good accuracy on clear documents. It works on scanned documents, photos of text, and image-based PDFs."
+          answer: "OCR recognises text in photos and scanned pages using an AI service. Clear, straight images work best. Handwriting, small print and complex tables may be misread; proofread the result."
         },
         {
           question: "Can I edit text directly in a PDF?",
-          answer: "Yes, our Edit PDF tool allows you to add text annotations, comments, and highlights. For full text editing capabilities on scanned documents, use our OCR tool first to convert the content to editable text."
+          answer: "Edit PDF adds text or graphics over pages; it is not a full replacement editor for existing PDF text. OCR can extract text from a scan, but does not itself replace the original page text."
         },
         {
           question: "How do I remove pages from a PDF?",
@@ -69,23 +69,23 @@ const FAQ = () => {
       faqs: [
         {
           question: "Is my data secure?",
-          answer: "Absolutely. All file transfers use 256-bit SSL encryption. Files are processed on secure servers and automatically deleted after processing. We never access, share, or sell your document contents."
+          answer: "Most PDF processing happens locally in your browser. Signed-in Merge, Split and Compress results are also saved to private account storage. AI features send submitted content to an AI service. See Privacy & File Processing for details."
         },
         {
           question: "How long do you keep my files?",
-          answer: "Uploaded files are automatically deleted from our servers within 1 hour of processing. If you have an account, you can choose to save files to your secure cloud storage for longer periods."
+          answer: "Closing a tab clears local processing state, but does not delete saved account files, support conversations or downloads on your device. We do not promise automatic deletion within one hour. Contact support to request deletion of account records."
         },
         {
           question: "Can I password-protect my PDFs?",
-          answer: "Yes! Our Protect PDF tool lets you add open passwords (to view) and permission passwords (to edit, print, or copy). We use industry-standard AES-256 encryption for maximum security."
+          answer: "Protect PDF adds an open password locally. Keep the password somewhere safe and test the downloaded file. Unlock PDF requires a known password; it does not crack unknown passwords."
         },
         {
           question: "What is PDF redaction?",
-          answer: "Redaction permanently removes sensitive information from PDFs. Unlike simply covering text with black boxes, proper redaction completely eliminates the data so it cannot be recovered, even with specialized tools."
+          answer: "This redaction tool blacks out complete lines containing exact matching text and rebuilds pages as images. It does not recognise scanned text. Inspect every page visually and check the output before sharing."
         },
         {
           question: "Are you GDPR compliant?",
-          answer: "Yes, we are fully GDPR compliant. You have complete control over your data, including the right to access, correct, and delete your information. See our Privacy Policy for details."
+          answer: "We do not claim independent GDPR certification. Our Privacy Policy explains how to request access, correction or deletion of account data; contact support with your request."
         }
       ]
     },
@@ -121,15 +121,15 @@ const FAQ = () => {
         },
         {
           question: "Can I cancel my subscription anytime?",
-          answer: "Yes, you can cancel your subscription at any time. You'll continue to have access to premium features until the end of your current billing period."
+          answer: "Contact support about an existing payment or plan. Available access and billing terms depend on the plan shown on your account; do not assume recurring billing or unverified premium benefits."
         },
         {
           question: "Do you offer refunds?",
-          answer: "We offer a 14-day money-back guarantee for all new premium subscriptions. If you're not satisfied, contact our support team for a full refund."
+          answer: "Refund eligibility depends on the applicable plan and payment terms. Read the Refund Policy and contact support with your payment details; there is no blanket money-back guarantee here."
         },
         {
           question: "Are there discounts for teams or businesses?",
-          answer: "Yes! We offer volume discounts for teams and custom enterprise plans with additional features like SSO, dedicated support, and custom integrations. Contact us for details."
+          answer: "Contact support with your requirements. Team discounts, SSO and dedicated integrations are not advertised here as verified available benefits."
         }
       ]
     }

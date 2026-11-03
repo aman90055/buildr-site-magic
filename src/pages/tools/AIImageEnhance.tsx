@@ -77,22 +77,22 @@ const AIImageEnhance = () => {
 
   return (
     <>
-      <Helmet><title>AI Image Enhance | PDF Tools</title><meta name="description" content="Enhance image quality with AI-powered adjustments." />
+      <Helmet><title>Image Adjustments | Docunova</title><meta name="description" content="Adjust brightness, contrast, saturation and sharpness in your browser. No AI upscaling." />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
-        <meta property="og:title" content="AI Image Enhance | PDF Tools" />
-        <meta property="og:description" content="Enhance image quality with AI-powered adjustments." />
+        <meta property="og:title" content="Image Adjustments | Docunova" />
+        <meta property="og:description" content="Adjust brightness, contrast, saturation and sharpness in your browser. No AI upscaling." />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="AI Image Enhance | PDF Tools" />
-        <meta name="twitter:description" content="Enhance image quality with AI-powered adjustments." /></Helmet>
+        <meta name="twitter:title" content="Image Adjustments | Docunova" />
+        <meta name="twitter:description" content="Adjust brightness, contrast, saturation and sharpness in your browser. No AI upscaling." /></Helmet>
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1 pt-24 pb-16">
           <div className="container mx-auto px-6 max-w-2xl">
             <div className="text-center mb-12">
               <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center"><Sparkles className="w-8 h-8 text-white" /></div>
-              <h1 className="text-4xl font-bold text-foreground mb-3">AI Image Enhance</h1>
-              <p className="text-muted-foreground">Enhance image quality with smart adjustments.</p>
+              <h1 className="text-4xl font-bold text-foreground mb-3">Image Adjustments</h1>
+              <p className="text-muted-foreground">Adjust image colour and contrast locally; no AI or upscaling.</p>
             </div>
             {!downloadUrl ? (
               <div className="space-y-6">

@@ -88,18 +88,18 @@ const PDFToSVG = () => {
   return (
     <>
       <Helmet>
-        <title>PDF to SVG - Convert PDF to Vector Graphics</title>
-        <meta name="description" content="Convert PDF pages to SVG vector format for infinite scalability." />
+        <title>PDF to SVG - Page Image Export</title>
+        <meta name="description" content="Export SVG files containing rendered PDF page images, not editable vector paths." />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
-        <meta property="og:title" content="PDF to SVG - Convert PDF to Vector Graphics" />
-        <meta property="og:description" content="Convert PDF pages to SVG vector format for infinite scalability." />
+        <meta property="og:title" content="PDF to SVG - Page Image Export" />
+        <meta property="og:description" content="Export SVG files containing rendered PDF page images, not editable vector paths." />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="PDF to SVG - Convert PDF to Vector Graphics" />
-        <meta name="twitter:description" content="Convert PDF pages to SVG vector format for infinite scalability." />
+        <meta name="twitter:title" content="PDF to SVG - Page Image Export" />
+        <meta name="twitter:description" content="Export SVG files containing rendered PDF page images, not editable vector paths." />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org", "@type": "HowTo",
-          name: "PDF to SVG - Convert PDF to Vector Graphics", description: "Convert PDF pages to SVG vector format for infinite scalability.",
+          name: "PDF to SVG - Page Image Export", description: "Export SVG files containing rendered PDF page images, not editable vector paths.",
           totalTime: "PT1M",
           step: [
             { "@type": "HowToStep", position: 1, name: "Add your file", text: "Select or drag your file into the tool. Everything is processed in your browser, so nothing is uploaded." },
@@ -117,7 +117,7 @@ const PDFToSVG = () => {
                 <PenTool className="w-8 h-8 text-primary" />
               </div>
               <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">PDF to SVG</h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Convert PDF pages to scalable vector graphics.</p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Export PDF page images inside SVG files; text and shapes are not editable vectors.</p>
             </div>
             <div className="max-w-3xl mx-auto">
               {svgUrls.length === 0 ? (
