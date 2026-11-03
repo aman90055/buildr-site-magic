@@ -52,7 +52,7 @@ const RichToolContentSection = ({ slug }: Props) => {
             <span className="inline-flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> {mins} min read</span>
           </div>
 
-          <h2 id="rich-guide" className="text-2xl font-bold mb-4">How to use {c.name}</h2>
+          <h2 id="rich-guide" className="text-2xl font-bold mb-4">{c.name}: steps and tips</h2>
 
           <article className="prose prose-slate dark:prose-invert max-w-none">
             {c.whatIsIt && <p>{c.whatIsIt}</p>}

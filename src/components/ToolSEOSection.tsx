@@ -4,7 +4,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Home, ArrowRight } from "lucide-react";
 import { getToolMeta, CATEGORY_META, type ToolMeta } from "@/lib/toolRegistry";
 import { getRichContent } from "@/lib/richToolContent";
-import { getToolSeo, canonicalFor } from "@/lib/toolSeo";
 import RelatedTools from "@/components/RelatedTools";
 import RichToolContentSection from "@/components/RichToolContentSection";
 import { toolPrivacy } from "@/lib/toolInstructions";
@@ -20,8 +19,6 @@ const ToolSEOSection = () => {
   const { pathname } = useLocation();
   const registryMeta = getToolMeta(pathname);
   const rich = getRichContent(pathname);
-  const seo = getToolSeo(pathname);
-  const selfUrl = canonicalFor(pathname);
 
   // Fall back to the long-form content library for tools that are not in the
   // hand-written registry, so every tool page ships substantial publisher content.
