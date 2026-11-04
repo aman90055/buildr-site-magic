@@ -108,7 +108,7 @@ const PDFCompress = () => {
           "step": [
             { "@type": "HowToStep", "name": "Upload PDF", "text": "Drop your PDF file into the uploader — up to any size." },
             { "@type": "HowToStep", "name": "Choose level", "text": "Pick a compression level 1–100 or accept the AI-recommended setting." },
-            { "@type": "HowToStep", "name": "Download", "text": "Download the compressed PDF, often 60–90% smaller." }
+            { "@type": "HowToStep", "name": "Download", "text": "Download the compressed PDF and check its quality; size reduction varies by file." }
           ]
         })}</script>
         <script type="application/ld+json">{JSON.stringify({
