@@ -20,18 +20,18 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Docunova — Free PDF Tools & AI Document Helpers</title>
-        <meta name="description" content="Merge, split and compress PDFs free without signing in. Core PDF tools have no file-size cap. Explore image tools and AI helpers with separate usage limits." />
+        <title>Free PDF Tools Online — Merge, Split & Compress | Docunova</title>
+        <meta name="description" content="Merge, split, compress and convert PDFs in your browser for free, with no sign-in and no file-size cap. Also includes OCR, image tools and AI helpers." />
         <link rel="canonical" href="https://docunova.online/" />
         <meta name="keywords" content="Docunova AI Suite, free PDF editor online, merge PDF, split PDF, compress PDF, PDF to Word, PDF to Excel, OCR online, e-sign PDF, AI PDF summarizer, watermark PDF, edit PDF free, image to PDF" />
-        <meta property="og:title" content="Docunova — Free PDF Tools & AI Document Helpers" />
-        <meta property="og:description" content="Free core PDF tools without sign-in or a file-size cap. AI helpers have separate usage and input limits." />
+        <meta property="og:title" content="Free PDF Tools Online — Merge, Split & Compress | Docunova" />
+        <meta property="og:description" content="Merge, split, compress and convert PDFs in your browser for free, with no sign-in and no file-size cap. Also includes OCR, image tools and AI helpers." />
         <meta property="og:url" content="https://docunova.online/" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="The Docunova AI Suite — 74 Tools" />
-        <meta name="twitter:description" content="Free core PDF tools without sign-in or a file-size cap. AI helpers have separate usage and input limits." />
+        <meta name="twitter:title" content="Free PDF Tools Online — Merge, Split & Compress | Docunova" />
+        <meta name="twitter:description" content="Merge, split, compress and convert PDFs in your browser for free, with no sign-in and no file-size cap. Also includes OCR, image tools and AI helpers." />
       </Helmet>
       <div className="min-h-screen">
         <Header />
