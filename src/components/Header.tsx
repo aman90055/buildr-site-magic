@@ -230,9 +230,6 @@ const Header = () => {
             </NavigationMenuList>
           </NavigationMenu>
 
-            {/* Mobile Navigation */}
-            <MobileNav />
-          
             <div className="flex items-center gap-2">
               {/* Search Button */}
               <Button
@@ -302,6 +299,9 @@ const Header = () => {
                   </Button>
                 </>
               )}
+
+              {/* Compact menu — sits at the right edge of the header */}
+              <MobileNav />
             </div>
           </div>
         </div>
