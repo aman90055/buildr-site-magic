@@ -1,22 +1,16 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ArrowLeft, Home } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import logo from "@/assets/logo.png";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { 
-  Image, FileText, Presentation, Table, Code,
-  FileImage, FileType, FileSpreadsheet, FileBadge,
-  LogIn, LogOut, User, Loader2, Sparkles, Brain, Search, LayoutDashboard, Gift, Crown
+  LogIn, LogOut, User, Loader2, Brain, Search, LayoutDashboard, Gift, Crown
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
 import {
   DropdownMenu,
@@ -26,26 +20,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
-import AIBadge from "./AIBadge";
 import ThemeToggle from "./ThemeToggle";
 import SearchDialog from "./SearchDialog";
 import MobileNav from "./MobileNav";
-
-const convertToPdfTools = [
-  { title: "JPG to PDF", href: "/image-to-pdf", icon: Image, description: "AI-optimized conversion", ai: true },
-  { title: "Word to PDF", href: "/word-to-pdf", icon: FileText, description: "Perfect formatting" },
-  { title: "PowerPoint to PDF", href: "/powerpoint-to-pdf", icon: Presentation, description: "Preserve animations" },
-  { title: "Excel to PDF", href: "/excel-to-pdf", icon: Table, description: "Keep formulas" },
-  { title: "HTML to PDF", href: "/html-to-pdf", icon: Code, description: "Web to document" },
-];
-
-const convertFromPdfTools = [
-  { title: "PDF to JPG", href: "/pdf-to-image", icon: FileImage, description: "AI-enhanced export", ai: true },
-  { title: "PDF to Word", href: "/pdf-to-word", icon: FileType, description: "Smart conversion", ai: true },
-  { title: "PDF to PowerPoint", href: "/pdf-to-powerpoint", icon: Presentation, description: "Editable slides" },
-  { title: "PDF to Excel", href: "/pdf-to-excel", icon: FileSpreadsheet, description: "Extract tables", ai: true },
-  { title: "PDF to PDF/A", href: "/pdf-to-pdfa", icon: FileBadge, description: "Archive format" },
-];
 
 const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -120,7 +97,7 @@ const Header = () => {
             </Link>
             </div>
           
-          <NavigationMenu className="hidden xl:flex shrink-0">
+          <NavigationMenu className="hidden min-[1440px]:flex shrink-0">
             <NavigationMenuList>
               <NavigationMenuItem>
                 <Link to="/tools" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium whitespace-nowrap">
@@ -128,12 +105,12 @@ const Header = () => {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/merge" className="hidden xl:block text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium whitespace-nowrap">
+                <Link to="/merge" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium whitespace-nowrap">
                   Merge
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/split" className="hidden xl:block text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium whitespace-nowrap">
+                <Link to="/split" className="text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium whitespace-nowrap">
                   Split
                 </Link>
               </NavigationMenuItem>
@@ -151,78 +128,7 @@ const Header = () => {
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-muted-foreground hover:text-foreground text-sm font-medium">
-                  Convert to PDF
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-1 p-4 glass-card rounded-2xl shadow-card-hover">
-                    {convertToPdfTools.map((tool) => (
-                      <li key={tool.href}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to={tool.href}
-                            className={cn(
-                              "flex items-center gap-3 select-none rounded-xl p-3 leading-none no-underline outline-none transition-colors",
-                              "hover:bg-muted focus:bg-muted"
-                            )}
-                          >
-                            <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                              <tool.icon className="h-4 w-4 text-primary" />
-                            </div>
-                            <div className="flex-1">
-                              <div className="flex items-center gap-2">
-                                <div className="text-sm font-medium leading-none">{tool.title}</div>
-                                {tool.ai && <AIBadge variant="inline" glow={false} />}
-                              </div>
-                              <p className="line-clamp-1 text-xs leading-snug text-muted-foreground mt-1">
-                                {tool.description}
-                              </p>
-                            </div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-muted-foreground hover:text-foreground text-sm font-medium">
-                  Convert from PDF
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-1 p-4 glass-card rounded-2xl shadow-card-hover">
-                    {convertFromPdfTools.map((tool) => (
-                      <li key={tool.href}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to={tool.href}
-                            className={cn(
-                              "flex items-center gap-3 select-none rounded-xl p-3 leading-none no-underline outline-none transition-colors",
-                              "hover:bg-muted focus:bg-muted"
-                            )}
-                          >
-                            <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                              <tool.icon className="h-4 w-4 text-primary" />
-                            </div>
-                            <div className="flex-1">
-                              <div className="flex items-center gap-2">
-                                <div className="text-sm font-medium leading-none">{tool.title}</div>
-                                {tool.ai && <AIBadge variant="inline" glow={false} />}
-                              </div>
-                              <p className="line-clamp-1 text-xs leading-snug text-muted-foreground mt-1">
-                                {tool.description}
-                              </p>
-                            </div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link to="/premium" className="hidden xl:flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium whitespace-nowrap">
+                <Link to="/premium" className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors px-3 py-2 text-sm font-medium whitespace-nowrap">
                   <Crown className="w-3.5 h-3.5 text-amber-500" />
                   Premium
                 </Link>
@@ -230,9 +136,6 @@ const Header = () => {
             </NavigationMenuList>
           </NavigationMenu>
 
-            {/* Mobile Navigation */}
-            <MobileNav />
-          
             <div className="flex items-center gap-2">
               {/* Search Button */}
               <Button
@@ -302,6 +205,9 @@ const Header = () => {
                   </Button>
                 </>
               )}
+
+              {/* Compact menu — sits at the right edge of the header */}
+              <MobileNav />
             </div>
           </div>
         </div>
