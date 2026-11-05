@@ -9,9 +9,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { 
-  Image, FileText, Presentation, Table, Code,
-  FileImage, FileType, FileSpreadsheet, FileBadge,
-  LogIn, LogOut, User, Loader2, Sparkles, Brain, Search, LayoutDashboard, Gift, Crown
+  LogIn, LogOut, User, Loader2, Brain, Search, LayoutDashboard, Gift, Crown
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import {
