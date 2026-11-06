@@ -1,481 +1,75 @@
-import { TOOL_COUNT_LABEL } from "@/lib/toolRegistry";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  ImageIcon, FileImage, FileDown, Merge, Scissors, Pencil, Lock, ScanText,
-  Trash2, FileOutput, LayoutGrid, Scan, Wrench, FileText, Presentation, Table,
-  Globe, FileArchive, RotateCw, Hash, Droplets, Crop, Unlock, PenTool, EyeOff,
-  GitCompare, Star, Lightbulb, ArrowDownUp, Layers, Contrast, Info, BookOpen,
-  FileCode, Type, Minimize2, Maximize, Eraser, RefreshCw, Languages, SpellCheck,
-  Database, Receipt, Award, Mail, FileUser, Search, X, Sparkles, FileSearch,
-} from "lucide-react";
-import AIBadge from "./AIBadge";
+import { ArrowRight, Brain, FileText, Image, Lock, Merge, Scissors, Minimize2, Star, Search, X, PenTool, Receipt, ArrowLeftRight, LayoutGrid } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { getAllTools, type ToolCategory, type ToolMeta } from "@/lib/toolRegistry";
 
-type Tool = {
-  title: string;
-  description: string;
-  href: string;
-  icon: any;
-  ai?: boolean;
-  popular?: boolean;
-  category: string;
-  categoryIcon: any;
-  catIndex: number;
-  idx: number;
+const categories: { value: ToolCategory | "all" | "favorites" | "recent"; label: string }[] = [
+  { value: "all", label: "All tools" }, { value: "organize", label: "Organize PDF" },
+  { value: "convert", label: "Convert" }, { value: "edit", label: "Edit PDF" },
+  { value: "security", label: "Security" }, { value: "image", label: "Images" },
+  { value: "ai", label: "AI & OCR" }, { value: "documents", label: "Documents" },
+  { value: "favorites", label: "Favorites" }, { value: "recent", label: "Recent" },
+];
+const icons = { organize: LayoutGrid, convert: ArrowLeftRight, edit: PenTool, security: Lock, image: Image, ai: Brain, documents: Receipt };
+const colors = { organize: "bg-brand-blue/10 text-brand-blue", convert: "bg-brand-green/10 text-brand-green", edit: "bg-brand-orange/10 text-brand-orange", security: "bg-brand-blue/10 text-brand-blue", image: "bg-brand-cyan/10 text-brand-cyan", ai: "bg-brand-purple/10 text-brand-purple", documents: "bg-brand-pink/10 text-brand-pink" };
+const featured = ["/merge", "/split", "/compress", "/image-to-pdf", "/pdf-to-word", "/image-to-text", "/edit-pdf", "/sign-pdf"];
+const summaries: Record<string, string> = {
+  "/merge": "Combine PDF files in the order you choose.", "/split": "Separate a PDF or extract selected page ranges.",
+  "/compress": "Reduce PDF size; results depend on the file.", "/image-to-pdf": "Turn photos and images into PDF pages.",
+  "/pdf-to-word": "Export extracted text to a Word document.", "/image-to-text": "Recognise text in an image with online OCR.",
+  "/edit-pdf": "Add text and annotations to PDF pages.", "/sign-pdf": "Add a typed or drawn signature to a PDF.",
 };
-
-const toolCategories = [
-  {
-    title: "Organize PDF",
-    icon: LayoutGrid,
-    tools: [
-      { title: "Merge PDF", description: "AI-optimized combining", href: "/merge", icon: Merge, ai: true, popular: true },
-      { title: "Split PDF", description: "Smart page detection", href: "/split", icon: Scissors, ai: true, popular: true },
-      { title: "Remove Pages", description: "AI-suggested removal", href: "/remove-pages", icon: Trash2, ai: true },
-      { title: "Extract Pages", description: "Smart extraction", href: "/extract-pages", icon: FileOutput, ai: true },
-      { title: "Organize PDF", description: "AI page arrangement", href: "/organize-pdf", icon: LayoutGrid, ai: true },
-      { title: "Scan to PDF", description: "Enhanced scanning", href: "/scan-to-pdf", icon: Scan },
-      { title: "Reverse PDF", description: "Reverse page order", href: "/reverse-pdf", icon: ArrowDownUp },
-    ],
-  },
-  {
-    title: "Smart Tools",
-    icon: Lightbulb,
-    tools: [
-      { title: "Smart OCR", description: "AI OCR in 100+ languages", href: "/ocr", icon: ScanText, ai: true, popular: true },
-      { title: "Smart Analysis", description: "Summarize & extract", href: "/ocr", icon: Lightbulb, ai: true },
-      { title: "Compress PDF", description: "AI compression engine", href: "/compress", icon: FileDown, ai: true, popular: true },
-      { title: "Repair PDF", description: "Smart PDF repair", href: "/repair-pdf", icon: Wrench, ai: true },
-      { title: "Smart Summarizer", description: "Instant PDF summaries", href: "/ai-summarizer", icon: Lightbulb, ai: true },
-      { title: "AI Translator", description: "Translate documents", href: "/ai-translator", icon: Languages, ai: true },
-      { title: "AI Grammar Check", description: "Fix errors instantly", href: "/ai-grammar-check", icon: SpellCheck, ai: true },
-      { title: "AI Rewriter", description: "Paraphrase content", href: "/ai-rewriter", icon: RefreshCw, ai: true },
-      { title: "AI Data Extractor", description: "Extract tables & data", href: "/ai-data-extractor", icon: Database, ai: true },
-      { title: "Image Enhance", description: "Upscale & sharpen", href: "/ai-image-enhance", icon: Star, ai: true },
-      { title: "Remove Background", description: "AI background removal", href: "/remove-background", icon: Eraser, ai: true },
-      { title: "Image to Text", description: "OCR from images", href: "/image-to-text", icon: ScanText, ai: true },
-    ],
-  },
-  {
-    title: "Convert to PDF",
-    icon: FileText,
-    tools: [
-      { title: "JPG to PDF", description: "AI image optimization", href: "/image-to-pdf", icon: ImageIcon, ai: true, popular: true },
-      { title: "Word to PDF", description: "Perfect formatting", href: "/word-to-pdf", icon: FileText, popular: true },
-      { title: "PowerPoint to PDF", description: "Preserve animations", href: "/powerpoint-to-pdf", icon: Presentation },
-      { title: "Excel to PDF", description: "Keep formulas", href: "/excel-to-pdf", icon: Table },
-      { title: "HTML to PDF", description: "Web to document", href: "/html-to-pdf", icon: Globe },
-      { title: "SVG to PDF", description: "Vector to PDF", href: "/svg-to-pdf", icon: PenTool },
-      { title: "Markdown to PDF", description: "MD to formatted PDF", href: "/markdown-to-pdf", icon: FileCode },
-      { title: "Text to PDF", description: "Plain text to PDF", href: "/text-to-pdf", icon: Type },
-    ],
-  },
-  {
-    title: "Convert from PDF",
-    icon: FileImage,
-    tools: [
-      { title: "PDF to JPG", description: "AI-enhanced export", href: "/pdf-to-image", icon: FileImage, ai: true, popular: true },
-      { title: "PDF to Word", description: "Smart conversion", href: "/pdf-to-word", icon: FileText, ai: true, popular: true },
-      { title: "PDF to PowerPoint", description: "Editable slides", href: "/pdf-to-powerpoint", icon: Presentation },
-      { title: "PDF to Excel", description: "Extract tables", href: "/pdf-to-excel", icon: Table, ai: true },
-      { title: "PDF to PDF/A", description: "Archive format", href: "/pdf-to-pdfa", icon: FileArchive },
-      { title: "PDF to Text", description: "AI text extraction", href: "/pdf-to-text", icon: FileText, ai: true },
-      { title: "PDF to HTML", description: "Web-ready output", href: "/pdf-to-html", icon: Globe, ai: true },
-      { title: "PDF to PNG", description: "High-res images", href: "/pdf-to-png", icon: ImageIcon, ai: true },
-      { title: "PDF to SVG", description: "Vector graphics", href: "/pdf-to-svg", icon: PenTool },
-      { title: "PDF to eBook", description: "EPUB conversion", href: "/pdf-to-epub", icon: BookOpen, ai: true },
-    ],
-  },
-  {
-    title: "Edit PDF",
-    icon: Pencil,
-    tools: [
-      { title: "Edit PDF", description: "AI-assisted editing", href: "/edit-pdf", icon: Pencil, ai: true, popular: true },
-      { title: "Rotate PDF", description: "Smart rotation", href: "/rotate-pdf", icon: RotateCw },
-      { title: "Add Page Numbers", description: "Auto-numbering", href: "/add-page-numbers", icon: Hash },
-      { title: "Add Watermark", description: "Custom branding", href: "/add-watermark", icon: Droplets },
-      { title: "Crop PDF", description: "Precision cropping", href: "/crop-pdf", icon: Crop },
-      { title: "Flatten PDF", description: "Lock form fields", href: "/flatten-pdf", icon: Layers },
-      { title: "Grayscale PDF", description: "Convert to B&W", href: "/grayscale-pdf", icon: Contrast },
-      { title: "Edit Metadata", description: "PDF properties", href: "/pdf-metadata", icon: Info },
-    ],
-  },
-  {
-    title: "PDF Security",
-    icon: Lock,
-    tools: [
-      { title: "Unlock PDF", description: "Remove restrictions", href: "/unlock-pdf", icon: Unlock },
-      { title: "Protect PDF", description: "Password-protect with AES encryption", href: "/protect-pdf", icon: Lock, popular: true },
-      { title: "Sign PDF", description: "Digital signatures", href: "/sign-pdf", icon: PenTool, popular: true },
-      { title: "PDF Filler", description: "Fill out PDF forms free", href: "/pdf-filler", icon: FileSearch, popular: true },
-      { title: "Redact PDF", description: "AI-powered redaction", href: "/redact-pdf", icon: EyeOff, ai: true },
-      { title: "Compare PDF", description: "AI difference detection", href: "/compare-pdf", icon: GitCompare, ai: true },
-    ],
-  },
-  {
-    title: "Image Tools",
-    icon: ImageIcon,
-    tools: [
-      { title: "Compress Image", description: "AI smart compression", href: "/compress-image", icon: Minimize2, ai: true, popular: true },
-      { title: "Resize Image", description: "Custom dimensions", href: "/resize-image", icon: Maximize },
-      { title: "Crop Image", description: "Precision cropping", href: "/crop-image", icon: Crop },
-      { title: "Rotate Image", description: "Rotate & flip", href: "/rotate-image", icon: RotateCw },
-      { title: "PNG to JPG", description: "Format conversion", href: "/png-to-jpg", icon: FileImage },
-      { title: "JPG to PNG", description: "Lossless conversion", href: "/jpg-to-png", icon: FileImage },
-      { title: "WebP to JPG", description: "Universal format", href: "/webp-to-jpg", icon: FileImage },
-      { title: "JPG to WebP", description: "Modern format", href: "/jpg-to-webp", icon: FileImage },
-    ],
-  },
-  {
-    title: "Document Tools",
-    icon: FileText,
-    tools: [
-      { title: "AI Resume Builder", description: "ATS-friendly resumes", href: "/resume-builder", icon: FileUser, ai: true, popular: true },
-      { title: "Invoice Generator", description: "Professional invoices", href: "/invoice-generator", icon: Receipt },
-      { title: "Certificate Maker", description: "Beautiful certificates", href: "/certificate-maker", icon: Award },
-      { title: "AI Letter Writer", description: "Smart correspondence", href: "/letter-writer", icon: Mail, ai: true },
-      { title: "AI Cover Letter", description: "Tailored cover letters", href: "/ai-cover-letter", icon: Mail, ai: true },
-      { title: "AI Resume Analyzer", description: "Score & improve resumes", href: "/ai-resume-analyzer", icon: FileSearch, ai: true },
-      { title: "AI Contract Review", description: "Spot risky clauses", href: "/ai/contract-review", icon: FileText, ai: true },
-      { title: "AI Proposal Generator", description: "Win more clients", href: "/ai/proposal-generator", icon: FileText, ai: true },
-    ],
-  },
-  {
-    title: "AI Writing",
-    icon: PenTool,
-    tools: [
-      { title: "AI Writing Assistant", description: "Improve any text", href: "/ai/writing-assistant", icon: PenTool, ai: true, popular: true },
-      { title: "AI Email Writer", description: "Perfect every email", href: "/ai-email-writer", icon: Mail, ai: true },
-      { title: "AI Blog Writer", description: "Long-form articles", href: "/ai-blog-writer", icon: BookOpen, ai: true },
-      { title: "AI Document Chat", description: "Chat with any doc", href: "/ai/document-chat", icon: ScanText, ai: true },
-      { title: "AI Meeting Notes", description: "Action items from notes", href: "/ai/meeting-notes", icon: FileText, ai: true },
-      { title: "AI Research Assistant", description: "Structured research", href: "/ai/research-assistant", icon: Search, ai: true },
-      { title: "AI Prompt Generator", description: "Better prompts", href: "/ai/prompt-generator", icon: Sparkles, ai: true },
-      { title: "AI Grammar Checker", description: "Flawless writing", href: "/ai/grammar-checker", icon: SpellCheck, ai: true },
-      { title: "AI Paraphraser", description: "Rewrite naturally", href: "/ai-rewriter", icon: RefreshCw, ai: true },
-      { title: "AI Translator", description: "100+ languages", href: "/ai/translate", icon: Languages, ai: true },
-    ],
-  },
-  {
-    title: "AI Productivity",
-    icon: Sparkles,
-    tools: [
-      { title: "AI Idea Generator", description: "Brainstorm anything", href: "/ai-idea-generator", icon: Lightbulb, ai: true },
-      { title: "AI Math Solver", description: "Step-by-step solutions", href: "/ai-math-solver", icon: Hash, ai: true },
-      { title: "AI Code Explainer", description: "Understand any code", href: "/ai-code-explainer", icon: FileCode, ai: true },
-      { title: "AI Hashtag Generator", description: "Trending hashtags", href: "/ai-hashtag-generator", icon: Hash, ai: true },
-      { title: "AI YouTube Titles", description: "Click-worthy titles", href: "/ai-youtube-titles", icon: Type, ai: true },
-      { title: "AI Tweet Generator", description: "Viral tweets", href: "/ai-tweet-generator", icon: Type, ai: true },
-      { title: "AI Summarizer", description: "Instant summaries", href: "/ai-summarizer", icon: Lightbulb, ai: true },
-      { title: "AI Data Extractor", description: "Tables & data", href: "/ai-data-extractor", icon: Database, ai: true },
-      { title: "AI Image Generator", description: "Text to image", href: "/ai-hub", icon: ImageIcon, ai: true },
-      { title: "AI Hub", description: "All AI tools", href: "/ai-hub", icon: Sparkles, ai: true },
-      { title: "Social Media Kit", description: "Posts & captions", href: "/social-kit", icon: Type, ai: true },
-    ],
-  },
-  {
-    title: "Quick PDF",
-    icon: Wrench,
-    tools: [
-      { title: "PDF Optimizer", description: "Reduce size smartly", href: "/compress", icon: FileDown },
-      { title: "PDF Annotator", description: "Notes & highlights", href: "/edit-pdf", icon: Pencil },
-      { title: "Bates Numbering", description: "Legal numbering", href: "/add-page-numbers", icon: Hash },
-      { title: "Booklet Maker", description: "Print-ready booklets", href: "/organize-pdf", icon: BookOpen },
-      { title: "N-up Layout", description: "Multiple pages per sheet", href: "/organize-pdf", icon: LayoutGrid },
-      { title: "Form Filler", description: "Fill PDF forms", href: "/edit-pdf", icon: Pencil },
-      { title: "Page Counter", description: "Inspect PDF stats", href: "/pdf-metadata", icon: Info },
-      { title: "PDF Splitter Pro", description: "Bookmark-aware split", href: "/split", icon: Scissors },
-    ],
-  },
-  {
-    title: "More Image Tools",
-    icon: FileImage,
-    tools: [
-      { title: "Screenshot to PDF", description: "Captures to PDF", href: "/image-to-pdf", icon: ImageIcon },
-      { title: "Photo to PDF", description: "Phone photos to PDF", href: "/image-to-pdf", icon: ImageIcon },
-      { title: "Receipt to PDF", description: "Archive receipts", href: "/image-to-pdf", icon: Receipt },
-      { title: "Image to Word", description: "Extract editable text", href: "/image-to-text", icon: FileText, ai: true },
-      { title: "Upscale Image", description: "4x AI upscaling", href: "/ai-image-enhance", icon: Maximize, ai: true },
-      { title: "Sharpen Image", description: "Restore detail", href: "/ai-image-enhance", icon: Sparkles, ai: true },
-    ],
-  },
-];
-
-
-const gradientPalette = [
-  "from-blue-500 via-blue-600 to-indigo-600",
-  "from-purple-500 via-fuchsia-500 to-pink-500",
-  "from-cyan-400 via-sky-500 to-blue-600",
-  "from-emerald-400 via-teal-500 to-cyan-600",
-  "from-orange-400 via-amber-500 to-rose-500",
-  "from-pink-500 via-rose-500 to-red-500",
-  "from-indigo-500 via-violet-500 to-purple-600",
-  "from-teal-400 via-emerald-500 to-green-600",
-];
-const pickGradient = (catIndex: number, idx: number) =>
-  gradientPalette[(catIndex * 3 + idx) % gradientPalette.length];
-
-// Build a flat list with category metadata
-const allTools: Tool[] = toolCategories.flatMap((cat, catIndex) =>
-  cat.tools.map((t, idx) => ({
-    ...t,
-    category: cat.title,
-    categoryIcon: cat.icon,
-    catIndex,
-    idx,
-  }))
-);
-
-const FAV_KEY = "depai_tool_favorites";
-const RECENT_KEY = "depai_tool_recent";
-
-function readSet(key: string): string[] {
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : [];
-  } catch {
-    return [];
-  }
+const tools = [...getAllTools()].sort((a, b) => {
+  const ai = featured.indexOf(a.slug), bi = featured.indexOf(b.slug);
+  return (ai < 0 ? featured.length : ai) - (bi < 0 ? featured.length : bi);
+});
+function readList(key: string): string[] {
+  try { const value: unknown = JSON.parse(localStorage.getItem(key) ?? "[]"); return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : []; } catch { return []; }
 }
-
-
-const ToolCard = ({
-  tool,
-  isFav,
-  onToggleFav,
-  onOpen,
-}: {
-  tool: Tool;
-  isFav: boolean;
-  onToggleFav: (href: string) => void;
-  onOpen: (href: string) => void;
-}) => {
-  const grad = pickGradient(tool.catIndex, tool.idx);
-  return (
-    <Link
-      to={tool.href}
-      onClick={() => onOpen(tool.href)}
-      className="group relative block rounded-[16px] p-[1px] bg-gradient-to-br from-white/40 via-white/10 to-white/5 dark:from-white/15 dark:via-white/5 dark:to-white/0 hover:from-blue-400/60 hover:via-purple-400/40 hover:to-cyan-400/60 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
-    >
-      <div className="relative h-full rounded-[14px] bg-white/70 dark:bg-slate-900/60 backdrop-blur-2xl backdrop-saturate-150 p-3 overflow-hidden border border-white/40 dark:border-white/5 shadow-[0_4px_16px_-8px_rgba(15,23,42,0.12)] dark:shadow-[0_4px_16px_-8px_rgba(0,0,0,0.5)] group-hover:shadow-[0_12px_30px_-12px_rgba(59,130,246,0.35)] dark:group-hover:shadow-[0_12px_30px_-12px_rgba(99,102,241,0.45)] transition-all duration-300">
-        <div className={`pointer-events-none absolute -top-10 -right-10 w-24 h-24 rounded-full bg-gradient-to-br ${grad} opacity-0 group-hover:opacity-25 dark:group-hover:opacity-35 blur-2xl transition-opacity duration-300`} />
-        <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.5),transparent_50%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.06),transparent_50%)]" />
-
-        {/* Favorite star */}
-        <button
-          type="button"
-          aria-label={isFav ? "Remove from favorites" : "Add to favorites"}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onToggleFav(tool.href);
-          }}
-          className="absolute top-2 left-2 z-10 w-6 h-6 rounded-full flex items-center justify-center bg-white/60 dark:bg-slate-800/60 backdrop-blur border border-white/40 dark:border-white/10 opacity-0 group-hover:opacity-100 data-[active=true]:opacity-100 hover:scale-110 transition-all duration-300"
-          data-active={isFav}
-        >
-          <Star
-            className={`w-3 h-3 transition-colors ${isFav ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`}
-            strokeWidth={2.2}
-          />
-        </button>
-
-        {tool.ai && (
-          <div className="absolute top-2 right-2 z-10">
-            <AIBadge variant="inline" glow={false} />
-          </div>
-        )}
-
-        <div className="relative flex flex-col h-full">
-          <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${grad} flex items-center justify-center shadow-md shadow-black/10 group-hover:shadow-lg group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 mb-2 ring-1 ring-white/40 dark:ring-white/10`}>
-            <tool.icon className="w-4 h-4 text-white drop-shadow" strokeWidth={2.2} />
-          </div>
-
-          <h4 className="font-display font-semibold text-sm leading-tight text-foreground group-hover:text-primary transition-colors duration-300 mb-0.5">
-            {tool.title}
-          </h4>
-          <p className="text-[11px] text-muted-foreground leading-snug line-clamp-2 mb-2">
-            {tool.description}
-          </p>
-
-          <div className="mt-auto flex items-center justify-between">
-            <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300">
-              Open
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-              </svg>
-            </span>
-            <div className={`w-1 h-1 rounded-full bg-gradient-to-br ${grad} opacity-60 group-hover:opacity-100 group-hover:scale-150 transition-all duration-300`} />
-          </div>
-        </div>
-      </div>
-    </Link>
-  );
-};
-
-
 const PopularTools = () => {
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState<(typeof categories)[number]["value"]>("all");
   const [favorites, setFavorites] = useState<string[]>([]);
   const [recent, setRecent] = useState<string[]>([]);
-
-  useEffect(() => {
-    setFavorites(readSet(FAV_KEY));
-    setRecent(readSet(RECENT_KEY));
-  }, []);
-
-  const toggleFav = (href: string) => {
-    setFavorites((prev) => {
-      const next = prev.includes(href) ? prev.filter((h) => h !== href) : [href, ...prev];
-      try {
-        localStorage.setItem(FAV_KEY, JSON.stringify(next));
-      } catch {}
-      return next;
-    });
+  useEffect(() => { setFavorites(readList("depai_tool_favorites")); setRecent(readList("depai_tool_recent")); }, []);
+  const save = (key: string, values: string[]) => { try { localStorage.setItem(key, JSON.stringify(values)); } catch {} };
+  const toggleFavorite = (slug: string) => {
+    const next = favorites.includes(slug) ? favorites.filter(value => value !== slug) : [...favorites, slug];
+    setFavorites(next); save("depai_tool_favorites", next);
   };
-
-  const onOpen = (href: string) => {
-    setRecent((prev) => {
-      const next = [href, ...prev.filter((h) => h !== href)].slice(0, 12);
-      try {
-        localStorage.setItem(RECENT_KEY, JSON.stringify(next));
-      } catch {}
-      return next;
-    });
-  };
-
-  const normalizedQuery = search.trim().toLowerCase();
-
-  const filtered = useMemo(() => {
-    if (!normalizedQuery) return allTools;
-    return allTools.filter(
-      (t) =>
-        t.title.toLowerCase().includes(normalizedQuery) ||
-        t.description.toLowerCase().includes(normalizedQuery) ||
-        t.category.toLowerCase().includes(normalizedQuery)
-    );
-  }, [normalizedQuery]);
-
-  const isFlatView = normalizedQuery.length > 0;
-
-
+  const open = (slug: string) => { const next = [slug, ...recent.filter(value => value !== slug)].slice(0, 12); setRecent(next); save("depai_tool_recent", next); };
+  const filtered = useMemo(() => tools.filter(tool => {
+    const matchesCategory = category === "all" || (category === "favorites" ? favorites.includes(tool.slug) : category === "recent" ? recent.includes(tool.slug) : tool.category === category);
+    const query = search.trim().toLowerCase();
+    return matchesCategory && `${tool.name} ${tool.short}`.toLowerCase().includes(query);
+  }), [search, category, favorites, recent]);
   return (
-    <section id="tools" className="py-20 px-6 max-w-7xl mx-auto">
-      <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 mb-4">
-          <Star className="w-5 h-5 text-brand-ai" />
-          <span className="text-brand-ai font-display font-medium text-sm uppercase tracking-wider">
-            Complete Toolkit
-          </span>
-        </div>
-        <h2 className="font-display font-bold text-4xl md:text-5xl text-foreground mb-4 tracking-tight">
-          All {TOOL_COUNT_LABEL} Tools You Need
-        </h2>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Search, filter and pin favorites across PDF, Image, Document & Smart categories.
-        </p>
+    <section id="tools" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-10 sm:px-8 sm:py-12" aria-labelledby="tools-heading">
+      <div className="mb-6 flex flex-col justify-between gap-5 md:flex-row md:items-center">
+        <div><h2 id="tools-heading" className="font-display text-2xl font-bold sm:text-3xl">What do you need to do?</h2><p className="mt-2 text-sm text-muted-foreground">PDFs, images and everyday documents.</p></div>
+        <div className="relative w-full md:w-80"><Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" /><Input aria-label="Search tools" placeholder="Search tools…" value={search} onChange={event => setSearch(event.target.value)} className="h-10 rounded-lg bg-card pl-10 pr-10" />{search && <Button variant="ghost" size="icon-xs" aria-label="Clear search" className="absolute right-2 top-2" onClick={() => setSearch("")}><X /></Button>}</div>
       </div>
-
-      {/* Search bar */}
-      <div className="max-w-2xl mx-auto mb-6">
-        <div className="relative group">
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-cyan-500/30 opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity duration-300" />
-          <div className="relative flex items-center rounded-2xl bg-white/70 dark:bg-slate-900/60 backdrop-blur-2xl backdrop-saturate-150 border border-white/40 dark:border-white/10 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.15)] dark:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.6)] transition-all duration-300 focus-within:border-primary/40">
-            <Search className="ml-4 w-4 h-4 text-muted-foreground" />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search tools — try 'compress', 'word', 'ocr'…"
-              aria-label="Search tools"
-              className="flex-1 bg-transparent px-3 py-3.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
-            />
-            {search && (
-              <button
-                type="button"
-                onClick={() => setSearch("")}
-                aria-label="Clear search"
-                className="mr-2 w-7 h-7 rounded-full flex items-center justify-center hover:bg-muted/70 transition-colors duration-300"
-              >
-                <X className="w-3.5 h-3.5 text-muted-foreground" />
-              </button>
-            )}
-          </div>
-        </div>
+      <div className="mb-6 flex flex-wrap gap-2" role="group" aria-label="Tool categories">{categories.map(item => <Button key={item.value} size="sm" variant={category === item.value ? "default" : "ghost"} aria-pressed={category === item.value} onClick={() => setCategory(item.value)} className="rounded-lg px-3">{item.label}</Button>)}</div>
+      <p className="mb-4 text-xs text-muted-foreground" aria-live="polite">{filtered.length} tools{category === "all" && !search ? " · Popular choices first" : " found"}</p>
+      <div className="grid grid-cols-1 gap-3 min-[400px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {filtered.map((tool: ToolMeta) => {
+          const Icon = tool.slug === "/merge" ? Merge : tool.slug === "/split" ? Scissors : tool.slug === "/compress" ? Minimize2 : icons[tool.category] ?? FileText;
+          const isFav = favorites.includes(tool.slug);
+          return <article key={tool.slug} className="group relative rounded-lg border border-border bg-card/80 transition-colors hover:border-primary/50">
+            <Link to={tool.slug} onClick={() => open(tool.slug)} className="block h-full rounded-lg p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <div className={`mb-4 flex h-10 w-10 items-center justify-center rounded-lg ${colors[tool.category]}`}><Icon className="h-5 w-5" /></div>
+              <h3 className="pr-2 font-display text-base font-semibold group-hover:text-primary">{tool.name}</h3>
+              <p className="mt-2 line-clamp-2 min-h-10 text-sm leading-5 text-muted-foreground">{summaries[tool.slug] ?? tool.short}</p>
+              <span className="mt-4 flex items-center gap-2 text-xs font-medium text-primary">Open tool<ArrowRight className="h-3 w-3" /></span>
+            </Link>
+            <Button variant="ghost" size="icon-sm" aria-label={`${isFav ? "Remove" : "Add"} ${tool.name} ${isFav ? "from" : "to"} favorites`} aria-pressed={isFav} title={isFav ? "Remove from favorites" : "Add to favorites"} onClick={() => toggleFavorite(tool.slug)} className="absolute right-3 top-3 rounded-lg"><Star className={isFav ? "fill-brand-orange text-brand-orange" : "text-muted-foreground"} /></Button>
+          </article>;
+        })}
       </div>
-
-
-
-      {/* Flat results view */}
-      {isFlatView ? (
-        filtered.length === 0 ? (
-          <div className="text-center py-20">
-            <div className="inline-flex w-16 h-16 rounded-2xl bg-muted/60 backdrop-blur items-center justify-center mb-4">
-              <Search className="w-7 h-7 text-muted-foreground" />
-            </div>
-            <h3 className="font-display font-semibold text-xl text-foreground mb-2">No tools found</h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              Try a different keyword or clear the filters.
-            </p>
-            <button
-              type="button"
-              onClick={() => setSearch("")}
-              className="text-sm font-semibold text-primary hover:underline"
-            >
-              Reset filters
-            </button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 animate-fade-in-up">
-            {filtered.map((tool) => (
-              <ToolCard
-                key={tool.href + tool.title}
-                tool={tool}
-                isFav={favorites.includes(tool.href)}
-                onToggleFav={toggleFav}
-                onOpen={onOpen}
-              />
-            ))}
-          </div>
-        )
-      ) : (
-        // Grouped by category view (default)
-        <div className="space-y-14">
-          {toolCategories.map((category, catIndex) => (
-            <div key={catIndex} className="animate-fade-in-up" style={{ animationDelay: `${catIndex * 0.06}s` }}>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                  <category.icon className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="font-display font-semibold text-xl md:text-2xl text-foreground tracking-tight">
-                  {category.title}
-                </h3>
-                <span className="text-xs font-medium text-muted-foreground bg-muted/60 backdrop-blur px-2.5 py-1 rounded-full border border-border/50">
-                  {category.tools.length} tools
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-                {category.tools.map((tool, index) => {
-                  const flat = allTools.find(
-                    (t) => t.href === tool.href && t.title === tool.title
-                  )!;
-                  return (
-                    <ToolCard
-                      key={index}
-                      tool={flat}
-                      isFav={favorites.includes(tool.href)}
-                      onToggleFav={toggleFav}
-                      onOpen={onOpen}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      {filtered.length === 0 && <div className="py-12 text-center"><Search className="mx-auto mb-4 h-6 w-6 text-muted-foreground" /><h3 className="font-display text-lg font-semibold">{category === "favorites" ? "No favorites yet" : category === "recent" ? "No recent tools" : "No matching tools"}</h3><Button variant="link" onClick={() => { setCategory("all"); setSearch(""); }}>View all tools</Button></div>}
     </section>
   );
 };
-
 export default PopularTools;
