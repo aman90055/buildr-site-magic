@@ -27,7 +27,7 @@ const Index = () => {
       </Helmet>
       <div className="home-workspace min-h-screen">
         <Header />
-        <main>
+        <main className="pt-[70px]">
           <Hero />
           <PopularTools />
           <HomeContent />
