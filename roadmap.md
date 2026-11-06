@@ -1,4 +1,6 @@
 # Current tasks
+- [ ] Redesign the homepage with readable headings, an accurate searchable tool catalogue and concise privacy information.
+- [ ] Verify homepage links, search, favorites and mobile/tablet/laptop layouts.
 - [x] Replace repetitive tool guides with concise, tool-specific instructions and honest limitations.
 - [x] Correct FAQ/privacy claims about cloud storage, AI processing and unverified benefits.
 - [x] Check 75 tool routes and four information pages on desktop/mobile; nine regression tests passed, no page errors or horizontal overflow. Invoice downloads verified; not every processing feature was retested.
