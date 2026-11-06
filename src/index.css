@@ -131,6 +131,30 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
+
+  .home-workspace {
+    --primary: 215 85% 45%;
+    --ring: 215 85% 45%;
+    --color-blue: 215 85% 45%;
+    --color-cyan: 188 85% 32%;
+    --color-green: 158 65% 32%;
+    --color-orange: 25 85% 42%;
+    --color-purple: 268 60% 48%;
+    --color-pink: 335 65% 44%;
+    letter-spacing: 0;
+  }
+
+  .dark .home-workspace {
+    --primary: 210 95% 70%;
+    --primary-foreground: 230 35% 8%;
+    --ring: 210 95% 70%;
+    --color-blue: 210 95% 70%;
+    --color-cyan: 188 85% 65%;
+    --color-green: 158 65% 60%;
+    --color-orange: 25 85% 65%;
+    --color-purple: 268 65% 75%;
+    --color-pink: 335 75% 72%;
+  }
 }
 
 @layer utilities {

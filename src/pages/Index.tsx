@@ -2,18 +2,10 @@ import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import PopularTools from "@/components/PopularTools";
-import Features from "@/components/Features";
-import Stats from "@/components/Stats";
-import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
-import HomeSections from "@/components/HomeSections";
 import HomeContent from "@/components/HomeContent";
 import AdSlot from "@/components/ads/AdSlot";
 import { AD_SLOTS } from "@/lib/adSlots";
-import AnimatedStatsSection from "@/components/AnimatedStatsSection";
-import PromoCards from "@/components/ads/PromoCards";
-import WorkflowStrip from "@/components/WorkflowStrip";
-import PricingSection from "@/components/PricingSection";
 
 
 const Index = () => {
@@ -33,23 +25,14 @@ const Index = () => {
         <meta name="twitter:title" content="Free PDF Tools Online — Merge, Split & Compress | Docunova" />
         <meta name="twitter:description" content="Merge, split, compress and convert PDFs in your browser for free, with no sign-in and no file-size cap. Also includes OCR, image tools and AI helpers." />
       </Helmet>
-      <div className="min-h-screen">
+      <div className="home-workspace min-h-screen">
         <Header />
         <main>
           <Hero />
-          <WorkflowStrip />
           <PopularTools />
-          <AnimatedStatsSection />
-          <Features />
-          <PricingSection />
-          <PromoCards className="py-12" location="home_features" />
-          <HomeSections />
           <HomeContent />
           <AdSlot config={AD_SLOTS.midContent} className="max-w-5xl mx-auto px-4 py-6" />
-          <Stats />
           <AdSlot config={AD_SLOTS.footer} className="max-w-5xl mx-auto px-4 py-6" />
-
-          <CTA />
         </main>
         <Footer />
       </div>
