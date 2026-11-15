@@ -1,4 +1,6 @@
 # Current tasks
+- [ ] Add the uploaded UPI QR to the donation option and verify it on phone and laptop.
+- [ ] Research audience communities/directories and deliver tailored drafts without posting or activating ads.
 - [x] Redesign the homepage with readable headings, an accurate searchable tool catalogue and concise privacy information.
 - [x] Verify homepage links, search, persistent favorites and mobile/tablet/laptop layouts; public Start Free and access tests passed. Not published.
 - [x] Replace repetitive tool guides with concise, tool-specific instructions and honest limitations.
