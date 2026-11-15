@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Star, Heart, Coffee } from "lucide-react";
 import ToolSEOSection from "@/components/ToolSEOSection";
 import ToolHead from "@/components/ToolHead";
+import DonationDialog from "@/components/DonationDialog";
 
 const Footer = () => {
   return (
@@ -40,12 +41,7 @@ const Footer = () => {
                 >
                   <Coffee className="w-3.5 h-3.5" /> Buy Me a Coffee
                 </a>
-                <a
-                  href="upi://pay?pa=amanvishwakarma@upi&pn=Aman%20Vishwakarma&cu=INR"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 transition-opacity"
-                >
-                  ₹ UPI Donate
-                </a>
+                <DonationDialog />
               </div>
             </div>
             
