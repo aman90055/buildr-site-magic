@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import GoogleAdsTracker from "@/components/GoogleAdsTracker";
 import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "next-themes";
@@ -134,16 +134,9 @@ const AIUsage = lazy(() => import("./pages/legal/AIUsage"));
 const Accessibility = lazy(() => import("./pages/legal/Accessibility"));
 const Brand = lazy(() => import("./pages/Brand"));
 const Press = lazy(() => import("./pages/Press"));
-const Enterprise = lazy(() => import("./pages/Enterprise"));
-const ApiDocs = lazy(() => import("./pages/ApiDocs"));
 const Workspace = lazy(() => import("./pages/Workspace"));
 const AIHub = lazy(() => import("./pages/AIHub"));
 const AITool = lazy(() => import("./pages/AITool"));
-const Integrations = lazy(() => import("./pages/Integrations"));
-const Growth = lazy(() => import("./pages/Growth"));
-const SocialKit = lazy(() => import("./pages/SocialKit"));
-const Careers = lazy(() => import("./pages/Careers"));
-const Internships = lazy(() => import("./pages/Internships"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const CaseStudies = lazy(() => import("./pages/CaseStudies"));
 const FileProcessing = lazy(() => import("./pages/FileProcessing"));
@@ -291,16 +284,16 @@ const App = () => (
                 <Route path="/newsletter" element={<Newsletter />} />
                 <Route path="/brand" element={<Brand />} />
                 <Route path="/press" element={<Press />} />
-                <Route path="/enterprise" element={<Enterprise />} />
-                <Route path="/api-docs" element={<ApiDocs />} />
+                <Route path="/enterprise" element={<Navigate to="/contact" replace />} />
+                <Route path="/api-docs" element={<Navigate to="/help" replace />} />
                 <Route path="/workspace" element={<Workspace />} />
                 <Route path="/ai-hub" element={<AIHub />} />
                 <Route path="/ai/:slug" element={<AITool />} />
-                <Route path="/integrations" element={<Integrations />} />
-                <Route path="/growth" element={<Growth />} />
-                <Route path="/social-kit" element={<SocialKit />} />
-                <Route path="/careers" element={<Careers />} />
-                <Route path="/internships" element={<Internships />} />
+                <Route path="/integrations" element={<Navigate to="/tools" replace />} />
+                <Route path="/growth" element={<Navigate to="/about" replace />} />
+                <Route path="/social-kit" element={<Navigate to="/about" replace />} />
+                <Route path="/careers" element={<Navigate to="/about" replace />} />
+                <Route path="/internships" element={<Navigate to="/about" replace />} />
                 <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/case-studies" element={<CaseStudies />} />
                 <Route path="/guides/how-to-edit-pdf-free" element={<GuideEditPDFFree />} />

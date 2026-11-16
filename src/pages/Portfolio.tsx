@@ -31,7 +31,7 @@ const projects = [
   {
     title: "Resume & Invoice Builder",
     tag: "Productivity",
-    desc: "Beautiful templates with one-click PDF export, used by 200,000+ professionals.",
+    desc: "Resume templates with one-click PDF export.",
     href: "/resume-builder",
     color: "from-brand-orange to-brand-purple",
   },

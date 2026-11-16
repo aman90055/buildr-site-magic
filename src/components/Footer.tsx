@@ -86,20 +86,12 @@ const Footer = () => {
               <li><Link to="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</Link></li>
               <li><Link to="/faq" className="text-muted-foreground hover:text-foreground transition-colors">FAQ</Link></li>
               <li><Link to="/help" className="text-muted-foreground hover:text-foreground transition-colors">Help Center</Link></li>
+              <li><Link to="/support" className="text-muted-foreground hover:text-foreground transition-colors">Support Chat</Link></li>
               <li><Link to="/roadmap" className="text-muted-foreground hover:text-foreground transition-colors">Roadmap</Link></li>
               <li><Link to="/changelog" className="text-muted-foreground hover:text-foreground transition-colors">Changelog</Link></li>
               <li><Link to="/newsletter" className="text-muted-foreground hover:text-foreground transition-colors">Newsletter</Link></li>
-              <li><Link to="/brand" className="text-muted-foreground hover:text-foreground transition-colors">Brand Kit</Link></li>
               <li><Link to="/press" className="text-muted-foreground hover:text-foreground transition-colors">Press</Link></li>
-              <li><Link to="/enterprise" className="text-muted-foreground hover:text-foreground transition-colors">Enterprise</Link></li>
-              <li><Link to="/api-docs" className="text-muted-foreground hover:text-foreground transition-colors">Developer API</Link></li>
-              <li><Link to="/workspace" className="text-muted-foreground hover:text-foreground transition-colors">Cloud Workspace</Link></li>
               <li><Link to="/ai-hub" className="text-muted-foreground hover:text-foreground transition-colors">AI Ecosystem</Link></li>
-              <li><Link to="/integrations" className="text-muted-foreground hover:text-foreground transition-colors">Integrations</Link></li>
-              <li><Link to="/growth" className="text-muted-foreground hover:text-foreground transition-colors">Growth Programs</Link></li>
-              <li><Link to="/social-kit" className="text-muted-foreground hover:text-foreground transition-colors">Social Kit</Link></li>
-              <li><Link to="/careers" className="text-muted-foreground hover:text-foreground transition-colors">Careers</Link></li>
-              <li><Link to="/internships" className="text-muted-foreground hover:text-foreground transition-colors">Internships</Link></li>
               <li><Link to="/portfolio" className="text-muted-foreground hover:text-foreground transition-colors">Portfolio</Link></li>
               <li><Link to="/case-studies" className="text-muted-foreground hover:text-foreground transition-colors">Use Cases</Link></li>
               <li><Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</Link></li>
