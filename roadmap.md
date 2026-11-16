@@ -1,5 +1,5 @@
 # Current tasks
-- [x] Add the uploaded UPI QR and matching decoded recipient to the donation dialog; tests passed and phone/laptop display verified using the actual hosting asset (local Vite lacks the asset endpoint). No real payment sent; not published.
+- [x] Donation UPI ID changed to the owner-provided ID; QR now generated from the same setting. No real payment sent; not published.
 - [x] Research audience communities/directories and save four tailored draft packages with rules and blocked destinations. No posting or ad activation.
 - [x] Redesign the homepage with readable headings, an accurate searchable tool catalogue and concise privacy information.
 - [x] Verify homepage links, search, persistent favorites and mobile/tablet/laptop layouts; public Start Free and access tests passed. Not published.

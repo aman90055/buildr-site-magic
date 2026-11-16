@@ -1,5 +1,5 @@
 # Project rules
-- Donation deep links and recipient labels use the QR-decoded shared donation configuration; why: the displayed QR and payment button must never send donors to different recipients.
+- The donation QR is generated in the browser from the shared donation configuration that also drives the UPI link and displayed ID; why: the displayed QR and payment button must never send donors to different recipients.
 - Each `usePremium` instance uses a unique Realtime channel and a stable user-ID dependency to prevent shared subscriptions from crashing signed-in pages.
 - Office imports/exports use lazy browser libraries in shared modules; PDF password operations and image-page rebuilds use `pdfWorker.run()` to keep processing local and responsive.
 - Homepage primary PDF calls to action use the shared public entry point in `src/lib/homeAccess.ts` so marketing cannot accidentally introduce a sign-in gate.
