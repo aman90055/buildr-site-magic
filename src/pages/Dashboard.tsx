@@ -49,8 +49,8 @@ const POPULAR_TOOLS = [
   { slug: "/compress", label: "Compress PDF", icon: FileDown },
   { slug: "/convert", label: "Convert PDF", icon: FileImage },
   { slug: "/ocr", label: "OCR", icon: ScanText },
-  { slug: "/protect", label: "Protect PDF", icon: Lock },
-  { slug: "/edit", label: "Edit PDF", icon: Pencil },
+  { slug: "/protect-pdf", label: "Protect PDF", icon: Lock },
+  { slug: "/edit-pdf", label: "Edit PDF", icon: Pencil },
   { slug: "/image-to-pdf", label: "Image to PDF", icon: ImageIcon },
 ];
 
