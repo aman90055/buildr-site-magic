@@ -1,4 +1,4 @@
-/** The recipient and deep link decoded from the owner's supplied QR. */
-export const DONATION_UPI_ID = "7905970907@ybl";
+/** Single source for the donation recipient; the on-screen QR is generated from DONATION_UPI_LINK. */
+export const DONATION_UPI_ID = "Docu2026@nyes";
 export const DONATION_RECIPIENT = "AMAN VISHWAKARMA";
-export const DONATION_UPI_LINK = "upi://pay?pa=7905970907@ybl&pn=AMAN%20VISHWAKARMA&mc=0000&mode=02&purpose=00";
+export const DONATION_UPI_LINK = `upi://pay?pa=${DONATION_UPI_ID}&pn=${encodeURIComponent(DONATION_RECIPIENT)}&cu=INR`;
