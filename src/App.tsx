@@ -290,7 +290,7 @@ const App = () => (
                 <Route path="/ai-hub" element={<AIHub />} />
                 <Route path="/ai/:slug" element={<AITool />} />
                 <Route path="/integrations" element={<Navigate to="/tools" replace />} />
-                <Route path="/growth" element={<Navigate to="/refer" replace />} />
+                <Route path="/growth" element={<Navigate to="/about" replace />} />
                 <Route path="/social-kit" element={<Navigate to="/about" replace />} />
                 <Route path="/careers" element={<Navigate to="/about" replace />} />
                 <Route path="/internships" element={<Navigate to="/about" replace />} />
