@@ -59,8 +59,8 @@ const faqs = [
     a: "No account is required for editing. Sign-up is only needed if you want to save projects to the cloud or use premium AI features.",
   },
   {
-    q: "How does Docunova AI compare to Adobe Acrobat and iLovePDF?",
-    a: "Unlike Adobe Acrobat, Docunova AI is completely free with no watermarks or trial limits. Unlike iLovePDF, we don't cap free users at 3 files a day or 100 MB — everything is unlimited and no signup is required.",
+    q: "How does Docunova AI compare to other PDF editors?",
+    a: "Docunova's PDF tools are free, add no watermark and don't need an account. Other services change their free limits often, so check their current pricing pages before comparing.",
   },
 ];
 
@@ -75,7 +75,7 @@ const GuideEditPDFFree = () => {
         />
         <link rel="canonical" href={url} />
         <meta property="og:title" content="How to Edit PDF for Free Online (2026 Guide) — No Software, No Signup" />
-        <meta property="og:description" content="Edit any PDF in your browser in 30 seconds. No downloads, no signup, unlimited file size. Compared with Adobe, iLovePDF, and Smallpdf." />
+        <meta property="og:description" content="Edit PDFs in your browser: add text, images and signatures. No download or sign-in needed." />
         <meta property="og:url" content={url} />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -126,7 +126,7 @@ const GuideEditPDFFree = () => {
               <p className="text-lg text-muted-foreground">
                 A step-by-step guide for anyone who needs to change text, add images,
                 fill forms, or reorder pages in a PDF — using only a web browser.
-                Updated for 2026 with a full comparison of the best free PDF editors.
+                Includes tips for scanned PDFs, phones and privacy.
               </p>
               <div className="flex flex-wrap gap-3 mt-6">
                 <Button asChild size="lg">
@@ -135,7 +135,7 @@ const GuideEditPDFFree = () => {
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <a href="#compare">See how it compares</a>
+                  <a href="#privacy">Is it private?</a>
                 </Button>
               </div>
               <div className="flex flex-wrap gap-4 mt-6 text-sm text-muted-foreground">
@@ -155,7 +155,6 @@ const GuideEditPDFFree = () => {
                   <li><a href="#what-you-can-edit" className="hover:text-foreground">What you can edit in a PDF</a></li>
                   <li><a href="#scanned" className="hover:text-foreground">Editing a scanned (image-based) PDF</a></li>
                   <li><a href="#mobile" className="hover:text-foreground">Editing PDFs on mobile</a></li>
-                  <li><a href="#compare" className="hover:text-foreground">Docunova AI vs Adobe, iLovePDF, Smallpdf</a></li>
                   <li><a href="#privacy" className="hover:text-foreground">Privacy — is it safe?</a></li>
                   <li><a href="#faq" className="hover:text-foreground">FAQ</a></li>
                 </ol>
@@ -177,7 +176,7 @@ const GuideEditPDFFree = () => {
               <ul>
                 <li><strong>Nothing to install.</strong> Open a URL and you're editing.</li>
                 <li><strong>Works on any device.</strong> Windows, macOS, Linux, ChromeOS, Android, iOS — same interface.</li>
-                <li><strong>Private by default.</strong> Tools like Docunova AI process files client-side, so your PDF never leaves your device.</li>
+                <li><strong>Private by default.</strong> Docunova's PDF editor opens and changes your file inside the browser tab.</li>
               </ul>
               <p>
                 Search demand backs this up: Google sees more than <strong>90,500 monthly searches</strong> for
@@ -234,9 +233,9 @@ const GuideEditPDFFree = () => {
               <p>
                 A scanned PDF isn't actually text — it's a photo of a page. To edit
                 one, run it through <Link to="/ocr" className="text-primary underline">Docunova AI OCR</Link> first.
-                Our OCR reads 100+ languages including Hindi, Marathi, Tamil, Arabic,
-                and Chinese, and returns real editable text that stays reliable on clean
-                scans. Then open the OCR'd file in the editor and edit like any other PDF.
+                It works best on clean, printed scans in English and Hindi; check the result
+                carefully for other scripts and handwriting. The page image is sent to an
+                online AI service for reading. Then open the OCR'd file in the editor and edit like any other PDF.
               </p>
             </section>
 
@@ -257,45 +256,6 @@ const GuideEditPDFFree = () => {
               </div>
             </section>
 
-            <section id="compare" className="mb-12">
-              <h2 className="text-3xl font-bold mb-6">Docunova AI vs Adobe, iLovePDF, and Smallpdf</h2>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm border-collapse">
-                  <thead>
-                    <tr className="border-b">
-                      <th className="text-left p-3">Feature</th>
-                      <th className="p-3">Docunova AI</th>
-                      <th className="p-3">Adobe Acrobat</th>
-                      <th className="p-3">iLovePDF</th>
-                      <th className="p-3">Smallpdf</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-muted-foreground">
-                    {[
-                      ["Price (free tier)", "Free forever", "7-day trial", "Free w/ limits", "Free w/ limits"],
-                      ["Signup required", "No", "Yes", "No (limited)", "Yes"],
-                      ["File-size limit", "Unlimited", "Unlimited", "100 MB free", "5 MB free"],
-                      ["Files per day (free)", "Unlimited", "N/A", "3–5", "2"],
-                      ["Watermarks on free", "None", "None", "None", "None on edit"],
-                      ["Client-side processing", "Yes (private)", "No", "No", "No"],
-                      ["AI features", "OCR, translate, summarize", "AI Assistant $$", "Limited", "Limited"],
-                      ["Works offline (PWA)", "Yes", "Desktop app", "No", "No"],
-                    ].map(([feat, ...cells], i) => (
-                      <tr key={i} className="border-b">
-                        <td className="p-3 font-medium text-foreground">{feat}</td>
-                        {cells.map((c, j) => (
-                          <td key={j} className={`p-3 text-center ${j === 0 ? "text-foreground font-semibold" : ""}`}>{c}</td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <p className="text-xs text-muted-foreground mt-3">
-                Comparison based on publicly published feature pages of each service, July 2026.
-              </p>
-            </section>
-
             <section id="privacy" className="prose prose-lg dark:prose-invert max-w-none mb-12">
               <h2>Privacy — is it safe to edit PDFs online?</h2>
               <p>
@@ -303,14 +263,13 @@ const GuideEditPDFFree = () => {
                 a confidential contract, tax return, or medical form, that's a real
                 concern. Docunova AI is built on <strong>client-side processing</strong> using
                 libraries like pdf.js and pdf-lib — your file is opened, modified, and
-                saved entirely inside your browser tab. Nothing is uploaded to us for
-                editing, and there's no server-side copy to leak.
+                saved entirely inside your browser tab. The editor itself does not upload your file.
               </p>
               <p>
                 The exceptions are AI-specific features (translate, summarize, OCR),
-                which do send the document to our AI Gateway because the model itself
-                runs server-side. Those requests are TLS-encrypted, never stored, and
-                covered by our{" "}
+                which send your content to an online AI service because the model runs
+                there. If you are signed in, some tools (such as Merge, Split and Compress)
+                also save the finished PDF to your private account storage. Details are in our{" "}
                 <Link to="/privacy" className="text-primary underline">Privacy Policy</Link>.
               </p>
             </section>

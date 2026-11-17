@@ -547,9 +547,9 @@ export const TOOL_SEO: Record<string, ToolSeo> = {
     ],
   ),
   "/ai-translator": T(
-    "Translate text into 100+ languages",
-    "AI Translator — 100+ Languages Free",
-    "Translate text between more than a hundred languages with natural phrasing, dictate input by voice and hear the result read aloud.",
+    "Translate text between many languages",
+    "AI Translator — Free Online Text Translation",
+    "Translate text between many common languages with natural phrasing, dictate input by voice and hear the result read aloud.",
     [
       "Translation is model-based rather than word-by-word, so idioms and tone survive far better than in a dictionary lookup.",
       "Voice input and a speak button are built in, which helps when checking pronunciation.",

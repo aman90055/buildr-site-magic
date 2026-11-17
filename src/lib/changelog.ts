@@ -18,6 +18,8 @@ export const CHANGELOG: ChangelogEntry[] = [
       "Donate dialog now shows a UPI QR code built from the same UPI ID shown beside it, so the code and the ID always match.",
       "Removed placeholder pages for an unreleased developer API, integrations marked \"coming soon\", partner programmes and job listings. Old links now open the closest real page.",
       "Fixed dashboard shortcuts that pointed to missing Protect PDF and Edit PDF pages.",
+      "Removed star ratings that did not come from real reviews, plus figures we could not back up such as \"100+ languages\", \"up to 90% smaller\" and a competitor comparison table.",
+      "Workspace page no longer advertises shared folders, version history or share links, which do not exist yet.",
       "This changelog and the roadmap were rewritten to list only real, dated changes.",
     ],
   },

@@ -41,7 +41,7 @@ export default function Workspace() {
       <Helmet>
         <meta name="robots" content="noindex, follow" />
         <title>Cloud Workspace — The Docunova AI Suite</title>
-        <meta name="description" content="Your private cloud workspace: recent files, shared folders, version history, and expiring share links." />
+        <meta name="description" content="Your recent PDF results saved while signed in." />
         <link rel="canonical" href="https://docunova.online/workspace" />
       </Helmet>
       <Header />
@@ -49,15 +49,9 @@ export default function Workspace() {
         <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
           <div>
             <h1 className="text-3xl md:text-4xl font-bold mb-2">Cloud Workspace</h1>
-            <p className="text-muted-foreground">Your recent files, shared folders, and secure share links.</p>
+            <p className="text-muted-foreground">Recent PDF results saved to your private account storage while you were signed in.</p>
           </div>
           <Button asChild><Link to="/dashboard">Open dashboard <ArrowRight className="w-4 h-4 ml-2" /></Link></Button>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-4 mb-10">
-          <Card className="p-5"><Folder className="w-5 h-5 text-primary mb-2" /><h3 className="font-semibold">Shared folders</h3><p className="text-sm text-muted-foreground">Group related files and invite teammates.</p></Card>
-          <Card className="p-5"><Clock className="w-5 h-5 text-primary mb-2" /><h3 className="font-semibold">Version history</h3><p className="text-sm text-muted-foreground">Restore any previous version from the last 30 days.</p></Card>
-          <Card className="p-5"><Share2 className="w-5 h-5 text-primary mb-2" /><h3 className="font-semibold">Expiring share links</h3><p className="text-sm text-muted-foreground">Password-protected links with auto-expiry.</p></Card>
         </div>
 
         <h2 className="text-xl font-semibold mb-4">Recent files</h2>

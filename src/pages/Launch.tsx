@@ -29,10 +29,10 @@ import {
 const url = "https://docunova.online/launch";
 
 const highlights = [
-  { icon: Sparkles, title: "100+ AI-powered tools", body: "PDF, image, document, and AI utilities in one suite." },
+  { icon: Sparkles, title: "PDF, image and AI tools", body: "Merge, split, compress, convert and more, in one place." },
   { icon: Shield, title: "Private by default", body: "Files are processed in your browser — nothing uploaded for most tools." },
-  { icon: Zap, title: "No limits, no signup", body: "Unlimited file size, no daily quota, no 'upgrade to continue' walls." },
-  { icon: Globe, title: "100+ languages", body: "AI translator, OCR, and voice input support Hindi, English, Spanish, Arabic, and more." },
+  { icon: Zap, title: "No sign-in for PDF tools", body: "Merge, split and compress run in your browser without an account. AI tools have usage limits." },
+  { icon: Globe, title: "Hindi and English", body: "Image to Text works best on clean Hindi and English scans; the translator covers many common languages." },
   { icon: FileText, title: "Real edits, real output", body: "Merge, split, compress, OCR, sign, edit — all with real, downloadable results." },
   { icon: Rocket, title: "Built solo", body: "Made by an independent developer to prove great tools don't need a paywall." },
 ];
@@ -48,13 +48,13 @@ const Launch = () => {
     <>
       <Helmet>
         <meta name="robots" content="noindex, follow" />
-        <title>Docunova AI — Launch Day 🚀 100+ Free AI Document Tools, No Signup</title>
+        <title>Docunova — Free PDF Tools in Your Browser</title>
         <meta
           name="description"
-          content="We're launching Docunova AI — 100+ AI-powered PDF, image, and document tools. Free forever, no signup, no file-size limits. Try it in your browser."
+          content="Docunova: free PDF, image and AI tools. Merge, split and compress PDFs in your browser without signing in."
         />
         <link rel="canonical" href={url} />
-        <meta property="og:title" content="Docunova AI — 100+ Free AI Document Tools, No Signup 🚀" />
+        <meta property="og:title" content="Docunova — Free PDF Tools in Your Browser" />
         <meta property="og:description" content="Merge, edit, compress, OCR, translate — all free, all in your browser. Support our launch on Product Hunt." />
         <meta property="og:url" content={url} />
         <meta property="og:type" content="website" />
@@ -73,7 +73,7 @@ const Launch = () => {
                 Docunova AI is <span className="text-gradient-ai">live</span> 🎉
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-                100+ AI-powered document tools. Free forever. No signup. No limits.
+                Free PDF, image and AI tools. PDF basics need no sign-in.
                 Made for anyone tired of paywalls on basic PDF tasks.
               </p>
 
@@ -165,7 +165,7 @@ const Launch = () => {
                   { to: "/compress", label: "Compress PDF" },
                   { to: "/edit-pdf", label: "Edit PDF" },
                   { to: "/ocr", label: "OCR — Image to Text" },
-                  { to: "/ai/translate", label: "AI Translator (100+ langs)" },
+                  { to: "/ai/translate", label: "AI Translator" },
                   { to: "/sign-pdf", label: "Sign PDF" },
                   { to: "/image-to-pdf", label: "Image to PDF" },
                   { to: "/convert", label: "PDF ↔ Word / Excel / PPT" },
@@ -203,7 +203,7 @@ const Launch = () => {
                 <Button asChild variant="outline">
                   <a
                     href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                      "Just tried @DocunovaAI — 100+ free AI document tools, no signup, no file-size limit. Solid. https://docunova.online"
+                      "Just tried @DocunovaAI — free PDF tools that run in the browser, no sign-in needed to merge or compress. https://docunova.online"
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"

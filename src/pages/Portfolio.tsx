@@ -38,7 +38,7 @@ const projects = [
   {
     title: "Smart OCR",
     tag: "Computer Vision",
-    desc: "100+ language OCR with layout preservation and editable output.",
+    desc: "Read text from images and scans, with best results on clean Hindi and English pages.",
     href: "/ocr",
     color: "from-brand-cyan to-primary",
   },

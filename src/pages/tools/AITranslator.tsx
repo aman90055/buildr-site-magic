@@ -156,7 +156,7 @@ Input: "Hello" → Output: "नमस्ते"`;
       title="AI Translator"
       description="Translate text to any language while preserving meaning and context."
       metaTitle="AI Translator - Translate Text | PDF Tools"
-      metaDescription="Translate text to 100+ languages with AI. Save favorites and recent languages for quick access."
+      metaDescription="Translate text between many common languages with AI. Save favorites and recent languages for quick access."
       icon={Languages}
       gradient="from-blue-500 to-cyan-600"
       systemPrompt={systemPrompt}

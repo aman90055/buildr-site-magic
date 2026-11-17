@@ -127,8 +127,7 @@ const OCR = () => {
           "name": "Docunova AI OCR",
           "applicationCategory": "UtilitiesApplication",
           "operatingSystem": "Web",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-          "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "1240" }
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
         })}</script>
       </Helmet>
 

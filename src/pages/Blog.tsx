@@ -278,7 +278,7 @@ const Blog = () => {
     },
     {
       title: "PDF Se Text Extract Kaise Karein - OCR Free Tool (Hindi)",
-      excerpt: "Scanned PDF aur images se text extract karein - Hindi, English aur 100+ languages support.",
+      excerpt: "Scanned PDF aur images se text extract karein - Hindi aur English ke saaf scans ke liye.",
       date: "April 10, 2026",
       readTime: "5 min read",
       category: "Hindi",

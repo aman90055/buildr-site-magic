@@ -86,19 +86,19 @@ const PDFCompress = () => {
   return (
     <>
       <Helmet>
-        <title>Free AI PDF Compressor — Reduce PDF Size up to 90% | Docunova AI</title>
+        <title>Compress PDF Online Free — Smaller PDFs in Your Browser | Docunova</title>
         <meta
           name="description"
-          content="Compress PDF files online for free with AI. Reduce PDF size below 100 KB, 500 KB, or 1 MB without losing quality. No signup, no file-size limit, works in your browser."
+          content="Compress PDF files for free in your browser. Choose a lossless or stronger setting; size reduction varies by file. No sign-in needed."
         />
         <link rel="canonical" href="https://docunova.online/compress" />
-        <meta property="og:title" content="Free AI PDF Compressor — Reduce PDF Size up to 90%" />
-        <meta property="og:description" content="AI-powered PDF compression. Shrink PDFs to under 100 KB without losing quality. Free, unlimited, browser-based." />
+        <meta property="og:title" content="Compress PDF Online Free — Docunova" />
+        <meta property="og:description" content="Free PDF compression in your browser. Results vary by file; check quality before sharing." />
         <meta property="og:url" content="https://docunova.online/compress" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free AI PDF Compressor — Reduce PDF Size up to 90%" />
-        <meta name="twitter:description" content="Shrink PDFs without losing quality. Free & unlimited." />
+        <meta name="twitter:title" content="Compress PDF Online Free — Docunova" />
+        <meta name="twitter:description" content="Free PDF compression in your browser. Results vary by file." />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "HowTo",
@@ -117,8 +117,7 @@ const PDFCompress = () => {
           "name": "Docunova AI PDF Compressor",
           "applicationCategory": "UtilitiesApplication",
           "operatingSystem": "Web",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-          "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "2100" }
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
         })}</script>
       </Helmet>
 

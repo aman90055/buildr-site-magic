@@ -66,7 +66,7 @@ export default function Brand() {
         <section>
           <h2 className="text-2xl font-semibold mb-4">Voice & Tone</h2>
           <Card className="p-6 text-muted-foreground">
-            <p>Confident, clear, and helpful. We say "Free forever" instead of "no cost". We say "your file never leaves your device" instead of "client-side processing".</p>
+            <p>Confident, clear, and helpful. We say exactly what happens: "runs in your browser" for local tools, "sent to an online AI service" for AI tools, and "saved to your account" when you are signed in.</p>
           </Card>
         </section>
 
