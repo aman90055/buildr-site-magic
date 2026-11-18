@@ -1,4 +1,5 @@
 # Current tasks
+- [ ] Premium gives real benefits: no ads for active paid users; daily AI limits 10 signed-out / 30 free / 100 Basic / 300 Pro / 1000 Enterprise; Premium page lists only these; payments to Docu2026@nyes. Server limits need Cloud active to deploy.
 - [x] Remove placeholder pages with unbacked promises (developer API, integrations, partner programmes, job listings, enterprise), redirect old links, fix broken internal links; rewrite changelog and roadmap with real dated changes. Not published.
 - [x] Donation UPI ID changed to the owner-provided ID; QR now generated from the same setting. No real payment sent; not published.
 - [x] Research audience communities/directories and save four tailored draft packages with rules and blocked destinations. No posting or ad activation.

@@ -98,6 +98,8 @@ serve(async (req) => {
         is_active: true,
         payment_verification_id,
         activated_at: new Date().toISOString(),
+        // Paid plans are monthly: one verified payment = 30 days.
+        expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
       }, { onConflict: "user_id" });
 
     if (premiumError) throw premiumError;

@@ -1,4 +1,3 @@
-import { TOOL_COUNT } from "@/lib/toolRegistry";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import Header from "@/components/Header";
@@ -16,6 +15,7 @@ import {
   IndianRupee, ArrowRight, Clock, FileText, Users 
 } from "lucide-react";
 import RazorpayCheckoutButton from "@/components/RazorpayCheckoutButton";
+import { DAILY_AI_LIMITS, PAID_PLANS, PREMIUM_UPI_ID, planFeatures, planUpiLink } from "@/lib/premiumPlans";
 
 const Premium = () => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
@@ -25,69 +25,20 @@ const Premium = () => {
   const [name, setName] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const plans = [
-    {
-      id: "basic",
-      name: "Basic",
-      price: "₹99",
-      period: "/month",
-      description: "Perfect for students & personal use",
-      icon: Zap,
-      color: "from-blue-500 to-cyan-500",
-      features: [
-        "Unlimited PDF merging",
-        "Compress up to 50MB files",
-        "5 AI summaries per day",
-        "Remove watermarks",
-        "Priority processing",
-        "Email support",
-      ],
-      popular: false,
-      upiLink: "upi://pay?pa=7905970907@ibl&pn=PDFTools&am=99&cu=INR&tn=PDFTools-Basic-Plan",
-    },
-    {
-      id: "pro",
-      name: "Pro",
-      price: "₹249",
-      period: "/month",
-      description: "Best for professionals & freelancers",
-      icon: Crown,
-      color: "from-primary to-purple-500",
-      features: [
-        "Everything in Basic",
-        "Unlimited file size",
-        "Unlimited AI features",
-        "Batch processing (100 files)",
-        "OCR with 50+ languages",
-        "Priority support",
-        "API access",
-        "No ads",
-      ],
-      popular: true,
-      upiLink: "upi://pay?pa=7905970907@ibl&pn=PDFTools&am=249&cu=INR&tn=PDFTools-Pro-Plan",
-    },
-    {
-      id: "enterprise",
-      name: "Enterprise",
-      price: "₹599",
-      period: "/month",
-      description: "For teams & businesses",
-      icon: Shield,
-      color: "from-amber-500 to-orange-500",
-      features: [
-        "Everything in Pro",
-        "5 team members",
-        "Custom branding",
-        "Dedicated support",
-        "SLA guarantee",
-        "Advanced analytics",
-        "Custom integrations",
-        "Unlimited batch processing",
-      ],
-      popular: false,
-      upiLink: "upi://pay?pa=7905970907@ibl&pn=PDFTools&am=599&cu=INR&tn=PDFTools-Enterprise-Plan",
-    },
-  ];
+  const icons = { basic: Zap, pro: Crown, enterprise: Shield } as const;
+  const colors = { basic: "from-blue-500 to-cyan-500", pro: "from-primary to-purple-500", enterprise: "from-amber-500 to-orange-500" } as const;
+  const plans = PAID_PLANS.map((p) => ({
+    id: p.id,
+    name: p.name,
+    price: `₹${p.price}`,
+    period: "/30 days",
+    description: p.description,
+    icon: icons[p.id],
+    color: colors[p.id],
+    features: planFeatures(p),
+    popular: !!p.popular,
+    upiLink: planUpiLink(p),
+  }));
 
   const handlePayNow = (planId: string) => {
     const plan = plans.find(p => p.id === planId);
@@ -139,15 +90,15 @@ const Premium = () => {
   return (
     <>
       <Helmet>
-        <title>Premium Plans - PDF Tools | Unlock All Features</title>
-        <meta name="description" content="Upgrade to PDF Tools Premium. Get unlimited AI features, batch processing, priority support. Plans start at ₹99/month. Pay via UPI." />
+        <title>Docunova Premium — No Ads and Higher AI Limits</title>
+        <meta name="description" content="Docunova Premium removes ads and raises your daily AI limit. All PDF tools stay free. Plans from ₹99 for 30 days, paid by UPI." />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="The Docunova AI Suite" />
-        <meta property="og:title" content="Premium Plans - PDF Tools | Unlock All Features" />
-        <meta property="og:description" content="Upgrade to PDF Tools Premium. Get unlimited AI features, batch processing, priority support. Plans start at ₹99/month. Pay via UPI." />
+        <meta property="og:title" content="Docunova Premium — No Ads and Higher AI Limits" />
+        <meta property="og:description" content="Docunova Premium removes ads and raises your daily AI limit. All PDF tools stay free. Plans from ₹99 for 30 days, paid by UPI." />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Premium Plans - PDF Tools | Unlock All Features" />
-        <meta name="twitter:description" content="Upgrade to PDF Tools Premium. Get unlimited AI features, batch processing, priority support. Plans start at ₹99/month. Pay via UPI." />
+        <meta name="twitter:title" content="Docunova Premium — No Ads and Higher AI Limits" />
+        <meta name="twitter:description" content="Docunova Premium removes ads and raises your daily AI limit. All PDF tools stay free. Plans from ₹99 for 30 days, paid by UPI." />
       </Helmet>
 
       <div className="min-h-screen flex flex-col bg-background">
@@ -162,15 +113,15 @@ const Premium = () => {
                 Premium Plans
               </Badge>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
-                Unlock Full Power
+                No ads. More AI each day.
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-4">
-                Get unlimited access to all AI-powered PDF tools. No limits, no watermarks, maximum productivity.
+                Every PDF tool is already free. Premium removes ads and raises how many AI requests you can make per day.
               </p>
               <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1"><IndianRupee className="w-4 h-4" /> Pay via UPI</span>
-                <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> Activate in 24hrs</span>
-                <span className="flex items-center gap-1"><Shield className="w-4 h-4" /> Cancel anytime</span>
+                <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> UPI payments activated within 24 hours</span>
+                <span className="flex items-center gap-1"><Shield className="w-4 h-4" /> No auto-renewal</span>
               </div>
             </div>
           </section>
@@ -263,7 +214,7 @@ const Premium = () => {
                       <Label>Selected Plan</Label>
                       <div className="p-3 rounded-lg bg-muted/50 text-sm font-medium flex items-center gap-2">
                         <Crown className="w-4 h-4 text-primary" />
-                        {plans.find(p => p.id === selectedPlan)?.name} - {plans.find(p => p.id === selectedPlan)?.price}/month
+                        {plans.find(p => p.id === selectedPlan)?.name} - {plans.find(p => p.id === selectedPlan)?.price}/30 days
                       </div>
                     </div>
                   </CardContent>
@@ -277,32 +228,16 @@ const Premium = () => {
             </section>
           )}
 
-          {/* Trust Signals */}
+          {/* What Premium includes */}
           <section className="py-16 bg-muted/30">
-            <div className="container max-w-4xl mx-auto px-4 text-center">
-              <h2 className="text-2xl font-bold mb-8">What Premium includes</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div>
-                  <FileText className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <div className="text-2xl font-bold">{TOOL_COUNT}</div>
-                  <div className="text-sm text-muted-foreground">Tools included</div>
-                </div>
-                <div>
-                  <Users className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <div className="text-2xl font-bold">No ads</div>
-                  <div className="text-sm text-muted-foreground">On premium plans</div>
-                </div>
-                <div>
-                  <Sparkles className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <div className="text-2xl font-bold">Priority</div>
-                  <div className="text-sm text-muted-foreground">Email support</div>
-                </div>
-                <div>
-                  <Shield className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <div className="text-2xl font-bold">Local</div>
-                  <div className="text-sm text-muted-foreground">PDF processing</div>
-                </div>
-              </div>
+            <div className="container max-w-4xl mx-auto px-4">
+              <h2 className="text-2xl font-bold mb-6 text-center">What Premium includes</h2>
+              <ul className="space-y-3 text-sm text-muted-foreground max-w-2xl mx-auto">
+                <li><strong className="text-foreground">No ads.</strong> While your plan is active and you are signed in, Docunova loads no ads on any page.</li>
+                <li><strong className="text-foreground">Higher daily AI limit.</strong> AI chat, writing tools, document analysis, Image to Text, image generation and voice typing share one allowance per 24 hours: {DAILY_AI_LIMITS.anonymous} without signing in, {DAILY_AI_LIMITS.free} on a free account, and {DAILY_AI_LIMITS.basic} / {DAILY_AI_LIMITS.pro} / {DAILY_AI_LIMITS.enterprise} on Basic / Pro / Enterprise.</li>
+                <li><strong className="text-foreground">Same tools.</strong> PDF and image tools are free for everyone and have no paid-only version.</li>
+                <li><strong className="text-foreground">How payment works.</strong> One payment covers 30 days and does not renew automatically. UPI payments go to <span className="font-mono text-foreground">{PREMIUM_UPI_ID}</span>; after you submit the transaction ID, the plan is switched on within 24 hours.</li>
+              </ul>
             </div>
           </section>
         </main>

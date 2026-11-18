@@ -6,6 +6,7 @@ import { isAdsEnabled } from "@/lib/siteSettings";
 import { trackAdEvent } from "@/lib/adAnalytics";
 import { hasMarketingConsent, onConsentChange } from "@/lib/adConsent";
 import { logAdPolicy } from "@/lib/adPolicyLog";
+import { useAdStatus } from "@/lib/adFree";
 
 
 
@@ -43,6 +44,7 @@ const AdSlot = ({
   const { pathname } = useLocation();
   const allowedHere = isAdRoute(pathname);
   const [consented, setConsented] = useState<boolean>(() => hasMarketingConsent());
+  const adStatus = useAdStatus();
 
   const slot = config?.slot ?? adSlot ?? "";
   const format: AdFormat = config?.format ?? adFormat ?? "auto";
@@ -66,6 +68,7 @@ const AdSlot = ({
       logAdPolicy("unit_suppressed", { route: pathname, slot, reason: "no marketing consent" });
       return;
     }
+    if (adStatus !== "ads") return;
     if (pushed.current || !slot) return;
     // Load the AdSense script on demand — allow-listed route + consent only.
     if (!ensureAdsenseLoaded(pathname)) return;
@@ -111,7 +114,7 @@ const AdSlot = ({
       io.disconnect();
       el.removeEventListener("click", onClick, true);
     };
-  }, [slot, allowedHere, consented, pathname]);
+  }, [slot, allowedHere, consented, pathname, adStatus]);
 
   // Global kill-switch: while AdSense review is pending, render no ad UI at all.
   if (!ADS_ENABLED) return null;
@@ -124,6 +127,8 @@ const AdSlot = ({
 
   // Consent gate: nothing ad-related renders until marketing consent is granted.
   if (!consented) return null;
+  // Premium users never see ads; nobody sees one before their plan is known.
+  if (adStatus !== "ads") return null;
 
 
 

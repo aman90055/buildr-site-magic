@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
 import { z } from "https://esm.sh/zod@3.23.8";
+import { checkDailyAiQuota, dailyLimitResponse } from "../_shared/aiQuota.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -32,6 +33,8 @@ serve(async (req) => {
       const { data } = await supabase.auth.getUser(authHeader.replace("Bearer ", ""));
       userId = data?.user?.id || null;
     }
+    const dailyQuota = await checkDailyAiQuota(supabase, userId, identifier);
+    if (!dailyQuota.allowed) return dailyLimitResponse(dailyQuota, corsHeaders);
     const limit = userId ? 30 : 5;
     if (!await checkRateLimit(supabase, userId || identifier, "ai-ocr", limit, 60000)) {
       return new Response(JSON.stringify({ error: "Rate limit exceeded" }), { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } });

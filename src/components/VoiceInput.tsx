@@ -66,7 +66,11 @@ const VoiceInput = ({ onTranscript, language, size = "sm", className }: VoiceInp
           });
           if (!res.ok) {
             const t = await res.text().catch(() => "");
-            if (res.status === 429) throw new Error("Rate limit — please try again in a moment.");
+            if (res.status === 429) {
+              let msg = "Rate limit — please try again in a moment.";
+              try { msg = JSON.parse(t).error || msg; } catch { /* keep default */ }
+              throw new Error(msg);
+            }
             if (res.status === 402) throw new Error("AI credits exhausted.");
             throw new Error(t || `Transcription failed (${res.status})`);
           }

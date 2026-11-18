@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { aiInvokeError } from "@/lib/aiErrors";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import ReactMarkdown from "react-markdown";
@@ -35,7 +36,7 @@ const AITool = () => {
       const { data, error } = await supabase.functions.invoke("ai-assistant", {
         body: { tool: tool.slug, input: input.trim(), extra: extra.trim() || undefined },
       });
-      if (error) throw error;
+      if (error) throw await aiInvokeError(error);
       if (data?.error) throw new Error(data.error);
       setOutput(data?.output || "No response");
     } catch (err: any) {

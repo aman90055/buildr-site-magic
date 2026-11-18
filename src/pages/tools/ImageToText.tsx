@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { aiInvokeError, isDailyAiLimit } from "@/lib/aiErrors";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -59,7 +60,7 @@ const ImageToText = () => {
         body: { imageData: await prepareOCRImage(preview) },
       });
 
-      if (fnError) throw fnError;
+      if (fnError) throw await aiInvokeError(fnError);
       if (data?.error) throw new Error(data.error);
 
       const extracted = (data?.text || "").trim();
@@ -77,7 +78,8 @@ const ImageToText = () => {
       console.error("OCR error:", err);
       const msg = err?.message || "";
       let friendly = "Failed to extract text. Please try again.";
-      if (msg.includes("Rate limit") || msg.includes("429")) friendly = "Too many requests. Please wait a moment and try again.";
+      if (isDailyAiLimit(msg)) friendly = msg;
+      else if (msg.includes("Rate limit") || msg.includes("429")) friendly = "Too many requests. Please wait a moment and try again.";
       else if (msg.includes("Usage limit") || msg.includes("402")) friendly = "AI usage limit reached. Please try again later.";
       else if (msg.includes("Validation")) friendly = "Invalid image data. Please upload a different image.";
       else if (msg.toLowerCase().includes("network") || msg.toLowerCase().includes("failed to fetch")) friendly = "Network error. Check your connection and retry.";

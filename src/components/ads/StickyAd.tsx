@@ -5,6 +5,7 @@ import AdSlot from "./AdSlot";
 import { AD_SLOTS } from "@/lib/adSlots";
 import { isAdRoute } from "@/lib/adsRoutes";
 import { hasMarketingConsent, onConsentChange } from "@/lib/adConsent";
+import { useAdStatus } from "@/lib/adFree";
 
 /**
  * Mobile sticky bottom ad — high-revenue placement.
@@ -16,6 +17,7 @@ const StickyAd = () => {
   const [closed, setClosed] = useState(false);
   const [consented, setConsented] = useState<boolean>(() => hasMarketingConsent());
   const { pathname } = useLocation();
+  const adStatus = useAdStatus();
 
   useEffect(() => onConsentChange(() => setConsented(hasMarketingConsent())), []);
 
@@ -30,6 +32,7 @@ const StickyAd = () => {
   if (!isAdRoute(pathname)) return null;
 
   if (!consented) return null;
+  if (adStatus !== "ads") return null;
 
   if (!visible || closed || !AD_SLOTS.sticky?.slot) return null;
 

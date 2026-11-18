@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { aiInvokeError } from "@/lib/aiErrors";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
@@ -15,7 +16,7 @@ export const useAIImageGenerate = () => {
         body: { prompt },
       });
 
-      if (error) throw error;
+      if (error) throw await aiInvokeError(error);
       if (data.error) throw new Error(data.error);
 
       setGeneratedImage(data.imageUrl);

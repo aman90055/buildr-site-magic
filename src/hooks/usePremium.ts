@@ -25,14 +25,19 @@ export const usePremium = (): PremiumStatus => {
     let cancelled = false;
 
     const fetchStatus = async () => {
-      const { data } = await supabase
+      setLoading(true);
+      const { data: rows } = await supabase
         .from("user_premium_status")
-        .select("plan, is_active")
+        .select("plan, is_active, expires_at")
         .eq("user_id", user.id)
-        .maybeSingle();
+        .eq("is_active", true)
+        .order("activated_at", { ascending: false })
+        .limit(1);
 
       if (cancelled) return;
-      const active = !!data?.is_active;
+      const data = rows?.[0];
+      // Expired plans no longer count, even if not yet switched off by an admin.
+      const active = !!data?.is_active && (!data.expires_at || new Date(data.expires_at).getTime() > Date.now());
       setIsPremium(active);
       setPlan(active ? data?.plan ?? null : null);
       setLoading(false);

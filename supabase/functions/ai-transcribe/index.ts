@@ -1,4 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
+import { checkDailyAiQuota, dailyLimitResponse } from "../_shared/aiQuota.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -17,6 +19,28 @@ serve(async (req) => {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
+
+    // Shared daily AI allowance + per-minute burst limit.
+    const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
+    const identifier = req.headers.get("x-forwarded-for") || req.headers.get("cf-connecting-ip") || "unknown";
+    let userId: string | null = null;
+    const authHeader = req.headers.get("Authorization");
+    if (authHeader?.startsWith("Bearer ")) {
+      const { data } = await admin.auth.getUser(authHeader.replace("Bearer ", ""));
+      userId = data?.user?.id || null;
+    }
+    const dailyQuota = await checkDailyAiQuota(admin, userId, identifier);
+    if (!dailyQuota.allowed) return dailyLimitResponse(dailyQuota, corsHeaders);
+    const rateKey = userId || identifier;
+    const minuteAgo = new Date(Date.now() - 60000).toISOString();
+    const { count: recent } = await admin.from("rate_limits").select("*", { count: "exact", head: true })
+      .eq("identifier", rateKey).eq("function_name", "ai-transcribe").gte("window_start", minuteAgo);
+    if ((recent || 0) >= (userId ? 20 : 5)) {
+      return new Response(JSON.stringify({ error: "Rate limit exceeded. Try again in a minute." }), {
+        status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    await admin.from("rate_limits").insert({ identifier: rateKey, function_name: "ai-transcribe", window_start: new Date().toISOString() });
 
     const form = await req.formData();
     const file = form.get("file");

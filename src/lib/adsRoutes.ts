@@ -14,6 +14,7 @@ import { ADSENSE_CLIENT } from "./adSlots";
 import { hasMarketingConsent } from "./adConsent";
 import { logAdPolicy } from "./adPolicyLog";
 import { getRichContent } from "./richToolContent";
+import { getAdStatus } from "./adFree";
 
 const hasRichContent = (pathname: string): boolean => !!getRichContent(pathname);
 
@@ -71,6 +72,10 @@ export const ensureAdsenseLoaded = (pathname?: string): boolean => {
 
   if (!isAdRoute(route)) {
     logAdPolicy("skipped_route_blocked", { route, reason: "route not allow-listed" });
+    return false;
+  }
+  if (getAdStatus() !== "ads") {
+    logAdPolicy("skipped_route_blocked", { route, reason: `ad status ${getAdStatus()} (premium or not yet known)` });
     return false;
   }
   if (!hasMarketingConsent()) {

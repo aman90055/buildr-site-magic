@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { aiInvokeError } from "@/lib/aiErrors";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { prepareOCRImage } from "@/lib/ocrImage";
@@ -22,7 +23,7 @@ export const useAIOCR = () => {
 
       setProgress(80);
 
-      if (error) throw error;
+      if (error) throw await aiInvokeError(error);
       if (data.error) throw new Error(data.error);
 
       setExtractedText(data.text);

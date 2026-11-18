@@ -76,7 +76,11 @@ const AITextTool = ({
 
       if (!res.ok) {
         const errText = await res.text().catch(() => "");
-        if (res.status === 429) throw new Error("Rate limit reached. Please wait a minute and try again.");
+        if (res.status === 429) {
+          let msg = "Rate limit reached. Please wait a minute and try again.";
+          try { msg = JSON.parse(errText).error || msg; } catch { /* keep default */ }
+          throw new Error(msg);
+        }
         if (res.status === 402) throw new Error("AI credits exhausted. Please contact the site owner.");
         throw new Error(errText || `AI error (${res.status})`);
       }
