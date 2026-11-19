@@ -13,6 +13,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import FloatingBackNav from "@/components/FloatingBackNav";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ExitIntentOffer from "@/components/ExitIntentOffer";
+import AdFreeSync from "@/components/ads/AdFreeSync";
 import CookieConsent from "@/components/CookieConsent";
 import AdDebugPanel from "@/components/ads/AdDebugPanel";
 
@@ -160,6 +161,7 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <ScrollToTop />
+            <AdFreeSync />
             <AuthRedirect />
             <AIChatWidget />
             <InstallPrompt />

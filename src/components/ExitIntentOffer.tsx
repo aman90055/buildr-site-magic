@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { X, Sparkles, Coffee, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { canShowExitIntent, markExitIntentShown } from "@/lib/siteSettings";
+import { useAdStatus } from "@/lib/adFree";
 
 /**
  * Exit-intent modal — converts leaving traffic into Premium / donations.
@@ -11,6 +12,7 @@ import { canShowExitIntent, markExitIntentShown } from "@/lib/siteSettings";
  */
 const ExitIntentOffer = () => {
   const [show, setShow] = useState(false);
+  const adStatus = useAdStatus();
 
   useEffect(() => {
     if (!canShowExitIntent()) return;
@@ -50,7 +52,8 @@ const ExitIntentOffer = () => {
     };
   }, []);
 
-  if (!show) return null;
+  // Paying users already have Premium; don't upsell them.
+  if (!show || adStatus !== "ads") return null;
 
   return (
     <div
@@ -75,8 +78,8 @@ const ExitIntentOffer = () => {
           </div>
           <h3 className="text-2xl font-bold">Wait! Before you go...</h3>
           <p className="text-muted-foreground">
-            Unlock <span className="text-foreground font-semibold">Premium</span> for unlimited fast processing,
-            no ads, and priority AI access — or support us with a coffee ☕
+            <span className="text-foreground font-semibold">Premium</span> removes ads and raises your daily AI limit.
+            Or support Docunova with a small donation.
           </p>
 
           <div className="grid grid-cols-2 gap-3 pt-2">

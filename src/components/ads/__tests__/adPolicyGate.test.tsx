@@ -6,6 +6,7 @@ import StickyAd from "@/components/ads/StickyAd";
 import { AD_SLOTS } from "@/lib/adSlots";
 import { isAdRoute } from "@/lib/adsRoutes";
 import { CONSENT_STORAGE_KEY } from "@/lib/adConsent";
+import { setAdStatus } from "@/lib/adFree";
 
 /** The exact ad set the homepage declares (midContent + footer). */
 const HomePageAds = () => (
@@ -51,6 +52,8 @@ const units = () => document.querySelectorAll("ins.adsbygoogle").length;
 const script = () => document.getElementById("adsbygoogle-js");
 
 beforeEach(() => {
+  // Default: a free visitor whose plan status is known.
+  setAdStatus("ads");
   localStorage.clear();
   sessionStorage.clear();
   document.getElementById("adsbygoogle-js")?.remove();
@@ -99,6 +102,24 @@ describe("ad policy gate — consent", () => {
 
   it("renders no units and injects no script on / when marketing consent is denied", () => {
     denyMarketingConsent();
+    renderAt("/");
+    expect(units()).toBe(0);
+    expect(script()).toBeNull();
+  });
+});
+
+describe("ad policy gate — premium", () => {
+  it("renders no units and injects no script on / for a premium user", () => {
+    setAdStatus("ad-free");
+    grantMarketingConsent();
+    renderAt("/");
+    expect(units()).toBe(0);
+    expect(script()).toBeNull();
+  });
+
+  it("renders no units while the visitor's plan is still loading", () => {
+    setAdStatus("pending");
+    grantMarketingConsent();
     renderAt("/");
     expect(units()).toBe(0);
     expect(script()).toBeNull();

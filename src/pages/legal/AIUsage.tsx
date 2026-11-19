@@ -75,7 +75,7 @@ Always review AI output before relying on it for any important decision. AI is a
       {
         id: "rate-limits",
         heading: "7. Rate Limits & Fair Use",
-        body: `To keep AI features available to everyone we apply rate limits per IP and per account. Limits scale up for Premium users. Excessive automated requests, scraping, or attempts to resell our AI capacity are prohibited.`,
+        body: `To keep AI features available to everyone we apply a short per-minute limit and a daily allowance shared across all AI features (rolling 24 hours): 10 requests without signing in, 30 on a free account, and 100 / 300 / 1000 on Premium Basic / Pro / Enterprise. Excessive automated requests, scraping, or attempts to resell our AI capacity are prohibited.`,
       },
       {
         id: "transparency",

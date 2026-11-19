@@ -11,8 +11,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { 
-  Crown, Check, Zap, Shield, Sparkles, Star, Upload, 
-  IndianRupee, ArrowRight, Clock, FileText, Users 
+  Crown, Check, Zap, Shield, Star, Upload,
+  IndianRupee, ArrowRight, Clock,
 } from "lucide-react";
 import RazorpayCheckoutButton from "@/components/RazorpayCheckoutButton";
 import { DAILY_AI_LIMITS, PAID_PLANS, PREMIUM_UPI_ID, planFeatures, planUpiLink } from "@/lib/premiumPlans";

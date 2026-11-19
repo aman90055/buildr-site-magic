@@ -44,7 +44,7 @@ serve(async (req) => {
 
     const form = await req.formData();
     const file = form.get("file");
-    if (!(file instanceof File) && !(file instanceof Blob)) {
+    if (!(file instanceof Blob)) {
       return new Response(JSON.stringify({ error: "Missing audio file" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },

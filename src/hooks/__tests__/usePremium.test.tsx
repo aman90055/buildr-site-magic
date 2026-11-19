@@ -8,7 +8,15 @@ const mocks = vi.hoisted(() => {
 vi.mock("../useAuth", () => ({ useAuth: () => ({ user: mocks.user }) }));
 vi.mock("@/integrations/supabase/client", () => ({
   supabase: {
-    from: () => ({ select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: { plan: "owner", is_active: true } }) }) }) }),
+    from: () => {
+      const q = {
+        select: () => q,
+        eq: () => q,
+        order: () => q,
+        limit: async () => ({ data: [{ plan: "owner", is_active: true, expires_at: null }] }),
+      };
+      return q;
+    },
     channel: (name: string) => {
       if (mocks.channels.includes(name)) throw new Error("Channel already subscribed");
       mocks.channels.push(name);

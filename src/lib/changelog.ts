@@ -11,6 +11,15 @@ export interface ChangelogEntry {
 /** Newest first. Only list changes that actually shipped in the app. */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    date: "2026-11-18",
+    title: "Premium with real benefits",
+    tags: ["feature", "accuracy"],
+    items: [
+      "Signed-in Premium users now see no ads on any page.",
+      "The Premium page lists only what paid plans actually include, and UPI payments go to the same ID as donations.",
+    ],
+  },
+  {
     date: "2026-11-16",
     title: "Donations and cleaner company pages",
     tags: ["feature", "accuracy"],
