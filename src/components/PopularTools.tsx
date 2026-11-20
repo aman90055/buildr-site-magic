@@ -28,6 +28,30 @@ const tools = [...getAllTools()].sort((a, b) => {
 function readList(key: string): string[] {
   try { const value: unknown = JSON.parse(localStorage.getItem(key) ?? "[]"); return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : []; } catch { return []; }
 }
+const iconFor = (slug: string, category: ToolCategory) =>
+  slug === "/merge" ? Merge : slug === "/split" ? Scissors : slug === "/compress" ? Minimize2 : icons[category] ?? FileText;
+
+type CardProps = { tool: ToolMeta; size: "spotlight" | "compact"; isFav: boolean; onOpen: (slug: string) => void; onFav: (slug: string) => void };
+const ToolCard = ({ tool, size, isFav, onOpen, onFav }: CardProps) => {
+  const Icon = iconFor(tool.slug, tool.category);
+  const spotlight = size === "spotlight";
+  return (
+    <article className={`group relative rounded-xl border border-border bg-card/80 transition-colors hover:border-primary/50 hover:shadow-md ${spotlight ? "p-5" : ""}`}>
+      <Link to={tool.slug} onClick={() => onOpen(tool.slug)} className="block h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+        <div className={spotlight ? "" : "p-5"}>
+          <div className={`mb-4 flex items-center justify-center rounded-xl ${colors[tool.category]} ${spotlight ? "h-12 w-12" : "h-10 w-10"}`}>
+            <Icon className={spotlight ? "h-6 w-6" : "h-5 w-5"} />
+          </div>
+          <h3 className={`pr-2 font-display font-semibold group-hover:text-primary ${spotlight ? "text-lg" : "text-base"}`}>{tool.name}</h3>
+          <p className={`mt-2 line-clamp-2 text-sm leading-5 text-muted-foreground ${spotlight ? "min-h-10" : "min-h-10"}`}>{summaries[tool.slug] ?? tool.short}</p>
+          <span className="mt-4 flex items-center gap-2 text-xs font-medium text-primary">Open tool<ArrowRight className="h-3 w-3" /></span>
+        </div>
+      </Link>
+      <Button variant="ghost" size="icon-sm" aria-label={`${isFav ? "Remove" : "Add"} ${tool.name} ${isFav ? "from" : "to"} favorites`} aria-pressed={isFav} title={isFav ? "Remove from favorites" : "Add to favorites"} onClick={() => onFav(tool.slug)} className="absolute right-3 top-3 rounded-lg"><Star className={isFav ? "fill-brand-orange text-brand-orange" : "text-muted-foreground"} /></Button>
+    </article>
+  );
+};
+
 const PopularTools = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<(typeof categories)[number]["value"]>("all");
@@ -45,6 +69,10 @@ const PopularTools = () => {
     const query = search.trim().toLowerCase();
     return matchesCategory && `${tool.name} ${tool.short}`.toLowerCase().includes(query);
   }), [search, category, favorites, recent]);
+  const browsingAll = category === "all" && !search.trim();
+  const spotlightTools = browsingAll ? filtered.filter(tool => featured.includes(tool.slug)) : [];
+  const restTools = browsingAll ? filtered.filter(tool => !featured.includes(tool.slug)) : filtered;
+  const cardProps = (tool: ToolMeta) => ({ tool, isFav: favorites.includes(tool.slug), onOpen: open, onFav: toggleFavorite });
   return (
     <section id="tools" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-10 sm:px-8 sm:py-12" aria-labelledby="tools-heading">
       <div className="mb-6 flex flex-col justify-between gap-5 md:flex-row md:items-center">
@@ -52,21 +80,18 @@ const PopularTools = () => {
         <div className="relative w-full md:w-80"><Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" /><Input aria-label="Search tools" placeholder="Search tools…" value={search} onChange={event => setSearch(event.target.value)} className="h-10 rounded-lg bg-card pl-10 pr-10" />{search && <Button variant="ghost" size="icon-xs" aria-label="Clear search" className="absolute right-2 top-2" onClick={() => setSearch("")}><X /></Button>}</div>
       </div>
       <div className="mb-6 flex flex-wrap gap-2" role="group" aria-label="Tool categories">{categories.map(item => <Button key={item.value} size="sm" variant={category === item.value ? "default" : "ghost"} aria-pressed={category === item.value} onClick={() => setCategory(item.value)} className="rounded-lg px-3">{item.label}</Button>)}</div>
-      <p className="mb-4 text-xs text-muted-foreground" aria-live="polite">{filtered.length} tools{category === "all" && !search ? " · Popular choices first" : " found"}</p>
+      <p className="mb-4 text-xs text-muted-foreground" aria-live="polite">{filtered.length} tools{browsingAll ? " · Popular choices first" : " found"}</p>
+      {browsingAll && spotlightTools.length > 0 && (
+        <>
+          <h3 className="mb-3 font-display text-sm font-semibold uppercase tracking-wide text-muted-foreground">Popular right now</h3>
+          <div className="grid grid-cols-1 gap-3 min-[400px]:grid-cols-2 lg:grid-cols-4">
+            {spotlightTools.map(tool => <ToolCard key={tool.slug} size="spotlight" {...cardProps(tool)} />)}
+          </div>
+          <h3 className="mb-3 mt-10 font-display text-sm font-semibold uppercase tracking-wide text-muted-foreground">Every tool</h3>
+        </>
+      )}
       <div className="grid grid-cols-1 gap-3 min-[400px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {filtered.map((tool: ToolMeta) => {
-          const Icon = tool.slug === "/merge" ? Merge : tool.slug === "/split" ? Scissors : tool.slug === "/compress" ? Minimize2 : icons[tool.category] ?? FileText;
-          const isFav = favorites.includes(tool.slug);
-          return <article key={tool.slug} className="group relative rounded-lg border border-border bg-card/80 transition-colors hover:border-primary/50">
-            <Link to={tool.slug} onClick={() => open(tool.slug)} className="block h-full rounded-lg p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-              <div className={`mb-4 flex h-10 w-10 items-center justify-center rounded-lg ${colors[tool.category]}`}><Icon className="h-5 w-5" /></div>
-              <h3 className="pr-2 font-display text-base font-semibold group-hover:text-primary">{tool.name}</h3>
-              <p className="mt-2 line-clamp-2 min-h-10 text-sm leading-5 text-muted-foreground">{summaries[tool.slug] ?? tool.short}</p>
-              <span className="mt-4 flex items-center gap-2 text-xs font-medium text-primary">Open tool<ArrowRight className="h-3 w-3" /></span>
-            </Link>
-            <Button variant="ghost" size="icon-sm" aria-label={`${isFav ? "Remove" : "Add"} ${tool.name} ${isFav ? "from" : "to"} favorites`} aria-pressed={isFav} title={isFav ? "Remove from favorites" : "Add to favorites"} onClick={() => toggleFavorite(tool.slug)} className="absolute right-3 top-3 rounded-lg"><Star className={isFav ? "fill-brand-orange text-brand-orange" : "text-muted-foreground"} /></Button>
-          </article>;
-        })}
+        {restTools.map(tool => <ToolCard key={tool.slug} size="compact" {...cardProps(tool)} />)}
       </div>
       {filtered.length === 0 && <div className="py-12 text-center"><Search className="mx-auto mb-4 h-6 w-6 text-muted-foreground" /><h3 className="font-display text-lg font-semibold">{category === "favorites" ? "No favorites yet" : category === "recent" ? "No recent tools" : "No matching tools"}</h3><Button variant="link" onClick={() => { setCategory("all"); setSearch(""); }}>View all tools</Button></div>}
     </section>
