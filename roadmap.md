@@ -1,4 +1,5 @@
 # Current tasks
+- [x] Bring back an honest Careers & Internships page (no openings, CV by email); /internships redirects to it; footer link. Not published.
 - [x] Premium gives real benefits in the app: no ads for active paid users; Premium page lists only real benefits; UPI payments to Docu2026@nyes.
 - [ ] Deploy daily AI limits (10/30/100/300/1000) and 30-day manual activation to the server — blocked: Lovable Cloud paused (workspace out of Cloud credits).
 - [x] Remove placeholder pages with unbacked promises (developer API, integrations, partner programmes, job listings, enterprise), redirect old links, fix broken internal links; rewrite changelog and roadmap with real dated changes. Not published.
