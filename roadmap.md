@@ -1,4 +1,5 @@
 # Current tasks
+- [ ] Add 50 new accurate, tool-based blog articles (35 English, 15 Hinglish) with internal links, listed on /blog and in the sitemap.
 - [x] Improve the homepage design: two-column hero with a merge-queue panel, spotlight popular tools above the full tool grid, carded privacy and FAQ sections. Not published.
 - [x] Bring back an honest Careers & Internships page (no openings, CV by email); /internships redirects to it; footer link. Not published.
 - [x] Premium gives real benefits in the app: no ads for active paid users; Premium page lists only real benefits; UPI payments to Docu2026@nyes.

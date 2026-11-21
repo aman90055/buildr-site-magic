@@ -10,12 +10,15 @@ import { Button } from "@/components/ui/button";
 import { BookOpen, Calendar, Clock, ArrowRight, Sparkles, FileText, Zap, Shield } from "lucide-react";
 import AdSlot from "@/components/ads/AdSlot";
 import AffiliateBanner from "@/components/ads/AffiliateBanner";
+import { EXTRA_BLOG_POSTS } from "@/lib/blogExtra";
+
+const EXTRA_ICONS = { Tutorial: FileText, "Feature Guide": Sparkles, Security: Shield, Productivity: Zap, Hindi: BookOpen } as const;
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const featuredPost = {
-    title: "Introducing AI-Powered PDF Compression: Reduce File Size by 90%",
+    title: "How Smart PDF Compression Works (and What Size to Expect)",
     excerpt: "Learn how our new AI compression algorithm analyzes your PDFs and applies intelligent optimization to dramatically reduce file sizes while maintaining quality.",
     date: "January 20, 2026",
     readTime: "5 min read",
@@ -24,7 +27,20 @@ const Blog = () => {
     slug: "ai-powered-compression",
   };
 
+  // Newest first: tool guides added on 2026-11-21, then the original articles.
+  const newPosts = EXTRA_BLOG_POSTS.map((p) => ({
+    title: p.title,
+    excerpt: p.excerpt,
+    date: p.date,
+    readTime: p.readTime,
+    category: p.category,
+    icon: EXTRA_ICONS[p.category] ?? FileText,
+    slug: p.slug,
+    image: undefined as string | undefined,
+  }));
+
   const blogPosts = [
+    ...newPosts,
     {
       title: "How to Merge Multiple PDFs in Seconds",
       excerpt: "A step-by-step guide to combining multiple PDF documents into one file using our merge tool.",
@@ -197,7 +213,7 @@ const Blog = () => {
       image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&auto=format&fit=crop&q=60",
     },
     {
-      title: "PDF Compress Online Free - File Size 90% Tak Kam Karein",
+      title: "PDF Compress Online Free - File Size Kaise Kam Karein",
       excerpt: "PDF file size kaise kam karein bina quality lose kiye - free online tool.",
       date: "April 2, 2026",
       readTime: "6 min read",

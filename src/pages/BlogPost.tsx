@@ -13,6 +13,7 @@ import longformPart1 from "@/data/blogLongform.part1.json";
 import longformPart2 from "@/data/blogLongform.part2.json";
 import longformPart3 from "@/data/blogLongform.part3.json";
 import longformPart4 from "@/data/blogLongform.part4.json";
+import { EXTRA_BLOG_BY_SLUG, isLinkableRoute, toolLabel } from "@/lib/blogExtra";
 
 const LONGFORM: Record<string, string[]> = {
   ...(longformPart1 as unknown as Record<string, string[]>),
@@ -36,7 +37,7 @@ const blogPostsData: Record<string, {
   relatedPosts: string[];
 }> = {
   "ai-powered-compression": {
-    title: "Introducing AI-Powered PDF Compression: Reduce File Size by 90%",
+    title: "How Smart PDF Compression Works (and What Size to Expect)",
     excerpt: "Learn how our new AI compression algorithm analyzes your PDFs and applies intelligent optimization to dramatically reduce file sizes while maintaining quality.",
     date: "January 20, 2026",
     readTime: "5 min read",
@@ -690,7 +691,7 @@ const blogPostsData: Record<string, {
   },
 
   "pdf-compress-online-free-hindi": {
-    title: "PDF Compress Online Free - File Size 90% Tak Kam Karein",
+    title: "PDF Compress Online Free - File Size Kaise Kam Karein",
     excerpt: "PDF file size kaise kam karein bina quality lose kiye - free online tool jo 100MB ki file ko 5MB tak compress kar sakta hai.",
     date: "April 2, 2026",
     readTime: "6 min read",
@@ -1019,7 +1020,8 @@ const blogPostsData: Record<string, {
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const base = slug ? blogPostsData[slug] : null;
+  const extra = slug ? EXTRA_BLOG_BY_SLUG[slug] : undefined;
+  const base = slug ? (blogPostsData[slug] ?? extra ?? null) : null;
   // Long-form article bodies live in separate data files so each post ships
   // substantial, original content instead of a short summary.
   const longform = slug ? LONGFORM[slug] : undefined;
@@ -1076,16 +1078,28 @@ const BlogPost = () => {
   const CategoryIcon = getCategoryIcon(post.category);
 
   // Renders inline **bold** segments inside a paragraph or list item.
+  // Renders inline **bold** segments and [label](/internal-route) links.
   const renderInline = (text: string) =>
-    text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
-      part.startsWith("**") && part.endsWith("**") && part.length > 4 ? (
-        <strong key={i} className="font-semibold text-foreground">
-          {part.slice(2, -2)}
-        </strong>
-      ) : (
-        part
-      ),
-    );
+    text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\(\/[^)\s]*\))/g).map((part, i) => {
+      if (part.startsWith("**") && part.endsWith("**") && part.length > 4) {
+        return (
+          <strong key={i} className="font-semibold text-foreground">
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+      const link = part.match(/^\[([^\]]+)\]\((\/[^)\s]*)\)$/);
+      if (link) {
+        return isLinkableRoute(link[2]) ? (
+          <Link key={i} to={link[2]} className="font-medium text-primary underline underline-offset-4 hover:no-underline">
+            {link[1]}
+          </Link>
+        ) : (
+          link[1]
+        );
+      }
+      return part;
+    });
 
   const renderContent = (content: string[]) => {
     return content.map((paragraph, index) => {
@@ -1110,6 +1124,17 @@ const BlogPost = () => {
           </p>
         );
       }
+      const step = paragraph.match(/^(\d+)\. (.*)$/);
+      if (step) {
+        return (
+          <div key={index} className="flex gap-3 mb-3 text-muted-foreground">
+            <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
+              {step[1]}
+            </span>
+            <p className="leading-relaxed">{renderInline(step[2])}</p>
+          </div>
+        );
+      }
       if (paragraph.startsWith("- ")) {
         return (
           <li key={index} className="ml-6 mb-2 text-muted-foreground">
@@ -1131,16 +1156,24 @@ const BlogPost = () => {
     "@type": "Article",
     "headline": post.title,
     "description": post.excerpt,
-    "image": post.image || "",
+    ...(post.image ? { "image": post.image } : {}),
     "author": { "@type": "Person", "name": post.author },
     "publisher": {
       "@type": "Organization",
-      "name": "PDF Tools",
+      "name": "Docunova AI",
       "url": "https://docunova.online"
     },
-    "datePublished": post.date,
+    "datePublished": extra?.isoDate ?? post.date,
+    ...(extra ? { "inLanguage": extra.category === "Hindi" ? "hi-Latn" : "en" } : {}),
     "mainEntityOfPage": `https://docunova.online/blog/${slug}`
   };
+
+  const relatedLinks = (post.relatedPosts ?? [])
+    .map((s) => {
+      const p = blogPostsData[s] ?? EXTRA_BLOG_BY_SLUG[s];
+      return p ? { slug: s, title: p.title } : null;
+    })
+    .filter((r): r is { slug: string; title: string } => r !== null);
 
   const shareUrl = `https://docunova.online/blog/${slug}`;
   const encodedUrl = encodeURIComponent(shareUrl);
@@ -1155,12 +1188,12 @@ const BlogPost = () => {
         <meta property="og:type" content="article" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
-        <meta property="og:image" content={post.image || ""} />
+        {post.image && <meta property="og:image" content={post.image} />}
         <meta property="og:url" content={shareUrl} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.excerpt} />
-        <meta name="twitter:image" content={post.image || ""} />
+        {post.image && <meta name="twitter:image" content={post.image} />}
         <script type="application/ld+json">{JSON.stringify(articleJsonLd)}</script>
       </Helmet>
 
@@ -1281,6 +1314,43 @@ const BlogPost = () => {
               </div>
             </div>
           </article>
+
+          {extra && (
+            <section className="pb-8">
+              <div className="container max-w-4xl mx-auto px-4 grid gap-6 md:grid-cols-2">
+                <Card className="bg-card/50 border-border/50">
+                  <CardContent className="p-6">
+                    <h2 className="text-lg font-semibold mb-3">Tools used in this guide</h2>
+                    <ul className="space-y-2">
+                      {extra.tools.map((route) => (
+                        <li key={route}>
+                          <Link to={route} className="text-primary font-medium hover:underline">
+                            {toolLabel(route)}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+                {relatedLinks.length > 0 && (
+                  <Card className="bg-card/50 border-border/50">
+                    <CardContent className="p-6">
+                      <h2 className="text-lg font-semibold mb-3">Related articles</h2>
+                      <ul className="space-y-2">
+                        {relatedLinks.map((r) => (
+                          <li key={r.slug}>
+                            <Link to={`/blog/${r.slug}`} className="text-primary hover:underline">
+                              {r.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
+            </section>
+          )}
 
           {/* Sponsored after content */}
           <div className="container max-w-4xl mx-auto px-4">
